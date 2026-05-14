@@ -1,0 +1,36 @@
+/* Core Foundations - empty icon */
+.callout.callout-core .callout-icon-container::before {
+  content: "\F30D"; 
+  font-family: bootstrap-icons;
+  color: #0d47a1;
+}
+.callout.callout-core {
+  border-left: 8px solid #0d47a1;
+  border-radius: 0px;
+  background-color: #f0f4fa;
+}
+
+/* Reference Ideas - half filled icon */
+.callout.callout-reference .callout-icon-container::before {
+  content: "\F30C"; 
+  font-family: bootstrap-icons;
+  color: #4db6ac;
+}
+.callout.callout-reference {
+  border-left: 5px dashed #4db6ac;
+  border-radius: 4px;
+  background-color: #f2f9f8;
+}
+
+/* Extended Knowledge - filled icon*/
+.callout.callout-extended .callout-icon-container::before {
+  content: "\F30B"; 
+  font-family: bootstrap-icons;
+  color: #6a1b9a;
+}
+.callout.callout-extended {
+  border: 1px solid #6a1b9a;
+  border-left: 5px solid #6a1b9a;
+  border-radius: 25px; /* Distinctive rounded shape */
+  background-color: #fdf2ff;
+}

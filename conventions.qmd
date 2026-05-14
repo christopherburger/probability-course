@@ -1,0 +1,27 @@
+---
+title: "Content Conventions"
+---
+
+The information in these course notes is categorized into three visual tiers that indicate the level of importance when it comes to graded material.
+
+### 1. Core Foundations (Know Cold)
+
+::: {.core-box}
+These blocks contain the core content of the course. If it is in a sharp-edged box, you are expected to be able to reproduce this information, derive the formulas, or perform the calculations from memory during examinations.
+:::
+
+------------------------------------------------------------------------
+
+### 2. Reference Concepts (Functional Familiarity)
+
+::: {.reference-box}
+These blocks contain tools, syntax, or concepts that you should recognize and understand when you see them. You do not need to memorize these "cold," but you should know they exist and where to find them.
+:::
+
+------------------------------------------------------------------------
+
+### 3. Extended Mastery (Context & Depth)
+
+::: {.extended-box}
+These rounded blocks are for students looking to further explore related content. This material is **not testable** but provides may prove useful for mastery of the core material in the course.
+:::

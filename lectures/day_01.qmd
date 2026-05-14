@@ -1,0 +1,21 @@
+---
+title: "Lecture 01: Introduction to Signals"
+date: "2026-08-20"
+---
+
+## Overview
+
+Today we define signal energy and power.
+
+## Mathematical Definition
+
+The energy $E_\infty$ of a continuous-time signal $x(t)$ is defined as:
+
+$$E_\infty = \int_{-\infty}^{\infty} |x(t)|^2 dt$$
+
+If the energy is finite ($0 < E_\infty < \infty$), we call $x(t)$ an **energy signal**.
+
+### Practice Task
+
+- Calculate the energy of a unit step function $u(t)$.
+- Determine if the signal is power or energy dominant.

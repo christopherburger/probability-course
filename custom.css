@@ -1,0 +1,67 @@
+/* Base padding and spacing for all custom boxes */
+.core-box, .reference-box, .extended-box {
+  margin: 1.5em 0;
+  padding: 1em 1.5em;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+/* -----------------------------------------
+   1. Core Foundations (Know Cold)
+----------------------------------------- */
+.core-box {
+  border-left: 8px solid #0d47a1;
+  background-color: #f0f4fa;
+  border-radius: 0px;
+}
+
+.core-box::before {
+  content: "⭐ Core Foundation";
+  display: block;
+  font-weight: 700;
+  color: #0d47a1;
+  margin-bottom: 0.8em;
+  border-bottom: 1px solid #d1d9e6;
+  padding-bottom: 0.3em;
+  font-size: 1.1em;
+}
+
+/* -----------------------------------------
+   2. Reference Concepts 
+----------------------------------------- */
+.reference-box {
+  border-left: 5px dashed #4db6ac;
+  background-color: #f2f9f8;
+  border-radius: 4px;
+}
+
+.reference-box::before {
+  content: "📖 Reference Concept";
+  display: block;
+  font-weight: 700;
+  color: #00796b;
+  margin-bottom: 0.8em;
+  border-bottom: 1px dashed #b2dfdb;
+  padding-bottom: 0.3em;
+  font-size: 1.1em;
+}
+
+/* -----------------------------------------
+   3. Extended Mastery 
+----------------------------------------- */
+.extended-box {
+  border: 1px solid #6a1b9a;
+  border-left: 8px solid #6a1b9a;
+  background-color: #fdf2ff;
+  border-radius: 25px; /* Distinctive rounded shape */
+}
+
+.extended-box::before {
+  content: "🚀 Extended Mastery";
+  display: block;
+  font-weight: 700;
+  color: #6a1b9a;
+  margin-bottom: 0.8em;
+  border-bottom: 1px solid #e1bee7;
+  padding-bottom: 0.3em;
+  font-size: 1.1em;
+}

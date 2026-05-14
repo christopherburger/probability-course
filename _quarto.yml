@@ -1,0 +1,27 @@
+project:
+  type: website
+  output-dir: docs 
+
+website:
+  title: "Programming for Engineers and Scientists"
+  sidebar:
+    style: "floating"
+    contents:
+      - section: "Course Info"
+        contents:
+          - index.qmd
+          - conventions.qmd
+      - section: "Lectures"
+        contents:
+          - lectures/day-01.qmd
+          - lectures/day-02.qmd
+
+format:
+  html:
+    theme: cosmo
+    css: custom.css
+    toc: true
+    html-math-method: katex
+    code-copy: true
+
+editor: visual
