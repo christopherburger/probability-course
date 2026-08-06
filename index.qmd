@@ -1,0 +1,17 @@
+---
+title: "Course Overview"
+subtitle: "Applied Probability"
+author: "Christopher Burger"
+institute: "University of Mississippi | School of Engineering"
+format: 
+  html:
+    theme: default
+    toc: true
+    toc-title: "On this page"
+    toc-depth: 2
+    css: styles.css
+---
+
+This is the central repository for the lecture notes for CSCI 4999. These notes provide an overview of the content covered during lecture.
+
+More in-depth information can be found in the course section available on Blackboard.

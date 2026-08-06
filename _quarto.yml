@@ -3,7 +3,7 @@ project:
   output-dir: docs 
 
 website:
-  title: "Programming for Engineers and Scientists"
+  title: "Applied Probability"
   sidebar:
     style: "floating"
     contents:
@@ -13,8 +13,12 @@ website:
           - conventions.qmd
       - section: "Lectures"
         contents:
-          - lectures/day-01.qmd
-          - lectures/day-02.qmd
+          - lectures/state_space.qmd
+          - lectures/permutations_combinations.qmd
+          - lectures/inclusion_exclusion.qmd
+          - lectures/axioms.qmd
+          - lectures/conditional_probability.qmd
+          - lectures/bayes_theorem.qmd
 
 format:
   html:

@@ -1,6 +1,5 @@
 ---
-title: "Lecture 01: Introduction to Signals"
-date: "2026-08-20"
+title: "1: State Space and the Multiplcation Principle"
 ---
 
 ## Overview
