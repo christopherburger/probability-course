@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Content Conventions – Applied Probability</title>
+<title>1: Experiments, Spaces and the Multiplcation Principle – Applied Probability</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,23 +26,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6388ad00bb6ecaefa25b9a98db1edf18.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6388ad00bb6ecaefa25b9a98db1edf18.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -71,8 +71,51 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
 
-<link rel="stylesheet" href="custom.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../custom.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -84,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Course Info</a></li><li class="breadcrumb-item"><a href="./conventions.html">Content Conventions</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/state_space.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/state_space.html">1: Experiments, Spaces and the Multiplcation Principle</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -99,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Applied Probability</a> 
+      <a href="../">Applied Probability</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -120,13 +163,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Course Overview</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./conventions.html" class="sidebar-item-text sidebar-link active">
+  <a href="../conventions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Content Conventions</span></a>
   </div>
 </li>
@@ -143,37 +186,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/state_space.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/state_space.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">1: Experiments, Spaces and the Multiplcation Principle</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/permutations_combinations.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/permutations_combinations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2: Permutations and Combinations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/inclusion_exclusion.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/inclusion_exclusion.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">3: The Principle of Inclusion-Exclusion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/axioms.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/axioms.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">4: Axioms of Probability</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/conditional_probability.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/conditional_probability.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">5: Conditional Probability</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/bayes_theorem.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/bayes_theorem.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">6: State Space and the Multiplcation Principle</span></a>
   </div>
 </li>
@@ -189,17 +232,23 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#core-foundations-know-cold" id="toc-core-foundations-know-cold" class="nav-link active" data-scroll-target="#core-foundations-know-cold">1. Core Foundations (Know Cold)</a></li>
-  <li><a href="#reference-concepts-functional-familiarity" id="toc-reference-concepts-functional-familiarity" class="nav-link" data-scroll-target="#reference-concepts-functional-familiarity">2. Reference Concepts (Functional Familiarity)</a></li>
+  <li><a href="#experiments-and-outcomes" id="toc-experiments-and-outcomes" class="nav-link active" data-scroll-target="#experiments-and-outcomes">Experiments and Outcomes</a>
+  <ul class="collapse">
+  <li><a href="#states-samples-and-experiments" id="toc-states-samples-and-experiments" class="nav-link" data-scroll-target="#states-samples-and-experiments">States, Samples and Experiments</a>
+  <ul class="collapse">
+  <li><a href="#enumerating-a-state-space" id="toc-enumerating-a-state-space" class="nav-link" data-scroll-target="#enumerating-a-state-space">Enumerating a State Space</a></li>
+  </ul></li>
+  <li><a href="#the-multiplication-principle" id="toc-the-multiplication-principle" class="nav-link" data-scroll-target="#the-multiplication-principle">The Multiplication Principle</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Course Info</a></li><li class="breadcrumb-item"><a href="./conventions.html">Content Conventions</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/state_space.html">Lectures</a></li><li class="breadcrumb-item"><a href="../lectures/state_space.html">1: Experiments, Spaces and the Multiplcation Principle</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Content Conventions</h1>
+<h1 class="title">1: Experiments, Spaces and the Multiplcation Principle</h1>
 </div>
 
 
@@ -216,28 +265,155 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>The information in these course notes is categorized into three visual tiers that indicate the level of importance when it comes to graded material.</p>
-<section id="core-foundations-know-cold" class="level3">
-<h3 class="anchored" data-anchor-id="core-foundations-know-cold">1. Core Foundations (Know Cold)</h3>
+<section id="experiments-and-outcomes" class="level1">
+<h1>Experiments and Outcomes</h1>
+<p>Consider a single six-sided die labeled with the numbers 1 through 6. What are the possible outcomes for a single roll?</p>
+<p>For this problem, the answer is straightforward:</p>
+<p><span class="math display">{1,2,3,4,5,6}</span></p>
+<p>In probability, a roll (or collection of rolls) is termed an <strong>experiment</strong> and the result of the experiment (the number seen face-up on the die) is an <strong>outcome</strong>.</p>
+<p>We enumerated the collection of possible outcomes above, but is this collection the die itself?</p>
+<p>No, these numbers are just labels we assign to physical outomes. This distinction seems trivial now, but it important to keep in mind.</p>
+<p>Experiments happen in reality while probability is associated with a mathematical representation. In other words, “Probability is not real.”</p>
+<section id="states-samples-and-experiments" class="level2">
+<h2 class="anchored" data-anchor-id="states-samples-and-experiments">States, Samples and Experiments</h2>
+<p>Now consider rolling two dice then summing their face-up values.</p>
+<p>Try to describe the outcomes.</p>
+<details>
+<summary>
+Click to show answer
+</summary>
+<p><strong>Answer:</strong> <span class="math inline">{2,3,4,5,6,7,8,9,10,11,12}</span></p>
+</details>
+<p>Now suppose we our sum is seven. Can that happen in multiple ways?</p>
+<details>
+<summary>
+Click to show answer
+</summary>
+<p><strong>Answer:</strong> If we are concerned about the order of the rolls then we have <span class="math inline">{(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)}</span>.</p>
+</details>
+<p>The important idea here is that an outcome is not the experiment.</p>
+<p>For our sum of seven, seven is the outcome.</p>
+<p>Our experiment is represented as <span class="math inline">(d_1, d_2)</span> where <span class="math inline">d_i \in {1,2,3,4,5,6}</span>.</p>
 <div class="core-box">
-<p>These blocks contain the core content of the course. If it is in a sharp-edged box, you are expected to be able to reproduce this information, derive the formulas, or perform the calculations from memory during examinations.</p>
+<p><strong>Experiment</strong> - What physically happens.</p>
+<p><strong>Sample space</strong> <span class="math inline">\Omega</span> - The set of all possible outcomes of an experiment.</p>
+<p><strong>State space</strong> <span class="math inline">S</span> - The collection of possible configurations of the system, including the individual outcomes that make up an experiment.</p>
+<p>The important distinction is that the sample space tells us what can happen and the state space tells us how we represent all the components of what can happen.</p>
 </div>
-<hr>
+<p>We can see with our sum of two die rolls experiment that <strong>sample space</strong> is <span class="math inline">{2,3,4,5,6,7,8,9,10,11,12}</span>.</p>
+<p>But if we actually cared about the actual faces that appeared then our <strong>sample space</strong> is <span class="math inline">{(1,1),(1,2),(1,3),...,(6,6)}</span>.</p>
+<p>This raises an important issue:</p>
+<p>There is not necessarily one uniquely correct sample space. The sample space depends on what constitutes an outcome for the experiment we are studying. This is why the state space distinction becomes useful in disambiguating things.</p>
+<p>We might then define an outcome of interest as a function of the state:</p>
+<p>The state of the two dice can be represented by:</p>
+<p><span class="math display">(d_1,d_2)</span></p>
+<p>where</p>
+<p><span class="math display">d_1,d_2 \in {1,2,3,4,5,6}</span></p>
+<p>And thus the state space is</p>
+<p><span class="math display">S = {(d_1, d_2) : d_1,d_2 \in {1,2,3,4,5,6}}</span></p>
+<p>We might then define an outcome of interest as a function of the state:</p>
+<p><span class="math display">X(d_1,d_2) = d_1 + d_2</span></p>
+<p>So, state <span class="math inline">\rightarrow</span> outcome of interest.</p>
+<p>For example,</p>
+<p><span class="math display">(2,5)⟶7</span>.</p>
+<p>And</p>
+<p><span class="math display">(5,2)⟶7</span>.</p>
+<p>Those are different states but the same outcome with respect to the sum.</p>
+<div class="note-box">
+<p>Different textbooks use sample space and state space differently. In this course, we will use these terms in a specific way. The <strong>sample space</strong> describes the possible outcomes we are interested in, while the <strong>state space</strong> describes the complete configurations from which those outcomes arise.</p>
+</div>
+<section id="enumerating-a-state-space" class="level3">
+<h3 class="anchored" data-anchor-id="enumerating-a-state-space">Enumerating a State Space</h3>
+<p>Given our experiment the state of the two dice can be represented by <span class="math inline">(d_1, d_2)</span> where <span class="math inline">d_i \in {1,2,3,4,5,6}</span>.</p>
+<p>So the state space is <span class="math inline">S = {(d_1, d_2)</span> : <span class="math inline">d_1,d_2 \in {1,2,3,4,5,6}}</span>.</p>
+<p>How many possible states are there? You should fully list them out.</p>
+<p>A useful way to approach this is using a tree diagram. Let the first die show a value of one, then draw branches for each of the possible values the second die can take on.</p>
+<details>
+<summary>
+Click to show tree
+</summary>
+<p><embed src="images/dice_sample_space_tree.pdf" class="img-fluid"></p>
+</details>
+<p>By looking at the tree, we notice a pattern. That every first roll has six associated possibilities.</p>
 </section>
-<section id="reference-concepts-functional-familiarity" class="level3">
-<h3 class="anchored" data-anchor-id="reference-concepts-functional-familiarity">2. Reference Concepts (Functional Familiarity)</h3>
-<div class="reference-box">
-<p>These blocks contain tools, syntax, or concepts that you should recognize and understand when you see them. You do not need to memorize these “cold,” but you should know they exist and where to find them.</p>
+</section>
+<section id="the-multiplication-principle" class="level2">
+<h2 class="anchored" data-anchor-id="the-multiplication-principle">The Multiplication Principle</h2>
+<p>Looking at our tree, we see every branch has the same number of children (six). And we have six total branches, one for each possible value of the first roll. The sum of all the leaves in the tree is 36, exactly the same number of states that we enumerated earlier.</p>
+<p>Looking at the pattern, we see we have six options for the first die and six options for the second or <span class="math inline">6 \times 6 = 36</span> total states. This is the <strong>multiplication principle</strong>.</p>
+<div class="core-box">
+<p>The Multiplication Principle:</p>
+<p>If there are <span class="math inline">x</span> options for one thing and <span class="math inline">y</span> choices for another thing, then there are <span class="math inline">x \times y</span> states that result from performing both actions.</p>
 </div>
-<!-- ------------------------------------------------------------------------
+<p>Now, what if we had three dice in our experiment? Then one outcome would look like <span class="math inline">(d_1,d_2,d_3)</span>.</p>
+<p>We have six choices for the first die, six for the second, and six for the third. So the size of our state space (the total number of states) is <span class="math inline">6 \times 6 \times 6 = 6^3</span>.</p>
+<p>What about the number of possible sums?</p>
+<p>Counting these up, we have the numbers from 3 to 18, or 16 total values. So, 16 is the size of our sample space. Note that the sizes of the sample space and the state space are quite different here. You should think about what this could mean. <em>Hint: Which outcome is more likely, 3 or 10?</em></p>
+<details>
+<summary>
+Click to show answer
+</summary>
+<p><strong>Answer:</strong> What we can have is multiple states mapped to the same outcome. For the outcome 3, all three die must show a one. There is only one way for this to occur. But for 10, we could have <span class="math inline">(3,3,4)</span>, <span class="math inline">(6,2,2)</span>, etc. Since there are more ways for 10 to occur and assuming the dice are fair (any side of the die is equally likely to be rolled), this outcome must be more likely than 3.</p>
+</details>
+<p>Now, if the sums were the state space then every answer would be equally likely. We know they are not, and so the sums cannot be state space.</p>
+<div class="exercise-box">
+<p>Imagine building a slot machine.</p>
+<p>Each reel contains three symbols</p>
+<ul>
+<li>🍒</li>
+<li>🍋</li>
+<li>🔔</li>
+</ul>
+<p>ith three totals reels. So, each pull generates a 3-tuple of symbols.</p>
+<p>What is the size of the state space?</p>
+<details>
+<summary>
+Click to show answer
+</summary>
+<p><strong>Answer:</strong> 27</p>
+</details>
+<p>Now define winning as exactly three Bells. How many winning states are there?</p>
+<details>
+<summary>
+Click to show answer
+</summary>
+<p><strong>Answer:</strong> 1</p>
+</details>
+<p>What if winning now means two bells? What is the state space?</p>
+<details>
+<summary>
+Click to show answer
+</summary>
+<p><strong>Answer:</strong> <span class="math inline">{(🔔,🔔,🍒),(🔔,🍒,🔔),(🍒,🔔,🔔),(🔔,🔔,🍋),(🔔,🍋,🔔),(🍋,🔔,🔔),(🔔,🔔,🔔)}</span></p>
+</details>
+</div>
+<div class="exercise-box">
+<p>Consider a standard roulette wheel. Its state space consists of 38 numbers: ${00, 0, 1, 2, 3, … , 35, 36}.</p>
+<p>00 and 0 are colored green while the remaining even numbers are colored red and the odd numbers colored black.</p>
+<p>Now suppose our question is, <em>did I win my bet?</em></p>
+<p>Do we have enough information to answer this question?</p>
+<details>
+<summary>
+Click to show answer
+</summary>
+<p><strong>Answer:</strong> No, we have no information on what the bet actually was about. It could have been on a specific number, color, etc.</p>
+</details>
+<p>Now define</p>
+$$ X(s) =
+<span class="math display">\begin{cases}
+   1 &amp; \text{if the bet wins} \\
+   0 &amp; \text{otherwise}
+\end{cases}</span>
+<p>Now dozens of different sates can produce the same outcome.</p>
+<p>For example, if we bet on red:</p>
+<p><span class="math inline">18 \rightarrow 1</span> <span class="math inline">20 \rightarrow 1</span> <span class="math inline">36 \rightarrow 1</span></p>
+<p>while</p>
+<p><span class="math inline">19 \rightarrow 0</span> <span class="math inline">00 \rightarrow 0</span></p>
+<p>It is important to remember that many states can correspond to a single outcome. We need to keep this in mind as we start to calculate probabilities.</p>
+</div>
 
-### 3. Extended Mastery (Context & Depth)
 
-::: extended-box
-These rounded blocks are for students looking to further explore related content. This material is **not testable** but provides may prove useful for mastery of the core material in the course.
-::: -->
-
-
+</section>
 </section>
 
 </main> <!-- /main -->
