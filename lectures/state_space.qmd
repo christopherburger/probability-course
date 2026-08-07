@@ -1,20 +1,239 @@
 ---
-title: "1: State Space and the Multiplcation Principle"
+title: "1: Experiments, Spaces and the Multiplcation Principle"
 ---
 
-## Overview
+# Experiments and Outcomes
 
-Today we define signal energy and power.
+Consider a single six-sided die labeled with the numbers 1 through 6. What are the possible outcomes for a single roll?
 
-## Mathematical Definition
+For this problem, the answer is straightforward:
 
-The energy $E_\infty$ of a continuous-time signal $x(t)$ is defined as:
+$${1,2,3,4,5,6}$$
 
-$$E_\infty = \int_{-\infty}^{\infty} |x(t)|^2 dt$$
+In probability, a roll (or collection of rolls) is termed an **experiment** and the result of the experiment (the number seen face-up on the die) is an **outcome**.
 
-If the energy is finite ($0 < E_\infty < \infty$), we call $x(t)$ an **energy signal**.
+We enumerated the collection of possible outcomes above, but is this collection the die itself?
 
-### Practice Task
+No, these numbers are just labels we assign to physical outomes. This distinction seems trivial now, but it important to keep in mind.
 
-- Calculate the energy of a unit step function $u(t)$.
-- Determine if the signal is power or energy dominant.
+Experiments happen in reality while probability is associated with a mathematical representation. In other words, "Probability is not real."
+
+## States, Samples and Experiments
+
+Now consider rolling two dice then summing their face-up values.
+
+Try to describe the outcomes.
+
+<details>
+
+<summary>Click to show answer</summary>
+
+**Answer:** ${2,3,4,5,6,7,8,9,10,11,12}$
+
+</details>
+
+Now suppose we our sum is seven. Can that happen in multiple ways?
+
+<details>
+
+<summary>Click to show answer</summary>
+
+**Answer:** If we are concerned about the order of the rolls then we have ${(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)}$.
+
+</details>
+
+The important idea here is that an outcome is not the experiment.
+
+For our sum of seven, seven is the outcome.
+
+Our experiment is represented as $(d_1, d_2)$ where $d_i \in {1,2,3,4,5,6}$.
+
+:::core-box
+**Experiment** - What physically happens.
+
+**Sample space** $\Omega$ - The set of all possible outcomes of an experiment.
+
+**State space** $S$ - The collection of possible configurations of the system, including the individual outcomes that make up an experiment.
+
+The important distinction is that the sample space tells us what can happen and the state space tells us how we represent all the components of what can happen.
+:::
+
+We can see with our sum of two die rolls experiment that **sample space** is ${2,3,4,5,6,7,8,9,10,11,12}$.
+
+But if we actually cared about the actual faces that appeared then our **sample space** is ${(1,1),(1,2),(1,3),...,(6,6)}$.
+
+This raises an important issue:
+
+There is not necessarily one uniquely correct sample space. The sample space depends on what constitutes an outcome for the experiment we are studying. This is why the state space distinction becomes useful in disambiguating things.
+
+We might then define an outcome of interest as a function of the state:
+
+The state of the two dice can be represented by:
+
+$$(d_1,d_2)$$
+
+where
+
+$$d_1,d_2 \in {1,2,3,4,5,6}$$
+
+And thus the state space is
+
+$$S = {(d_1, d_2) : d_1,d_2 \in {1,2,3,4,5,6}}$$
+
+We might then define an outcome of interest as a function of the state:
+
+$$X(d_1,d_2) = d_1 + d_2$$
+
+So, state $\rightarrow$ outcome of interest.
+
+For example,
+
+$$(2,5)⟶7$$.
+
+And
+
+$$(5,2)⟶7$$.
+
+Those are different states but the same outcome with respect to the sum.
+
+:::note-box
+Different textbooks use sample space and state space differently. In this course, we will use these terms in a specific way. The **sample space** describes the possible outcomes we are interested in, while the **state space** describes the complete configurations from which those outcomes arise.
+:::
+
+### Enumerating a State Space
+
+Given our experiment the state of the two dice can be represented by $(d_1, d_2)$ where $d_i \in {1,2,3,4,5,6}$.
+
+So the state space is $S = {(d_1, d_2)$ : $d_1,d_2 \in {1,2,3,4,5,6}}$.
+
+How many possible states are there? You should fully list them out.
+
+A useful way to approach this is using a tree diagram. Let the first die show a value of one, then draw branches for each of the possible values the second die can take on.
+
+<details>
+
+<summary>Click to show tree</summary>
+
+![](images/dice_sample_space_tree.pdf)
+
+</details>
+
+By looking at the tree, we notice a pattern. That every first roll has six associated possibilities. 
+
+## The Multiplication Principle
+
+Looking at our tree, we see every branch has the same number of children (six). And we have six total branches, one for each possible value of the first roll. The sum of all the leaves in the tree is 36, exactly the same number of states that we enumerated earlier.
+
+Looking at the pattern, we see we have six options for the first die and six options for the second or $6 \times 6 = 36$ total states. This is the **multiplication principle**. 
+
+:::core-box
+The Multiplication Principle:
+
+If there are $x$ options for one thing and $y$ choices for another thing, then there are $x \times y$ states that result from performing both actions. 
+:::
+
+Now, what if we had three dice in our experiment? Then one outcome would look like $(d_1,d_2,d_3)$.
+
+We have six choices for the first die, six for the second, and six for the third. So the size of our state space (the total number of states) is $6 \times 6 \times 6 = 6^3$. 
+
+What about the number of possible sums? 
+
+Counting these up, we have the numbers from 3 to 18, or 16 total values. So, 16 is the size of our sample space. Note that the sizes of the sample space and the state space are quite different here. You should think about what this could mean. *Hint: Which outcome is more likely, 3 or 10?*
+
+
+<details>
+
+<summary>Click to show answer</summary>
+
+**Answer:** What we can have is multiple states mapped to the same outcome. For the outcome 3, all three die must show a one. There is only one way for this to occur. But for 10, we could have $(3,3,4)$, $(6,2,2)$, etc. Since there are more ways for 10 to occur and assuming the dice are fair (any side of the die is equally likely to be rolled), this outcome must be more likely than 3.
+
+</details>
+
+Now, if the sums were the state space then every answer would be equally likely. We know they are not, and so the sums cannot be state space.
+
+
+:::exercise-box
+
+Imagine building a slot machine.
+
+Each reel contains three symbols
+
+- 🍒
+- 🍋
+- 🔔
+
+ith three totals reels. So, each pull generates a 3-tuple of symbols.
+
+What is the size of the state space?
+
+<details>
+
+<summary>Click to show answer</summary>
+
+**Answer:** 27
+
+</details>
+
+Now define winning as exactly three Bells. How many winning states are there?
+
+<details>
+
+<summary>Click to show answer</summary>
+
+**Answer:** 1
+
+</details>
+
+What if winning now means two bells? What is the state space?
+
+<details>
+
+<summary>Click to show answer</summary>
+
+**Answer:** ${(🔔,🔔,🍒),(🔔,🍒,🔔),(🍒,🔔,🔔),(🔔,🔔,🍋),(🔔,🍋,🔔),(🍋,🔔,🔔),(🔔,🔔,🔔)}$
+
+</details>
+
+:::
+
+:::exercise-box
+
+Consider a standard roulette wheel. Its state space consists of 38 numbers: ${00, 0, 1, 2, 3, ... , 35, 36}.
+
+00 and 0 are colored green while the remaining even numbers are colored red and the odd numbers colored black.
+
+Now suppose our question is, *did I win my bet?*
+
+Do we have enough information to answer this question?
+
+<details>
+
+<summary>Click to show answer</summary>
+
+**Answer:** No, we have no information on what the bet actually was about. It could have been on a specific number, color, etc.
+
+</details>
+
+Now define
+
+$$ X(s) = \begin{cases}
+   1 & \text{if the bet wins} \\
+   0 & \text{otherwise}
+\end{cases}
+
+Now dozens of different sates can produce the same outcome.
+
+For example, if we bet on red:
+
+$18 \rightarrow 1$
+$20 \rightarrow 1$
+$36 \rightarrow 1$
+
+while
+
+$19 \rightarrow 0$
+$00 \rightarrow 0$
+
+It is important to remember that many states can correspond to a single outcome. We need to keep this in mind as we start to calculate probabilities.
+
+:::
