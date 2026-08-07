@@ -1,5 +1,5 @@
 /* Base padding and spacing for all custom boxes */
-.core-box, .reference-box, .extended-box {
+.core-box, .reference-box, .extended-box, .note-box, .practice-box {
   margin: 1.5em 0;
   padding: 1em 1.5em;
   box-shadow: 0 4px 6px rgba(0,0,0,0.05);
@@ -15,7 +15,7 @@
 }
 
 .core-box::before {
-  content: "⭐ Core Foundation";
+  content: "  ⭐ Core Material";
   display: block;
   font-weight: 700;
   color: #0d47a1;
@@ -35,7 +35,7 @@
 }
 
 .reference-box::before {
-  content: "📖 Reference Concept";
+  content: "  📖 Reference Concept";
   display: block;
   font-weight: 700;
   color: #00796b;
@@ -56,7 +56,7 @@
 }
 
 .extended-box::before {
-  content: "🚀 Extended Mastery";
+  content: "  🚀 Extended Mastery";
   display: block;
   font-weight: 700;
   color: #6a1b9a;
@@ -77,7 +77,7 @@
 }
 
 .note-box::before {
-  content: "🍄 Note";
+  content: "  🍄 Note";
   display: block;
   font-weight: 700;
   color: #6a1b9a;
@@ -99,7 +99,7 @@
 }
 
 .practice-box::before {
-  content: "📝 Practice";
+  content: "  📝 Practice";
   display: block;
   font-weight: 700;
   color: #6a1b9a;

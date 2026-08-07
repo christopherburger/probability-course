@@ -28,7 +28,7 @@ Try to describe the outcomes.
 
 <summary>Click to show answer</summary>
 
-**Answer:** ${2,3,4,5,6,7,8,9,10,11,12}$
+**Answer:** $\{2,3,4,5,6,7,8,9,10,11,12\}$
 
 </details>
 
@@ -38,7 +38,7 @@ Now suppose we our sum is seven. Can that happen in multiple ways?
 
 <summary>Click to show answer</summary>
 
-**Answer:** If we are concerned about the order of the rolls then we have ${(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)}$.
+**Answer:** If we are concerned about the order of the rolls then we have $\{(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)\}$.
 
 </details>
 
@@ -46,9 +46,9 @@ The important idea here is that an outcome is not the experiment.
 
 For our sum of seven, seven is the outcome.
 
-Our experiment is represented as $(d_1, d_2)$ where $d_i \in {1,2,3,4,5,6}$.
+Our experiment is represented as $(d_1, d_2)$ where $d_i \in \{1,2,3,4,5,6\}$.
 
-:::core-box
+::: core-box
 **Experiment** - What physically happens.
 
 **Sample space** $\Omega$ - The set of all possible outcomes of an experiment.
@@ -78,7 +78,7 @@ $$d_1,d_2 \in {1,2,3,4,5,6}$$
 
 And thus the state space is
 
-$$S = {(d_1, d_2) : d_1,d_2 \in {1,2,3,4,5,6}}$$
+$$S = {(d_1, d_2) : d_1,d_2 \in \{1,2,3,4,5,6\}}$$
 
 We might then define an outcome of interest as a function of the state:
 
@@ -88,23 +88,23 @@ So, state $\rightarrow$ outcome of interest.
 
 For example,
 
-$$(2,5)⟶7$$.
+$$(2,5)⟶7$$
 
 And
 
-$$(5,2)⟶7$$.
+$$(5,2)⟶7$$
 
 Those are different states but the same outcome with respect to the sum.
 
-:::note-box
+::: note-box
 Different textbooks use sample space and state space differently. In this course, we will use these terms in a specific way. The **sample space** describes the possible outcomes we are interested in, while the **state space** describes the complete configurations from which those outcomes arise.
 :::
 
 ### Enumerating a State Space
 
-Given our experiment the state of the two dice can be represented by $(d_1, d_2)$ where $d_i \in {1,2,3,4,5,6}$.
+Given our experiment the state of the two dice can be represented by $(d_1, d_2)$ where $d_i \in \{1,2,3,4,5,6\}$.
 
-So the state space is $S = {(d_1, d_2)$ : $d_1,d_2 \in {1,2,3,4,5,6}}$.
+So the state space is $S = {(d_1, d_2) : d_1,d_2 \in \{1,2,3,4,5,6\}}$.
 
 How many possible states are there? You should fully list them out.
 
@@ -118,28 +118,27 @@ A useful way to approach this is using a tree diagram. Let the first die show a 
 
 </details>
 
-By looking at the tree, we notice a pattern. That every first roll has six associated possibilities. 
+By looking at the tree, we notice a pattern. That every first roll has six associated possibilities.
 
 ## The Multiplication Principle
 
 Looking at our tree, we see every branch has the same number of children (six). And we have six total branches, one for each possible value of the first roll. The sum of all the leaves in the tree is 36, exactly the same number of states that we enumerated earlier.
 
-Looking at the pattern, we see we have six options for the first die and six options for the second or $6 \times 6 = 36$ total states. This is the **multiplication principle**. 
+Looking at the pattern, we see we have six options for the first die and six options for the second or $6 \times 6 = 36$ total states. This is the **multiplication principle**.
 
-:::core-box
+::: core-box
 The Multiplication Principle:
 
-If there are $x$ options for one thing and $y$ choices for another thing, then there are $x \times y$ states that result from performing both actions. 
+If there are $x$ options for one thing and $y$ choices for another thing, then there are $x \times y$ states that result from performing both actions.
 :::
 
 Now, what if we had three dice in our experiment? Then one outcome would look like $(d_1,d_2,d_3)$.
 
-We have six choices for the first die, six for the second, and six for the third. So the size of our state space (the total number of states) is $6 \times 6 \times 6 = 6^3$. 
+We have six choices for the first die, six for the second, and six for the third. So the size of our state space (the total number of states) is $6 \times 6 \times 6 = 6^3$.
 
-What about the number of possible sums? 
+What about the number of possible sums?
 
 Counting these up, we have the numbers from 3 to 18, or 16 total values. So, 16 is the size of our sample space. Note that the sizes of the sample space and the state space are quite different here. You should think about what this could mean. *Hint: Which outcome is more likely, 3 or 10?*
-
 
 <details>
 
@@ -151,9 +150,7 @@ Counting these up, we have the numbers from 3 to 18, or 16 total values. So, 16 
 
 Now, if the sums were the state space then every answer would be equally likely. We know they are not, and so the sums cannot be state space.
 
-
-:::exercise-box
-
+::: practice-box
 Imagine building a slot machine.
 
 Each reel contains three symbols
@@ -162,7 +159,7 @@ Each reel contains three symbols
 - 🍋
 - 🔔
 
-ith three totals reels. So, each pull generates a 3-tuple of symbols.
+with three totals reels. So, each pull generates a 3-tuple of symbols.
 
 What is the size of the state space?
 
@@ -190,15 +187,13 @@ What if winning now means two bells? What is the state space?
 
 <summary>Click to show answer</summary>
 
-**Answer:** ${(🔔,🔔,🍒),(🔔,🍒,🔔),(🍒,🔔,🔔),(🔔,🔔,🍋),(🔔,🍋,🔔),(🍋,🔔,🔔),(🔔,🔔,🔔)}$
+**Answer:** $\{(🔔,🔔,🍒),(🔔,🍒,🔔),(🍒,🔔,🔔),(🔔,🔔,🍋),(🔔,🍋,🔔),(🍋,🔔,🔔),(🔔,🔔,🔔)\}$
 
 </details>
-
 :::
 
-:::exercise-box
-
-Consider a standard roulette wheel. Its state space consists of 38 numbers: ${00, 0, 1, 2, 3, ... , 35, 36}.
+::: practice-box
+Consider a standard roulette wheel. Its state space consists of 38 numbers: $\{00, 0, 1, 2, 3, ... , 35, 36\}$.
 
 00 and 0 are colored green while the remaining even numbers are colored red and the odd numbers colored black.
 
@@ -219,21 +214,19 @@ Now define
 $$ X(s) = \begin{cases}
    1 & \text{if the bet wins} \\
    0 & \text{otherwise}
-\end{cases}
-
+\end{cases}$$
 Now dozens of different sates can produce the same outcome.
 
 For example, if we bet on red:
 
-$18 \rightarrow 1$
-$20 \rightarrow 1$
-$36 \rightarrow 1$
+- $18 \rightarrow 1$
+- $20 \rightarrow 1$
+- $36 \rightarrow 1$
 
 while
 
-$19 \rightarrow 0$
-$00 \rightarrow 0$
+- $19 \rightarrow 0$
+- $00 \rightarrow 0$
 
 It is important to remember that many states can correspond to a single outcome. We need to keep this in mind as we start to calculate probabilities.
-
 :::

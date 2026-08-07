@@ -18,6 +18,7 @@ These blocks contain the core content of the course. If it is in a sharp-edged b
 These blocks contain tools, syntax, or concepts that you should recognize and understand when you see them. You do not need to memorize these "cold," but you should know they exist and where to find them.
 :::
 
+```{=html}
 <!-- ------------------------------------------------------------------------
 
 ### 3. Extended Mastery (Context & Depth)
@@ -25,3 +26,4 @@ These blocks contain tools, syntax, or concepts that you should recognize and un
 ::: extended-box
 These rounded blocks are for students looking to further explore related content. This material is **not testable** but provides may prove useful for mastery of the core material in the course.
 ::: -->
+```
