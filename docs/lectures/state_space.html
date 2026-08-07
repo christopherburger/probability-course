@@ -282,18 +282,18 @@ window.Quarto = {
 <summary>
 Click to show answer
 </summary>
-<p><strong>Answer:</strong> <span class="math inline">{2,3,4,5,6,7,8,9,10,11,12}</span></p>
+<p><strong>Answer:</strong> <span class="math inline">\{2,3,4,5,6,7,8,9,10,11,12\}</span></p>
 </details>
 <p>Now suppose we our sum is seven. Can that happen in multiple ways?</p>
 <details>
 <summary>
 Click to show answer
 </summary>
-<p><strong>Answer:</strong> If we are concerned about the order of the rolls then we have <span class="math inline">{(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)}</span>.</p>
+<p><strong>Answer:</strong> If we are concerned about the order of the rolls then we have <span class="math inline">\{(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)\}</span>.</p>
 </details>
 <p>The important idea here is that an outcome is not the experiment.</p>
 <p>For our sum of seven, seven is the outcome.</p>
-<p>Our experiment is represented as <span class="math inline">(d_1, d_2)</span> where <span class="math inline">d_i \in {1,2,3,4,5,6}</span>.</p>
+<p>Our experiment is represented as <span class="math inline">(d_1, d_2)</span> where <span class="math inline">d_i \in \{1,2,3,4,5,6\}</span>.</p>
 <div class="core-box">
 <p><strong>Experiment</strong> - What physically happens.</p>
 <p><strong>Sample space</strong> <span class="math inline">\Omega</span> - The set of all possible outcomes of an experiment.</p>
@@ -310,22 +310,22 @@ Click to show answer
 <p>where</p>
 <p><span class="math display">d_1,d_2 \in {1,2,3,4,5,6}</span></p>
 <p>And thus the state space is</p>
-<p><span class="math display">S = {(d_1, d_2) : d_1,d_2 \in {1,2,3,4,5,6}}</span></p>
+<p><span class="math display">S = {(d_1, d_2) : d_1,d_2 \in \{1,2,3,4,5,6\}}</span></p>
 <p>We might then define an outcome of interest as a function of the state:</p>
 <p><span class="math display">X(d_1,d_2) = d_1 + d_2</span></p>
 <p>So, state <span class="math inline">\rightarrow</span> outcome of interest.</p>
 <p>For example,</p>
-<p><span class="math display">(2,5)⟶7</span>.</p>
+<p><span class="math display">(2,5)⟶7</span></p>
 <p>And</p>
-<p><span class="math display">(5,2)⟶7</span>.</p>
+<p><span class="math display">(5,2)⟶7</span></p>
 <p>Those are different states but the same outcome with respect to the sum.</p>
 <div class="note-box">
 <p>Different textbooks use sample space and state space differently. In this course, we will use these terms in a specific way. The <strong>sample space</strong> describes the possible outcomes we are interested in, while the <strong>state space</strong> describes the complete configurations from which those outcomes arise.</p>
 </div>
 <section id="enumerating-a-state-space" class="level3">
 <h3 class="anchored" data-anchor-id="enumerating-a-state-space">Enumerating a State Space</h3>
-<p>Given our experiment the state of the two dice can be represented by <span class="math inline">(d_1, d_2)</span> where <span class="math inline">d_i \in {1,2,3,4,5,6}</span>.</p>
-<p>So the state space is <span class="math inline">S = {(d_1, d_2)</span> : <span class="math inline">d_1,d_2 \in {1,2,3,4,5,6}}</span>.</p>
+<p>Given our experiment the state of the two dice can be represented by <span class="math inline">(d_1, d_2)</span> where <span class="math inline">d_i \in \{1,2,3,4,5,6\}</span>.</p>
+<p>So the state space is <span class="math inline">S = {(d_1, d_2) : d_1,d_2 \in \{1,2,3,4,5,6\}}</span>.</p>
 <p>How many possible states are there? You should fully list them out.</p>
 <p>A useful way to approach this is using a tree diagram. Let the first die show a value of one, then draw branches for each of the possible values the second die can take on.</p>
 <details>
@@ -356,7 +356,7 @@ Click to show answer
 <p><strong>Answer:</strong> What we can have is multiple states mapped to the same outcome. For the outcome 3, all three die must show a one. There is only one way for this to occur. But for 10, we could have <span class="math inline">(3,3,4)</span>, <span class="math inline">(6,2,2)</span>, etc. Since there are more ways for 10 to occur and assuming the dice are fair (any side of the die is equally likely to be rolled), this outcome must be more likely than 3.</p>
 </details>
 <p>Now, if the sums were the state space then every answer would be equally likely. We know they are not, and so the sums cannot be state space.</p>
-<div class="exercise-box">
+<div class="practice-box">
 <p>Imagine building a slot machine.</p>
 <p>Each reel contains three symbols</p>
 <ul>
@@ -364,7 +364,7 @@ Click to show answer
 <li>🍋</li>
 <li>🔔</li>
 </ul>
-<p>ith three totals reels. So, each pull generates a 3-tuple of symbols.</p>
+<p>with three totals reels. So, each pull generates a 3-tuple of symbols.</p>
 <p>What is the size of the state space?</p>
 <details>
 <summary>
@@ -384,11 +384,11 @@ Click to show answer
 <summary>
 Click to show answer
 </summary>
-<p><strong>Answer:</strong> <span class="math inline">{(🔔,🔔,🍒),(🔔,🍒,🔔),(🍒,🔔,🔔),(🔔,🔔,🍋),(🔔,🍋,🔔),(🍋,🔔,🔔),(🔔,🔔,🔔)}</span></p>
+<p><strong>Answer:</strong> <span class="math inline">\{(🔔,🔔,🍒),(🔔,🍒,🔔),(🍒,🔔,🔔),(🔔,🔔,🍋),(🔔,🍋,🔔),(🍋,🔔,🔔),(🔔,🔔,🔔)\}</span></p>
 </details>
 </div>
-<div class="exercise-box">
-<p>Consider a standard roulette wheel. Its state space consists of 38 numbers: ${00, 0, 1, 2, 3, … , 35, 36}.</p>
+<div class="practice-box">
+<p>Consider a standard roulette wheel. Its state space consists of 38 numbers: <span class="math inline">\{00, 0, 1, 2, 3, ... , 35, 36\}</span>.</p>
 <p>00 and 0 are colored green while the remaining even numbers are colored red and the odd numbers colored black.</p>
 <p>Now suppose our question is, <em>did I win my bet?</em></p>
 <p>Do we have enough information to answer this question?</p>
@@ -399,16 +399,21 @@ Click to show answer
 <p><strong>Answer:</strong> No, we have no information on what the bet actually was about. It could have been on a specific number, color, etc.</p>
 </details>
 <p>Now define</p>
-$$ X(s) =
-<span class="math display">\begin{cases}
+<p><span class="math display"> X(s) = \begin{cases}
    1 &amp; \text{if the bet wins} \\
    0 &amp; \text{otherwise}
-\end{cases}</span>
-<p>Now dozens of different sates can produce the same outcome.</p>
+\end{cases}</span> Now dozens of different sates can produce the same outcome.</p>
 <p>For example, if we bet on red:</p>
-<p><span class="math inline">18 \rightarrow 1</span> <span class="math inline">20 \rightarrow 1</span> <span class="math inline">36 \rightarrow 1</span></p>
+<ul>
+<li><span class="math inline">18 \rightarrow 1</span></li>
+<li><span class="math inline">20 \rightarrow 1</span></li>
+<li><span class="math inline">36 \rightarrow 1</span></li>
+</ul>
 <p>while</p>
-<p><span class="math inline">19 \rightarrow 0</span> <span class="math inline">00 \rightarrow 0</span></p>
+<ul>
+<li><span class="math inline">19 \rightarrow 0</span></li>
+<li><span class="math inline">00 \rightarrow 0</span></li>
+</ul>
 <p>It is important to remember that many states can correspond to a single outcome. We need to keep this in mind as we start to calculate probabilities.</p>
 </div>
 
