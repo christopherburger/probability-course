@@ -2,12 +2,12 @@
 title: "Content Conventions"
 ---
 
-The information in these course notes is categorized into three visual tiers that indicate the level of importance when it comes to graded material.
+The information in these course notes is categorized into visual tiers.
 
-### 1. Core Foundations (Know Cold)
+### 1. Core Material
 
 ::: core-box
-These blocks contain the core content of the course. If it is in a sharp-edged box, you are expected to be able to reproduce this information, derive the formulas, or perform the calculations from memory during examinations.
+These blocks contain the core content of the course. You are expected to be able to reproduce this information, derive the formulas, or perform the calculations from memory during examinations.
 :::
 
 ------------------------------------------------------------------------
@@ -18,12 +18,26 @@ These blocks contain the core content of the course. If it is in a sharp-edged b
 These blocks contain tools, syntax, or concepts that you should recognize and understand when you see them. You do not need to memorize these "cold," but you should know they exist and where to find them.
 :::
 
-```{=html}
-<!-- ------------------------------------------------------------------------
+------------------------------------------------------------------------
 
-### 3. Extended Mastery (Context & Depth)
+### 3. Extended Information
 
 ::: extended-box
-These rounded blocks are for students looking to further explore related content. This material is **not testable** but provides may prove useful for mastery of the core material in the course.
-::: -->
-```
+These blocks are for students looking to further explore related content. This material is **not testable** but provides may prove useful for mastery of the core material in the course.
+:::
+
+------------------------------------------------------------------------
+
+### 4. Notes
+
+::: note-box
+These blocks are for context, especially for definitions that are used in the course that may be defined differently elsewhere.
+:::
+
+------------------------------------------------------------------------
+
+### 5. Practice
+
+::: practice-box
+These blocks contain practice problems associated with their related section(s).
+:::

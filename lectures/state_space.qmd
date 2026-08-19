@@ -1,5 +1,5 @@
 ---
-title: "1: Experiments, Spaces and the Multiplcation Principle"
+title: "1: Experiments, Spaces and the Multiplication Principle"
 ---
 
 # Experiments and Outcomes
@@ -214,8 +214,7 @@ Now define
 $$ X(s) = \begin{cases}
    1 & \text{if the bet wins} \\
    0 & \text{otherwise}
-\end{cases}$$
-Now dozens of different sates can produce the same outcome.
+\end{cases}$$ Now dozens of different sates can produce the same outcome.
 
 For example, if we bet on red:
 

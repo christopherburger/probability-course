@@ -11,7 +11,7 @@ website:
         contents:
           - index.qmd
           - conventions.qmd
-      - section: "Lectures"
+      - section: "Foundations"
         contents:
           - lectures/state_space.qmd
           - lectures/permutations_combinations.qmd
@@ -19,6 +19,7 @@ website:
           - lectures/axioms.qmd
           - lectures/conditional_probability.qmd
           - lectures/bayes_theorem.qmd
+      - section: "Introduction to Inference"
 
 format:
   html:
