@@ -229,3 +229,33 @@ while
 
 It is important to remember that many states can correspond to a single outcome. We need to keep this in mind as we start to calculate probabilities.
 :::
+
+## Probability
+
+Our purpose for investigating counting to introduce a commonly seen definition of probability, that of **relative frequency**.
+
+This definition is: The probability of an event $A$ termed $P(A)$ is ratio of the number of ways that $A$ can happen to the total number of things that can happen.
+
+That is $$ P(A) \frac{\text{# of ways A can occur}}{# of total things that can occur} $$
+
+Note that with the ratio above, we will always have a value that is in the interval $[0,1]$.
+
+Now if we consider simple examples like we have seen above, we might say that the probability of rolling a six on a standard die is $$\frac{\text{number of ways a six can be rolled}{total number of possible values for a roll} = \frac{1}{6}$$
+
+But what exactly is a "standard" die? And does a die "have" probability?
+
+These questions lead towards a different, more fundamental definition of probability. Where probability is defined as a **measure of uncertainty given a set of evidence**.
+
+Under this definition probability falls within the interval $[0,1]$ just like the previous definition where the end points are understood to be **extreme** probabilities, that is, they signify absolute certainty.
+
+In practice, if we possess absolute certainty about the outcome of some experiment, we have no use for probability. But it is very rare for us to have this kind of certainty in most situations.
+
+Flipping a "fair" coin is often used as an introductory example as a "random" event, but is the event actually "random"? That is, are we always ignorant of the outcome?
+
+We could devise a machine (and many have been made) that controls all the initial conditions for our coin flip to guarantee what side we would like to the coin land on. What separates this coin flip using our theoretical machine over just flipping the coin ourselves?
+
+The answer is control. We are in control of more of the conditions that affect the coin toss. If we control all the important conditions, we can guarantee that the process is no longer "random." Randomness is not an inherent property of the coin, it is a **lack of knowledge** about the conditions (causes) that govern the behavior of the coin when we toss it.
+
+Probability as a measure of uncertainty then needs to incorporate information into its definition, as adding **relevant** information will increase our understanding of the causes behind our experiment and so our resulting probability will be a better estimate of the actual outcome (that is, the probability we calculate will tend more towards one of the two extreme values, 0 or 1.)
+
+Probability under this definition is then written as $P(A | E)$ which is read "The probability of event $A$ occurring given $E$" where $E$ stands for all the evidence assumed. We always have assumed evidence, for instance the descriptor "fair" is a very important piece of information, where it is generally assumed to be that any outcome is equally likely. This definition is known as **conditional probability**, which we will cover in more detail in the future. By convention we leave out the evidence on many examples but it is important to remember that $P(A)$ is not a fully complete statement. We **always** assume something and as such all probability is conditional.

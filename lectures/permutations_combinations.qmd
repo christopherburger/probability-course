@@ -1,3 +1,71 @@
 ---
 title: "2: Permutations and Combinations"
 ---
+
+Traditional discussions in permutations and combinations focus on attempting to pattern-match word problems (order matters vs. order does not matter) instead of modeling state spaces. When we need to work with probabilistic algorithms, there will are no word problems to pattern-match.
+
+We will instead discuss permutations and combinations as **technology built to bypass the brute-force calculations of our previous state space creation.**
+
+# Permutations
+
+In our previous section, if you had 52 cards in a standard deck and drew 5, you would draw a tree with 52 branches, then 51 branches, then 50 branches, then 49 branches, then 48 branches.
+
+That is infeasible, there is just too much to draw.
+
+What we need is a way to truncate our multiplication tree based on prior information.
+
+This is exactly what the idea of **permutation** does. A permutation is just a macro for a truncated multiplication tree.
+
+We are just doing the multiplication principle, but stopping early. We write $52 \times 51 \times 50 \times 49 \times 48$. This is reasonable since we have 52 choices for the first card, then 51 (as we have already chosen one card), then 50 (as we have chosen two), and so on. We are not concerned about the possibilities associated with the remaining 47 cards, as we are only drawing five.
+
+We mathematically encode "stopping early" by writing the full tree (that is, every possible ordering which is $52!$) and dividing off the branches we did not need ($47!$).
+
+The general formula for a permutation is:
+$$\frac{n!}{(n-k)!}$$
+
+Where $n$ is the total number of items and $r$ is the number of items in out set of interest that were **removed** from the total.
+
+But it is not a new concept; the formula comes just from being a typographical shortcut for multiplication. In a way, we can view the standard permutation formula as a form of compression for our multiplication tree.
+
+:::practice-box
+Assume we are dealt three cards from a standard deck consisting of the Ace, King, and Queen of diamonds. What are all the permutations of how these cards could be dealt to us?
+<details>
+
+<summary>Click to show answer</summary>
+
+Answer: Counting all the individual states:
+$(A,K,Q), (A,Q,K), (K,A,Q), (K,Q,A), (Q,A,K), (Q,K,A)$
+gives us six total possibilities.
+
+Using the formula: $\frac{3!}{(3-3)! = 3! = 6$}
+
+Note that $0!$ is defined as $1$.
+
+</details>
+:::
+
+What happens if we do not remove items from the total collection? That is, selecting an item allows for us to select it again on the next "step"? 
+
+# Combinations
+
+Combinations are closely related to permutations and our goal is to think about them innately as a physical grouping mechanism whose purpose is to erase artificial distinctions.
+
+Lets consider the practice problem above. We have three cards, the Ace, King, and Queen of diamonds. What if we are using them to determine a hand in a card game where order is not important? For example, a flush in poker is a hand that has all the same suit (in our case it is diamonds) and the hand is sized differently depending on the specifics of the game (it is usually five cards). Given this, does it matter what order we recieved the cards?
+
+No, the order is no longer important here. The concept of a hand in poker makes no distinction between the physical arrangement of cards, they only must meet the much less restrictive requirement of being present in the hand. 
+
+:::note-box
+For those familiar with the game of poker, you may say that a straight enforces an ordering of the cards. But this is only applicable to the entire hand. The dealer is not concerned if your hand is in ascending order, descending order or any combination thereof. If you have 5 sequentially ordered cards within your hand in any arrangement, you have a straight.
+:::
+
+Since the physical reality of the game does not care about the order, we need a way to adjust out permutation formula to control for counting distinctions that do not matter. We saw that the permutation formula counted all 6 of those sequences as distinct branches on our tree. 
+
+A combination is an algorithm to bundle those 6 branches into a single "meta-branch.
+
+If every valid state in our space has been artificially cloned exactly $k!$ times by the a permutation's ordering, we divide the total state space by $k!$ to collapse the clones into single entities.
+
+$$
+$$\frac{n!}{r!(n-k)!}$$
+$$
+
+So in poker, the hand consisting of the Ace, King, and Queen of diamonds the number of combinations is $\frac{3!}{3!(3-3)!} = 1$ which matches our intuition with respect to the rules of poker.

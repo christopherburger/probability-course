@@ -224,6 +224,10 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Random Variables</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
  <span class="menu-text">Introduction to Inference</span></span>
   </li>
     </ul>
@@ -243,6 +247,7 @@ window.Quarto = {
   <li><a href="#enumerating-a-state-space" id="toc-enumerating-a-state-space" class="nav-link" data-scroll-target="#enumerating-a-state-space">Enumerating a State Space</a></li>
   </ul></li>
   <li><a href="#the-multiplication-principle" id="toc-the-multiplication-principle" class="nav-link" data-scroll-target="#the-multiplication-principle">The Multiplication Principle</a></li>
+  <li><a href="#probability" id="toc-probability" class="nav-link" data-scroll-target="#probability">Probability</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -420,6 +425,23 @@ Click to show answer
 </ul>
 <p>It is important to remember that many states can correspond to a single outcome. We need to keep this in mind as we start to calculate probabilities.</p>
 </div>
+</section>
+<section id="probability" class="level2">
+<h2 class="anchored" data-anchor-id="probability">Probability</h2>
+<p>Our purpose for investigating counting to introduce a commonly seen definition of probability, that of <strong>relative frequency</strong>.</p>
+<p>This definition is: The probability of an event <span class="math inline">A</span> termed <span class="math inline">P(A)</span> is ratio of the number of ways that <span class="math inline">A</span> can happen to the total number of things that can happen.</p>
+<p>That is <span class="math display"> P(A) \frac{\text{# of ways A can occur}}{# of total things that can occur} </span></p>
+<p>Note that with the ratio above, we will always have a value that is in the interval <span class="math inline">[0,1]</span>.</p>
+<p>Now if we consider simple examples like we have seen above, we might say that the probability of rolling a six on a standard die is <span class="math display">\frac{\text{number of ways a six can be rolled}{total number of possible values for a roll} = \frac{1}{6}</span></p>
+<p>But what exactly is a “standard” die? And does a die “have” probability?</p>
+<p>These questions lead towards a different, more fundamental definition of probability. Where probability is defined as a <strong>measure of uncertainty given a set of evidence</strong>.</p>
+<p>Under this definition probability falls within the interval <span class="math inline">[0,1]</span> just like the previous definition where the end points are understood to be <strong>extreme</strong> probabilities, that is, they signify absolute certainty.</p>
+<p>In practice, if we possess absolute certainty about the outcome of some experiment, we have no use for probability. But it is very rare for us to have this kind of certainty in most situations.</p>
+<p>Flipping a “fair” coin is often used as an introductory example as a “random” event, but is the event actually “random”? That is, are we always ignorant of the outcome?</p>
+<p>We could devise a machine (and many have been made) that controls all the initial conditions for our coin flip to guarantee what side we would like to the coin land on. What separates this coin flip using our theoretical machine over just flipping the coin ourselves?</p>
+<p>The answer is control. We are in control of more of the conditions that affect the coin toss. If we control all the important conditions, we can guarantee that the process is no longer “random.” Randomness is not an inherent property of the coin, it is a <strong>lack of knowledge</strong> about the conditions (causes) that govern the behavior of the coin when we toss it.</p>
+<p>Probability as a measure of uncertainty then needs to incorporate information into its definition, as adding <strong>relevant</strong> information will increase our understanding of the causes behind our experiment and so our resulting probability will be a better estimate of the actual outcome (that is, the probability we calculate will tend more towards one of the two extreme values, 0 or 1.)</p>
+<p>Probability under this definition is then written as <span class="math inline">P(A | E)</span> which is read “The probability of event <span class="math inline">A</span> occurring given <span class="math inline">E</span>” where <span class="math inline">E</span> stands for all the evidence assumed. We always have assumed evidence, for instance the descriptor “fair” is a very important piece of information, where it is generally assumed to be that any outcome is equally likely. This definition is known as <strong>conditional probability</strong>, which we will cover in more detail in the future. By convention we leave out the evidence on many examples but it is important to remember that <span class="math inline">P(A)</span> is not a fully complete statement. We <strong>always</strong> assume something and as such all probability is conditional.</p>
 
 
 </section>
