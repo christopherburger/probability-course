@@ -232,15 +232,21 @@ It is important to remember that many states can correspond to a single outcome.
 
 ## Probability
 
-Our purpose for investigating counting to introduce a commonly seen definition of probability, that of **relative frequency**.
+Our purpose for investigating counting is to introduce a commonly seen definition of probability, that of **relative frequency**.
 
 This definition is: The probability of an event $A$ termed $P(A)$ is ratio of the number of ways that $A$ can happen to the total number of things that can happen.
 
-That is $$ P(A) \frac{\text{# of ways A can occur}}{# of total things that can occur} $$
+That is 
+$$ 
+P(A) \frac{\text{# of ways A can occur}}{# of total things that can occur} 
+$$
 
 Note that with the ratio above, we will always have a value that is in the interval $[0,1]$.
 
-Now if we consider simple examples like we have seen above, we might say that the probability of rolling a six on a standard die is $$\frac{\text{number of ways a six can be rolled}{total number of possible values for a roll} = \frac{1}{6}$$
+Now if we consider simple examples like we have seen above, we might say that the probability of rolling a six on a standard die is 
+$$
+\frac{\text{number of ways a six can be rolled}}{total number of possible values for a roll} = \frac{1}{6}
+$$
 
 But what exactly is a "standard" die? And does a die "have" probability?
 
