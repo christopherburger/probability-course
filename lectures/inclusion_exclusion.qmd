@@ -1,3 +1,52 @@
 ---
 title: "3: The Principle of Inclusion-Exclusion"
 ---
+
+## Part 1: PIE as "Subtraction-Based Compression"
+
+When students encounter a problem like "What is the probability a drawn card is a Heart OR a Face Card?", they naturally add $13 + 12 = 25$.
+
+When you ask them why the answer is wrong, they will correctly identify that the King, Queen, and Jack of Hearts were counted twice. The critical mistake textbooks make next is handing them the formula $P(A \cup B) = P(A) + P(B) - P(A \cap B)$.
+
+**The Fix: Ban the Formula, Require the Map.**
+
+Do not let them memorize alternating plus and minus signs. Force them to physically map the layers of the count.
+
+1.  **The Overlap Test:** Ask them what happens with 3 sets (e.g., "Rolls that are Even, \>3, or Prime").
+
+2.  **The Physical Action:** Have them draw a 3-circle Venn Diagram. Have them physically place a tally mark in every region that satisfies condition $A$, then condition $B$, then condition $C$.
+
+3.  **The Diagnosis:** The center region (satisfying all three) now has exactly 3 tally marks. It has been counted 3 times. If we subtract the pairwise intersections, we remove 3 tally marks. Now the center has 0 tally marks. We have to add it back once.
+
+The alternating signs are not a rule to be memorized; they are a crude algebraic repair job for clumsy counting.
+
+## Part 2: Stars and Bars (Destroying the Formula)
+
+This is the most misunderstood topic in elementary combinatorics. If you teach them $\binom{n+k-1}{k-1}$, they will fail every probabilistic algorithm problem that requires dynamic resource allocation.
+
+**The Setup (The Gambling Context):** You have 10 identical \$100 chips. You want to distribute them among 3 distinct players (Alice, Bob, Charlie) at a poker table. How many ways can you distribute the chips, assuming some players might get zero?
+
+**The Trap:** Because the players are distinct, students want to use permutations. Because the chips are identical, they want to use combinations. It breaks both models.
+
+**The Fix: The "Mississippi" Anagram Hack.**
+
+Remind them of the "Mississippi Problem" from Week 2 (finding distinct anagrams of indistinguishable letters). Tell them they already know the math for Stars and Bars; they just haven't realized it's a cryptography problem.
+
+1.  **The Translation:** Tell them to physically line up the 10 identical chips (`* * * * * * * * * *`).
+
+2.  **The Bins:** Ask them how to physically separate these chips for 3 people. They don't need 3 dividers; they only need 2 wooden sticks (`| |`) to create 3 zones on the table.
+
+3.  **The Encryption:** Any distribution of chips can be written as a string of characters.
+
+    - Alice gets 4, Bob gets 1, Charlie gets 5 $\rightarrow$ `* * * * | * | * * * * *`
+
+    - Alice gets 10, Bob 0, Charlie 0 $\rightarrow$ `* * * * * * * * * * | |`
+
+4.  **The Epiphany:** We have 12 total physical objects (10 stars, 2 bars). We just need to find the number of distinct anagrams of this 12-character string.
+
+Because we have 12 slots, and we just need to choose where the 2 bars go, the answer is $\binom{12}{2}$. Or, using Week 2's division logic for identical items: $\frac{12!}{10!2!}$.
+
+"A casino manager is handing out 5 comped hotel room keys to 3 high rollers.
+*Part A:* Assume all 5 keys are for identical standard rooms.
+*Part B:* Assume all 5 keys are for uniquely themed penthouse suites (The Roman, The Egyptian, etc.).
+Calculate the state space for both, and strictly define *why* the physical nature of the room key changes the fundamental mathematical architecture of the problem."

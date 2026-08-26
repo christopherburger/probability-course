@@ -1,3 +1,27 @@
 ---
 title: "4: Axioms of Probability"
 ---
+
+The transition into Week 4 represents a dangerous pivot point. Up until now, students have lived entirely in a discrete, uniform world where probability is just counting: $P(A) = \frac{\vert{}A\vert{}}{\vert{}\Omega\vert{}}$.
+
+If you do not explicitly destroy this assumption before introducing the formal axioms, students will drag the "Uniform Measure Fallacy" into every subsequent topic. They will try to solve continuous probability, Markov chains, and Bayesian updates by just counting states and dividing, which will lead to catastrophic modeling errors.
+
+Here is how to structure Week 4 to transition them from raw counting to formal measure theory, using Kolmogorov’s axioms as the scaffolding.
+
+## Phase 1: Breaking the Uniform Assumption (The "Loaded Dice" Diagnostic)
+
+Before you teach the axioms, you must prove to them that counting is no longer sufficient.
+
+**The Setup:** Introduce a game with a biased coin or a loaded die. For example, a coin where $P(\text{Heads}) = \frac{2}{3}$.
+
+Ask them to calculate the probability of getting exactly one Head in two flips.
+
+**The Trap:** Students who are stuck in Week 3 will define the state space as $\Omega = \{HH, HT, TH, TT\}$. They will identify the event as $A = \{HT, TH\}$. They will count the states and proudly state $P(A) = \frac{2}{4} = \frac{1}{2}$.
+
+**The Destruction:** You must stop the class here and ruthlessly expose the flaw.
+
+1.  Ask them: *"Does your mathematical model match the physical reality of the loaded coin?"*
+
+2.  Force them to realize that the state $HH$ is physically much heavier (more likely) than the state $TT$.
+
+3.  **The Epiphany:** Counting states only works if every state has the exact same "weight." Once the universe becomes non-uniform, counting is useless. We need a new mathematical machine.

@@ -1,3 +1,17 @@
 ---
 title: "5: Conditional Probability"
 ---
+
+## Phase 1: Shrinking the Universe
+
+You must teach conditional probability strictly as a shift in perspective.
+
+**The Setup:**
+
+Imagine a state space $\Omega$ with two events, $A$ and $B$.
+
+- **Joint Probability** $P(A \cap B)$: You are standing outside the universe $\Omega$. You are looking at the intersection of $A$ and $B$. The denominator is everything in $\Omega$.
+
+- **Conditional Probability** $P(A\vert{}B)$: Event $B$ has just occurred. The old universe $\Omega$ is dead. Everything outside of $B$ has ceased to exist. $B$ is the new universe. The numerator (the physical space of the intersection) hasn't changed at all. What changed is the denominator: you must re-normalize the new universe so that its total measure equals 1 (Axiom 2 from Week 4).
+
+Do not let them use the formula for the first two lectures. Force them to physically cross out the invalid parts of the state space and calculate the new probabilities by manually normalizing the surviving weights.
