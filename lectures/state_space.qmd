@@ -237,7 +237,7 @@ Our purpose for investigating counting is to introduce a commonly seen definitio
 This definition is: The probability of an event $A$ termed $P(A)$ is ratio of the number of ways that $A$ can happen to the total number of things that can happen.
 
 That is $$ 
-P(A) \frac{\text{# of ways A can occur}}{# of total things that can occur} $$
+P(A) \frac{\text{number of ways A can occur}}{\text{number of total things that can occur}} $$
 
 Note that with the ratio above, we will always have a value that is in the interval $[0,1]$.
 
