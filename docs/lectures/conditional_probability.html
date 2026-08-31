@@ -71,6 +71,49 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../custom.css">
 </head>
@@ -84,7 +127,9 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/state_space.html">Foundations</a></li><li class="breadcrumb-item"><a href="../lectures/conditional_probability.html">5: Conditional Probability</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      Applied Probability
+      </li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -153,30 +198,6 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">2: Permutations and Combinations</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../lectures/inclusion_exclusion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3: The Principle of Inclusion-Exclusion</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../lectures/axioms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4: Axioms of Probability</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../lectures/conditional_probability.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">5: Conditional Probability</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../lectures/bayes_theorem.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">6: Bayes’s Theorem</span></a>
-  </div>
-</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -198,7 +219,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/state_space.html">Foundations</a></li><li class="breadcrumb-item"><a href="../lectures/conditional_probability.html">5: Conditional Probability</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">5: Conditional Probability</h1>
 </div>
@@ -217,6 +238,11 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>We have already discussed the idea of conditional probability during our introduction to sample and state spaces. But for our previous problems, while we made to state our assumptions, these were not included directly in the mathematical notation we used.</p>
+<p>Consider a state space <span class="math inline">\Omega</span> with two events, <span class="math inline">A</span> and <span class="math inline">B</span>.</p>
+<p>Now consider that Event <span class="math inline">B</span> has just occurred. The old universe <span class="math inline">\Omega</span> is irrelevant. Everything outside of <span class="math inline">B</span> has ceased to exist. <span class="math inline">B</span> is the <strong>new universe</strong>.</p>
+<p>Now consider that Event <span class="math inline">A</span> occurs <strong>after we know</strong> event <span class="math inline">B</span> has occured. The numerator (the physical space of the intersection) has not changed at all. What changed is the denominator: we must re-normalize the new universe so that its total measure equals 1 (Axiom 2 from Week 4).</p>
+<p>What we have here is the <strong>Conditional Probability</strong> of Event <span class="math inline">A</span> given Event <span class="math inline">B</span> has occured, which in notation is written as <span class="math inline">P(A\vert{}B)</span>.</p>
 
 
 

@@ -71,6 +71,49 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../custom.css">
 </head>
@@ -84,7 +127,9 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/state_space.html">Foundations</a></li><li class="breadcrumb-item"><a href="../lectures/inclusion_exclusion.html">3: The Principle of Inclusion-Exclusion</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      Applied Probability
+      </li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -153,30 +198,6 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">2: Permutations and Combinations</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../lectures/inclusion_exclusion.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">3: The Principle of Inclusion-Exclusion</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../lectures/axioms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4: Axioms of Probability</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../lectures/conditional_probability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">5: Conditional Probability</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../lectures/bayes_theorem.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">6: Bayes’s Theorem</span></a>
-  </div>
-</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -192,13 +213,20 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#part-1-pie-as-subtraction-based-compression" id="toc-part-1-pie-as-subtraction-based-compression" class="nav-link active" data-scroll-target="#part-1-pie-as-subtraction-based-compression">Part 1: PIE as “Subtraction-Based Compression”</a></li>
+  <li><a href="#part-2-stars-and-bars-destroying-the-formula" id="toc-part-2-stars-and-bars-destroying-the-formula" class="nav-link" data-scroll-target="#part-2-stars-and-bars-destroying-the-formula">Part 2: Stars and Bars (Destroying the Formula)</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/state_space.html">Foundations</a></li><li class="breadcrumb-item"><a href="../lectures/inclusion_exclusion.html">3: The Principle of Inclusion-Exclusion</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">3: The Principle of Inclusion-Exclusion</h1>
 </div>
@@ -217,8 +245,41 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="part-1-pie-as-subtraction-based-compression" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-pie-as-subtraction-based-compression">Part 1: PIE as “Subtraction-Based Compression”</h2>
+<p>When students encounter a problem like “What is the probability a drawn card is a Heart OR a Face Card?”, they naturally add <span class="math inline">13 + 12 = 25</span>.</p>
+<p>When you ask them why the answer is wrong, they will correctly identify that the King, Queen, and Jack of Hearts were counted twice. The critical mistake textbooks make next is handing them the formula <span class="math inline">P(A \cup B) = P(A) + P(B) - P(A \cap B)</span>.</p>
+<p><strong>The Fix: Ban the Formula, Require the Map.</strong></p>
+<p>Do not let them memorize alternating plus and minus signs. Force them to physically map the layers of the count.</p>
+<ol type="1">
+<li><p><strong>The Overlap Test:</strong> Ask them what happens with 3 sets (e.g., “Rolls that are Even, &gt;3, or Prime”).</p></li>
+<li><p><strong>The Physical Action:</strong> Have them draw a 3-circle Venn Diagram. Have them physically place a tally mark in every region that satisfies condition <span class="math inline">A</span>, then condition <span class="math inline">B</span>, then condition <span class="math inline">C</span>.</p></li>
+<li><p><strong>The Diagnosis:</strong> The center region (satisfying all three) now has exactly 3 tally marks. It has been counted 3 times. If we subtract the pairwise intersections, we remove 3 tally marks. Now the center has 0 tally marks. We have to add it back once.</p></li>
+</ol>
+<p>The alternating signs are not a rule to be memorized; they are a crude algebraic repair job for clumsy counting.</p>
+</section>
+<section id="part-2-stars-and-bars-destroying-the-formula" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-stars-and-bars-destroying-the-formula">Part 2: Stars and Bars (Destroying the Formula)</h2>
+<p>This is the most misunderstood topic in elementary combinatorics. If you teach them <span class="math inline">\binom{n+k-1}{k-1}</span>, they will fail every probabilistic algorithm problem that requires dynamic resource allocation.</p>
+<p><strong>The Setup (The Gambling Context):</strong> You have 10 identical $100 chips. You want to distribute them among 3 distinct players (Alice, Bob, Charlie) at a poker table. How many ways can you distribute the chips, assuming some players might get zero?</p>
+<p><strong>The Trap:</strong> Because the players are distinct, students want to use permutations. Because the chips are identical, they want to use combinations. It breaks both models.</p>
+<p><strong>The Fix: The “Mississippi” Anagram Hack.</strong></p>
+<p>Remind them of the “Mississippi Problem” from Week 2 (finding distinct anagrams of indistinguishable letters). Tell them they already know the math for Stars and Bars; they just haven’t realized it’s a cryptography problem.</p>
+<ol type="1">
+<li><p><strong>The Translation:</strong> Tell them to physically line up the 10 identical chips (<code>* * * * * * * * * *</code>).</p></li>
+<li><p><strong>The Bins:</strong> Ask them how to physically separate these chips for 3 people. They don’t need 3 dividers; they only need 2 wooden sticks (<code>| |</code>) to create 3 zones on the table.</p></li>
+<li><p><strong>The Encryption:</strong> Any distribution of chips can be written as a string of characters.</p>
+<ul>
+<li><p>Alice gets 4, Bob gets 1, Charlie gets 5 <span class="math inline">\rightarrow</span> <code>* * * * | * | * * * * *</code></p></li>
+<li><p>Alice gets 10, Bob 0, Charlie 0 <span class="math inline">\rightarrow</span> <code>* * * * * * * * * * | |</code></p></li>
+</ul></li>
+<li><p><strong>The Epiphany:</strong> We have 12 total physical objects (10 stars, 2 bars). We just need to find the number of distinct anagrams of this 12-character string.</p></li>
+</ol>
+<p>Because we have 12 slots, and we just need to choose where the 2 bars go, the answer is <span class="math inline">\binom{12}{2}</span>. Or, using Week 2’s division logic for identical items: <span class="math inline">\frac{12!}{10!2!}</span>.</p>
+<p>“A casino manager is handing out 5 comped hotel room keys to 3 high rollers. <em>Part A:</em> Assume all 5 keys are for identical standard rooms. <em>Part B:</em> Assume all 5 keys are for uniquely themed penthouse suites (The Roman, The Egyptian, etc.). Calculate the state space for both, and strictly define <em>why</em> the physical nature of the room key changes the fundamental mathematical architecture of the problem.”</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

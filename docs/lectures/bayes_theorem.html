@@ -71,6 +71,49 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../custom.css">
 </head>
@@ -84,7 +127,9 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/state_space.html">Foundations</a></li><li class="breadcrumb-item"><a href="../lectures/bayes_theorem.html">6: Bayes’s Theorem</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      Applied Probability
+      </li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -153,30 +198,6 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">2: Permutations and Combinations</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../lectures/inclusion_exclusion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3: The Principle of Inclusion-Exclusion</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../lectures/axioms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4: Axioms of Probability</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../lectures/conditional_probability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">5: Conditional Probability</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../lectures/bayes_theorem.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">6: Bayes’s Theorem</span></a>
-  </div>
-</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -192,13 +213,20 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#bayes-theorem-is-just-time-travel-on-a-tree" id="toc-bayes-theorem-is-just-time-travel-on-a-tree" class="nav-link active" data-scroll-target="#bayes-theorem-is-just-time-travel-on-a-tree">Bayes’ Theorem is Just “Time Travel” on a Tree</a></li>
+  <li><a href="#phase-2-the-natural-frequencies-hack" id="toc-phase-2-the-natural-frequencies-hack" class="nav-link" data-scroll-target="#phase-2-the-natural-frequencies-hack">Phase 2: The “Natural Frequencies” Hack</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/state_space.html">Foundations</a></li><li class="breadcrumb-item"><a href="../lectures/bayes_theorem.html">6: Bayes’s Theorem</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">6: Bayes’s Theorem</h1>
 </div>
@@ -217,8 +245,49 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>The standard pedagogical introduction to Bayes’ Theorem is perhaps the most destructive in all of mathematics education. Textbooks typically present this monstrosity on day one:</p>
+<p><span class="math inline">P(A\vert{}B) = \frac{P(B\vert{}A)P(A)}{P(B\vert{}A)P(A) + P(B\vert{}A^c)P(A^c)}</span></p>
+<p>When students see this, they stop thinking probabilistically and start playing algebraic Sudoku. They scan the word problem for numbers, arbitrarily assign them to the variables in the formula, and pray the fraction computes to something between 0 and 1. This guarantees they will fail when attempting Bayesian inference in algorithms later, because they have no idea what the theorem is physically doing.</p>
+<p>To fix this, Week 6 must frame Bayes’ Theorem entirely visually. The formula should not be written on the board until the final lecture of the week.</p>
+<section id="bayes-theorem-is-just-time-travel-on-a-tree" class="level2">
+<h2 class="anchored" data-anchor-id="bayes-theorem-is-just-time-travel-on-a-tree">Bayes’ Theorem is Just “Time Travel” on a Tree</h2>
+<p>You are playing poker. Your opponent makes a massive “all-in” raise (Call this Event <span class="math inline">B</span>). You need to decide if they are bluffing (Event <span class="math inline">A</span>).</p>
+<ol type="1">
+<li><p><strong>The Forward Tree (What we know):</strong> In Week 5, they learned to build trees chronologically.</p>
+<ul>
+<li><p>Node 1: Does the opponent have a good hand or a bad hand (the prior, <span class="math inline">P(A)</span>)?</p></li>
+<li><p>Node 2: Given their hand, do they raise or fold (the conditional, <span class="math inline">P(B\vert{}A)</span>)?</p></li>
+</ul></li>
+<li><p><strong>The Crisis:</strong> You are sitting at the table. You don’t get to see Node 1. You only see the end result: they raised.</p></li>
+<li><p><strong>The Bayesian Epiphany:</strong> Bayes’ Theorem is just traveling backward up the tree. You know the end result (the raise). You want to know which branch they took to get there.</p></li>
+</ol>
+</section>
+<section id="phase-2-the-natural-frequencies-hack" class="level2">
+<h2 class="anchored" data-anchor-id="phase-2-the-natural-frequencies-hack">Phase 2: The “Natural Frequencies” Hack</h2>
+<p>The human brain is terrible at processing conditional probabilities as percentages, but excellent at processing raw counts. Before using probabilities, teach Bayes using “Natural Frequencies.”</p>
+<p><strong>The Scenario:</strong> (A classic Mosteller-style setup)</p>
+<ul>
+<li><p>10% of the time, your opponent has a monster hand.</p></li>
+<li><p>90% of the time, they have garbage.</p></li>
+<li><p>If they have a monster, they raise 80% of the time.</p></li>
+<li><p>If they have garbage, they bluff (raise) 20% of the time.</p></li>
+<li><p>They just raised. What is the probability they have a monster?</p></li>
+</ul>
+<p><strong>The Execution (No Formulas Allowed):</strong></p>
+<p>Force the students to pretend they play 100 hands against this opponent.</p>
+<ol type="1">
+<li><p><strong>Split the Universe:</strong> Out of 100 hands, 10 are monsters, 90 are garbage.</p></li>
+<li><p><strong>Calculate the Actions:</strong></p>
+<ul>
+<li><p>Of the 10 monsters, they raise 8 times.</p></li>
+<li><p>Of the 90 garbage hands, they bluff 18 times.</p></li>
+</ul></li>
+<li><p><strong>Shrink the Universe (Week 5 rules):</strong> The opponent raised. The universe of “folds” is dead. The new universe is exactly <span class="math inline">8 + 18 = 26</span> total raises.</p></li>
+<li><p><strong>The Bayesian Result:</strong> Of those 26 raises, 8 came from a monster hand. The probability is <span class="math inline">8 / 26</span> (about 31%).</p></li>
+</ol>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

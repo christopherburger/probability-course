@@ -10,11 +10,9 @@ When students see this, they stop thinking probabilistically and start playing a
 
 To fix this, Week 6 must frame Bayes' Theorem entirely visually. The formula should not be written on the board until the final lecture of the week.
 
-## Phase 1: Bayes' Theorem is Just "Time Travel" on a Tree
+## Bayes' Theorem is Just "Time Travel" on a Tree
 
-You must connect Week 6 directly to the trees they built in Week 5.
-
-**The Setup (The Decision Context):** You are playing poker. Your opponent makes a massive "all-in" raise (Event B). You need to decide if they are bluffing (Event A).
+You are playing poker. Your opponent makes a massive "all-in" raise (Call this Event $B$). You need to decide if they are bluffing (Event $A$).
 
 1.  **The Forward Tree (What we know):** In Week 5, they learned to build trees chronologically.
 

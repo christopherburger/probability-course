@@ -71,6 +71,49 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../custom.css">
 </head>
@@ -84,7 +127,9 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/state_space.html">Foundations</a></li><li class="breadcrumb-item"><a href="../lectures/axioms.html">4: Axioms of Probability</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      Applied Probability
+      </li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -153,30 +198,6 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">2: Permutations and Combinations</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../lectures/inclusion_exclusion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3: The Principle of Inclusion-Exclusion</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../lectures/axioms.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">4: Axioms of Probability</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../lectures/conditional_probability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">5: Conditional Probability</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../lectures/bayes_theorem.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">6: Bayes’s Theorem</span></a>
-  </div>
-</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -192,13 +213,19 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#phase-1-breaking-the-uniform-assumption-the-loaded-dice-diagnostic" id="toc-phase-1-breaking-the-uniform-assumption-the-loaded-dice-diagnostic" class="nav-link active" data-scroll-target="#phase-1-breaking-the-uniform-assumption-the-loaded-dice-diagnostic">Phase 1: Breaking the Uniform Assumption (The “Loaded Dice” Diagnostic)</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/state_space.html">Foundations</a></li><li class="breadcrumb-item"><a href="../lectures/axioms.html">4: Axioms of Probability</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">4: Axioms of Probability</h1>
 </div>
@@ -217,8 +244,24 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>The transition into Week 4 represents a dangerous pivot point. Up until now, students have lived entirely in a discrete, uniform world where probability is just counting: <span class="math inline">P(A) = \frac{\vert{}A\vert{}}{\vert{}\Omega\vert{}}</span>.</p>
+<p>If you do not explicitly destroy this assumption before introducing the formal axioms, students will drag the “Uniform Measure Fallacy” into every subsequent topic. They will try to solve continuous probability, Markov chains, and Bayesian updates by just counting states and dividing, which will lead to catastrophic modeling errors.</p>
+<p>Here is how to structure Week 4 to transition them from raw counting to formal measure theory, using Kolmogorov’s axioms as the scaffolding.</p>
+<section id="phase-1-breaking-the-uniform-assumption-the-loaded-dice-diagnostic" class="level2">
+<h2 class="anchored" data-anchor-id="phase-1-breaking-the-uniform-assumption-the-loaded-dice-diagnostic">Phase 1: Breaking the Uniform Assumption (The “Loaded Dice” Diagnostic)</h2>
+<p>Before you teach the axioms, you must prove to them that counting is no longer sufficient.</p>
+<p><strong>The Setup:</strong> Introduce a game with a biased coin or a loaded die. For example, a coin where <span class="math inline">P(\text{Heads}) = \frac{2}{3}</span>.</p>
+<p>Ask them to calculate the probability of getting exactly one Head in two flips.</p>
+<p><strong>The Trap:</strong> Students who are stuck in Week 3 will define the state space as <span class="math inline">\Omega = \{HH, HT, TH, TT\}</span>. They will identify the event as <span class="math inline">A = \{HT, TH\}</span>. They will count the states and proudly state <span class="math inline">P(A) = \frac{2}{4} = \frac{1}{2}</span>.</p>
+<p><strong>The Destruction:</strong> You must stop the class here and ruthlessly expose the flaw.</p>
+<ol type="1">
+<li><p>Ask them: <em>“Does your mathematical model match the physical reality of the loaded coin?”</em></p></li>
+<li><p>Force them to realize that the state <span class="math inline">HH</span> is physically much heavier (more likely) than the state <span class="math inline">TT</span>.</p></li>
+<li><p><strong>The Epiphany:</strong> Counting states only works if every state has the exact same “weight.” Once the universe becomes non-uniform, counting is useless. We need a new mathematical machine.</p></li>
+</ol>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
