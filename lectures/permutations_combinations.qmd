@@ -20,8 +20,7 @@ We are just doing the multiplication principle, but stopping early. We write $52
 
 We mathematically encode "stopping early" by writing the full tree (that is, every possible ordering which is $52!$) and dividing off the branches we did not need ($47!$).
 
-The general formula for a permutation is:
-$$nPr = \frac{n!}{(n-k)!}$$
+The general formula for a permutation is: $$nPr = \frac{n!}{(n-k)!}$$
 
 Where $n$ is the total number of items and $r$ is the number of items in out set of interest that were **removed** from the total.
 
@@ -36,7 +35,7 @@ Assume we are dealt three cards from a standard deck consisting of the Ace, King
 
 Answer: Counting all the individual states: $(A,K,Q), (A,Q,K), (K,A,Q), (K,Q,A), (Q,A,K), (Q,K,A)$ gives us six total possibilities.
 
-Using the formula: $\frac{3!}{(3-3)! = 3! = 6$}
+Using the formula: $\frac{3!}{(3-3)!} = 3! = 6$
 
 Note that $0!$ is defined as $1$.
 
