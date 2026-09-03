@@ -20,7 +20,7 @@ We are just doing the multiplication principle, but stopping early. We write $52
 
 We mathematically encode "stopping early" by writing the full tree (that is, every possible ordering which is $52!$) and dividing off the branches we did not need ($47!$).
 
-The general formula for a permutation is: $$nPr = \frac{n!}{(n-k)!}$$
+The general formula for a permutation is: $$nPk = \frac{n!}{(n-k)!}$$
 
 Where $n$ is the total number of items and $r$ is the number of items in out set of interest that were **removed** from the total.
 
@@ -48,7 +48,7 @@ What happens if we do not remove items from the total collection? That is, selec
 
 Combinations are closely related to permutations and our goal is to think about them innately as a physical grouping mechanism whose purpose is to erase artificial distinctions.
 
-Lets consider the practice problem above. We have three cards, the Ace, King, and Queen of diamonds. What if we are using them to determine a hand in a card game where order is not important? For example, a flush in poker is a hand that has all the same suit (in our case it is diamonds) and the hand is sized differently depending on the specifics of the game (it is usually five cards). Given this, does it matter what order we recieved the cards?
+Lets consider the practice problem above. We have three cards, the Ace, King, and Queen of diamonds. What if we are using them to determine a hand in a card game where order is not important? For example, a flush in poker is a hand that has all the same suit (in our case it is diamonds) and the hand is sized differently depending on the specifics of the game (it is usually five cards). Given this, does it matter what order we received the cards?
 
 No, the order is no longer important here. The concept of a hand in poker makes no distinction between the physical arrangement of cards, they only must meet the much less restrictive requirement of being present in the hand.
 
@@ -56,12 +56,12 @@ No, the order is no longer important here. The concept of a hand in poker makes 
 For those familiar with the game of poker, you may say that a straight enforces an ordering of the cards. But this is only applicable to the entire hand. The dealer is not concerned if your hand is in ascending order, descending order or any possible ordering. If you have 5 sequentially ordered cards within your hand then regardless of their arrangement within your hand, you have a straight.
 :::
 
-Since the physical reality of the game does not care about the order, we need a way to adjust out permutation formula to control for counting distinctions that do not matter. We saw that the permutation formula counted all 6 of those sequences as distinct branches on our tree.
+Since the physical reality of the game does not care about the order, we need a way to adjust our permutation formula to control for counting distinctions that do not matter. We saw that the permutation formula counted all 6 of those sequences as distinct branches on our tree.
 
 A combination is an algorithm to bundle those 6 branches into a single "meta-branch.
 
-If every valid state in our space has been artificially cloned exactly $k!$ times by the a permutation's ordering, we divide the total state space by $k!$ to collapse the clones into single entities.
+If every valid state in our space has been artificially cloned exactly $k!$ times by a permutation's ordering, we divide the total state space by $k!$ to collapse the clones into single entities.
 
-$$\binom{n}{k} = nCr = \frac{n!}{r!(n-k)!}$$
+$$\binom{n}{k} = nCk = \frac{n!}{k!(n-k)!}$$
 
 So in poker, the hand consisting of the Ace, King, and Queen of diamonds the number of combinations is $\frac{3!}{3!(3-3)!} = 1$ which matches our intuition with respect to the rules of poker.
