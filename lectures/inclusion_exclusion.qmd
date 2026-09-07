@@ -50,3 +50,22 @@ Because we have 12 slots, and we just need to choose where the 2 bars go, the an
 *Part A:* Assume all 5 keys are for identical standard rooms.
 *Part B:* Assume all 5 keys are for uniquely themed penthouse suites (The Roman, The Egyptian, etc.).
 Calculate the state space for both, and strictly define *why* the physical nature of the room key changes the fundamental mathematical architecture of the problem."
+
+
+
+::: practice-box
+If 8 identical objects are to be divided among 4 bins, how many divisions are possible?
+
+How many divisions are possible if each bin must contain at least one object?
+<details>
+
+<summary>Click to show answer</summary>
+
+Answer: With 8 objects and 4 bins, we can view this as having 11 total physical objects. We only then need to choose where the dividing points that indicate the bins go.
+
+This gives us $\binom{11}{3}$.
+
+If there must be at least one object in each bin, then we already have four objects allocated as there are four bins. We can then view our total number of objects as $11 - 4 = 7$ and this then gives us $\binom{7}{3}$.
+
+</details>
+:::
