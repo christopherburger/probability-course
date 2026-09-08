@@ -218,6 +218,14 @@ window.Quarto = {
   <ul>
   <li><a href="#permutations" id="toc-permutations" class="nav-link active" data-scroll-target="#permutations">Permutations</a></li>
   <li><a href="#combinations" id="toc-combinations" class="nav-link" data-scroll-target="#combinations">Combinations</a></li>
+  <li><a href="#the-binomial-theorem" id="toc-the-binomial-theorem" class="nav-link" data-scroll-target="#the-binomial-theorem">The Binomial Theorem</a>
+  <ul class="collapse">
+  <li><a href="#proof-of-the-binomial-theorem" id="toc-proof-of-the-binomial-theorem" class="nav-link" data-scroll-target="#proof-of-the-binomial-theorem">Proof of the Binomial Theorem</a></li>
+  </ul></li>
+  <li><a href="#the-multinomial-theorem" id="toc-the-multinomial-theorem" class="nav-link" data-scroll-target="#the-multinomial-theorem">The Multinomial Theorem</a>
+  <ul class="collapse">
+  <li><a href="#application-to-the-3-category-digit-problem" id="toc-application-to-the-3-category-digit-problem" class="nav-link" data-scroll-target="#application-to-the-3-category-digit-problem">Application to the 3-Category Digit Problem</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -268,6 +276,28 @@ Click to show answer
 </details>
 </div>
 <p>What happens if we do not remove items from the total collection? That is, selecting an item allows for us to select it again on the next “step”?</p>
+<div class="practice-box">
+<p>How many different 7-place license plates are possible if the first three places are reserved for letters and the remaining four are for numbers?</p>
+<details>
+<summary>
+Click to show answer
+</summary>
+<p>Answer: We need to make some assumptions to begin solving this problem. First, what letters and numbers are we working with? If we choose different sized sets of symbols, we will have different (correct) answers.</p>
+<p>Let us assume we have a 26 character alphabet for the set of letters and 10 digits for the set of numbers.</p>
+<p>Then for the first three places, each place has 26 possible options, so <span class="math inline">26 \times 26 \times 26 = 26^3</span>.</p>
+<p>For the remaining four places, each place has 10 possible options, so <span class="math inline">10^4</span>.</p>
+<p>The total number of different license plates possible can then be calculated by the multiplication principle giving us <span class="math inline">26^3 \times 10^4</span> license plates.</p>
+</details>
+</div>
+<div class="practice-box">
+<p>Consider the previous practice problem. We assumed (without stating) that we could use the same symbol repeatedly. Repeat the previous problem without this assumption, that is, no letter or number can be repeated in a single license plate.</p>
+<details>
+<summary>
+Click to show answer
+</summary>
+<p>Answer: <span class="math inline">26\times(26-1)\times(26-2) \times 10 \times (10-1) \times (10-2) \times (10-3) = 26\times 25\times 24 \times 10 \times 9 \times 8 \times 7</span></p>
+</details>
+</div>
 </section>
 <section id="combinations" class="level1">
 <h1>Combinations</h1>
@@ -282,8 +312,133 @@ Click to show answer
 <p>If every valid state in our space has been artificially cloned exactly <span class="math inline">k!</span> times by a permutation’s ordering, we divide the total state space by <span class="math inline">k!</span> to collapse the clones into single entities.</p>
 <p><span class="math display">\binom{n}{k} = nCk = \frac{n!}{k!(n-k)!}</span></p>
 <p>So in poker, the hand consisting of the Ace, King, and Queen of diamonds the number of combinations is <span class="math inline">\frac{3!}{3!(3-3)!} = 1</span> which matches our intuition with respect to the rules of poker.</p>
+<div class="practice-box">
+<details>
+<summary>
+Click to show answer
+</summary>
+<p>Answer:</p>
+</details>
+</div>
+<div class="practice-box">
+<details>
+<summary>
+Click to show answer
+</summary>
+<p>Answer:</p>
+</details>
+</div>
+<div class="practice-box">
+<details>
+<summary>
+Click to show answer
+</summary>
+<p>Answer:</p>
+</details>
+</div>
+<div class="practice-box">
+<p>Consider <span class="math inline">n</span>-digit numbers where each digit is one of the 10 integers <span class="math inline">0, 1, ... , 9</span>.</p>
+<ol type="a">
+<li><p>How many such numbers are there for which no two consecutive digits are equal?</p></li>
+<li><p>How many such numbers are there for which 0 appears as a digit a total of <span class="math inline">i</span> times <span class="math inline">i = 0, 1, ..., n</span>?</p>
+<details></details></li>
+</ol>
+<summary>
+Click to show answer (a)
+</summary>
+<p>Answer: Let us assume that the first digit can be a zero, that is, we can have a leading zero in our number.</p>
+<p>Then, we have 10 possibilties for the first digit. The following digit then has 9 possible values, as we cannot repeat the one chosen for the first digit.</p>
+<p>We can then follow this logic for the remaining digits, each will have 9 valid choices for a total amount of numbers of <span class="math inline">10\times 9^{n-1}</span>.</p>
+
+<details>
+<summary>
+Click to show answer (b)
+</summary>
+<p>Answer: This problem is easier if we break it up into two distinct parts.</p>
+<p>First, let us choose the locations for the zeroes.</p>
+<p>From the <span class="math inline">n</span> available positions, how many ways can we choose the <span class="math inline">i</span> positions where the <span class="math inline">0</span>s will sit? This is <span class="math inline">\binom{n}{i}</span>.</p>
+<p>Now, we need to fill the remaining positions. Each one of these positions has 9 possible choices. The number of positions to be filled is given by <span class="math inline">n-i</span>. And so we have <span class="math inline">9^{n-i}</span> possibilities.</p>
+<p>For a given value of <span class="math inline">i</span> then the total amount of numbers is <span class="math inline">\binom{n}{i}\times 9^{n-i}</span>.</p>
+<p>For the sum over all <span class="math inline">i</span> we have</p>
+<p><span class="math display">\sum{i=0}{n} \binom{n}{i}\times 9^{n-i}</span></p>
+<p>Which can be simplified using the Binomial Theorem to <span class="math inline">(9+1)^n = 10^n</span>.</p>
+</details>
+</div>
+</section>
+<section id="the-binomial-theorem" class="level1">
+<h1>The Binomial Theorem</h1>
+<p>The physical intuition of the Binomial Theorem can be expressed as making an independent choice at every branch of a binary tree.</p>
+<p>When you expand:</p>
+<p><span class="math display">(x + y)^n = \underbrace{(x + y)(x + y)(x + y) \cdots (x + y)}_{n \text{ factors}}</span></p>
+<p>You are just visiting <span class="math inline">n</span> distinct locations or nodes in succession.</p>
+<p>At each node, you must pick exactly one item: either an <span class="math inline">x</span> or a <span class="math inline">y</span>.</p>
+<p>When you multiply out the brackets by the distributive law before collecting like terms, you form every possible sequence of <span class="math inline">n</span> choices:</p>
+<ul>
+<li>Pick <span class="math inline">x</span> from all <span class="math inline">n</span> boxes: you get <span class="math inline">x \cdot x \cdots x = x^n</span> (only 1 way to do this).Pick <span class="math inline">y</span> from Box 1, and <span class="math inline">x</span> from the rest: you get <span class="math inline">y \cdot x \cdots x = yx^{n-1}</span>.</li>
+<li>Pick <span class="math inline">y</span> from Box 2, and <span class="math inline">x</span> from the rest: you get <span class="math inline">x \cdot y \cdot x \cdots x = xyx^{n-2}</span>.</li>
+</ul>
+<p>Because multiplication is commutative (<span class="math inline">yx = xy</span>), every term that contains <span class="math inline">k</span> copies of <span class="math inline">y</span> and <span class="math inline">n-k</span> copies of <span class="math inline">x</span> collapses into the single algebraic monomial:</p>
+<p><span class="math display">x^{n-k}y^k</span></p>
+<p>Now ask the combinatorial question: How many distinct paths produce this exact monomial?</p>
+<p>You have <span class="math inline">n</span> nodes. You need to designate <span class="math inline">k</span> of them from which to grab a <span class="math inline">y</span> (the remaining <span class="math inline">n-k</span> automatically supply an <span class="math inline">x</span>). The number of ways to choose which <span class="math inline">k</span> booths provide a <span class="math inline">y</span> is, by definition: <span class="math display">\binom{n}{k}</span></p>
+<p>Thus, the coefficient of <span class="math inline">x^{n-k}y^k</span> is simply the count of matching choice histories:</p>
+<p><span class="math display">(x + y)^n = \sum_{k=0}^n \binom{n}{k} x^{n-k} y^k</span></p>
+<p>In the digit example, each position in an <span class="math inline">n</span>-digit string faces a binary classification:</p>
+<ul>
+<li>Option A: The digit is a non-zero (<span class="math inline">\{1, 2, \dots, 9\}</span>) <span class="math inline">\rightarrow</span> 9 possibilities.</li>
+<li>Option B: The digit is a zero (<span class="math inline">\{0\}</span>) <span class="math inline">\rightarrow</span> 1 possibility.</li>
+</ul>
+<p>The total number of unrestricted strings of length <span class="math inline">n</span> is:</p>
+<p><span class="math display">10^n = (9 + 1)^n</span></p>
+<p>Now let <span class="math inline">x = 9</span> and <span class="math inline">y = 1</span>:</p>
+<p><span class="math display">(9 + 1)^n = \underbrace{(9 + 1)(9 + 1) \cdots (9 + 1)}_{n \text{ positions}}</span></p>
+<p>At each digit position, you choose either one of the 9 non-zeros or the 1 zero:</p>
+<p>To get exactly <span class="math inline">i</span> zeros, you choose <span class="math inline">i</span> factors to contribute the “<span class="math inline">1</span>” (the zeros).The remaining <span class="math inline">n - i</span> factors must contribute the “<span class="math inline">9</span>” (the non-zeros).</p>
+<p>The number of ways to pick which positions contain the zeros is <span class="math inline">\binom{n}{i}</span>.</p>
+<p>This yields:</p>
+<p><span class="math display">\text{Number of strings with } i \text{ zeros} = \binom{n}{i} 9^{n-i} 1^i = \binom{n}{i} 9^{n-i}</span></p>
+<section id="proof-of-the-binomial-theorem" class="level2">
+<h2 class="anchored" data-anchor-id="proof-of-the-binomial-theorem">Proof of the Binomial Theorem</h2>
+</section>
+</section>
+<section id="the-multinomial-theorem" class="level1">
+<h1>The Multinomial Theorem</h1>
+<p>What if we have a tree that branches more than twice for each decision? The same logic applies, but instead of choosing between two options (<span class="math inline">x</span> or <span class="math inline">y</span>) at each node, you choose among three or more options.</p>
+<p>Consider partitioning the <span class="math inline">10</span> digits into three distinct buckets:</p>
+<ul>
+<li><p>Zero: <span class="math inline">\{0\}</span> <span class="math inline">\to 1</span> possibility (<span class="math inline">x_1 = 1</span>)</p></li>
+<li><p>Odd digits: <span class="math inline">\{1, 3, 5, 7, 9\}</span> <span class="math inline">\to 5</span> possibilities (<span class="math inline">x_2 = 5</span>)</p></li>
+<li><p>Even non-zero digits: <span class="math inline">\{2, 4, 6, 8\}</span> <span class="math inline">\to 4</span> possibilities (<span class="math inline">x_3 = 4</span>)</p></li>
+</ul>
+<p>Notice that <span class="math inline">1 + 5 + 4 = 10</span>. The total number of <span class="math inline">n</span>-digit strings is:<span class="math display">10^n = (1 + 5 + 4)^n = (x_1 + x_2 + x_3)^n</span></p>
+<p>Expanding <span class="math inline">(x_1 + x_2 + \dots + x_m)^n</span> means visiting <span class="math inline">n</span> node. At each node, you must pick exactly one item: an <span class="math inline">x_1</span>, an <span class="math inline">x_2</span>, <span class="math inline">\dots</span>, or an <span class="math inline">x_m</span>.</p>
+<p>If you want a term with:<span class="math inline">k_1</span> items of type <span class="math inline">x_1</span><span class="math inline">k_2</span> items of type <span class="math inline">x_2</span><span class="math inline">\dots</span><span class="math inline">k_m</span> items of type <span class="math inline">x_m</span>where <span class="math inline">k_1 + k_2 + \dots + k_m = n</span>, the resulting monomial is:</p>
+<p><span class="math display">x_1^{k_1} x_2^{k_2} \cdots x_m^{k_m}</span></p>
+<p>To find the coefficient, ask: How many ways can you assign the <span class="math inline">n</span> positions to these targets?</p>
+<p>Choose <span class="math inline">k_1</span> positions for type <span class="math inline">x_1</span>: <span class="math inline">\binom{n}{k_1}</span> ways. From the remaining <span class="math inline">n - k_1</span> spots, choose <span class="math inline">k_2</span> positions for type <span class="math inline">x_2</span>: <span class="math inline">\binom{n - k_1}{k_2}</span> ways.</p>
+<p>From the remaining <span class="math inline">n - k_1 - k_2</span> spots, choose <span class="math inline">k_3</span> positions for type <span class="math inline">x_3</span>: <span class="math inline">\binom{n - k_1 - k_2}{k_3}</span> ways.</p>
+<p>Continue until the last group takes all remaining spots.Multiplying these independent choices gives:</p>
+<p><span class="math display">\binom{n}{k_1} \binom{n - k_1}{k_2} \cdots = \frac{n!}{k_1!(n - k_1)!} \cdot \frac{(n - k_1)!}{k_2!(n - k_1 - k_2)!} \cdots = \frac{n!}{k_1! k_2! \cdots k_m!}</span></p>
+<p>This is the multinomial coefficient, written as:<span class="math display">\binom{n}{k_1, k_2, \dots, k_m} = \frac{n!}{k_1! k_2! \cdots k_m!}</span></p>
+<section id="application-to-the-3-category-digit-problem" class="level2">
+<h2 class="anchored" data-anchor-id="application-to-the-3-category-digit-problem">Application to the 3-Category Digit Problem</h2>
+<p>Suppose you want to know how many <span class="math inline">n</span>-digit strings contain:</p>
+<ul>
+<li>Exactly <span class="math inline">a</span> zeros</li>
+<li>Exactly <span class="math inline">b</span> odd digits</li>
+<li>Exactly <span class="math inline">c</span> even non-zero digits</li>
+</ul>
+<p>where <span class="math inline">a + b + c = n</span>.</p>
+<p>Using the multinomial breakdown:Assign the locations: <span class="math inline">\binom{n}{a, b, c} = \frac{n!}{a!b!c!}</span> ways to decide which positions hold which category.</p>
+<p>Fill each category:<span class="math inline">a</span> spots filled with <span class="math inline">\{0\}</span>: <span class="math inline">1^a</span> ways.<span class="math inline">b</span> spots filled with odd digits: <span class="math inline">5^b</span> ways.<span class="math inline">c</span> spots filled with even non-zero digits: <span class="math inline">4^c</span> ways.</p>
+<p>The total count is:</p>
+<p><span class="math display">\binom{n}{a, b, c} 1^a 5^b 4^c = \frac{n!}{a!b!c!} 5^b 4^c</span>S</p>
+<p>umming this over all non-negative integers where <span class="math inline">a + b + c = n</span> reconstructs the entire space:</p>
+<p><span class="math display">\sum_{a+b+c=n} \binom{n}{a, b, c} 1^a 5^b 4^c = (1 + 5 + 4)^n = 10^n</span></p>
+<p>Just as the Binomial Theorem tracks taking a left or right turn at each step, the Multinomial Theorem tracks navigating an <span class="math inline">m</span>-way intersection at every step of length <span class="math inline">n</span>.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

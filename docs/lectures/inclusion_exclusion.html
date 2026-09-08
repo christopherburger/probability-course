@@ -277,6 +277,18 @@ window.Quarto = {
 </ol>
 <p>Because we have 12 slots, and we just need to choose where the 2 bars go, the answer is <span class="math inline">\binom{12}{2}</span>. Or, using Week 2’s division logic for identical items: <span class="math inline">\frac{12!}{10!2!}</span>.</p>
 <p>“A casino manager is handing out 5 comped hotel room keys to 3 high rollers. <em>Part A:</em> Assume all 5 keys are for identical standard rooms. <em>Part B:</em> Assume all 5 keys are for uniquely themed penthouse suites (The Roman, The Egyptian, etc.). Calculate the state space for both, and strictly define <em>why</em> the physical nature of the room key changes the fundamental mathematical architecture of the problem.”</p>
+<div class="practice-box">
+<p>If 8 identical objects are to be divided among 4 bins, how many divisions are possible?</p>
+How many divisions are possible if each bin must contain at least one object?
+<details>
+<summary>
+Click to show answer
+</summary>
+<p>Answer: With 8 objects and 4 bins, we can view this as having 11 total physical objects. We only then need to choose where the dividing points that indicate the bins go.</p>
+<p>This gives us <span class="math inline">\binom{11}{3}</span>.</p>
+<p>If there must be at least one object in each bin, then we already have four objects allocated as there are four bins. We can then view our total number of objects as <span class="math inline">11 - 4 = 7</span> and this then gives us <span class="math inline">\binom{7}{3}</span>.</p>
+</details>
+</div>
 
 
 </section>

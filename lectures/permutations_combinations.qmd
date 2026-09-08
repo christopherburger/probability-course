@@ -46,6 +46,7 @@ What happens if we do not remove items from the total collection? That is, selec
 
 ::: practice-box
 How many different 7-place license plates are possible if the first three places are reserved for letters and the remaining four are for numbers?
+
 <details>
 
 <summary>Click to show answer</summary>
@@ -56,13 +57,12 @@ Let us assume we have a 26 character alphabet for the set of letters and 10 digi
 
 Then for the first three places, each place has 26 possible options, so $26 \times 26 \times 26 = 26^3$.
 
-For the remaining four places, each place has 10 possible options, so $10^4$. 
+For the remaining four places, each place has 10 possible options, so $10^4$.
 
 The total number of different license plates possible can then be calculated by the multiplication principle giving us $26^3 \times 10^4$ license plates.
 
 </details>
 :::
-
 
 ::: practice-box
 Consider the previous practice problem. We assumed (without stating) that we could use the same symbol repeatedly. Repeat the previous problem without this assumption, that is, no letter or number can be repeated in a single license plate.
@@ -99,53 +99,49 @@ $$\binom{n}{k} = nCk = \frac{n!}{k!(n-k)!}$$
 So in poker, the hand consisting of the Ace, King, and Queen of diamonds the number of combinations is $\frac{3!}{3!(3-3)!} = 1$ which matches our intuition with respect to the rules of poker.
 
 ::: practice-box
-
 <details>
 
 <summary>Click to show answer</summary>
 
-Answer: 
-
-</details>
-
-:::
-
-
-::: practice-box
-
-<details>
-
-<summary>Click to show answer</summary>
-
-Answer: 
+Answer:
 
 </details>
 :::
 
 ::: practice-box
-
 <details>
 
 <summary>Click to show answer</summary>
 
-Answer: 
+Answer:
 
 </details>
 :::
 
 ::: practice-box
-Consider $n$-digit numbers where each digit is one of the 10 integers $0, 1, ... , 9$. 
+<details>
+
+<summary>Click to show answer</summary>
+
+Answer:
+
+</details>
+:::
+
+::: practice-box
+Consider $n$-digit numbers where each digit is one of the 10 integers $0, 1, ... , 9$.
 
 (a) How many such numbers are there for which no two consecutive digits are equal?
 
 (b) How many such numbers are there for which 0 appears as a digit a total of $i$ times $i = 0, 1, ..., n$?
-<details>
+
+    <details>
 
 <summary>Click to show answer (a)</summary>
 
 Answer: Let us assume that the first digit can be a zero, that is, we can have a leading zero in our number.
 
-Then, we have 10 possibilties for the first digit. The following digit then has 9 possible values, as we cannot repeat the one chosen for the first digit. 
+Then, we have 10 possibilties for the first digit. The following digit then has 9 possible values, as we cannot repeat the one chosen for the first digit.
 
 We can then follow this logic for the remaining digits, each will have 9 valid choices for a total amount of numbers of $10\times 9^{n-1}$.
 
@@ -167,11 +163,10 @@ For a given value of $i$ then the total amount of numbers is $\binom{n}{i}\times
 
 For the sum over all $i$ we have
 
-$$
-\sum{i=0}{n} \binom{n}{i}\times 9^{n-i}
-$$
+$$\sum{i=0}{n} \binom{n}{i}\times 9^{n-i}$$
 
 Which can be simplified using the Binomial Theorem to $(9+1)^n = 10^n$.
+
 </details>
 :::
 
@@ -183,7 +178,7 @@ When you expand:
 
 $$(x + y)^n = \underbrace{(x + y)(x + y)(x + y) \cdots (x + y)}_{n \text{ factors}}$$
 
-You are just visiting $n$ distinct locations or nodes in succession. 
+You are just visiting $n$ distinct locations or nodes in succession.
 
 At each node, you must pick exactly one item: either an $x$ or a $y$.
 
@@ -198,8 +193,7 @@ $$x^{n-k}y^k$$
 
 Now ask the combinatorial question: How many distinct paths produce this exact monomial?
 
-You have $n$ nodes. You need to designate $k$ of them from which to grab a $y$ (the remaining $n-k$ automatically supply an $x$). The number of ways to choose which $k$ booths provide a $y$ is, by definition:
-$$\binom{n}{k}$$
+You have $n$ nodes. You need to designate $k$ of them from which to grab a $y$ (the remaining $n-k$ automatically supply an $x$). The number of ways to choose which $k$ booths provide a $y$ is, by definition: $$\binom{n}{k}$$
 
 Thus, the coefficient of $x^{n-k}y^k$ is simply the count of matching choice histories:
 
@@ -232,4 +226,56 @@ $$\text{Number of strings with } i \text{ zeros} = \binom{n}{i} 9^{n-i} 1^i = \b
 
 # The Multinomial Theorem
 
-The exact same "assembly line" logic applies, but instead of choosing between two options ($x$ or $y$) at each station, you choose among three or more options.Consider partitioning the $10$ digits into three distinct buckets:Zero: $\{0\}$ $\to 1$ possibility ($x_1 = 1$)Odd digits: $\{1, 3, 5, 7, 9\}$ $\to 5$ possibilities ($x_2 = 5$)Even non-zero digits: $\{2, 4, 6, 8\}$ $\to 4$ possibilities ($x_3 = 4$)Notice that $1 + 5 + 4 = 10$. The total number of $n$-digit strings is:$$10^n = (1 + 5 + 4)^n = (x_1 + x_2 + x_3)^n$$The Choice MechanismExpanding $(x_1 + x_2 + \dots + x_m)^n$ means visiting $n$ booths. At each booth, you must pick exactly one item: an $x_1$, an $x_2$, $\dots$, or an $x_m$.If you want a term with:$k_1$ items of type $x_1$$k_2$ items of type $x_2$$\dots$$k_m$ items of type $x_m$where $k_1 + k_2 + \dots + k_m = n$, the resulting monomial is:$$x_1^{k_1} x_2^{k_2} \cdots x_m^{k_m}$$To find the coefficient, ask: How many ways can you assign the $n$ positions to these targets?Choose $k_1$ positions for type $x_1$: $\binom{n}{k_1}$ ways.From the remaining $n - k_1$ spots, choose $k_2$ positions for type $x_2$: $\binom{n - k_1}{k_2}$ ways.From the remaining $n - k_1 - k_2$ spots, choose $k_3$ positions for type $x_3$: $\binom{n - k_1 - k_2}{k_3}$ ways.Continue until the last group takes all remaining spots.Multiplying these independent choices gives:$$\binom{n}{k_1} \binom{n - k_1}{k_2} \cdots = \frac{n!}{k_1!(n - k_1)!} \cdot \frac{(n - k_1)!}{k_2!(n - k_1 - k_2)!} \cdots = \frac{n!}{k_1! k_2! \cdots k_m!}$$This is the multinomial coefficient, written as:$$\binom{n}{k_1, k_2, \dots, k_m} = \frac{n!}{k_1! k_2! \cdots k_m!}$$Application to the 3-Category Digit ProblemSuppose you want to know how many $n$-digit strings contain:Exactly $a$ zerosExactly $b$ odd digitsExactly $c$ even non-zero digitswhere $a + b + c = n$.Using the multinomial breakdown:Assign the locations: $\binom{n}{a, b, c} = \frac{n!}{a!b!c!}$ ways to decide which positions hold which category.Fill each category:$a$ spots filled with $\{0\}$: $1^a$ ways.$b$ spots filled with odd digits: $5^b$ ways.$c$ spots filled with even non-zero digits: $4^c$ ways.The total count is:$$\binom{n}{a, b, c} 1^a 5^b 4^c = \frac{n!}{a!b!c!} 5^b 4^c$$Summing this over all non-negative integers where $a + b + c = n$ reconstructs the entire space:$$\sum_{a+b+c=n} \binom{n}{a, b, c} 1^a 5^b 4^c = (1 + 5 + 4)^n = 10^n$$Just as the Binomial Theorem tracks taking a left or right turn at each step, the Multinomial Theorem tracks navigating an $m$-way intersection at every step of length $n$.
+What if we have a tree that branches more than twice for each decision? The same logic applies, but instead of choosing between two options ($x$ or $y$) at each node, you choose among three or more options.
+
+Consider partitioning the $10$ digits into three distinct buckets:
+
+- Zero: $\{0\}$ $\to 1$ possibility ($x_1 = 1$)
+
+- Odd digits: $\{1, 3, 5, 7, 9\}$ $\to 5$ possibilities ($x_2 = 5$)
+
+- Even non-zero digits: $\{2, 4, 6, 8\}$ $\to 4$ possibilities ($x_3 = 4$)
+
+Notice that $1 + 5 + 4 = 10$. The total number of $n$-digit strings is:$$10^n = (1 + 5 + 4)^n = (x_1 + x_2 + x_3)^n$$
+
+Expanding $(x_1 + x_2 + \dots + x_m)^n$ means visiting $n$ node.  At each node, you must pick exactly one item: an $x_1$, an $x_2$, $\dots$, or an $x_m$.
+
+If you want a term with:$k_1$ items of type $x_1$$k_2$ items of type $x_2$$\dots$$k_m$ items of type $x_m$where $k_1 + k_2 + \dots + k_m = n$, the resulting monomial is:
+
+$$x_1^{k_1} x_2^{k_2} \cdots x_m^{k_m}$$
+
+To find the coefficient, ask: How many ways can you assign the $n$ positions to these targets?
+
+Choose $k_1$ positions for type $x_1$: $\binom{n}{k_1}$ ways. From the remaining $n - k_1$ spots, choose $k_2$ positions for type $x_2$: $\binom{n - k_1}{k_2}$ ways.
+
+From the remaining $n - k_1 - k_2$ spots, choose $k_3$ positions for type $x_3$: $\binom{n - k_1 - k_2}{k_3}$ ways.
+
+Continue until the last group takes all remaining spots.Multiplying these independent choices gives:
+
+$$\binom{n}{k_1} \binom{n - k_1}{k_2} \cdots = \frac{n!}{k_1!(n - k_1)!} \cdot \frac{(n - k_1)!}{k_2!(n - k_1 - k_2)!} \cdots = \frac{n!}{k_1! k_2! \cdots k_m!}$$
+
+This is the multinomial coefficient, written as:$$\binom{n}{k_1, k_2, \dots, k_m} = \frac{n!}{k_1! k_2! \cdots k_m!}$$
+
+## Application to the 3-Category Digit Problem
+
+Suppose you want to know how many $n$-digit strings contain:
+
+- Exactly $a$ zeros
+- Exactly $b$ odd digits
+- Exactly $c$ even non-zero digits
+
+where $a + b + c = n$.
+
+Using the multinomial breakdown:Assign the locations: $\binom{n}{a, b, c} = \frac{n!}{a!b!c!}$ ways to decide which positions hold which category.
+
+Fill each category:$a$ spots filled with $\{0\}$: $1^a$ ways.$b$ spots filled with odd digits: $5^b$ ways.$c$ spots filled with even non-zero digits: $4^c$ ways.
+
+The total count is:
+
+$$\binom{n}{a, b, c} 1^a 5^b 4^c = \frac{n!}{a!b!c!} 5^b 4^c$$S
+
+umming this over all non-negative integers where $a + b + c = n$ reconstructs the entire space:
+
+$$\sum_{a+b+c=n} \binom{n}{a, b, c} 1^a 5^b 4^c = (1 + 5 + 4)^n = 10^n$$
+
+Just as the Binomial Theorem tracks taking a left or right turn at each step, the Multinomial Theorem tracks navigating an $m$-way intersection at every step of length $n$.
