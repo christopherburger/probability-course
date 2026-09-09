@@ -135,7 +135,7 @@ Consider $n$-digit numbers where each digit is one of the 10 integers $0, 1, ...
 
 (b) How many such numbers are there for which 0 appears as a digit a total of $i$ times $i = 0, 1, ..., n$?
 
-    <details>
+<details>
 
 <summary>Click to show answer (a)</summary>
 
@@ -149,7 +149,7 @@ We can then follow this logic for the remaining digits, each will have 9 valid c
 
 <details>
 
-<summary>Click to show answer (b)</summary>
+<summary> Click to show answer (b)</summary>
 
 Answer: This problem is easier if we break it up into two distinct parts.
 
@@ -250,7 +250,7 @@ Choose $k_1$ positions for type $x_1$: $\binom{n}{k_1}$ ways. From the remaining
 
 From the remaining $n - k_1 - k_2$ spots, choose $k_3$ positions for type $x_3$: $\binom{n - k_1 - k_2}{k_3}$ ways.
 
-Continue until the last group takes all remaining spots.Multiplying these independent choices gives:
+Continue until the last group takes all remaining spots. Multiplying these independent choices gives:
 
 $$\binom{n}{k_1} \binom{n - k_1}{k_2} \cdots = \frac{n!}{k_1!(n - k_1)!} \cdot \frac{(n - k_1)!}{k_2!(n - k_1 - k_2)!} \cdots = \frac{n!}{k_1! k_2! \cdots k_m!}$$
 
@@ -266,15 +266,17 @@ Suppose you want to know how many $n$-digit strings contain:
 
 where $a + b + c = n$.
 
-Using the multinomial breakdown:Assign the locations: $\binom{n}{a, b, c} = \frac{n!}{a!b!c!}$ ways to decide which positions hold which category.
+Using the multinomial structure:
+
+Assign the locations: $\binom{n}{a, b, c} = \frac{n!}{a!b!c!}$ ways to decide which positions hold which category.
 
 Fill each category:$a$ spots filled with $\{0\}$: $1^a$ ways.$b$ spots filled with odd digits: $5^b$ ways.$c$ spots filled with even non-zero digits: $4^c$ ways.
 
 The total count is:
 
-$$\binom{n}{a, b, c} 1^a 5^b 4^c = \frac{n!}{a!b!c!} 5^b 4^c$$S
+$$\binom{n}{a, b, c} 1^a 5^b 4^c = \frac{n!}{a!b!c!} 5^b 4^c$$
 
-umming this over all non-negative integers where $a + b + c = n$ reconstructs the entire space:
+Summing this over all non-negative integers where $a + b + c = n$ reconstructs the entire space:
 
 $$\sum_{a+b+c=n} \binom{n}{a, b, c} 1^a 5^b 4^c = (1 + 5 + 4)^n = 10^n$$
 

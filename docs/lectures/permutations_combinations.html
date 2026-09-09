@@ -340,16 +340,16 @@ Click to show answer
 <p>Consider <span class="math inline">n</span>-digit numbers where each digit is one of the 10 integers <span class="math inline">0, 1, ... , 9</span>.</p>
 <ol type="a">
 <li><p>How many such numbers are there for which no two consecutive digits are equal?</p></li>
-<li><p>How many such numbers are there for which 0 appears as a digit a total of <span class="math inline">i</span> times <span class="math inline">i = 0, 1, ..., n</span>?</p>
-<details></details></li>
+<li><p>How many such numbers are there for which 0 appears as a digit a total of <span class="math inline">i</span> times <span class="math inline">i = 0, 1, ..., n</span>?</p></li>
 </ol>
+<details>
 <summary>
 Click to show answer (a)
 </summary>
 <p>Answer: Let us assume that the first digit can be a zero, that is, we can have a leading zero in our number.</p>
 <p>Then, we have 10 possibilties for the first digit. The following digit then has 9 possible values, as we cannot repeat the one chosen for the first digit.</p>
 <p>We can then follow this logic for the remaining digits, each will have 9 valid choices for a total amount of numbers of <span class="math inline">10\times 9^{n-1}</span>.</p>
-
+</details>
 <details>
 <summary>
 Click to show answer (b)
@@ -417,7 +417,7 @@ Click to show answer (b)
 <p>To find the coefficient, ask: How many ways can you assign the <span class="math inline">n</span> positions to these targets?</p>
 <p>Choose <span class="math inline">k_1</span> positions for type <span class="math inline">x_1</span>: <span class="math inline">\binom{n}{k_1}</span> ways. From the remaining <span class="math inline">n - k_1</span> spots, choose <span class="math inline">k_2</span> positions for type <span class="math inline">x_2</span>: <span class="math inline">\binom{n - k_1}{k_2}</span> ways.</p>
 <p>From the remaining <span class="math inline">n - k_1 - k_2</span> spots, choose <span class="math inline">k_3</span> positions for type <span class="math inline">x_3</span>: <span class="math inline">\binom{n - k_1 - k_2}{k_3}</span> ways.</p>
-<p>Continue until the last group takes all remaining spots.Multiplying these independent choices gives:</p>
+<p>Continue until the last group takes all remaining spots. Multiplying these independent choices gives:</p>
 <p><span class="math display">\binom{n}{k_1} \binom{n - k_1}{k_2} \cdots = \frac{n!}{k_1!(n - k_1)!} \cdot \frac{(n - k_1)!}{k_2!(n - k_1 - k_2)!} \cdots = \frac{n!}{k_1! k_2! \cdots k_m!}</span></p>
 <p>This is the multinomial coefficient, written as:<span class="math display">\binom{n}{k_1, k_2, \dots, k_m} = \frac{n!}{k_1! k_2! \cdots k_m!}</span></p>
 <section id="application-to-the-3-category-digit-problem" class="level2">
@@ -429,11 +429,12 @@ Click to show answer (b)
 <li>Exactly <span class="math inline">c</span> even non-zero digits</li>
 </ul>
 <p>where <span class="math inline">a + b + c = n</span>.</p>
-<p>Using the multinomial breakdown:Assign the locations: <span class="math inline">\binom{n}{a, b, c} = \frac{n!}{a!b!c!}</span> ways to decide which positions hold which category.</p>
+<p>Using the multinomial structure:</p>
+<p>Assign the locations: <span class="math inline">\binom{n}{a, b, c} = \frac{n!}{a!b!c!}</span> ways to decide which positions hold which category.</p>
 <p>Fill each category:<span class="math inline">a</span> spots filled with <span class="math inline">\{0\}</span>: <span class="math inline">1^a</span> ways.<span class="math inline">b</span> spots filled with odd digits: <span class="math inline">5^b</span> ways.<span class="math inline">c</span> spots filled with even non-zero digits: <span class="math inline">4^c</span> ways.</p>
 <p>The total count is:</p>
-<p><span class="math display">\binom{n}{a, b, c} 1^a 5^b 4^c = \frac{n!}{a!b!c!} 5^b 4^c</span>S</p>
-<p>umming this over all non-negative integers where <span class="math inline">a + b + c = n</span> reconstructs the entire space:</p>
+<p><span class="math display">\binom{n}{a, b, c} 1^a 5^b 4^c = \frac{n!}{a!b!c!} 5^b 4^c</span></p>
+<p>Summing this over all non-negative integers where <span class="math inline">a + b + c = n</span> reconstructs the entire space:</p>
 <p><span class="math display">\sum_{a+b+c=n} \binom{n}{a, b, c} 1^a 5^b 4^c = (1 + 5 + 4)^n = 10^n</span></p>
 <p>Just as the Binomial Theorem tracks taking a left or right turn at each step, the Multinomial Theorem tracks navigating an <span class="math inline">m</span>-way intersection at every step of length <span class="math inline">n</span>.</p>
 
