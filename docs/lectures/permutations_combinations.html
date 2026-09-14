@@ -196,6 +196,12 @@ window.Quarto = {
  <span class="menu-text">2: Permutations and Combinations</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/inclusion_exclusion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3: The Principle of Inclusion-Exclusion</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -329,14 +335,6 @@ Click to show answer
 </details>
 </div>
 <div class="practice-box">
-<details>
-<summary>
-Click to show answer
-</summary>
-<p>Answer:</p>
-</details>
-</div>
-<div class="practice-box">
 <p>Consider <span class="math inline">n</span>-digit numbers where each digit is one of the 10 integers <span class="math inline">0, 1, ... , 9</span>.</p>
 <ol type="a">
 <li><p>How many such numbers are there for which no two consecutive digits are equal?</p></li>
@@ -431,12 +429,25 @@ Click to show answer (b)
 <p>where <span class="math inline">a + b + c = n</span>.</p>
 <p>Using the multinomial structure:</p>
 <p>Assign the locations: <span class="math inline">\binom{n}{a, b, c} = \frac{n!}{a!b!c!}</span> ways to decide which positions hold which category.</p>
-<p>Fill each category:<span class="math inline">a</span> spots filled with <span class="math inline">\{0\}</span>: <span class="math inline">1^a</span> ways.<span class="math inline">b</span> spots filled with odd digits: <span class="math inline">5^b</span> ways.<span class="math inline">c</span> spots filled with even non-zero digits: <span class="math inline">4^c</span> ways.</p>
+<p>Fill each category:</p>
+<ul>
+<li><span class="math inline">a</span> spots filled with <span class="math inline">\{0\}</span>: <span class="math inline">1^a</span> ways.</li>
+<li><span class="math inline">b</span> spots filled with odd digits: <span class="math inline">5^b</span> ways.</li>
+<li><span class="math inline">c</span> spots filled with even non-zero digits: <span class="math inline">4^c</span> ways.</li>
+</ul>
 <p>The total count is:</p>
 <p><span class="math display">\binom{n}{a, b, c} 1^a 5^b 4^c = \frac{n!}{a!b!c!} 5^b 4^c</span></p>
 <p>Summing this over all non-negative integers where <span class="math inline">a + b + c = n</span> reconstructs the entire space:</p>
 <p><span class="math display">\sum_{a+b+c=n} \binom{n}{a, b, c} 1^a 5^b 4^c = (1 + 5 + 4)^n = 10^n</span></p>
 <p>Just as the Binomial Theorem tracks taking a left or right turn at each step, the Multinomial Theorem tracks navigating an <span class="math inline">m</span>-way intersection at every step of length <span class="math inline">n</span>.</p>
+<div class="practice-box">
+<details>
+<summary>
+Click to show answer
+</summary>
+<p>Answer:</p>
+</details>
+</div>
 
 
 </section>

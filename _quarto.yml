@@ -15,7 +15,7 @@ website:
         contents:
           - lectures/state_space.qmd
           - lectures/permutations_combinations.qmd
-          #- lectures/inclusion_exclusion.qmd
+          - lectures/inclusion_exclusion.qmd
           #- lectures/axioms.qmd
           #- lectures/conditional_probability.qmd
           #- lectures/bayes_theorem.qmd

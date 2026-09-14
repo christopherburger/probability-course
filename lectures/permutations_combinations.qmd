@@ -119,16 +119,6 @@ Answer:
 :::
 
 ::: practice-box
-<details>
-
-<summary>Click to show answer</summary>
-
-Answer:
-
-</details>
-:::
-
-::: practice-box
 Consider $n$-digit numbers where each digit is one of the 10 integers $0, 1, ... , 9$.
 
 (a) How many such numbers are there for which no two consecutive digits are equal?
@@ -149,7 +139,7 @@ We can then follow this logic for the remaining digits, each will have 9 valid c
 
 <details>
 
-<summary> Click to show answer (b)</summary>
+<summary>Click to show answer (b)</summary>
 
 Answer: This problem is easier if we break it up into two distinct parts.
 
@@ -238,7 +228,7 @@ Consider partitioning the $10$ digits into three distinct buckets:
 
 Notice that $1 + 5 + 4 = 10$. The total number of $n$-digit strings is:$$10^n = (1 + 5 + 4)^n = (x_1 + x_2 + x_3)^n$$
 
-Expanding $(x_1 + x_2 + \dots + x_m)^n$ means visiting $n$ node.  At each node, you must pick exactly one item: an $x_1$, an $x_2$, $\dots$, or an $x_m$.
+Expanding $(x_1 + x_2 + \dots + x_m)^n$ means visiting $n$ node. At each node, you must pick exactly one item: an $x_1$, an $x_2$, $\dots$, or an $x_m$.
 
 If you want a term with:$k_1$ items of type $x_1$$k_2$ items of type $x_2$$\dots$$k_m$ items of type $x_m$where $k_1 + k_2 + \dots + k_m = n$, the resulting monomial is:
 
@@ -270,7 +260,11 @@ Using the multinomial structure:
 
 Assign the locations: $\binom{n}{a, b, c} = \frac{n!}{a!b!c!}$ ways to decide which positions hold which category.
 
-Fill each category:$a$ spots filled with $\{0\}$: $1^a$ ways.$b$ spots filled with odd digits: $5^b$ ways.$c$ spots filled with even non-zero digits: $4^c$ ways.
+Fill each category:
+
+- $a$ spots filled with $\{0\}$: $1^a$ ways.
+- $b$ spots filled with odd digits: $5^b$ ways.
+- $c$ spots filled with even non-zero digits: $4^c$ ways.
 
 The total count is:
 
@@ -281,3 +275,13 @@ Summing this over all non-negative integers where $a + b + c = n$ reconstructs t
 $$\sum_{a+b+c=n} \binom{n}{a, b, c} 1^a 5^b 4^c = (1 + 5 + 4)^n = 10^n$$
 
 Just as the Binomial Theorem tracks taking a left or right turn at each step, the Multinomial Theorem tracks navigating an $m$-way intersection at every step of length $n$.
+
+::: practice-box
+<details>
+
+<summary>Click to show answer</summary>
+
+Answer:
+
+</details>
+:::

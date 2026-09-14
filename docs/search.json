@@ -77,7 +77,7 @@
     "href": "lectures/permutations_combinations.html#application-to-the-3-category-digit-problem",
     "title": "2: Permutations and Combinations",
     "section": "Application to the 3-Category Digit Problem",
-    "text": "Application to the 3-Category Digit Problem\nSuppose you want to know how many n-digit strings contain:\n\nExactly a zeros\nExactly b odd digits\nExactly c even non-zero digits\n\nwhere a + b + c = n.\nUsing the multinomial structure:\nAssign the locations: \\binom{n}{a, b, c} = \\frac{n!}{a!b!c!} ways to decide which positions hold which category.\nFill each category:a spots filled with \\{0\\}: 1^a ways.b spots filled with odd digits: 5^b ways.c spots filled with even non-zero digits: 4^c ways.\nThe total count is:\n\\binom{n}{a, b, c} 1^a 5^b 4^c = \\frac{n!}{a!b!c!} 5^b 4^c\nSumming this over all non-negative integers where a + b + c = n reconstructs the entire space:\n\\sum_{a+b+c=n} \\binom{n}{a, b, c} 1^a 5^b 4^c = (1 + 5 + 4)^n = 10^n\nJust as the Binomial Theorem tracks taking a left or right turn at each step, the Multinomial Theorem tracks navigating an m-way intersection at every step of length n.",
+    "text": "Application to the 3-Category Digit Problem\nSuppose you want to know how many n-digit strings contain:\n\nExactly a zeros\nExactly b odd digits\nExactly c even non-zero digits\n\nwhere a + b + c = n.\nUsing the multinomial structure:\nAssign the locations: \\binom{n}{a, b, c} = \\frac{n!}{a!b!c!} ways to decide which positions hold which category.\nFill each category:\n\na spots filled with \\{0\\}: 1^a ways.\nb spots filled with odd digits: 5^b ways.\nc spots filled with even non-zero digits: 4^c ways.\n\nThe total count is:\n\\binom{n}{a, b, c} 1^a 5^b 4^c = \\frac{n!}{a!b!c!} 5^b 4^c\nSumming this over all non-negative integers where a + b + c = n reconstructs the entire space:\n\\sum_{a+b+c=n} \\binom{n}{a, b, c} 1^a 5^b 4^c = (1 + 5 + 4)^n = 10^n\nJust as the Binomial Theorem tracks taking a left or right turn at each step, the Multinomial Theorem tracks navigating an m-way intersection at every step of length n.\n\n\n\nClick to show answer\n\nAnswer:",
     "crumbs": [
       "Foundations",
       "2: Permutations and Combinations"
@@ -145,20 +145,98 @@
     "href": "lectures/inclusion_exclusion.html",
     "title": "3: The Principle of Inclusion-Exclusion",
     "section": "",
-    "text": "When students encounter a problem like “What is the probability a drawn card is a Heart OR a Face Card?”, they naturally add 13 + 12 = 25.\nWhen you ask them why the answer is wrong, they will correctly identify that the King, Queen, and Jack of Hearts were counted twice. The critical mistake textbooks make next is handing them the formula P(A \\cup B) = P(A) + P(B) - P(A \\cap B).\nThe Fix: Ban the Formula, Require the Map.\nDo not let them memorize alternating plus and minus signs. Force them to physically map the layers of the count.\n\nThe Overlap Test: Ask them what happens with 3 sets (e.g., “Rolls that are Even, &gt;3, or Prime”).\nThe Physical Action: Have them draw a 3-circle Venn Diagram. Have them physically place a tally mark in every region that satisfies condition A, then condition B, then condition C.\nThe Diagnosis: The center region (satisfying all three) now has exactly 3 tally marks. It has been counted 3 times. If we subtract the pairwise intersections, we remove 3 tally marks. Now the center has 0 tally marks. We have to add it back once.\n\nThe alternating signs are not a rule to be memorized; they are a crude algebraic repair job for clumsy counting."
+    "text": "Before calculating, we need to identify what is being counted, what is distinguishable, and where overlap or separation occurs. Memorizing formulas is not the goal, these ideas emerge from common structure between similar problems.",
+    "crumbs": [
+      "Foundations",
+      "3: The Principle of Inclusion-Exclusion"
+    ]
   },
   {
-    "objectID": "lectures/inclusion_exclusion.html#part-1-pie-as-subtraction-based-compression",
-    "href": "lectures/inclusion_exclusion.html#part-1-pie-as-subtraction-based-compression",
+    "objectID": "lectures/inclusion_exclusion.html#a-continued-example",
+    "href": "lectures/inclusion_exclusion.html#a-continued-example",
     "title": "3: The Principle of Inclusion-Exclusion",
-    "section": "",
-    "text": "When students encounter a problem like “What is the probability a drawn card is a Heart OR a Face Card?”, they naturally add 13 + 12 = 25.\nWhen you ask them why the answer is wrong, they will correctly identify that the King, Queen, and Jack of Hearts were counted twice. The critical mistake textbooks make next is handing them the formula P(A \\cup B) = P(A) + P(B) - P(A \\cap B).\nThe Fix: Ban the Formula, Require the Map.\nDo not let them memorize alternating plus and minus signs. Force them to physically map the layers of the count.\n\nThe Overlap Test: Ask them what happens with 3 sets (e.g., “Rolls that are Even, &gt;3, or Prime”).\nThe Physical Action: Have them draw a 3-circle Venn Diagram. Have them physically place a tally mark in every region that satisfies condition A, then condition B, then condition C.\nThe Diagnosis: The center region (satisfying all three) now has exactly 3 tally marks. It has been counted 3 times. If we subtract the pairwise intersections, we remove 3 tally marks. Now the center has 0 tally marks. We have to add it back once.\n\nThe alternating signs are not a rule to be memorized; they are a crude algebraic repair job for clumsy counting."
+    "section": "A Continued Example",
+    "text": "A Continued Example\nConsider a standard 52-card deck. Let A be the event that the card is a Heart, and B the event that the card is a Face Card (Jack, Queen, or King). Recall that there are 13 Hearts and 12 Face Cards.\nNaive count: 13 + 12 = 25.\nIs 25 actually the number of cards satisfying A or B?\nNo. The Jack, Queen, and King of Hearts belong to both groups, so those three cards were counted twice.\nThe important observation is not merely that we subtract 3. It is that the same physical outcomes appeared in two different counting categories.",
+    "crumbs": [
+      "Foundations",
+      "3: The Principle of Inclusion-Exclusion"
+    ]
   },
   {
-    "objectID": "lectures/inclusion_exclusion.html#part-2-stars-and-bars-destroying-the-formula",
-    "href": "lectures/inclusion_exclusion.html#part-2-stars-and-bars-destroying-the-formula",
+    "objectID": "lectures/inclusion_exclusion.html#venn-diagrams",
+    "href": "lectures/inclusion_exclusion.html#venn-diagrams",
     "title": "3: The Principle of Inclusion-Exclusion",
-    "section": "Part 2: Stars and Bars (Destroying the Formula)",
-    "text": "Part 2: Stars and Bars (Destroying the Formula)\nThis is the most misunderstood topic in elementary combinatorics. If you teach them \\binom{n+k-1}{k-1}, they will fail every probabilistic algorithm problem that requires dynamic resource allocation.\nThe Setup (The Gambling Context): You have 10 identical $100 chips. You want to distribute them among 3 distinct players (Alice, Bob, Charlie) at a poker table. How many ways can you distribute the chips, assuming some players might get zero?\nThe Trap: Because the players are distinct, students want to use permutations. Because the chips are identical, they want to use combinations. It breaks both models.\nThe Fix: The “Mississippi” Anagram Hack.\nRemind them of the “Mississippi Problem” from Week 2 (finding distinct anagrams of indistinguishable letters). Tell them they already know the math for Stars and Bars; they just haven’t realized it’s a cryptography problem.\n\nThe Translation: Tell them to physically line up the 10 identical chips (* * * * * * * * * *).\nThe Bins: Ask them how to physically separate these chips for 3 people. They don’t need 3 dividers; they only need 2 wooden sticks (| |) to create 3 zones on the table.\nThe Encryption: Any distribution of chips can be written as a string of characters.\n\nAlice gets 4, Bob gets 1, Charlie gets 5 \\rightarrow * * * * | * | * * * * *\nAlice gets 10, Bob 0, Charlie 0 \\rightarrow * * * * * * * * * * | |\n\nThe Epiphany: We have 12 total physical objects (10 stars, 2 bars). We just need to find the number of distinct anagrams of this 12-character string.\n\nBecause we have 12 slots, and we just need to choose where the 2 bars go, the answer is \\binom{12}{2}. Or, using Week 2’s division logic for identical items: \\frac{12!}{10!2!}.\n“A casino manager is handing out 5 comped hotel room keys to 3 high rollers. Part A: Assume all 5 keys are for identical standard rooms. Part B: Assume all 5 keys are for uniquely themed penthouse suites (The Roman, The Egyptian, etc.). Calculate the state space for both, and strictly define why the physical nature of the room key changes the fundamental mathematical architecture of the problem.”\n\nIf 8 identical objects are to be divided among 4 bins, how many divisions are possible?\nHow many divisions are possible if each bin must contain at least one object?\n\n\nClick to show answer\n\nAnswer: With 8 objects and 4 bins, we can view this as having 11 total physical objects. We only then need to choose where the dividing points that indicate the bins go.\nThis gives us \\binom{11}{3}.\nIf there must be at least one object in each bin, then we already have four objects allocated as there are four bins. We can then view our total number of objects as 11 - 4 = 7 and this then gives us \\binom{7}{3}."
+    "section": "Venn Diagrams",
+    "text": "Venn Diagrams\nLet us draw two circles labeled A and B that correspond to the events in our continued example.\nPlace all the events for A and B into their respective circles.\n\nHeart: 13\nFace card: 12\nBoth: 3\n\nNote that the intersection between these events is non-empty, that is, we have overlap between the events. If we count in the naive way by adding up the size of the events, we will have overcounted.\nSo we will need to remove the overcounting, and we need to approach this systematically. What is the size of the overlap? And how much did we overcount?\nThe size of the overlap is simply the size of the intersection and how much we overcounted is how many times the intersection was counted. We counted the intersection twice (but only needed to count it once) and so we must reduce our total count by the size of the intersection.\nTherefore: 13 + 12 − 3 = 22 cards.\n\nA die is rolled. How many outcomes are even OR greater than 3?\n\n\nClick to show answer\n\nEven outcomes are {2, 4, 6}; outcomes greater than 3 are {4, 5, 6}.\nAdding gives 3 + 3 = 6, but 4 and 6 have been counted twice.\nThe intersection is {4, 6}, containing 2 outcomes.\nThus the union has 6 − 2 = 4 outcomes: {2, 4, 5, 6}.",
+    "crumbs": [
+      "Foundations",
+      "3: The Principle of Inclusion-Exclusion"
+    ]
+  },
+  {
+    "objectID": "lectures/inclusion_exclusion.html#extending-to-many-sets",
+    "href": "lectures/inclusion_exclusion.html#extending-to-many-sets",
+    "title": "3: The Principle of Inclusion-Exclusion",
+    "section": "Extending to Many Sets",
+    "text": "Extending to Many Sets\nConsider a die roll and define:\n\nA = even\nB = greater than 3\nC = prime\n\nTrying drawing three overlapping circles and physically marking outcomes in each set.\nLet us focus only on an outcome in the center—the outcome satisfying A, B, and C. It is initially counted once when A is counted, once when B is counted, and once when C is counted: three copies.\nIf we subtract the three pairwise intersections, the center outcome loses three copies. But it originally had three copies, so this correction leaves zero copies. We have over-corrected.\nTherefore the center must be added back once.\nThe alternating signs are bookkeeping. For three sets, ‘+ singles − pairwise overlaps + triple overlap’ is a compressed record of how many copies each region currently has and how many copies the correction removes.\nA good question to ask is ‘How many times is this region currently being counted, and how many copies do I want?’ That question scales to more complicated counting problems.\n\n\nFrom the numbers 1 through 12, count numbers that are divisible by 2 OR 3 OR 5.\n\nClick to show answer\n\nAnswer: The single-set counts are 6, 4, and 2.\nThe pairwise intersections have sizes 2 (divisible by 6), 1 (divisible by 10), and 1 (divisible by 15).\nThe triple intersection is 0 because no number from 1 to 12 is divisible by 30.\nThus the count is 6 + 4 + 2 − 2 − 1 − 1 + 0 = 8.\n\n\nInclusion–exclusion is best viewed as compression. The Venn diagram is the detailed representation; the alternating-sign expression is the compressed representation. If you can construct the map, you can reconstruct the formula.",
+    "crumbs": [
+      "Foundations",
+      "3: The Principle of Inclusion-Exclusion"
+    ]
+  },
+  {
+    "objectID": "lectures/inclusion_exclusion.html#the-poker-chip-problem",
+    "href": "lectures/inclusion_exclusion.html#the-poker-chip-problem",
+    "title": "3: The Principle of Inclusion-Exclusion",
+    "section": "The poker-chip problem",
+    "text": "The poker-chip problem\nSuppose a poker table has 10 identical $100 chips and three distinct players: Alice, Bob, and Charlie. Any player may receive zero chips.\nThe desired outcomes are triples (a,b,c) of nonnegative integers satisfying a + b + c = 10. But rather than immediately write a formula, let us build the representation.\nWe will use stars to represent the chips and bars for the boundaries.\nLine up ten identical chips as stars:\n**********\nTo divide them among three players, only two separators are required:\n***|***|****\nEverything before the first bar belongs to Alice, everything between the bars belongs to Bob, and everything after the second bar belongs to Charlie.\nThis example represents (3,3,4). Notice that the players are distinct because their positions in the string are distinct.\nZero allocations are naturally represented:\n**********||\nThis represents (10,0,0). The adjacent bars create an empty middle region, so Bob gets zero.",
+    "crumbs": [
+      "Foundations",
+      "3: The Principle of Inclusion-Exclusion"
+    ]
+  },
+  {
+    "objectID": "lectures/inclusion_exclusion.html#repeated-letter-anagrams-revisted",
+    "href": "lectures/inclusion_exclusion.html#repeated-letter-anagrams-revisted",
+    "title": "3: The Principle of Inclusion-Exclusion",
+    "section": "Repeated-letter Anagrams Revisted",
+    "text": "Repeated-letter Anagrams Revisted\nWe can think of a stars-and-bars distribution as a restricted anagram problem.\nThere are 10 identical stars and 2 identical bars, giving 12 total positions. Choose which 2 positions contain bars; all remaining positions contain stars.\nNumber of distributions = \\binom{12}{2} = 66.\nEquivalently, the repeated-character calculation is \\frac{12!}/{10!2!}.\n\n\nDistribute 8 identical tokens among Alice, Bob, Charlie, and Dana, allowing zero.\n\nClick to show answer\n\nAnswer: Four recipients require three bars. The representation contains 8 stars and 3 bars, for 11 positions. Choose the three bar positions: \\binom{11}{3} = 165.\nNote that number of bars is determined by the number of boundaries needed to create the recipient zones: k recipients require k−1 bars.",
+    "crumbs": [
+      "Foundations",
+      "3: The Principle of Inclusion-Exclusion"
+    ]
+  },
+  {
+    "objectID": "lectures/inclusion_exclusion.html#the-formula",
+    "href": "lectures/inclusion_exclusion.html#the-formula",
+    "title": "3: The Principle of Inclusion-Exclusion",
+    "section": "The Formula",
+    "text": "The Formula\nFor n identical objects distributed among k distinct recipients with zero allowed, there are n stars and k−1 bars, giving n+k−1 total positions. Choosing the bar positions gives:\n\\binom{n + k - 1}{k - 1}",
+    "crumbs": [
+      "Foundations",
+      "3: The Principle of Inclusion-Exclusion"
+    ]
+  },
+  {
+    "objectID": "lectures/inclusion_exclusion.html#the-physical-nature-of-the-objects-changes-the-mathematics",
+    "href": "lectures/inclusion_exclusion.html#the-physical-nature-of-the-objects-changes-the-mathematics",
+    "title": "3: The Principle of Inclusion-Exclusion",
+    "section": "The Physical Nature of the Objects Changes the Mathematics",
+    "text": "The Physical Nature of the Objects Changes the Mathematics\nThe physical identity of the objects determines what constitutes a different outcome. Changing identical keys into distinct keys does not merely change a number in the formula; it changes the sample-space architecture.\n\nThe casino hotel-key problem\nA casino manager is handing out 5 complimentary hotel room keys to 3 distinct high rollers. Compare two versions.\n\nFive identical standard-room keys\nAssume the five keys are interchangeable: giving Alice key 1 and Bob key 2 is not meaningfully different from giving Alice key 2 and Bob key 1.\nOnly the number of keys received by each person matters. Let (a,b,c) be the allocations. Then a+b+c=5 with a,b,c ≥ 0. This is a stars-and-bars problem with 5 stars and 2 bars, so the state-space size is \\binom{7}{2} 21.\nNote here that the physical objects are indistinguishable. A person’s allocation is summarized completely by a count.\n\nFive uniquely themed penthouse keys\nAssume the five keys correspond to five distinct suites: Roman, Egyptian, Art Deco, Presidential, and Ocean. A particular key can be assigned to any one of the three players.\nEach of the 5 distinct keys has 3 possible recipients. Therefore the number of assignments is 3^5 = 243.\nNote that the objects are distinguishable. Which player receives which particular key matters.\n\n\n\n\nWhy this is a different mathematical architecture\n\n\n\n\n\n\n\n\nFeature\nIdentical keys\nDistinct keys\n\n\n\n\nWhat matters?\nHow many each player gets\nWhich key each player gets\n\n\nObject identity\nIrrelevant\nRelevant\n\n\nRepresentation\nStars + bars\n5 independent key assignments\n\n\nTypical structure\nInteger solutions\nFunctions / assignments\n\n\nState-space size\n\\binom{7}{2} = 21\n3^5 = 243\n\n\n\nA useful question: If I swap two objects between recipients, does the outcome change?\nIf NO, the objects may be indistinguishable for this problem. If YES, the objects are distinguishable and a different counting architecture is likely required.",
+    "crumbs": [
+      "Foundations",
+      "3: The Principle of Inclusion-Exclusion"
+    ]
+  },
+  {
+    "objectID": "lectures/inclusion_exclusion.html#practice",
+    "href": "lectures/inclusion_exclusion.html#practice",
+    "title": "3: The Principle of Inclusion-Exclusion",
+    "section": "Practice",
+    "text": "Practice\n\n\nDistribute 12 identical candies among 4 children, allowing zero. How many possible distributions are there?\n\nClick to show answer\n\nAnswer: There are 12 stars and 3 bars: \\binom{15}{3} = 455.\nDo not let the word ‘children’ trigger permutations. The recipients are distinct; the candies are not.\n\n\n\n\nFive distinct prizes are awarded to three students. Each prize goes to exactly one student, and students may receive multiple prizes. How many ways are there to award the prizes?\n\nClick to show answer\n\nAnswer: Each prize has three possible recipients, independently of the others. Thus 3^5 = 243.\n\n\n\n\nFive identical $100 chips are distributed among three players, but every player must receive at least one. How many possible distributions are there?\nHint: It can be easier to handle constraints by modifying the physical model before counting.\n\nClick to show answer\n\nAnswer: Give each player one chip first. Three chips have now been assigned, leaving 2 identical chips to distribute freely among 3 players. Thus \\binom{2+3-1}{3-1} = \\binom{4}{2} = 6.\n\n\n\nIf 8 identical objects are to be divided among 4 bins, how many divisions are possible?\nHow many divisions are possible if each bin must contain at least one object?\n\n\nClick to show answer\n\nAnswer: With 8 objects and 4 bins, we can view this as having 11 total physical objects. We only then need to choose where the dividing points that indicate the bins go.\nThis gives us \\binom{11}{3}.\nIf there must be at least one object in each bin, then we already have four objects allocated as there are four bins. We can then view our total number of objects as 11 - 4 = 7 and this then gives us \\binom{7}{3}.",
+    "crumbs": [
+      "Foundations",
+      "3: The Principle of Inclusion-Exclusion"
+    ]
   }
 ]
