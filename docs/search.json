@@ -44,11 +44,120 @@
     ]
   },
   {
-    "objectID": "lectures/conditional_probability.html",
-    "href": "lectures/conditional_probability.html",
-    "title": "5: Conditional Probability",
+    "objectID": "lectures/axioms2.html",
+    "href": "lectures/axioms2.html",
+    "title": "Applied Probability",
     "section": "",
-    "text": "We have already discussed the idea of conditional probability during our introduction to sample and state spaces. But for our previous problems, while we made to state our assumptions, these were not included directly in the mathematical notation we used.\nConsider a state space \\Omega with two events, A and B.\nNow consider that Event B has just occurred. The old universe \\Omega is irrelevant. Everything outside of B has ceased to exist. B is the new universe.\nNow consider that Event A occurs after we know event B has occured. The numerator (the physical space of the intersection) has not changed at all. What changed is the denominator: we must re-normalize the new universe so that its total measure equals 1 (Axiom 2 from Week 4).\nWhat we have here is the Conditional Probability of Event A given Event B has occured, which in notation is written as P(A\\vert{}B)."
+    "text": "In earlier counting problems, we asked how many outcomes are possible and how many satisfy a condition. For a finite uniform sample space, probability is normalized counting:\nP(A) = |A| / |Ω|\nProbability theory generalizes this idea. Instead of requiring every outcome to have equal weight, we require the assignment of probability to behave consistently.\nOutcome — One possible result of an experiment.\nSample space Ω — The collection of all possible outcomes.\nEvent A — A subset of Ω; the outcomes for which some condition is true.\nP(A) — The probability assigned to event A.\nThe transition into Week 4 represents a dangerous pivot point. Up until now, students have lived entirely in a discrete, uniform world where probability is just counting: P(A) = \\frac{\\vert{}A\\vert{}}{\\vert{}\\Omega\\vert{}}.\nIf you do not explicitly destroy this assumption before introducing the formal axioms, students will drag the “Uniform Measure Fallacy” into every subsequent topic. They will try to solve continuous probability, Markov chains, and Bayesian updates by just counting states and dividing, which will lead to catastrophic modeling errors.\nHere is how to structure Week 4 to transition them from raw counting to formal measure theory, using Kolmogorov’s axioms as the scaffolding.\nPhase 1: Breaking the Uniform Assumption (The “Loaded Dice” Diagnostic)\nBefore you teach the axioms, you must prove to them that counting is no longer sufficient.\nThe Setup: Introduce a game with a biased coin or a loaded die. For example, a coin where P(\\text{Heads}) = \\frac{2}{3}.\nAsk them to calculate the probability of getting exactly one Head in two flips.\nThe Trap: Students who are stuck in Week 3 will define the state space as \\Omega = \\{HH, HT, TH, TT\\}. They will identify the event as A = \\{HT, TH\\}. They will count the states and proudly state P(A) = \\frac{2}{4} = \\frac{1}{2}.\nThe Destruction: You must stop the class here and ruthlessly expose the flaw.\nAsk them: “Does your mathematical model match the physical reality of the loaded coin?”\nForce them to realize that the state HH is physically much heavier (more likely) than the state TT.\nThe Epiphany: Counting states only works if every state has the exact same “weight.” Once the universe becomes non-uniform, counting is useless. We need a new mathematical machine."
+  },
+  {
+    "objectID": "lectures/bayes_theorem.html",
+    "href": "lectures/bayes_theorem.html",
+    "title": "6: Bayes’s Theorem",
+    "section": "",
+    "text": "The standard pedagogical introduction to Bayes’ Theorem is perhaps the most destructive in all of mathematics education. Textbooks typically present this monstrosity on day one:\nP(A\\vert{}B) = \\frac{P(B\\vert{}A)P(A)}{P(B\\vert{}A)P(A) + P(B\\vert{}A^c)P(A^c)}\nWhen students see this, they stop thinking probabilistically and start playing algebraic Sudoku. They scan the word problem for numbers, arbitrarily assign them to the variables in the formula, and pray the fraction computes to something between 0 and 1. This guarantees they will fail when attempting Bayesian inference in algorithms later, because they have no idea what the theorem is physically doing.\nTo fix this, Week 6 must frame Bayes’ Theorem entirely visually. The formula should not be written on the board until the final lecture of the week."
+  },
+  {
+    "objectID": "lectures/bayes_theorem.html#bayes-theorem-is-just-time-travel-on-a-tree",
+    "href": "lectures/bayes_theorem.html#bayes-theorem-is-just-time-travel-on-a-tree",
+    "title": "6: Bayes’s Theorem",
+    "section": "Bayes’ Theorem is Just “Time Travel” on a Tree",
+    "text": "Bayes’ Theorem is Just “Time Travel” on a Tree\nYou are playing poker. Your opponent makes a massive “all-in” raise (Call this Event B). You need to decide if they are bluffing (Event A).\n\nThe Forward Tree (What we know): In Week 5, they learned to build trees chronologically.\n\nNode 1: Does the opponent have a good hand or a bad hand (the prior, P(A))?\nNode 2: Given their hand, do they raise or fold (the conditional, P(B\\vert{}A))?\n\nThe Crisis: You are sitting at the table. You don’t get to see Node 1. You only see the end result: they raised.\nThe Bayesian Epiphany: Bayes’ Theorem is just traveling backward up the tree. You know the end result (the raise). You want to know which branch they took to get there."
+  },
+  {
+    "objectID": "lectures/bayes_theorem.html#phase-2-the-natural-frequencies-hack",
+    "href": "lectures/bayes_theorem.html#phase-2-the-natural-frequencies-hack",
+    "title": "6: Bayes’s Theorem",
+    "section": "Phase 2: The “Natural Frequencies” Hack",
+    "text": "Phase 2: The “Natural Frequencies” Hack\nThe human brain is terrible at processing conditional probabilities as percentages, but excellent at processing raw counts. Before using probabilities, teach Bayes using “Natural Frequencies.”\nThe Scenario: (A classic Mosteller-style setup)\n\n10% of the time, your opponent has a monster hand.\n90% of the time, they have garbage.\nIf they have a monster, they raise 80% of the time.\nIf they have garbage, they bluff (raise) 20% of the time.\nThey just raised. What is the probability they have a monster?\n\nThe Execution (No Formulas Allowed):\nForce the students to pretend they play 100 hands against this opponent.\n\nSplit the Universe: Out of 100 hands, 10 are monsters, 90 are garbage.\nCalculate the Actions:\n\nOf the 10 monsters, they raise 8 times.\nOf the 90 garbage hands, they bluff 18 times.\n\nShrink the Universe (Week 5 rules): The opponent raised. The universe of “folds” is dead. The new universe is exactly 8 + 18 = 26 total raises.\nThe Bayesian Result: Of those 26 raises, 8 came from a monster hand. The probability is 8 / 26 (about 31%)."
+  },
+  {
+    "objectID": "lectures/axioms.html",
+    "href": "lectures/axioms.html",
+    "title": "4: Axioms of Probability",
+    "section": "",
+    "text": "The Kolmogorov axioms are the rules that every probability assignment must obey. They should be understood as consistency requirements rather than as formulas to memorize.",
+    "crumbs": [
+      "Foundations",
+      "4: Axioms of Probability"
+    ]
+  },
+  {
+    "objectID": "lectures/axioms.html#axiom-1-nonnegativity",
+    "href": "lectures/axioms.html#axiom-1-nonnegativity",
+    "title": "4: Axioms of Probability",
+    "section": "Axiom 1 — Nonnegativity",
+    "text": "Axiom 1 — Nonnegativity\nP(A) ≥ 0\nProbabilities cannot be negative.",
+    "crumbs": [
+      "Foundations",
+      "4: Axioms of Probability"
+    ]
+  },
+  {
+    "objectID": "lectures/axioms.html#axiom-2-normalization",
+    "href": "lectures/axioms.html#axiom-2-normalization",
+    "title": "4: Axioms of Probability",
+    "section": "Axiom 2 — Normalization",
+    "text": "Axiom 2 — Normalization\nP(Ω) = 1\nThe entire modeled sample space has probability one.",
+    "crumbs": [
+      "Foundations",
+      "4: Axioms of Probability"
+    ]
+  },
+  {
+    "objectID": "lectures/axioms.html#axiom-3-additivity-for-disjoint-events",
+    "href": "lectures/axioms.html#axiom-3-additivity-for-disjoint-events",
+    "title": "4: Axioms of Probability",
+    "section": "Axiom 3 — Additivity for disjoint events",
+    "text": "Axiom 3 — Additivity for disjoint events\nP(A∪B)=P(A)+P(B) \\text{ when } A∩B=∅\nIf events cannot occur together, their probabilities add. More generally, this extends to countably many mutually exclusive events.\nNote that the axioms do not tell us what probability a physical experiment should have. They tell us what a consistent probability model must obey once its probabilities are specified. |\n\nConsequences we can derive from the Axioms\n\nWhat is the probability of the empty set (\\emptyset)?\n\n\nClick to show answer\n\nAnswer: Because Ω and ∅ are disjoint and Ω∪∅=Ω, additivity gives P(Ω)=P(Ω)+P(∅). Therefore P(∅)=0.\n\n\n\nFor some event A in our space \\Omega what is the probability of the complement of A (A^c)?\n\n\nClick to show answer\n\nAnswer: A and Aᶜ partition Ω, so P(Aᶜ)=1−P(A).",
+    "crumbs": [
+      "Foundations",
+      "4: Axioms of Probability"
+    ]
+  },
+  {
+    "objectID": "lectures/axioms.html#bounds-and-monotonicity",
+    "href": "lectures/axioms.html#bounds-and-monotonicity",
+    "title": "4: Axioms of Probability",
+    "section": "Bounds and Monotonicity",
+    "text": "Bounds and Monotonicity\nThe axioms imply:\n0 ≤ P(A) ≤ 1\nAlso, if A⊆B, then P(A)≤P(B). A smaller event cannot contain more probability than the event containing it.",
+    "crumbs": [
+      "Foundations",
+      "4: Axioms of Probability"
+    ]
+  },
+  {
+    "objectID": "lectures/axioms.html#inclusionexclusion-returns",
+    "href": "lectures/axioms.html#inclusionexclusion-returns",
+    "title": "4: Axioms of Probability",
+    "section": "Inclusion–Exclusion Returns",
+    "text": "Inclusion–Exclusion Returns\nThe inclusion–exclusion principle from counting carries directly into probability:\nP(A∪B)=P(A)+P(B)−P(A∩B)\nThis is not really a new formula. It is the same overlap correction already developed through Venn diagrams. Adding P(A) and P(B) counts the overlap twice; subtracting it once leaves one copy.",
+    "crumbs": [
+      "Foundations",
+      "4: Axioms of Probability"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Course Overview",
+    "section": "",
+    "text": "This is the central repository for the lecture notes for CSCI 4999. These notes provide an overview of the content covered during lecture.\nMore in-depth information can be found in the course section available on Blackboard.",
+    "crumbs": [
+      "Course Info",
+      "Course Overview"
+    ]
+  },
+  {
+    "objectID": "conventions.html",
+    "href": "conventions.html",
+    "title": "Content Conventions",
+    "section": "",
+    "text": "The information in these course notes is categorized into visual tiers.\n\n1. Core Material\n\nThese blocks contain the core content of the course. You are expected to be able to reproduce this information, derive the formulas, or perform the calculations from memory during examinations.\n\n\n\n\n2. Reference Concepts (Functional Familiarity)\n\nThese blocks contain tools, syntax, or concepts that you should recognize and understand when you see them. You do not need to memorize these “cold,” but you should know they exist and where to find them.\n\n\n\n\n3. Extended Information\n\nThese blocks are for students looking to further explore related content. This material is not testable but provides may prove useful for mastery of the core material in the course.\n\n\n\n\n4. Notes\n\nThese blocks are for context, especially for definitions that are used in the course that may be defined differently elsewhere.\n\n\n\n\n5. Practice\n\nThese blocks contain practice problems associated with their related section(s).",
+    "crumbs": [
+      "Course Info",
+      "Content Conventions"
+    ]
   },
   {
     "objectID": "lectures/permutations_combinations.html",
@@ -84,61 +193,11 @@
     ]
   },
   {
-    "objectID": "conventions.html",
-    "href": "conventions.html",
-    "title": "Content Conventions",
+    "objectID": "lectures/conditional_probability.html",
+    "href": "lectures/conditional_probability.html",
+    "title": "5: Conditional Probability",
     "section": "",
-    "text": "The information in these course notes is categorized into visual tiers.\n\n1. Core Material\n\nThese blocks contain the core content of the course. You are expected to be able to reproduce this information, derive the formulas, or perform the calculations from memory during examinations.\n\n\n\n\n2. Reference Concepts (Functional Familiarity)\n\nThese blocks contain tools, syntax, or concepts that you should recognize and understand when you see them. You do not need to memorize these “cold,” but you should know they exist and where to find them.\n\n\n\n\n3. Extended Information\n\nThese blocks are for students looking to further explore related content. This material is not testable but provides may prove useful for mastery of the core material in the course.\n\n\n\n\n4. Notes\n\nThese blocks are for context, especially for definitions that are used in the course that may be defined differently elsewhere.\n\n\n\n\n5. Practice\n\nThese blocks contain practice problems associated with their related section(s).",
-    "crumbs": [
-      "Course Info",
-      "Content Conventions"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Course Overview",
-    "section": "",
-    "text": "This is the central repository for the lecture notes for CSCI 4999. These notes provide an overview of the content covered during lecture.\nMore in-depth information can be found in the course section available on Blackboard.",
-    "crumbs": [
-      "Course Info",
-      "Course Overview"
-    ]
-  },
-  {
-    "objectID": "lectures/axioms.html",
-    "href": "lectures/axioms.html",
-    "title": "4: Axioms of Probability",
-    "section": "",
-    "text": "The transition into Week 4 represents a dangerous pivot point. Up until now, students have lived entirely in a discrete, uniform world where probability is just counting: P(A) = \\frac{\\vert{}A\\vert{}}{\\vert{}\\Omega\\vert{}}.\nIf you do not explicitly destroy this assumption before introducing the formal axioms, students will drag the “Uniform Measure Fallacy” into every subsequent topic. They will try to solve continuous probability, Markov chains, and Bayesian updates by just counting states and dividing, which will lead to catastrophic modeling errors.\nHere is how to structure Week 4 to transition them from raw counting to formal measure theory, using Kolmogorov’s axioms as the scaffolding."
-  },
-  {
-    "objectID": "lectures/axioms.html#phase-1-breaking-the-uniform-assumption-the-loaded-dice-diagnostic",
-    "href": "lectures/axioms.html#phase-1-breaking-the-uniform-assumption-the-loaded-dice-diagnostic",
-    "title": "4: Axioms of Probability",
-    "section": "Phase 1: Breaking the Uniform Assumption (The “Loaded Dice” Diagnostic)",
-    "text": "Phase 1: Breaking the Uniform Assumption (The “Loaded Dice” Diagnostic)\nBefore you teach the axioms, you must prove to them that counting is no longer sufficient.\nThe Setup: Introduce a game with a biased coin or a loaded die. For example, a coin where P(\\text{Heads}) = \\frac{2}{3}.\nAsk them to calculate the probability of getting exactly one Head in two flips.\nThe Trap: Students who are stuck in Week 3 will define the state space as \\Omega = \\{HH, HT, TH, TT\\}. They will identify the event as A = \\{HT, TH\\}. They will count the states and proudly state P(A) = \\frac{2}{4} = \\frac{1}{2}.\nThe Destruction: You must stop the class here and ruthlessly expose the flaw.\n\nAsk them: “Does your mathematical model match the physical reality of the loaded coin?”\nForce them to realize that the state HH is physically much heavier (more likely) than the state TT.\nThe Epiphany: Counting states only works if every state has the exact same “weight.” Once the universe becomes non-uniform, counting is useless. We need a new mathematical machine."
-  },
-  {
-    "objectID": "lectures/bayes_theorem.html",
-    "href": "lectures/bayes_theorem.html",
-    "title": "6: Bayes’s Theorem",
-    "section": "",
-    "text": "The standard pedagogical introduction to Bayes’ Theorem is perhaps the most destructive in all of mathematics education. Textbooks typically present this monstrosity on day one:\nP(A\\vert{}B) = \\frac{P(B\\vert{}A)P(A)}{P(B\\vert{}A)P(A) + P(B\\vert{}A^c)P(A^c)}\nWhen students see this, they stop thinking probabilistically and start playing algebraic Sudoku. They scan the word problem for numbers, arbitrarily assign them to the variables in the formula, and pray the fraction computes to something between 0 and 1. This guarantees they will fail when attempting Bayesian inference in algorithms later, because they have no idea what the theorem is physically doing.\nTo fix this, Week 6 must frame Bayes’ Theorem entirely visually. The formula should not be written on the board until the final lecture of the week."
-  },
-  {
-    "objectID": "lectures/bayes_theorem.html#bayes-theorem-is-just-time-travel-on-a-tree",
-    "href": "lectures/bayes_theorem.html#bayes-theorem-is-just-time-travel-on-a-tree",
-    "title": "6: Bayes’s Theorem",
-    "section": "Bayes’ Theorem is Just “Time Travel” on a Tree",
-    "text": "Bayes’ Theorem is Just “Time Travel” on a Tree\nYou are playing poker. Your opponent makes a massive “all-in” raise (Call this Event B). You need to decide if they are bluffing (Event A).\n\nThe Forward Tree (What we know): In Week 5, they learned to build trees chronologically.\n\nNode 1: Does the opponent have a good hand or a bad hand (the prior, P(A))?\nNode 2: Given their hand, do they raise or fold (the conditional, P(B\\vert{}A))?\n\nThe Crisis: You are sitting at the table. You don’t get to see Node 1. You only see the end result: they raised.\nThe Bayesian Epiphany: Bayes’ Theorem is just traveling backward up the tree. You know the end result (the raise). You want to know which branch they took to get there."
-  },
-  {
-    "objectID": "lectures/bayes_theorem.html#phase-2-the-natural-frequencies-hack",
-    "href": "lectures/bayes_theorem.html#phase-2-the-natural-frequencies-hack",
-    "title": "6: Bayes’s Theorem",
-    "section": "Phase 2: The “Natural Frequencies” Hack",
-    "text": "Phase 2: The “Natural Frequencies” Hack\nThe human brain is terrible at processing conditional probabilities as percentages, but excellent at processing raw counts. Before using probabilities, teach Bayes using “Natural Frequencies.”\nThe Scenario: (A classic Mosteller-style setup)\n\n10% of the time, your opponent has a monster hand.\n90% of the time, they have garbage.\nIf they have a monster, they raise 80% of the time.\nIf they have garbage, they bluff (raise) 20% of the time.\nThey just raised. What is the probability they have a monster?\n\nThe Execution (No Formulas Allowed):\nForce the students to pretend they play 100 hands against this opponent.\n\nSplit the Universe: Out of 100 hands, 10 are monsters, 90 are garbage.\nCalculate the Actions:\n\nOf the 10 monsters, they raise 8 times.\nOf the 90 garbage hands, they bluff 18 times.\n\nShrink the Universe (Week 5 rules): The opponent raised. The universe of “folds” is dead. The new universe is exactly 8 + 18 = 26 total raises.\nThe Bayesian Result: Of those 26 raises, 8 came from a monster hand. The probability is 8 / 26 (about 31%)."
+    "text": "We have already discussed the idea of conditional probability during our introduction to sample and state spaces. But for our previous problems, while we made to state our assumptions, these were not included directly in the mathematical notation we used.\nConsider a state space \\Omega with two events, A and B.\nNow consider that Event B has just occurred. The old universe \\Omega is irrelevant. Everything outside of B has ceased to exist. B is the new universe.\nNow consider that Event A occurs after we know event B has occured. The numerator (the physical space of the intersection) has not changed at all. What changed is the denominator: we must re-normalize the new universe so that its total measure equals 1 (Axiom 2 from Week 4).\nWhat we have here is the Conditional Probability of Event A given Event B has occured, which in notation is written as P(A\\vert{}B)."
   },
   {
     "objectID": "lectures/inclusion_exclusion.html",

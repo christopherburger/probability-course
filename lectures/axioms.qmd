@@ -2,26 +2,66 @@
 title: "4: Axioms of Probability"
 ---
 
-The transition into Week 4 represents a dangerous pivot point. Up until now, students have lived entirely in a discrete, uniform world where probability is just counting: $P(A) = \frac{\vert{}A\vert{}}{\vert{}\Omega\vert{}}$.
+The Kolmogorov axioms are the rules that every probability assignment must obey. They should be understood as consistency requirements rather than as formulas to memorize.
 
-If you do not explicitly destroy this assumption before introducing the formal axioms, students will drag the "Uniform Measure Fallacy" into every subsequent topic. They will try to solve continuous probability, Markov chains, and Bayesian updates by just counting states and dividing, which will lead to catastrophic modeling errors.
+## **Axiom 1 — Nonnegativity**
 
-Here is how to structure Week 4 to transition them from raw counting to formal measure theory, using Kolmogorov’s axioms as the scaffolding.
+**P(A) ≥ 0**
 
-## Phase 1: Breaking the Uniform Assumption (The "Loaded Dice" Diagnostic)
+Probabilities cannot be negative.
 
-Before you teach the axioms, you must prove to them that counting is no longer sufficient.
+## **Axiom 2 — Normalization**
 
-**The Setup:** Introduce a game with a biased coin or a loaded die. For example, a coin where $P(\text{Heads}) = \frac{2}{3}$.
+**P(Ω) = 1**
 
-Ask them to calculate the probability of getting exactly one Head in two flips.
+The entire modeled sample space has probability one.
 
-**The Trap:** Students who are stuck in Week 3 will define the state space as $\Omega = \{HH, HT, TH, TT\}$. They will identify the event as $A = \{HT, TH\}$. They will count the states and proudly state $P(A) = \frac{2}{4} = \frac{1}{2}$.
+## **Axiom 3 — Additivity for disjoint events**
 
-**The Destruction:** You must stop the class here and ruthlessly expose the flaw.
+$P(A∪B)=P(A)+P(B) \text{ when } A∩B=∅$
 
-1.  Ask them: *"Does your mathematical model match the physical reality of the loaded coin?"*
+If events cannot occur together, their probabilities add. More generally, this extends to countably many mutually exclusive events.
 
-2.  Force them to realize that the state $HH$ is physically much heavier (more likely) than the state $TT$.
+Note that the axioms do not tell us what probability a physical experiment should have. They tell us what a consistent probability model must obey once its probabilities are specified. \|
 
-3.  **The Epiphany:** Counting states only works if every state has the exact same "weight." Once the universe becomes non-uniform, counting is useless. We need a new mathematical machine.
+### **Consequences we can derive from the Axioms**
+
+::: practice-box
+What is the probability of the empty set ($\emptyset$)?
+
+<details>
+
+<summary>Click to show answer</summary>
+
+**Answer:** Because $Ω$ and $∅$ are disjoint and $Ω∪∅=Ω$, additivity gives $P(Ω)=P(Ω)+P(∅)$. Therefore $P(∅)=0$.
+
+</details>
+:::
+
+::: practice-box
+For some event $A$ in our space $\Omega$ what is the probability of the complement of $A$ ($A^c$)?
+
+<details>
+
+<summary>Click to show answer</summary>
+
+**Answer:** $A$ and $Aᶜ$ partition $Ω$, so $P(Aᶜ)=1−P(A)$.
+
+</details>
+:::
+
+## **Bounds and Monotonicity**
+
+The axioms imply:
+
+$$0 ≤ P(A) ≤ 1$$
+
+Also, if $A⊆B$, then $P(A)≤P(B)$. A smaller event cannot contain more probability than the event containing it.
+
+## **Inclusion–Exclusion Returns**
+
+The inclusion–exclusion principle from counting carries directly into probability:
+
+$$P(A∪B)=P(A)+P(B)−P(A∩B)$$
+
+This is not really a new formula. It is the same overlap correction already developed through Venn diagrams. Adding $P(A)$ and $P(B)$ counts the overlap twice; subtracting it once leaves one copy.

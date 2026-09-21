@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3: The Principle of Inclusion-Exclusion – Applied Probability</title>
+<title>axioms2 – Applied Probability</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -127,7 +127,9 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/state_space.html">Foundations</a></li><li class="breadcrumb-item"><a href="../lectures/inclusion_exclusion.html">3: The Principle of Inclusion-Exclusion</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      Applied Probability
+      </li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -198,7 +200,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/inclusion_exclusion.html" class="sidebar-item-text sidebar-link active">
+  <a href="../lectures/inclusion_exclusion.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">3: The Principle of Inclusion-Exclusion</span></a>
   </div>
 </li>
@@ -223,275 +225,36 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#inclusionexclusion-as-subtraction-based-compression" id="toc-inclusionexclusion-as-subtraction-based-compression" class="nav-link active" data-scroll-target="#inclusionexclusion-as-subtraction-based-compression">Inclusion–Exclusion as Subtraction-Based Compression</a>
-  <ul class="collapse">
-  <li><a href="#a-continued-example" id="toc-a-continued-example" class="nav-link" data-scroll-target="#a-continued-example">A Continued Example</a></li>
-  <li><a href="#venn-diagrams" id="toc-venn-diagrams" class="nav-link" data-scroll-target="#venn-diagrams">Venn Diagrams</a></li>
-  <li><a href="#extending-to-many-sets" id="toc-extending-to-many-sets" class="nav-link" data-scroll-target="#extending-to-many-sets">Extending to Many Sets</a></li>
-  </ul></li>
-  <li><a href="#stars-and-bars" id="toc-stars-and-bars" class="nav-link" data-scroll-target="#stars-and-bars">Stars and Bars</a>
-  <ul class="collapse">
-  <li><a href="#the-poker-chip-problem" id="toc-the-poker-chip-problem" class="nav-link" data-scroll-target="#the-poker-chip-problem">The poker-chip problem</a></li>
-  <li><a href="#repeated-letter-anagrams-revisted" id="toc-repeated-letter-anagrams-revisted" class="nav-link" data-scroll-target="#repeated-letter-anagrams-revisted">Repeated-letter Anagrams Revisted</a></li>
-  <li><a href="#the-formula" id="toc-the-formula" class="nav-link" data-scroll-target="#the-formula">The Formula</a></li>
-  <li><a href="#the-physical-nature-of-the-objects-changes-the-mathematics" id="toc-the-physical-nature-of-the-objects-changes-the-mathematics" class="nav-link" data-scroll-target="#the-physical-nature-of-the-objects-changes-the-mathematics">The Physical Nature of the Objects Changes the Mathematics</a>
-  <ul class="collapse">
-  <li><a href="#the-casino-hotel-key-problem" id="toc-the-casino-hotel-key-problem" class="nav-link" data-scroll-target="#the-casino-hotel-key-problem">The casino hotel-key problem</a></li>
-  <li><a href="#why-this-is-a-different-mathematical-architecture" id="toc-why-this-is-a-different-mathematical-architecture" class="nav-link" data-scroll-target="#why-this-is-a-different-mathematical-architecture">Why this is a different mathematical architecture</a></li>
-  </ul></li>
-  <li><a href="#practice" id="toc-practice" class="nav-link" data-scroll-target="#practice">Practice</a></li>
-  </ul></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/state_space.html">Foundations</a></li><li class="breadcrumb-item"><a href="../lectures/inclusion_exclusion.html">3: The Principle of Inclusion-Exclusion</a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title">3: The Principle of Inclusion-Exclusion</h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<p>Before calculating, we need to identify what is being counted, what is distinguishable, and where overlap or separation occurs. Memorizing formulas is not the goal, these ideas emerge from common structure between similar problems.</p>
-<section id="inclusionexclusion-as-subtraction-based-compression" class="level1">
-<h1>Inclusion–Exclusion as Subtraction-Based Compression</h1>
-<p>A common failure mode in elementary probability is that we learn the inclusion–exclusion formula before we understand why the correction is necessary. The result is symbolic pattern matching: add the sets, subtract an intersection, and hope the signs are right.</p>
-<p>What we need is a map of the sample space. We should be able to point to the regions that were counted, identify which regions were counted more than once, and explain how to compensate.</p>
-<section id="a-continued-example" class="level2">
-<h2 class="anchored" data-anchor-id="a-continued-example">A Continued Example</h2>
-<p>Consider a standard 52-card deck. Let <span class="math inline">A</span> be the event that the card is a Heart, and <span class="math inline">B</span> the event that the card is a Face Card (Jack, Queen, or King). Recall that there are 13 Hearts and 12 Face Cards.</p>
-<p>Naive count: 13 + 12 = 25.</p>
-<p>Is 25 actually the number of cards satisfying <span class="math inline">A</span> or <span class="math inline">B</span>?</p>
-<p>No.&nbsp;The Jack, Queen, and King of Hearts belong to both groups, so those three cards were counted twice.</p>
-<p>The important observation is not merely that <strong>we subtract 3.</strong> It is that the same physical outcomes appeared in two different counting categories.</p>
-</section>
-<section id="venn-diagrams" class="level2">
-<h2 class="anchored" data-anchor-id="venn-diagrams">Venn Diagrams</h2>
-<p>Let us draw two circles labeled <span class="math inline">A</span> and <span class="math inline">B</span> that correspond to the events in our continued example.</p>
-<p>Place all the events for <span class="math inline">A</span> and <span class="math inline">B</span> into their respective circles.</p>
-<ul>
-<li><p>Heart: 13</p></li>
-<li><p>Face card: 12</p></li>
-<li><p>Both: 3</p></li>
-</ul>
-<p>Note that the intersection between these events is non-empty, that is, we have overlap between the events. If we count in the naive way by adding up the size of the events, we will have overcounted.</p>
-<p>So we will need to remove the overcounting, and we need to approach this systematically. What is the size of the overlap? And how much did we overcount?</p>
-<p>The size of the overlap is simply the size of the intersection and how much we overcounted is how many times the intersection was counted. We counted the intersection twice (but only needed to count it once) and so we must reduce our total count by the size of the intersection.</p>
-<p>Therefore: 13 + 12 − 3 = 22 cards.</p>
-<div class="practice-box">
-<p>A die is rolled. How many outcomes are even OR greater than 3?</p>
-<details>
-<summary>
-Click to show answer
-</summary>
-<p>Even outcomes are {2, 4, 6}; outcomes greater than 3 are {4, 5, 6}.</p>
-<p>Adding gives 3 + 3 = 6, but 4 and 6 have been counted twice.</p>
-<p>The intersection is {4, 6}, containing 2 outcomes.</p>
-<p>Thus the union has 6 − 2 = 4 outcomes: {2, 4, 5, 6}.</p>
-</details>
-</div>
-</section>
-<section id="extending-to-many-sets" class="level2">
-<h2 class="anchored" data-anchor-id="extending-to-many-sets">Extending to Many Sets</h2>
-<p>Consider a die roll and define:</p>
-<ul>
-<li><p><span class="math inline">A</span> = even</p></li>
-<li><p><span class="math inline">B</span> = greater than 3</p></li>
-<li><p><span class="math inline">C</span> = prime</p></li>
-</ul>
-<p>Trying drawing three overlapping circles and physically marking outcomes in each set.</p>
-<p>Let us focus only on an outcome in the center—the outcome satisfying <span class="math inline">A</span>, <span class="math inline">B</span>, and <span class="math inline">C</span>. It is initially counted once when <span class="math inline">A</span> is counted, once when <span class="math inline">B</span> is counted, and once when <span class="math inline">C</span> is counted: three copies.</p>
-<p>If we subtract the three pairwise intersections, the center outcome loses three copies. But it originally had three copies, so this correction leaves zero copies. We have over-corrected.</p>
-<p>Therefore the center must be added back once.</p>
-<p>The alternating signs are bookkeeping. For three sets, <strong>‘+ singles − pairwise overlaps + triple overlap’</strong> is a compressed record of how many copies each region currently has and how many copies the correction removes.</p>
-<p>A good question to ask is <strong>‘How many times is this region currently being counted, and how many copies do I want?’</strong> That question scales to more complicated counting problems.</p>
-<div class="practice-box">
-<p>From the numbers 1 through 12, count numbers that are divisible by 2 OR 3 OR 5.</p>
-<details>
-<summary>
-Click to show answer
-</summary>
-<p>Answer: The single-set counts are 6, 4, and 2.</p>
-<p>The pairwise intersections have sizes 2 (divisible by 6), 1 (divisible by 10), and 1 (divisible by 15).</p>
-<p>The triple intersection is 0 because no number from 1 to 12 is divisible by 30.</p>
-<p>Thus the count is 6 + 4 + 2 − 2 − 1 − 1 + 0 = 8.</p>
-</details>
-</div>
-<p>Inclusion–exclusion is best viewed as compression. The Venn diagram is the detailed representation; the alternating-sign expression is the compressed representation. If you can construct the map, you can reconstruct the formula.</p>
-</section>
-</section>
-<section id="stars-and-bars" class="level1">
-<h1>Stars and Bars</h1>
-<p>Stars and Bars is often taught as a formula for nonnegative integer solutions. That description is mathematically correct but often too terse to see the generalizability. Another interpretation is a representation theorem: every distribution of identical objects among distinct recipients can be encoded by a string of stars separated into recipient zones.</p>
-<section id="the-poker-chip-problem" class="level2">
-<h2 class="anchored" data-anchor-id="the-poker-chip-problem">The poker-chip problem</h2>
-<p>Suppose a poker table has 10 identical $100 chips and three distinct players: Alice, Bob, and Charlie. Any player may receive zero chips.</p>
-<p>The desired outcomes are triples (a,b,c) of nonnegative integers satisfying <span class="math inline">a + b + c = 10</span>. But rather than immediately write a formula, let us build the representation.</p>
-<p>We will use stars to represent the chips and bars for the boundaries.</p>
-<p>Line up ten identical chips as stars:</p>
-<p><span class="math inline">**********</span></p>
-<p>To divide them among three players, only two separators are required:</p>
-<p><span class="math inline">***|***|****</span></p>
-<p>Everything before the first bar belongs to Alice, everything between the bars belongs to Bob, and everything after the second bar belongs to Charlie.</p>
-<p>This example represents (3,3,4). Notice that the players are distinct because their positions in the string are distinct.</p>
-<p>Zero allocations are naturally represented:</p>
-<p><span class="math inline">**********||</span></p>
-<p>This represents (10,0,0). The adjacent bars create an empty middle region, so Bob gets zero.</p>
-</section>
-<section id="repeated-letter-anagrams-revisted" class="level2">
-<h2 class="anchored" data-anchor-id="repeated-letter-anagrams-revisted">Repeated-letter Anagrams Revisted</h2>
-<p>We can think of a stars-and-bars distribution as a restricted anagram problem.</p>
-<p>There are <span class="math inline">10</span> identical stars and <span class="math inline">2</span> identical bars, giving <span class="math inline">12</span> total positions. Choose which <span class="math inline">2</span> positions contain bars; all remaining positions contain stars.</p>
-<p>Number of distributions = <span class="math inline">\binom{12}{2} = 66</span>.</p>
-<p>Equivalently, the repeated-character calculation is <span class="math inline">\frac{12!}/{10!2!}</span>.</p>
-<div class="practice-box">
-<p>How many ways are there to distribute 8 identical tokens among Alice, Bob, Charlie, and Dana, allowing zero?</p>
-<details>
-<summary>
-Click to show answer
-</summary>
-<p>Answer: Four recipients require three bars. The representation contains 8 stars and 3 bars, for 11 positions. Choose the three bar positions: <span class="math inline">\binom{11}{3} = 165</span>.</p>
-<p>Note that number of bars is determined by the number of boundaries needed to create the recipient zones: <span class="math inline">k</span> recipients require <span class="math inline">k−1</span> bars.</p>
-</details>
-</div>
-</section>
-<section id="the-formula" class="level2">
-<h2 class="anchored" data-anchor-id="the-formula">The Formula</h2>
-<p>For <span class="math inline">n</span> identical objects distributed among <span class="math inline">k</span> distinct recipients with zero allowed, there are <span class="math inline">n</span> stars and <span class="math inline">k−1</span> bars, giving <span class="math inline">n+k−1</span> total positions. Choosing the bar positions gives:</p>
-<p><span class="math inline">\binom{n + k - 1}{k - 1}</span></p>
-</section>
-<section id="the-physical-nature-of-the-objects-changes-the-mathematics" class="level2">
-<h2 class="anchored" data-anchor-id="the-physical-nature-of-the-objects-changes-the-mathematics">The Physical Nature of the Objects Changes the Mathematics</h2>
-<p>The physical identity of the objects determines what constitutes a different outcome. Changing identical keys into distinct keys does not merely change a number in the formula; it changes the sample-space architecture.</p>
-<section id="the-casino-hotel-key-problem" class="level3">
-<h3 class="anchored" data-anchor-id="the-casino-hotel-key-problem">The casino hotel-key problem</h3>
-<p>A casino manager is handing out 5 complimentary hotel room keys to 3 distinct high rollers. Compare two versions.</p>
-<section id="five-identical-standard-room-keys" class="level4">
-<h4 class="anchored" data-anchor-id="five-identical-standard-room-keys">Five identical standard-room keys</h4>
-<p>Assume the five keys are interchangeable: giving Alice key 1 and Bob key 2 is not meaningfully different from giving Alice key 2 and Bob key 1.</p>
-<p>Only the number of keys received by each person matters. Let <span class="math inline">(a,b,c)</span> be the allocations. Then <span class="math inline">a+b+c=5</span> with <span class="math inline">a,b,c ≥ 0</span>. This is a stars-and-bars problem with 5 stars and 2 bars, so the state-space size is <span class="math inline">\binom{7}{2} 21</span>.</p>
-<p>Note here that the physical objects are indistinguishable. A person’s allocation is summarized completely by a count.</p>
-<section id="five-uniquely-themed-penthouse-keys" class="level5">
-<h5 class="anchored" data-anchor-id="five-uniquely-themed-penthouse-keys">Five uniquely themed penthouse keys</h5>
-<p>Assume the five keys correspond to five distinct suites: Roman, Egyptian, Art Deco, Presidential, and Ocean. A particular key can be assigned to any one of the three players.</p>
-<p>Each of the 5 distinct keys has 3 possible recipients. Therefore the number of assignments is <span class="math inline">3^5 = 243</span>.</p>
-<p>Note that the objects are distinguishable. Which player receives which particular key matters.</p>
-</section>
-</section>
-</section>
-<section id="why-this-is-a-different-mathematical-architecture" class="level3">
-<h3 class="anchored" data-anchor-id="why-this-is-a-different-mathematical-architecture">Why this is a different mathematical architecture</h3>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 24%">
-<col style="width: 35%">
-<col style="width: 40%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Feature</th>
-<th>Identical keys</th>
-<th>Distinct keys</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>What matters?</td>
-<td>How many each player gets</td>
-<td>Which key each player gets</td>
-</tr>
-<tr class="even">
-<td>Object identity</td>
-<td>Irrelevant</td>
-<td>Relevant</td>
-</tr>
-<tr class="odd">
-<td>Representation</td>
-<td>Stars + bars</td>
-<td>5 independent key assignments</td>
-</tr>
-<tr class="even">
-<td>Typical structure</td>
-<td>Integer solutions</td>
-<td>Functions / assignments</td>
-</tr>
-<tr class="odd">
-<td>State-space size</td>
-<td><span class="math inline">\binom{7}{2} = 21</span></td>
-<td><span class="math inline">3^5 = 243</span></td>
-</tr>
-</tbody>
-</table>
-<p>A useful question: <em>If I swap two objects between recipients, does the outcome change?</em></p>
-<p>If <strong>NO</strong>, the objects may be indistinguishable for this problem. If <strong>YES</strong>, the objects are distinguishable and a different counting architecture is likely required.</p>
-</section>
-</section>
-<section id="practice" class="level2">
-<h2 class="anchored" data-anchor-id="practice">Practice</h2>
-<div class="practice-box">
-<p>Distribute 12 identical candies among 4 children, allowing zero. How many possible distributions are there?</p>
-<details>
-<summary>
-Click to show answer
-</summary>
-<p>Answer: There are 12 stars and 3 bars: <span class="math inline">\binom{15}{3} = 455</span>.</p>
-<p>Do not let the word ‘children’ trigger permutations. The recipients are distinct; the candies are not.</p>
-</details>
-</div>
-<div class="practice-box">
-<p>Five distinct prizes are awarded to three students. Each prize goes to exactly one student, and students may receive multiple prizes. How many ways are there to award the prizes?</p>
-<details>
-<summary>
-Click to show answer
-</summary>
-<p>Answer: Each prize has three possible recipients, independently of the others. Thus <span class="math inline">3^5 = 243</span>.</p>
-</details>
-</div>
-<div class="practice-box">
-<p>Five identical $100 chips are distributed among three players, but every player must receive at least one. How many possible distributions are there?</p>
-Hint: It can be easier to handle constraints by modifying the physical model before counting.
-<details>
-<summary>
-Click to show answer
-</summary>
-<p>Answer: Give each player one chip first. Three chips have now been assigned, leaving 2 identical chips to distribute freely among 3 players. Thus <span class="math inline">\binom{2+3-1}{3-1} = \binom{4}{2} = 6</span>.</p>
-</details>
-</div>
-<div class="practice-box">
-<p>If 8 identical objects are to be divided among 4 bins, how many divisions are possible?</p>
-<p>How many divisions are possible if each bin must contain at least one object?</p>
-<details>
-<summary>
-Click to show answer
-</summary>
-<p>Answer: With 8 objects and 4 bins, we can view this as having 11 total physical objects. We only then need to choose where the dividing points that indicate the bins go.</p>
-<p>This gives us <span class="math inline">\binom{11}{3}</span>.</p>
-<p>If there must be at least one object in each bin, then we already have four objects allocated as there are four bins. We can then view our total number of objects as <span class="math inline">11 - 4 = 7</span> and this then gives us <span class="math inline">\binom{7}{3}</span>.</p>
-</details>
-</div>
+<p>In earlier counting problems, we asked how many outcomes are possible and how many satisfy a condition. For a finite uniform sample space, probability is normalized counting:</p>
+<p>P(A) = |A| / |Ω|</p>
+<p>Probability theory generalizes this idea. Instead of requiring every outcome to have equal weight, we require the assignment of probability to behave consistently.</p>
+<p>Outcome — One possible result of an experiment.</p>
+<p>Sample space Ω — The collection of all possible outcomes.</p>
+<p>Event A — A subset of Ω; the outcomes for which some condition is true.</p>
+<p>P(A) — The probability assigned to event A.</p>
+<p>The transition into Week 4 represents a dangerous pivot point. Up until now, students have lived entirely in a discrete, uniform world where probability is just counting: <span class="math inline">P(A) = \frac{\vert{}A\vert{}}{\vert{}\Omega\vert{}}</span>.</p>
+<p>If you do not explicitly destroy this assumption before introducing the formal axioms, students will drag the “Uniform Measure Fallacy” into every subsequent topic. They will try to solve continuous probability, Markov chains, and Bayesian updates by just counting states and dividing, which will lead to catastrophic modeling errors.</p>
+<p>Here is how to structure Week 4 to transition them from raw counting to formal measure theory, using Kolmogorov’s axioms as the scaffolding.</p>
+<p>Phase 1: Breaking the Uniform Assumption (The “Loaded Dice” Diagnostic)</p>
+<p>Before you teach the axioms, you must prove to them that counting is no longer sufficient.</p>
+<p>The Setup: Introduce a game with a biased coin or a loaded die. For example, a coin where <span class="math inline">P(\text{Heads}) = \frac{2}{3}</span>.</p>
+<p>Ask them to calculate the probability of getting exactly one Head in two flips.</p>
+<p>The Trap: Students who are stuck in Week 3 will define the state space as <span class="math inline">\Omega = \{HH, HT, TH, TT\}</span>. They will identify the event as <span class="math inline">A = \{HT, TH\}</span>. They will count the states and proudly state <span class="math inline">P(A) = \frac{2}{4} = \frac{1}{2}</span>.</p>
+<p>The Destruction: You must stop the class here and ruthlessly expose the flaw.</p>
+<p>Ask them: “Does your mathematical model match the physical reality of the loaded coin?”</p>
+<p>Force them to realize that the state <span class="math inline">HH</span> is physically much heavier (more likely) than the state <span class="math inline">TT</span>.</p>
+<p>The Epiphany: Counting states only works if every state has the exact same “weight.” Once the universe becomes non-uniform, counting is useless. We need a new mathematical machine.</p>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

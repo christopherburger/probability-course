@@ -127,9 +127,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      Applied Probability
-      </li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/state_space.html">Foundations</a></li><li class="breadcrumb-item"><a href="../lectures/axioms.html">4: Axioms of Probability</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -204,6 +202,12 @@ window.Quarto = {
  <span class="menu-text">3: The Principle of Inclusion-Exclusion</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/axioms.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">4: Axioms of Probability</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -224,14 +228,21 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#phase-1-breaking-the-uniform-assumption-the-loaded-dice-diagnostic" id="toc-phase-1-breaking-the-uniform-assumption-the-loaded-dice-diagnostic" class="nav-link active" data-scroll-target="#phase-1-breaking-the-uniform-assumption-the-loaded-dice-diagnostic">Phase 1: Breaking the Uniform Assumption (The “Loaded Dice” Diagnostic)</a></li>
+  <li><a href="#axiom-1-nonnegativity" id="toc-axiom-1-nonnegativity" class="nav-link active" data-scroll-target="#axiom-1-nonnegativity"><strong>Axiom 1 — Nonnegativity</strong></a></li>
+  <li><a href="#axiom-2-normalization" id="toc-axiom-2-normalization" class="nav-link" data-scroll-target="#axiom-2-normalization"><strong>Axiom 2 — Normalization</strong></a></li>
+  <li><a href="#axiom-3-additivity-for-disjoint-events" id="toc-axiom-3-additivity-for-disjoint-events" class="nav-link" data-scroll-target="#axiom-3-additivity-for-disjoint-events"><strong>Axiom 3 — Additivity for disjoint events</strong></a>
+  <ul class="collapse">
+  <li><a href="#consequences-we-can-derive-from-the-axioms" id="toc-consequences-we-can-derive-from-the-axioms" class="nav-link" data-scroll-target="#consequences-we-can-derive-from-the-axioms"><strong>Consequences we can derive from the Axioms</strong></a></li>
+  </ul></li>
+  <li><a href="#bounds-and-monotonicity" id="toc-bounds-and-monotonicity" class="nav-link" data-scroll-target="#bounds-and-monotonicity"><strong>Bounds and Monotonicity</strong></a></li>
+  <li><a href="#inclusionexclusion-returns" id="toc-inclusionexclusion-returns" class="nav-link" data-scroll-target="#inclusionexclusion-returns"><strong>Inclusion–Exclusion Returns</strong></a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/state_space.html">Foundations</a></li><li class="breadcrumb-item"><a href="../lectures/axioms.html">4: Axioms of Probability</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">4: Axioms of Probability</h1>
 </div>
@@ -250,21 +261,55 @@ window.Quarto = {
 </header>
 
 
-<p>The transition into Week 4 represents a dangerous pivot point. Up until now, students have lived entirely in a discrete, uniform world where probability is just counting: <span class="math inline">P(A) = \frac{\vert{}A\vert{}}{\vert{}\Omega\vert{}}</span>.</p>
-<p>If you do not explicitly destroy this assumption before introducing the formal axioms, students will drag the “Uniform Measure Fallacy” into every subsequent topic. They will try to solve continuous probability, Markov chains, and Bayesian updates by just counting states and dividing, which will lead to catastrophic modeling errors.</p>
-<p>Here is how to structure Week 4 to transition them from raw counting to formal measure theory, using Kolmogorov’s axioms as the scaffolding.</p>
-<section id="phase-1-breaking-the-uniform-assumption-the-loaded-dice-diagnostic" class="level2">
-<h2 class="anchored" data-anchor-id="phase-1-breaking-the-uniform-assumption-the-loaded-dice-diagnostic">Phase 1: Breaking the Uniform Assumption (The “Loaded Dice” Diagnostic)</h2>
-<p>Before you teach the axioms, you must prove to them that counting is no longer sufficient.</p>
-<p><strong>The Setup:</strong> Introduce a game with a biased coin or a loaded die. For example, a coin where <span class="math inline">P(\text{Heads}) = \frac{2}{3}</span>.</p>
-<p>Ask them to calculate the probability of getting exactly one Head in two flips.</p>
-<p><strong>The Trap:</strong> Students who are stuck in Week 3 will define the state space as <span class="math inline">\Omega = \{HH, HT, TH, TT\}</span>. They will identify the event as <span class="math inline">A = \{HT, TH\}</span>. They will count the states and proudly state <span class="math inline">P(A) = \frac{2}{4} = \frac{1}{2}</span>.</p>
-<p><strong>The Destruction:</strong> You must stop the class here and ruthlessly expose the flaw.</p>
-<ol type="1">
-<li><p>Ask them: <em>“Does your mathematical model match the physical reality of the loaded coin?”</em></p></li>
-<li><p>Force them to realize that the state <span class="math inline">HH</span> is physically much heavier (more likely) than the state <span class="math inline">TT</span>.</p></li>
-<li><p><strong>The Epiphany:</strong> Counting states only works if every state has the exact same “weight.” Once the universe becomes non-uniform, counting is useless. We need a new mathematical machine.</p></li>
-</ol>
+<p>The Kolmogorov axioms are the rules that every probability assignment must obey. They should be understood as consistency requirements rather than as formulas to memorize.</p>
+<section id="axiom-1-nonnegativity" class="level2">
+<h2 class="anchored" data-anchor-id="axiom-1-nonnegativity"><strong>Axiom 1 — Nonnegativity</strong></h2>
+<p><strong>P(A) ≥ 0</strong></p>
+<p>Probabilities cannot be negative.</p>
+</section>
+<section id="axiom-2-normalization" class="level2">
+<h2 class="anchored" data-anchor-id="axiom-2-normalization"><strong>Axiom 2 — Normalization</strong></h2>
+<p><strong>P(Ω) = 1</strong></p>
+<p>The entire modeled sample space has probability one.</p>
+</section>
+<section id="axiom-3-additivity-for-disjoint-events" class="level2">
+<h2 class="anchored" data-anchor-id="axiom-3-additivity-for-disjoint-events"><strong>Axiom 3 — Additivity for disjoint events</strong></h2>
+<p><span class="math inline">P(A∪B)=P(A)+P(B) \text{ when } A∩B=∅</span></p>
+<p>If events cannot occur together, their probabilities add. More generally, this extends to countably many mutually exclusive events.</p>
+<p>Note that the axioms do not tell us what probability a physical experiment should have. They tell us what a consistent probability model must obey once its probabilities are specified. |</p>
+<section id="consequences-we-can-derive-from-the-axioms" class="level3">
+<h3 class="anchored" data-anchor-id="consequences-we-can-derive-from-the-axioms"><strong>Consequences we can derive from the Axioms</strong></h3>
+<div class="practice-box">
+<p>What is the probability of the empty set (<span class="math inline">\emptyset</span>)?</p>
+<details>
+<summary>
+Click to show answer
+</summary>
+<p><strong>Answer:</strong> Because <span class="math inline">Ω</span> and <span class="math inline">∅</span> are disjoint and <span class="math inline">Ω∪∅=Ω</span>, additivity gives <span class="math inline">P(Ω)=P(Ω)+P(∅)</span>. Therefore <span class="math inline">P(∅)=0</span>.</p>
+</details>
+</div>
+<div class="practice-box">
+<p>For some event <span class="math inline">A</span> in our space <span class="math inline">\Omega</span> what is the probability of the complement of <span class="math inline">A</span> (<span class="math inline">A^c</span>)?</p>
+<details>
+<summary>
+Click to show answer
+</summary>
+<p><strong>Answer:</strong> <span class="math inline">A</span> and <span class="math inline">Aᶜ</span> partition <span class="math inline">Ω</span>, so <span class="math inline">P(Aᶜ)=1−P(A)</span>.</p>
+</details>
+</div>
+</section>
+</section>
+<section id="bounds-and-monotonicity" class="level2">
+<h2 class="anchored" data-anchor-id="bounds-and-monotonicity"><strong>Bounds and Monotonicity</strong></h2>
+<p>The axioms imply:</p>
+<p><span class="math display">0 ≤ P(A) ≤ 1</span></p>
+<p>Also, if <span class="math inline">A⊆B</span>, then <span class="math inline">P(A)≤P(B)</span>. A smaller event cannot contain more probability than the event containing it.</p>
+</section>
+<section id="inclusionexclusion-returns" class="level2">
+<h2 class="anchored" data-anchor-id="inclusionexclusion-returns"><strong>Inclusion–Exclusion Returns</strong></h2>
+<p>The inclusion–exclusion principle from counting carries directly into probability:</p>
+<p><span class="math display">P(A∪B)=P(A)+P(B)−P(A∩B)</span></p>
+<p>This is not really a new formula. It is the same overlap correction already developed through Venn diagrams. Adding <span class="math inline">P(A)</span> and <span class="math inline">P(B)</span> counts the overlap twice; subtracting it once leaves one copy.</p>
 
 
 </section>

@@ -8,6 +8,6 @@ Consider a state space $\Omega$ with two events, $A$ and $B$.
 
 Now consider that Event $B$ has just occurred. The old universe $\Omega$ is irrelevant. Everything outside of $B$ has ceased to exist. $B$ is the **new universe**.
 
-Now consider that Event $A$ occurs **after we know** event $B$ has occured. The numerator (the physical space of the intersection) has not changed at all. What changed is the denominator: we must re-normalize the new universe so that its total measure equals 1 (Axiom 2 from Week 4).
+Now consider that Event $A$ occurs **after we know** event $B$ has occurred. The numerator (the physical space of the intersection) has not changed at all. What changed is the denominator: we must re-normalize the new universe so that its total measure equals 1 (Axiom 2 from Week 4).
 
-What we have here is the **Conditional Probability** of Event $A$ given Event $B$ has occured, which in notation is written as $P(A\vert{}B)$.
+What we have here is the **Conditional Probability** of Event $A$ given Event $B$ has occurred, which in notation is written as $P(A\vert{}B)$.

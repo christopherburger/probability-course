@@ -83,11 +83,9 @@ The alternating signs are bookkeeping. For three sets, **'+ singles − pairwise
 A good question to ask is **'How many times is this region currently being counted, and how many copies do I want?'** That question scales to more complicated counting problems.
 
 ::: practice-box
-
 From the numbers 1 through 12, count numbers that are divisible by 2 OR 3 OR 5.
 
 <details>
-
 
 <summary>Click to show answer</summary>
 
@@ -142,14 +140,12 @@ There are $10$ identical stars and $2$ identical bars, giving $12$ total positio
 
 Number of distributions = $\binom{12}{2} = 66$.
 
-Equivalently, the repeated-character calculation is $\frac{12!}/{10!2!}$.
+Equivalently, the repeated-character calculation is $\frac{12!}{10!2!}$.
 
 ::: practice-box
-
 How many ways are there to distribute 8 identical tokens among Alice, Bob, Charlie, and Dana, allowing zero?
 
 <details>
-
 
 <summary>Click to show answer</summary>
 
@@ -193,7 +189,7 @@ Note that the objects are distinguishable. Which player receives which particula
 ### Why this is a different mathematical architecture
 
 | Feature           | Identical keys            | Distinct keys                 |
-|-------------------|---------------------------|-------------------------------|
+|------------------|-------------------------|-----------------------------|
 | What matters?     | How many each player gets | Which key each player gets    |
 | Object identity   | Irrelevant                | Relevant                      |
 | Representation    | Stars + bars              | 5 independent key assignments |
@@ -207,11 +203,9 @@ If **NO**, the objects may be indistinguishable for this problem. If **YES**, th
 ## Practice
 
 ::: practice-box
-
 Distribute 12 identical candies among 4 children, allowing zero. How many possible distributions are there?
 
 <details>
-
 
 <summary>Click to show answer</summary>
 
@@ -223,10 +217,10 @@ Do not let the word 'children' trigger permutations. The recipients are distinct
 :::
 
 ::: practice-box
-
 Five distinct prizes are awarded to three students. Each prize goes to exactly one student, and students may receive multiple prizes. How many ways are there to award the prizes?
 
 <details>
+
 <summary>Click to show answer</summary>
 
 Answer: Each prize has three possible recipients, independently of the others. Thus $3^5 = 243$.
@@ -235,10 +229,10 @@ Answer: Each prize has three possible recipients, independently of the others. T
 :::
 
 ::: practice-box
-
 Five identical \$100 chips are distributed among three players, but every player must receive at least one. How many possible distributions are there?
 
 Hint: It can be easier to handle constraints by modifying the physical model before counting.
+
 <details>
 
 <summary>Click to show answer</summary>
