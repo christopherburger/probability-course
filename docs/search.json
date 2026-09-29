@@ -51,27 +51,6 @@
     "text": "In earlier counting problems, we asked how many outcomes are possible and how many satisfy a condition. For a finite uniform sample space, probability is normalized counting:\nP(A) = |A| / |Ω|\nProbability theory generalizes this idea. Instead of requiring every outcome to have equal weight, we require the assignment of probability to behave consistently.\nOutcome — One possible result of an experiment.\nSample space Ω — The collection of all possible outcomes.\nEvent A — A subset of Ω; the outcomes for which some condition is true.\nP(A) — The probability assigned to event A.\nThe transition into Week 4 represents a dangerous pivot point. Up until now, students have lived entirely in a discrete, uniform world where probability is just counting: P(A) = \\frac{\\vert{}A\\vert{}}{\\vert{}\\Omega\\vert{}}.\nIf you do not explicitly destroy this assumption before introducing the formal axioms, students will drag the “Uniform Measure Fallacy” into every subsequent topic. They will try to solve continuous probability, Markov chains, and Bayesian updates by just counting states and dividing, which will lead to catastrophic modeling errors.\nHere is how to structure Week 4 to transition them from raw counting to formal measure theory, using Kolmogorov’s axioms as the scaffolding.\nPhase 1: Breaking the Uniform Assumption (The “Loaded Dice” Diagnostic)\nBefore you teach the axioms, you must prove to them that counting is no longer sufficient.\nThe Setup: Introduce a game with a biased coin or a loaded die. For example, a coin where P(\\text{Heads}) = \\frac{2}{3}.\nAsk them to calculate the probability of getting exactly one Head in two flips.\nThe Trap: Students who are stuck in Week 3 will define the state space as \\Omega = \\{HH, HT, TH, TT\\}. They will identify the event as A = \\{HT, TH\\}. They will count the states and proudly state P(A) = \\frac{2}{4} = \\frac{1}{2}.\nThe Destruction: You must stop the class here and ruthlessly expose the flaw.\nAsk them: “Does your mathematical model match the physical reality of the loaded coin?”\nForce them to realize that the state HH is physically much heavier (more likely) than the state TT.\nThe Epiphany: Counting states only works if every state has the exact same “weight.” Once the universe becomes non-uniform, counting is useless. We need a new mathematical machine."
   },
   {
-    "objectID": "lectures/bayes_theorem.html",
-    "href": "lectures/bayes_theorem.html",
-    "title": "6: Bayes’s Theorem",
-    "section": "",
-    "text": "The standard pedagogical introduction to Bayes’ Theorem is perhaps the most destructive in all of mathematics education. Textbooks typically present this monstrosity on day one:\nP(A\\vert{}B) = \\frac{P(B\\vert{}A)P(A)}{P(B\\vert{}A)P(A) + P(B\\vert{}A^c)P(A^c)}\nWhen students see this, they stop thinking probabilistically and start playing algebraic Sudoku. They scan the word problem for numbers, arbitrarily assign them to the variables in the formula, and pray the fraction computes to something between 0 and 1. This guarantees they will fail when attempting Bayesian inference in algorithms later, because they have no idea what the theorem is physically doing.\nTo fix this, Week 6 must frame Bayes’ Theorem entirely visually. The formula should not be written on the board until the final lecture of the week."
-  },
-  {
-    "objectID": "lectures/bayes_theorem.html#bayes-theorem-is-just-time-travel-on-a-tree",
-    "href": "lectures/bayes_theorem.html#bayes-theorem-is-just-time-travel-on-a-tree",
-    "title": "6: Bayes’s Theorem",
-    "section": "Bayes’ Theorem is Just “Time Travel” on a Tree",
-    "text": "Bayes’ Theorem is Just “Time Travel” on a Tree\nYou are playing poker. Your opponent makes a massive “all-in” raise (Call this Event B). You need to decide if they are bluffing (Event A).\n\nThe Forward Tree (What we know): In Week 5, they learned to build trees chronologically.\n\nNode 1: Does the opponent have a good hand or a bad hand (the prior, P(A))?\nNode 2: Given their hand, do they raise or fold (the conditional, P(B\\vert{}A))?\n\nThe Crisis: You are sitting at the table. You don’t get to see Node 1. You only see the end result: they raised.\nThe Bayesian Epiphany: Bayes’ Theorem is just traveling backward up the tree. You know the end result (the raise). You want to know which branch they took to get there."
-  },
-  {
-    "objectID": "lectures/bayes_theorem.html#phase-2-the-natural-frequencies-hack",
-    "href": "lectures/bayes_theorem.html#phase-2-the-natural-frequencies-hack",
-    "title": "6: Bayes’s Theorem",
-    "section": "Phase 2: The “Natural Frequencies” Hack",
-    "text": "Phase 2: The “Natural Frequencies” Hack\nThe human brain is terrible at processing conditional probabilities as percentages, but excellent at processing raw counts. Before using probabilities, teach Bayes using “Natural Frequencies.”\nThe Scenario: (A classic Mosteller-style setup)\n\n10% of the time, your opponent has a monster hand.\n90% of the time, they have garbage.\nIf they have a monster, they raise 80% of the time.\nIf they have garbage, they bluff (raise) 20% of the time.\nThey just raised. What is the probability they have a monster?\n\nThe Execution (No Formulas Allowed):\nForce the students to pretend they play 100 hands against this opponent.\n\nSplit the Universe: Out of 100 hands, 10 are monsters, 90 are garbage.\nCalculate the Actions:\n\nOf the 10 monsters, they raise 8 times.\nOf the 90 garbage hands, they bluff 18 times.\n\nShrink the Universe (Week 5 rules): The opponent raised. The universe of “folds” is dead. The new universe is exactly 8 + 18 = 26 total raises.\nThe Bayesian Result: Of those 26 raises, 8 came from a monster hand. The probability is 8 / 26 (about 31%)."
-  },
-  {
     "objectID": "lectures/axioms.html",
     "href": "lectures/axioms.html",
     "title": "4: Axioms of Probability",
@@ -197,56 +176,88 @@
     "href": "lectures/conditional_probability.html",
     "title": "5: Conditional Probability",
     "section": "",
-    "text": "We have already discussed the idea of conditional probability during our introduction to sample and state spaces. But this was in the context of the general idea of probability itself. We will now focus on how the incorporation of new information is computed.\nWhat should happen to a probability when we learn something new?\nSuppose we draw one card from a standard 52-card deck.\nBefore seeing the card:\nP(\\text{Ace})=\\frac{4}{52}=\\frac{1}{13}.\nNow suppose someone tells us:\nDoes that information matter?\nYes.\nWe now know that the card must be one of the 13 Hearts.\nAmong those 13 cards, only one is an Ace.\nTherefore,\nP(\\text{Ace}\\mid\\text{Heart})\n=\n\\frac{1}{13}.\nIn this particular example the probability happened not to change.\nNow changing the information:\nThere are 12 Face Cards, and 3 of them are Hearts.\nIf we ask for the probability that the card is a Heart:\nP(\\text{Heart}\\mid\\text{Face})\n=\n\\frac{3}{12}\n=\n\\frac14.\nOur new information changed the probability from\nP(\\text{Heart})=\\frac{13}{52}=\\frac14\nto\nP(\\text{Heart}\\mid\\text{Face})=\\frac14.\nBut again, this new information did not change it.\nWe will now choose something that does.\nNow:\nP(\\text{Heart}\\mid\\text{Spade})=0.\nThe new information makes Hearts impossible.\nConditional probability fundamentally asks:\nThe word among is extremely important."
+    "text": "We have already discussed the idea of conditional probability during our introduction to sample and state spaces. But this was in the context of the general idea of probability itself. We will now focus on how the incorporation of new information is computed.\nWhat should happen to a probability when we learn something new?\nSuppose we draw one card from a standard 52-card deck.\nBefore seeing the card:\nP(\\text{Ace})=\\frac{4}{52}=\\frac{1}{13}.\nNow suppose someone tells us:\nDoes that information matter?\nYes.\nWe now know that the card must be one of the 13 Hearts.\nAmong those 13 cards, only one is an Ace.\nTherefore,\nP(\\text{Ace}\\mid\\text{Heart})\n=\n\\frac{1}{13}.\nIn this particular example the probability happened not to change.\nNow changing the information:\nThere are 12 Face Cards, and 3 of them are Hearts.\nIf we ask for the probability that the card is a Heart:\nP(\\text{Heart}\\mid\\text{Face})\n=\n\\frac{3}{12}\n=\n\\frac14.\nOur new information changed the probability from\nP(\\text{Heart})=\\frac{13}{52}=\\frac14\nto\nP(\\text{Heart}\\mid\\text{Face})=\\frac14.\nBut again, this new information did not change it.\nWe will now choose something that does.\nNow:\nP(\\text{Heart}\\mid\\text{Spade})=0.\nThe new information makes Hearts impossible.\nConditional probability fundamentally asks:\nThe word among is extremely important.",
+    "crumbs": [
+      "Foundations",
+      "5: Conditional Probability"
+    ]
   },
   {
     "objectID": "lectures/conditional_probability.html#interpretation-1-restricted-sample-space",
     "href": "lectures/conditional_probability.html#interpretation-1-restricted-sample-space",
     "title": "5: Conditional Probability",
     "section": "Interpretation 1: Restricted sample space",
-    "text": "Interpretation 1: Restricted sample space\nKnowing B occurred restricts our sample space from \\Omega to B.\nThen we ask how much of B is also in A."
+    "text": "Interpretation 1: Restricted sample space\nKnowing B occurred restricts our sample space from \\Omega to B.\nThen we ask how much of B is also in A.",
+    "crumbs": [
+      "Foundations",
+      "5: Conditional Probability"
+    ]
   },
   {
     "objectID": "lectures/conditional_probability.html#interpretation-2-among",
     "href": "lectures/conditional_probability.html#interpretation-2-among",
     "title": "5: Conditional Probability",
     "section": "Interpretation 2: “Among”",
-    "text": "Interpretation 2: “Among”\nP(A\\mid B) means:\n\nAmong the B cases, what fraction are also A?\n\nFor example:\n\nAmong students who own a laptop, what fraction are engineering majors?\n\nThe denominator is laptop owners, not all students."
+    "text": "Interpretation 2: “Among”\nP(A\\mid B) means:\n\nAmong the B cases, what fraction are also A?\n\nFor example:\n\nAmong students who own a laptop, what fraction are engineering majors?\n\nThe denominator is laptop owners, not all students.",
+    "crumbs": [
+      "Foundations",
+      "5: Conditional Probability"
+    ]
   },
   {
     "objectID": "lectures/conditional_probability.html#interpretation-3-renormalization",
     "href": "lectures/conditional_probability.html#interpretation-3-renormalization",
     "title": "5: Conditional Probability",
     "section": "Interpretation 3: Renormalization",
-    "text": "Interpretation 3: Renormalization\nThe original probabilities of all outcomes outside B become zero. The probabilities inside B are rescaled so that they add to one.\nThis is particularly useful later when discussing Bayesian inference.\n\n\nRoll a fair six-sided die.\nLet\nA=\\{\\text{even}\\}\nand\nB=\\{\\text{greater than 3}\\}.\nThe original sample space is\n\\Omega=\\{1,2,3,4,5,6\\}.\nThe condition B tells us:\nB=\\{4,5,6\\}.\nSo our universe is now:\n\\{4,5,6\\}.\nOf those three outcomes, two are even:\n\\{4,6\\}.\nTherefore,\nP(A\\mid B)=\\frac{2}{3}.\n\nWhat happened to 1, 2, and 3?\nThese outcomes became impossible given the information."
+    "text": "Interpretation 3: Renormalization\nThe original probabilities of all outcomes outside B become zero. The probabilities inside B are rescaled so that they add to one.\nThis is particularly useful later when discussing Bayesian inference.\n\n\nRoll a fair six-sided die.\nLet\nA=\\{\\text{even}\\}\nand\nB=\\{\\text{greater than 3}\\}.\nThe original sample space is\n\\Omega=\\{1,2,3,4,5,6\\}.\nThe condition B tells us:\nB=\\{4,5,6\\}.\nSo our universe is now:\n\\{4,5,6\\}.\nOf those three outcomes, two are even:\n\\{4,6\\}.\nTherefore,\nP(A\\mid B)=\\frac{2}{3}.\n\nWhat happened to 1, 2, and 3?\nThese outcomes became impossible given the information.",
+    "crumbs": [
+      "Foundations",
+      "5: Conditional Probability"
+    ]
   },
   {
     "objectID": "lectures/conditional_probability.html#independence-and-mutual-exclusivity",
     "href": "lectures/conditional_probability.html#independence-and-mutual-exclusivity",
     "title": "5: Conditional Probability",
     "section": "Independence and Mutual Exclusivity",
-    "text": "Independence and Mutual Exclusivity\nMutually exclusive:\n\nKnowing one occurred tells you the other did not occur.\n\nIndependent:\n\nKnowing one occurred tells you nothing about whether the other occurred.\n\nThese are almost opposite ideas.\nFor nonzero-probability events, mutually exclusive events cannot be independent.\n\nConsider a single die.\nLet\nA=\\{\\text{roll a 1}\\}\nand\nB=\\{\\text{roll a 6}\\}.\nThese events are mutually exclusive. That is, they cannot happen simultaneously.\nTherefore:\nP(A\\cap B)=0.\nBut:\nP(B)=\\frac16\nwhile\nP(B\\mid A)=0.\nKnowing that A occurred changes the probability of B. Therefore they are not independent."
+    "text": "Independence and Mutual Exclusivity\nMutually exclusive:\n\nKnowing one occurred tells you the other did not occur.\n\nIndependent:\n\nKnowing one occurred tells you nothing about whether the other occurred.\n\nThese are almost opposite ideas.\nFor nonzero-probability events, mutually exclusive events cannot be independent.\n\nConsider a single die.\nLet\nA=\\{\\text{roll a 1}\\}\nand\nB=\\{\\text{roll a 6}\\}.\nThese events are mutually exclusive. That is, they cannot happen simultaneously.\nTherefore:\nP(A\\cap B)=0.\nBut:\nP(B)=\\frac16\nwhile\nP(B\\mid A)=0.\nKnowing that A occurred changes the probability of B. Therefore they are not independent.",
+    "crumbs": [
+      "Foundations",
+      "5: Conditional Probability"
+    ]
   },
   {
     "objectID": "lectures/conditional_probability.html#using-tree-diagrams",
     "href": "lectures/conditional_probability.html#using-tree-diagrams",
     "title": "5: Conditional Probability",
     "section": "Using Tree Diagrams",
-    "text": "Using Tree Diagrams\nThere are two simple operations.\n\nAlong a path: multiply\nFor example,\nP(A\\cap B)\n=\nP(A)P(B\\mid A).\n\n\nAcross alternative paths: add\nIf B can happen through two mutually exclusive paths,\nP(B)\n=\nP(A\\cap B)+P(A^c\\cap B).\nTherefore,"
+    "text": "Using Tree Diagrams\nThere are two simple operations.\n\nAlong a path: multiply\nFor example,\nP(A\\cap B)\n=\nP(A)P(B\\mid A).\n\n\nAcross alternative paths: add\nIf B can happen through two mutually exclusive paths,\nP(B)\n=\nP(A\\cap B)+P(A^c\\cap B).\nTherefore,",
+    "crumbs": [
+      "Foundations",
+      "5: Conditional Probability"
+    ]
   },
   {
     "objectID": "lectures/conditional_probability.html#pb-papbmid-a-pacpbmid-ac.",
     "href": "lectures/conditional_probability.html#pb-papbmid-a-pacpbmid-ac.",
     "title": "5: Conditional Probability",
     "section": "P(B)\n=\nP(A)P(B\\mid A)\n+\nP(A^c)P(B\\mid A^c).",
-    "text": "P(B)\n=\nP(A)P(B\\mid A)\n+\nP(A^c)P(B\\mid A^c).\n\nSuppose:\nUrn 1\n\n3 red\n2 blue\n\nUrn 2\n\n1 red\n4 blue\n\nWe draw one ball from Urn 1 and transfer it to Urn 2.\nThen draw one ball from Urn 2.\nWhat is the probability that the second draw is red?\nThere are two ways the second ball can be red.\nPath 1: Transfer a red\nProbability:\n\\frac35.\nThen Urn 2 contains:\n\n2 red\n4 blue\n\nso\nP(\\text{red second}\\mid\\text{red transferred})\n=\n\\frac26.\nThus:\n\\frac35\\frac26.\nPath 2: Transfer a blue\nProbability:\n\\frac25.\nThen Urn 2 contains:\n\n1 red\n5 blue\n\nso\nP(\\text{red second}\\mid\\text{blue transferred})\n=\n\\frac16.\nThus:\n\\frac25\\frac16.\nAdd the two paths:\nP(\\text{second red})\n=\n\\frac35\\frac26\n+\n\\frac25\\frac16.\nTherefore,\nP(\\text{second red})\n=\n\\frac4{15}."
+    "text": "P(B)\n=\nP(A)P(B\\mid A)\n+\nP(A^c)P(B\\mid A^c).\n\nSuppose:\nUrn 1\n\n3 red\n2 blue\n\nUrn 2\n\n1 red\n4 blue\n\nWe draw one ball from Urn 1 and transfer it to Urn 2.\nThen draw one ball from Urn 2.\nWhat is the probability that the second draw is red?\nThere are two ways the second ball can be red.\nPath 1: Transfer a red\nProbability:\n\\frac35.\nThen Urn 2 contains:\n\n2 red\n4 blue\n\nso\nP(\\text{red second}\\mid\\text{red transferred})\n=\n\\frac26.\nThus:\n\\frac35\\frac26.\nPath 2: Transfer a blue\nProbability:\n\\frac25.\nThen Urn 2 contains:\n\n1 red\n5 blue\n\nso\nP(\\text{red second}\\mid\\text{blue transferred})\n=\n\\frac16.\nThus:\n\\frac25\\frac16.\nAdd the two paths:\nP(\\text{second red})\n=\n\\frac35\\frac26\n+\n\\frac25\\frac16.\nTherefore,\nP(\\text{second red})\n=\n\\frac4{15}.",
+    "crumbs": [
+      "Foundations",
+      "5: Conditional Probability"
+    ]
   },
   {
     "objectID": "lectures/conditional_probability.html#formulating-bayes-theorem",
     "href": "lectures/conditional_probability.html#formulating-bayes-theorem",
     "title": "5: Conditional Probability",
     "section": "Formulating Bayes’ Theorem",
-    "text": "Formulating Bayes’ Theorem\nStart with the multiplication rule:\nP(A\\cap B)\n=\nP(A\\mid B)P(B).\nBut we can also write the same intersection in the opposite direction:\nP(A\\cap B)\n=\nP(B\\mid A)P(A).\nSince both expressions equal the same quantity,\nP(A\\mid B)P(B)\n=\nP(B\\mid A)P(A).\nTherefore,\n\\boxed{\nP(A\\mid B)\n=\n\\frac{P(B\\mid A)P(A)}{P(B)}\n}\nBayes’ theorem is not an unrelated new formula but instead a consequence of conditional probability. Fundamentally, Bayesian inference is built out of conditional probability."
+    "text": "Formulating Bayes’ Theorem\nStart with the multiplication rule:\nP(A\\cap B)\n=\nP(A\\mid B)P(B).\nBut we can also write the same intersection in the opposite direction:\nP(A\\cap B)\n=\nP(B\\mid A)P(A).\nSince both expressions equal the same quantity,\nP(A\\mid B)P(B)\n=\nP(B\\mid A)P(A).\nTherefore,\n\\boxed{\nP(A\\mid B)\n=\n\\frac{P(B\\mid A)P(A)}{P(B)}\n}\nBayes’ theorem is not an unrelated new formula but instead a consequence of conditional probability. Fundamentally, Bayesian inference is built out of conditional probability.",
+    "crumbs": [
+      "Foundations",
+      "5: Conditional Probability"
+    ]
   },
   {
     "objectID": "lectures/inclusion_exclusion.html",
