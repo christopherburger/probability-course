@@ -108,3 +108,25 @@
   padding-bottom: 0.3em;
   font-size: 1.1em;
 }
+
+
+/* -----------------------------------------
+   6. Example 
+----------------------------------------- */
+.example-box {
+  border: 1px solid #14a4357c;
+  border-left: 5px solid #14a4357c;
+  background-color: #fdf2ff;
+  border-radius: 10px; 
+}
+
+.example-box::before {
+  content: "  📝 Practice";
+  display: block;
+  font-weight: 700;
+  color: #6a1b9a;
+  margin-bottom: 0.8em;
+  border-bottom: 1px solid #e1bee7;
+  padding-bottom: 0.3em;
+  font-size: 1.1em;
+}

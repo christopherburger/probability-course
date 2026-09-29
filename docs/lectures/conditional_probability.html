@@ -127,9 +127,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      Applied Probability
-      </li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/state_space.html">Foundations</a></li><li class="breadcrumb-item"><a href="../lectures/conditional_probability.html">5: Conditional Probability</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -210,6 +208,12 @@ window.Quarto = {
  <span class="menu-text">4: Axioms of Probability</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/conditional_probability.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">5: Conditional Probability</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -225,13 +229,64 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#conditional-probability" id="toc-conditional-probability" class="nav-link active" data-scroll-target="#conditional-probability">Conditional Probability</a>
+  <ul class="collapse">
+  <li><a href="#what-should-happen-to-a-probability-when-we-learn-something-new" id="toc-what-should-happen-to-a-probability-when-we-learn-something-new" class="nav-link" data-scroll-target="#what-should-happen-to-a-probability-when-we-learn-something-new"><strong>What should happen to a probability when we learn something new?</strong></a></li>
+  </ul></li>
+  <li><a href="#adjusting-the-universe" id="toc-adjusting-the-universe" class="nav-link" data-scroll-target="#adjusting-the-universe">Adjusting the Universe</a></li>
+  <li><a href="#formal-definition" id="toc-formal-definition" class="nav-link" data-scroll-target="#formal-definition">Formal Definition</a></li>
+  <li><a href="#different-interpretations-of-conditional-probability" id="toc-different-interpretations-of-conditional-probability" class="nav-link" data-scroll-target="#different-interpretations-of-conditional-probability">Different Interpretations of Conditional Probability</a>
+  <ul class="collapse">
+  <li><a href="#interpretation-1-restricted-sample-space" id="toc-interpretation-1-restricted-sample-space" class="nav-link" data-scroll-target="#interpretation-1-restricted-sample-space">Interpretation 1: Restricted sample space</a></li>
+  <li><a href="#interpretation-2-among" id="toc-interpretation-2-among" class="nav-link" data-scroll-target="#interpretation-2-among">Interpretation 2: “Among”</a></li>
+  <li><a href="#interpretation-3-renormalization" id="toc-interpretation-3-renormalization" class="nav-link" data-scroll-target="#interpretation-3-renormalization">Interpretation 3: Renormalization</a></li>
+  </ul></li>
+  <li><a href="#applying-conditional-probability-to-counting-based-problems" id="toc-applying-conditional-probability-to-counting-based-problems" class="nav-link" data-scroll-target="#applying-conditional-probability-to-counting-based-problems">Applying Conditional Probability to Counting-based Problems</a>
+  <ul class="collapse">
+  <li><a href="#step-1" id="toc-step-1" class="nav-link" data-scroll-target="#step-1">Step 1</a></li>
+  <li><a href="#step-2" id="toc-step-2" class="nav-link" data-scroll-target="#step-2">Step 2</a></li>
+  <li><a href="#step-3" id="toc-step-3" class="nav-link" data-scroll-target="#step-3">Step 3</a></li>
+  <li><a href="#step-4" id="toc-step-4" class="nav-link" data-scroll-target="#step-4">Step 4</a></li>
+  </ul></li>
+  <li><a href="#translating-language-into-probability" id="toc-translating-language-into-probability" class="nav-link" data-scroll-target="#translating-language-into-probability">Translating Language into Probability</a></li>
+  <li><a href="#conditional-probability-and-intersections" id="toc-conditional-probability-and-intersections" class="nav-link" data-scroll-target="#conditional-probability-and-intersections">Conditional Probability and Intersections</a></li>
+  <li><a href="#dependence-and-independence" id="toc-dependence-and-independence" class="nav-link" data-scroll-target="#dependence-and-independence">Dependence and Independence</a>
+  <ul class="collapse">
+  <li><a href="#without-replacement" id="toc-without-replacement" class="nav-link" data-scroll-target="#without-replacement">Without replacement</a></li>
+  <li><a href="#with-replacement" id="toc-with-replacement" class="nav-link" data-scroll-target="#with-replacement">With replacement</a></li>
+  <li><a href="#independence-and-mutual-exclusivity" id="toc-independence-and-mutual-exclusivity" class="nav-link" data-scroll-target="#independence-and-mutual-exclusivity">Independence and Mutual Exclusivity</a></li>
+  </ul></li>
+  <li><a href="#tree-diagrams" id="toc-tree-diagrams" class="nav-link" data-scroll-target="#tree-diagrams">16. Tree Diagrams</a>
+  <ul class="collapse">
+  <li><a href="#using-tree-diagrams" id="toc-using-tree-diagrams" class="nav-link" data-scroll-target="#using-tree-diagrams">Using Tree Diagrams</a>
+  <ul class="collapse">
+  <li><a href="#along-a-path-multiply" id="toc-along-a-path-multiply" class="nav-link" data-scroll-target="#along-a-path-multiply">Along a path: multiply</a></li>
+  <li><a href="#across-alternative-paths-add" id="toc-across-alternative-paths-add" class="nav-link" data-scroll-target="#across-alternative-paths-add">Across alternative paths: add</a></li>
+  </ul></li>
+  <li><a href="#pb-papbmid-a-pacpbmid-ac." id="toc-pb-papbmid-a-pacpbmid-ac." class="nav-link" data-scroll-target="#pb-papbmid-a-pacpbmid-ac."><span class="math display">P(B)
+  =
+  P(A)P(B\mid A)
+  +
+  P(A^c)P(B\mid A^c).</span></a></li>
+  </ul></li>
+  <li><a href="#practice" id="toc-practice" class="nav-link" data-scroll-target="#practice">Practice</a></li>
+  <li><a href="#conditional-probability-as-information" id="toc-conditional-probability-as-information" class="nav-link" data-scroll-target="#conditional-probability-as-information">Conditional Probability as Information</a></li>
+  <li><a href="#from-conditional-probability-to-bayes" id="toc-from-conditional-probability-to-bayes" class="nav-link" data-scroll-target="#from-conditional-probability-to-bayes">From Conditional Probability to Bayes</a>
+  <ul class="collapse">
+  <li><a href="#formulating-bayes-theorem" id="toc-formulating-bayes-theorem" class="nav-link" data-scroll-target="#formulating-bayes-theorem">Formulating Bayes’ Theorem</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/state_space.html">Foundations</a></li><li class="breadcrumb-item"><a href="../lectures/conditional_probability.html">5: Conditional Probability</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">5: Conditional Probability</h1>
 </div>
@@ -250,13 +305,757 @@ window.Quarto = {
 </header>
 
 
-<p>We have already discussed the idea of conditional probability during our introduction to sample and state spaces. But for our previous problems, while we made to state our assumptions, these were not included directly in the mathematical notation we used.</p>
-<p>Consider a state space <span class="math inline">\Omega</span> with two events, <span class="math inline">A</span> and <span class="math inline">B</span>.</p>
-<p>Now consider that Event <span class="math inline">B</span> has just occurred. The old universe <span class="math inline">\Omega</span> is irrelevant. Everything outside of <span class="math inline">B</span> has ceased to exist. <span class="math inline">B</span> is the <strong>new universe</strong>.</p>
-<p>Now consider that Event <span class="math inline">A</span> occurs <strong>after we know</strong> event <span class="math inline">B</span> has occured. The numerator (the physical space of the intersection) has not changed at all. What changed is the denominator: we must re-normalize the new universe so that its total measure equals 1 (Axiom 2 from Week 4).</p>
-<p>What we have here is the <strong>Conditional Probability</strong> of Event <span class="math inline">A</span> given Event <span class="math inline">B</span> has occured, which in notation is written as <span class="math inline">P(A\vert{}B)</span>.</p>
+<section id="conditional-probability" class="level1">
+<h1>Conditional Probability</h1>
+<p>We have already discussed the idea of conditional probability during our introduction to sample and state spaces. But this was in the context of the general idea of probability itself. We will now focus on how the incorporation of new information is computed.</p>
+<section id="what-should-happen-to-a-probability-when-we-learn-something-new" class="level3">
+<h3 class="anchored" data-anchor-id="what-should-happen-to-a-probability-when-we-learn-something-new"><strong>What should happen to a probability when we learn something new?</strong></h3>
+<p>Suppose we draw one card from a standard 52-card deck.</p>
+<p>Before seeing the card:</p>
+<p><span class="math display">P(\text{Ace})=\frac{4}{52}=\frac{1}{13}.</span></p>
+<p>Now suppose someone tells us:</p>
+<blockquote class="blockquote">
+<p>“The card is a Heart.”</p>
+</blockquote>
+<p>Does that information matter?</p>
+<p>Yes.</p>
+<p>We now know that the card must be one of the 13 Hearts.</p>
+<p>Among those 13 cards, only one is an Ace.</p>
+<p>Therefore,</p>
+<p><span class="math display">P(\text{Ace}\mid\text{Heart})
+=
+\frac{1}{13}.</span></p>
+<p>In this particular example the probability happened not to change.</p>
+<p>Now changing the information:</p>
+<blockquote class="blockquote">
+<p>“The card is a Face Card.”</p>
+</blockquote>
+<p>There are 12 Face Cards, and 3 of them are Hearts.</p>
+<p>If we ask for the probability that the card is a Heart:</p>
+<p><span class="math display">P(\text{Heart}\mid\text{Face})
+=
+\frac{3}{12}
+=
+\frac14.</span></p>
+<p>Our new information changed the probability from</p>
+<p><span class="math display">P(\text{Heart})=\frac{13}{52}=\frac14</span></p>
+<p>to</p>
+<p><span class="math display">P(\text{Heart}\mid\text{Face})=\frac14.</span></p>
+<p>But again, this new information did not change it.</p>
+<p>We will now choose something that does.</p>
+<blockquote class="blockquote">
+<p>“The card is a Spade.”</p>
+</blockquote>
+<p>Now:</p>
+<p><span class="math display">P(\text{Heart}\mid\text{Spade})=0.</span></p>
+<p>The new information makes Hearts impossible.</p>
+<p>Conditional probability fundamentally asks:</p>
+<blockquote class="blockquote">
+<p><strong>How likely is</strong> <span class="math inline">A</span> among the outcomes where <span class="math inline">B</span> is known to have occurred?</p>
+</blockquote>
+<p>The word <strong>among</strong> is extremely important.</p>
+</section>
+</section>
+<section id="adjusting-the-universe" class="level1">
+<h1>Adjusting the Universe</h1>
+<p>A useful question to ask is: <strong>What is our universe now?</strong></p>
+<p>Originally, our universe is the entire space <span class="math inline">\Omega.</span></p>
+<p>If we learn that <span class="math inline">B</span> occurred, outcomes outside <span class="math inline">B</span> are no longer relevant. We effectively throw them away.</p>
+<p>The new universe is:</p>
+<p><span class="math display">B.</span></p>
+<p>If we want the probability that <span class="math inline">A</span> occurs within this new universe, we need the outcomes that are simultaneously in <span class="math inline">A</span> and <span class="math inline">B</span>:</p>
+<p><span class="math display">A\cap B.</span></p>
+<p>Therefore, in a finite equally likely sample space,</p>
+<p><span class="math display">\boxed{
+P(A\mid B)
+=
+\frac{|A\cap B|}{|B|}
+}</span></p>
+<p>provided <span class="math inline">B</span> is not empty.</p>
+<hr>
+</section>
+<section id="formal-definition" class="level1">
+<h1>Formal Definition</h1>
+<p>The general definition is</p>
+<p><span class="math display">\boxed{
+P(A\mid B)
+=
+\frac{P(A\cap B)}{P(B)}
+}</span></p>
+<p>provided</p>
+<p><span class="math display">P(B)&gt;0.</span></p>
+<p>This is read as:</p>
+<blockquote class="blockquote">
+<p>The probability of <span class="math inline">A</span>, given <span class="math inline">B</span>, is the probability that both <span class="math inline">A</span> and <span class="math inline">B</span> occur, divided by the probability that <span class="math inline">B</span> occurs.</p>
+</blockquote>
+<p>The denominator controls for <strong>the</strong> <strong>outcomes are still possible after we learn</strong> <span class="math inline">B</span>.</p>
+<hr>
+</section>
+<section id="different-interpretations-of-conditional-probability" class="level1">
+<h1>Different Interpretations of Conditional Probability</h1>
+<section id="interpretation-1-restricted-sample-space" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-1-restricted-sample-space">Interpretation 1: Restricted sample space</h2>
+<p>Knowing <span class="math inline">B</span> occurred restricts our sample space from <span class="math inline">\Omega</span> to <span class="math inline">B.</span></p>
+<p>Then we ask how much of <span class="math inline">B</span> is also in <span class="math inline">A</span>.</p>
+</section>
+<section id="interpretation-2-among" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-2-among">Interpretation 2: “Among”</h2>
+<p><span class="math inline">P(A\mid B)</span> means:</p>
+<blockquote class="blockquote">
+<p><strong>Among the</strong> <span class="math inline">B</span> cases, what fraction are also <span class="math inline">A</span>?</p>
+</blockquote>
+<p>For example:</p>
+<blockquote class="blockquote">
+<p>Among students who own a laptop, what fraction are engineering majors?</p>
+</blockquote>
+<p>The denominator is <strong>laptop owners</strong>, not all students.</p>
+</section>
+<section id="interpretation-3-renormalization" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-3-renormalization">Interpretation 3: Renormalization</h2>
+<p>The original probabilities of all outcomes outside <span class="math inline">B</span> become zero. The probabilities inside <span class="math inline">B</span> are rescaled so that they add to one.</p>
+<p>This is particularly useful later when discussing Bayesian inference.</p>
+<hr>
+<div class="example-box">
+<p>Roll a fair six-sided die.</p>
+<p>Let</p>
+<p><span class="math display">A=\{\text{even}\}</span></p>
+<p>and</p>
+<p><span class="math display">B=\{\text{greater than 3}\}.</span></p>
+<p>The original sample space is</p>
+<p><span class="math display">\Omega=\{1,2,3,4,5,6\}.</span></p>
+<p>The condition <span class="math inline">B</span> tells us:</p>
+<p><span class="math display">B=\{4,5,6\}.</span></p>
+<p>So our universe is now:</p>
+<p><span class="math display">\{4,5,6\}.</span></p>
+<p>Of those three outcomes, two are even:</p>
+<p><span class="math display">\{4,6\}.</span></p>
+<p>Therefore,</p>
+<p><span class="math display">P(A\mid B)=\frac{2}{3}.</span></p>
+</div>
+<p>What happened to 1, 2, and 3?</p>
+<p>These outcomes became <strong>impossible given the information</strong>.</p>
+<hr>
+</section>
+</section>
+<section id="applying-conditional-probability-to-counting-based-problems" class="level1">
+<h1>Applying Conditional Probability to Counting-based Problems</h1>
+<p>For a counting-based conditional probability problem:</p>
+<section id="step-1" class="level3">
+<h3 class="anchored" data-anchor-id="step-1">Step 1</h3>
+<p>Identify the condition.</p>
+<p>What do we know?</p>
+<p><span class="math display">B</span></p>
+</section>
+<section id="step-2" class="level3">
+<h3 class="anchored" data-anchor-id="step-2">Step 2</h3>
+<p>Restrict the sample space.</p>
+<p>List or visualize the outcomes satisfying <span class="math inline">B</span>.</p>
+</section>
+<section id="step-3" class="level3">
+<h3 class="anchored" data-anchor-id="step-3">Step 3</h3>
+<p>Ask what also satisfies <span class="math inline">A</span>.</p>
+<p>Find</p>
+<p><span class="math display">A\cap B.</span></p>
+</section>
+<section id="step-4" class="level3">
+<h3 class="anchored" data-anchor-id="step-4">Step 4</h3>
+<p>Divide.</p>
+<p><span class="math display">P(A\mid B)
+=
+\frac{|A\cap B|}{|B|}.</span></p>
+<div class="example-box">
+<p>Roll two fair six-sided dice.</p>
+<p>There are 36 equally likely ordered outcomes.</p>
+<p>Suppose we are told:</p>
+<blockquote class="blockquote">
+<p>The sum is greater than 8.</p>
+</blockquote>
+<p>What is the probability that the first die is a 6?</p>
+<p>Let</p>
+<p><span class="math display">B=\{\text{sum}&gt;8\}.</span></p>
+<p>The possible outcomes satisfying <span class="math inline">B</span> are:</p>
+<p><span class="math display">(3,6)</span></p>
+<p><span class="math display">(4,5),(4,6)</span></p>
+<p><span class="math display">(5,4),(5,5),(5,6)</span></p>
+<p><span class="math display">(6,3),(6,4),(6,5),(6,6).</span></p>
+<p>There are 10 possible outcomes.</p>
+<p>Now restrict further to outcomes where the first die is 6:</p>
+<p><span class="math display">(6,3),(6,4),(6,5),(6,6).</span></p>
+<p>There are 4.</p>
+<p>Therefore,</p>
+<p><span class="math display">P(\text{first die}=6\mid\text{sum}&gt;8)
+=
+\frac{4}{10}
+=
+\frac25.</span></p>
+</div>
+<p>Note that the original denominator was 36 and the conditional denominator is 10. Why?</p>
+<p>Because after learning that the sum exceeds 8, only those 10 outcomes remain possible.</p>
+<hr>
+</section>
+</section>
+<section id="translating-language-into-probability" class="level1">
+<h1>Translating Language into Probability</h1>
+<p>There are many equivalent statements ordinary language that refer to conditional probability, this list is only a few of them.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Language</th>
+<th>Mathematical expression</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>“given that <span class="math inline">B</span>”</td>
+<td><span class="math inline">P(A\mid B)</span></td>
+</tr>
+<tr class="even">
+<td>“assuming <span class="math inline">B</span>”</td>
+<td><span class="math inline">P(A\mid B)</span></td>
+</tr>
+<tr class="odd">
+<td>“if we know <span class="math inline">B</span>”</td>
+<td><span class="math inline">P(A\mid B)</span></td>
+</tr>
+<tr class="even">
+<td>“among the <span class="math inline">B</span> cases”</td>
+<td><span class="math inline">P(A\mid B)</span></td>
+</tr>
+<tr class="odd">
+<td>“of the <span class="math inline">B</span> outcomes, how many are <span class="math inline">A</span>?”</td>
+<td><span class="math inline">P(A\mid B)</span></td>
+</tr>
+<tr class="even">
+<td>“the probability of both <span class="math inline">A</span> and <span class="math inline">B</span>”</td>
+<td><span class="math inline">P(A\cap B)</span></td>
+</tr>
+</tbody>
+</table>
+<p>A particularly useful test is:</p>
+<blockquote class="blockquote">
+<p><strong>What is the denominator supposed to represent?</strong></p>
+</blockquote>
+<p>If the question says:</p>
+<blockquote class="blockquote">
+<p>“Among the people who…”</p>
+</blockquote>
+<p>then the denominator should be the number of people who satisfy that condition.</p>
+<hr>
+<div class="example-box">
+<p>Suppose a class contains 40 students.</p>
+<ul>
+<li>24 are engineering majors.</li>
+<li>10 of the engineering majors are seniors.</li>
+</ul>
+<p>Choose a student at random.</p>
+<p>What is the probability the student is a senior <strong>given that the student is an engineering major</strong>?</p>
+<p>Let</p>
+<p><span class="math display">E=\{\text{engineering major}\}</span></p>
+<p>and</p>
+<p><span class="math display">S=\{\text{senior}\}.</span></p>
+<p>We want</p>
+<p><span class="math display">P(S\mid E).</span></p>
+<p>We are no longer considering all 40 students.</p>
+<p>We are considering the 24 engineering students.</p>
+<p>Of those 24 students, 10 are seniors.</p>
+<p>Therefore,</p>
+<p><span class="math display">P(S\mid E)
+=
+\frac{10}{24}
+=
+\frac{5}{12}.</span></p>
+</div>
+<p>A seemingly reasonable, but incorrect answer is <span class="math inline">10/40</span>.</p>
+<p>But <span class="math inline">10/40</span> answers a different question:</p>
+<p><span class="math display">P(S\cap E).</span></p>
+<p>It is the probability that a randomly selected student is <strong>both</strong> a senior and an engineering major.</p>
+<hr>
+</section>
+<section id="conditional-probability-and-intersections" class="level1">
+<h1>Conditional Probability and Intersections</h1>
+<p>Recall that the probabiity of the intersection of the events <span class="math inline">A</span> and <span class="math inline">B</span> (<span class="math inline">P(A\cap B)</span>) asks:</p>
+<blockquote class="blockquote">
+<p>What is the probability that <strong>both</strong> <span class="math inline">A</span> and <span class="math inline">B</span> happen?</p>
+</blockquote>
+<p>Conditional probability <span class="math display">P(A\mid B)</span> instead asks:</p>
+<blockquote class="blockquote">
+<p>If I already know <span class="math inline">B</span> happened, how likely is <span class="math inline">A</span>?</p>
+</blockquote>
+<p>These ideas are related, but they are not the same quantity.</p>
+<p>The definition gives:</p>
+<p><span class="math display">P(A\mid B)
+=
+\frac{P(A\cap B)}{P(B)}.</span></p>
+<p>Rearranging gives the <strong>multiplication rule</strong>:</p>
+<p><span class="math display">\boxed{
+P(A\cap B)=P(A\mid B)P(B)
+}</span></p>
+<p>This is one of the most useful consequences of conditional probability.</p>
+<hr>
+<div class="example-box">
+<p>Draw two cards from a standard deck without replacement.</p>
+<p>What is the probability that both cards are Aces?</p>
+<p>We can think sequentially.</p>
+<p><strong>First card</strong></p>
+<p><span class="math display">P(\text{Ace})=\frac4{52}.</span></p>
+<p><strong>Second card</strong></p>
+<p>If the first card was an Ace, then there are:</p>
+<ul>
+<li>3 Aces remaining</li>
+<li>51 cards remaining</li>
+</ul>
+<p>Therefore:</p>
+<p><span class="math display">P(\text{second Ace}\mid\text{first Ace})
+=
+\frac3{51}.</span></p>
+<p>The probability of both events is therefore</p>
+<p><span class="math display">P(\text{both Aces})
+=
+\frac4{52}\frac3{51}.</span></p>
+<p>Thus:</p>
+<p><span class="math display">P(\text{both Aces})
+=
+\frac{1}{221}.</span></p>
+</div>
+<hr>
+</section>
+<section id="dependence-and-independence" class="level1">
+<h1>Dependence and Independence</h1>
+<p>Now suppose we replace the first card before drawing again.</p>
+<p>Then:</p>
+<p><span class="math display">P(\text{second Ace}\mid\text{first Ace})
+=
+\frac4{52}.</span></p>
+<p>So:</p>
+<section id="without-replacement" class="level3">
+<h3 class="anchored" data-anchor-id="without-replacement">Without replacement</h3>
+<p><span class="math display">P(\text{second Ace}\mid\text{first Ace})
+=
+\frac3{51}.</span></p>
+</section>
+<section id="with-replacement" class="level3">
+<h3 class="anchored" data-anchor-id="with-replacement">With replacement</h3>
+<p><span class="math display">P(\text{second Ace}\mid\text{first Ace})
+=
+\frac4{52}.</span></p>
+<p>This demonstrates the idea of <strong>dependence</strong>:</p>
+<blockquote class="blockquote">
+<p>If knowing what happened previously changes the probability of what happens next, the events are dependent.</p>
+</blockquote>
+<p>Now, if we ask the question: <strong>Does knowing</strong> <span class="math inline">B</span> happened change the probability of <span class="math inline">A</span>?</p>
+<p>If it does not, then:</p>
+<p><span class="math display">P(A\mid B)=P(A).</span></p>
+<p>This is the conceptual definition of independence.</p>
+<p>For events <span class="math inline">A</span> and <span class="math inline">B</span>, assuming <span class="math inline">P(B)&gt;0</span>,</p>
+<p><span class="math display">\boxed{
+A\text{ and }B\text{ are independent}
+\iff
+P(A\mid B)=P(A)
+}</span></p>
+<p>From this, the multiplication rule gives the familiar equivalent form:</p>
+<p><span class="math display">\boxed{
+P(A\cap B)=P(A)P(B)
+}</span></p>
+<hr>
+<div class="example-box">
+<p>Flip a fair coin twice.</p>
+<p>Let</p>
+<p><span class="math display">A=\{\text{first flip is Heads}\}</span></p>
+<p>and</p>
+<p><span class="math display">B=\{\text{second flip is Heads}\}.</span></p>
+<p>Before knowing anything about the first flip:</p>
+<p><span class="math display">P(B)=\frac12.</span></p>
+<p>After learning that the first flip was Heads:</p>
+<p><span class="math display">P(B\mid A)=\frac12.</span></p>
+<p>The information did not change the probability.</p>
+<p>Therefore the events are independent.</p>
+</div>
+<hr>
+</section>
+<section id="independence-and-mutual-exclusivity" class="level2">
+<h2 class="anchored" data-anchor-id="independence-and-mutual-exclusivity">Independence and Mutual Exclusivity</h2>
+<p><strong>Mutually exclusive:</strong></p>
+<blockquote class="blockquote">
+<p>Knowing one occurred tells you the other did not occur.</p>
+</blockquote>
+<p><strong>Independent:</strong></p>
+<blockquote class="blockquote">
+<p>Knowing one occurred tells you nothing about whether the other occurred.</p>
+</blockquote>
+<p>These are almost opposite ideas.</p>
+<p>For nonzero-probability events, mutually exclusive events cannot be independent.</p>
+<div class="example-box">
+<p>Consider a single die.</p>
+<p>Let</p>
+<p><span class="math display">A=\{\text{roll a 1}\}</span></p>
+<p>and</p>
+<p><span class="math display">B=\{\text{roll a 6}\}.</span></p>
+<p>These events are <strong>mutually exclusive</strong>. That is, they cannot happen simultaneously.</p>
+<p>Therefore:</p>
+<p><span class="math display">P(A\cap B)=0.</span></p>
+<p>But:</p>
+<p><span class="math display">P(B)=\frac16</span></p>
+<p>while</p>
+<p><span class="math display">P(B\mid A)=0.</span></p>
+<p>Knowing that <span class="math inline">A</span> occurred changes the probability of <span class="math inline">B</span>. Therefore they are <strong>not independent</strong>.</p>
+</div>
+<hr>
+</section>
+</section>
+<section id="tree-diagrams" class="level1">
+<h1>16. Tree Diagrams</h1>
+<p>Conditional probability becomes especially useful when an experiment happens in stages.</p>
+<p>We can use a tree diagram to make the structure visible.</p>
+<p>Suppose:</p>
+<ol type="1">
+<li>An initial event <span class="math inline">A</span> or <span class="math inline">A^c</span> occurs.</li>
+<li>Then <span class="math inline">B</span> or <span class="math inline">B^c</span> occurs conditional on the first event.</li>
+</ol>
+<p>The structure is:</p>
+<pre class="text"><code>                    ┌── B
+             ┌──────┤
+             │      └── Bᶜ
+        A ───┤
+             │
+             │      ┌── B
+             └──────┤
+                    └── Bᶜ
+                  Aᶜ</code></pre>
+<p>The branches carry probabilities such as:</p>
+<p><span class="math display">P(A),\quad P(A^c)</span></p>
+<p>followed by</p>
+<p><span class="math display">P(B\mid A),\quad P(B^c\mid A)</span></p>
+<p>and</p>
+<p><span class="math display">P(B\mid A^c),\quad P(B^c\mid A^c).</span></p>
+<section id="using-tree-diagrams" class="level2">
+<h2 class="anchored" data-anchor-id="using-tree-diagrams">Using Tree Diagrams</h2>
+<p>There are two simple operations.</p>
+<section id="along-a-path-multiply" class="level3">
+<h3 class="anchored" data-anchor-id="along-a-path-multiply">Along a path: multiply</h3>
+<p>For example,</p>
+<p><span class="math display">P(A\cap B)
+=
+P(A)P(B\mid A).</span></p>
+</section>
+<section id="across-alternative-paths-add" class="level3">
+<h3 class="anchored" data-anchor-id="across-alternative-paths-add">Across alternative paths: add</h3>
+<p>If <span class="math inline">B</span> can happen through two mutually exclusive paths,</p>
+<p><span class="math display">P(B)
+=
+P(A\cap B)+P(A^c\cap B).</span></p>
+<p>Therefore,</p>
+</section>
+</section>
+<section id="pb-papbmid-a-pacpbmid-ac." class="level2">
+<h2 class="anchored" data-anchor-id="pb-papbmid-a-pacpbmid-ac."><span class="math display">P(B)
+=
+P(A)P(B\mid A)
++
+P(A^c)P(B\mid A^c).</span></h2>
+<div class="example-box">
+<p>Suppose:</p>
+<p><strong>Urn 1</strong></p>
+<ul>
+<li>3 red</li>
+<li>2 blue</li>
+</ul>
+<p><strong>Urn 2</strong></p>
+<ul>
+<li>1 red</li>
+<li>4 blue</li>
+</ul>
+<p>We draw one ball from Urn 1 and transfer it to Urn 2.</p>
+<p>Then draw one ball from Urn 2.</p>
+<p>What is the probability that the second draw is red?</p>
+<p>There are two ways the second ball can be red.</p>
+<p><strong>Path 1: Transfer a red</strong></p>
+<p>Probability:</p>
+<p><span class="math display">\frac35.</span></p>
+<p>Then Urn 2 contains:</p>
+<ul>
+<li>2 red</li>
+<li>4 blue</li>
+</ul>
+<p>so</p>
+<p><span class="math display">P(\text{red second}\mid\text{red transferred})
+=
+\frac26.</span></p>
+<p>Thus:</p>
+<p><span class="math display">\frac35\frac26.</span></p>
+<p><strong>Path 2: Transfer a blue</strong></p>
+<p>Probability:</p>
+<p><span class="math display">\frac25.</span></p>
+<p>Then Urn 2 contains:</p>
+<ul>
+<li>1 red</li>
+<li>5 blue</li>
+</ul>
+<p>so</p>
+<p><span class="math display">P(\text{red second}\mid\text{blue transferred})
+=
+\frac16.</span></p>
+<p>Thus:</p>
+<p><span class="math display">\frac25\frac16.</span></p>
+<p>Add the two paths:</p>
+<p><span class="math display">P(\text{second red})
+=
+\frac35\frac26
++
+\frac25\frac16.</span></p>
+<p>Therefore,</p>
+<p><span class="math display">P(\text{second red})
+=
+\frac4{15}.</span></p>
+</div>
+<hr>
+</section>
+</section>
+<section id="practice" class="level1">
+<h1>Practice</h1>
+<div class="practice-box">
+<p>A card is known to be a Spade.</p>
+<p>What is the probability that it is an Ace?</p>
+<details>
+<summary>
+Click to show answer
+</summary>
+<p>There are 13 Spades.</p>
+<p>One is an Ace.</p>
+<p><span class="math display">P(\text{Ace}\mid\text{Spade})
+=
+\frac1{13}.</span></p>
+</details>
+</div>
+<hr>
+<div class="practice-box">
+<p>A die is known to have produced a number greater than 3.</p>
+<p>What is the probability that the number is even?</p>
+<details>
+<summary>
+Click to show answer
+</summary>
+<p>Remaining possibilities:</p>
+<p><span class="math display">\{4,5,6\}.</span></p>
+<p>Even possibilities:</p>
+<p><span class="math display">\{4,6\}.</span></p>
+<p>Therefore:</p>
+<p><span class="math display">P(\text{Even}\mid&gt;3)=\frac23.</span></p>
+</details>
+</div>
+<hr>
+<div class="practice-box">
+<p>Two dice are rolled.</p>
+<p>Given that the sum is even, what is the probability that both dice are even?</p>
+<details>
+<summary>
+Click to show answer
+</summary>
+<p>The sum is even when:</p>
+<ul>
+<li>both dice are even, or</li>
+<li>both dice are odd.</li>
+</ul>
+<p>There are 18 outcomes with even sum.</p>
+<p>There are 9 outcomes with both dice even.</p>
+<p>Therefore:</p>
+<p><span class="math display">P(\text{both even}\mid\text{even sum})
+=
+\frac9{18}
+=
+\frac12.</span></p>
+</details>
+</div>
+<hr>
+<div class="practice-box">
+<p>Suppose:</p>
+<p><span class="math display">P(A)=0.4,</span></p>
+<p><span class="math display">P(B)=0.5,</span></p>
+<p>and</p>
+<p><span class="math display">P(A\cap B)=0.2.</span></p>
+<p>Find:</p>
+<p><span class="math display">P(A\mid B).</span></p>
+<details>
+<summary>
+Click to show answer
+</summary>
+<p><span class="math display">P(A\mid B)
+=
+\frac{P(A\cap B)}{P(B)}
+=
+\frac{0.2}{0.5}
+=
+0.4.</span></p>
+<p>Notice:</p>
+<p><span class="math display">P(A\mid B)=P(A).</span></p>
+<p>This suggests that <span class="math inline">A</span> and <span class="math inline">B</span> are independent.</p>
+</details>
+</div>
+<hr>
+<div class="practice-box">
+<p>Suppose:</p>
+<p><span class="math display">P(A\mid B)=0.7,</span></p>
+<p><span class="math display">P(B)=0.3,</span></p>
+<p>and</p>
+<p><span class="math display">P(A)=0.4.</span></p>
+<p>Find:</p>
+<p><span class="math display">P(B\mid A).</span></p>
+<details>
+<summary>
+Click to show answer
+</summary>
+<p>Start with the intersection:</p>
+<p><span class="math display">P(A\cap B)
+=
+P(A\mid B)P(B)</span></p>
+<p>so</p>
+<p><span class="math display">P(A\cap B)
+=
+(0.7)(0.3)
+=
+0.21.</span></p>
+<p>Now:</p>
+<p><span class="math display">P(B\mid A)
+=
+\frac{P(A\cap B)}{P(A)}
+=
+\frac{0.21}{0.4}
+=
+0.525.</span></p>
+<p>Therefore,</p>
+<p><span class="math display">P(B\mid A)=0.525.</span></p>
+<p>Note that there is no rule saying</p>
+<p><span class="math display">P(A\mid B)=P(B\mid A).</span></p>
+<p>The two quantities answer different questions.</p>
+<p>This is the conceptual problem that Bayes’ theorem will eventually solve.</p>
+</details>
+</div>
+<hr>
+<div class="practice-box">
+<p>Suppose:</p>
+<p><span class="math display">P(A)=0.6</span></p>
+<p>and</p>
+<p><span class="math display">P(B)=0.5.</span></p>
+<p>If <span class="math inline">A</span> and <span class="math inline">B</span> are independent, find</p>
+<p><span class="math display">P(A\cap B).</span></p>
+<details>
+<summary>
+Click to show answer
+</summary>
+<p>Since independence means</p>
+<p><span class="math display">P(A\mid B)=P(A),</span></p>
+<p>we have</p>
+<p><span class="math display">P(A\cap B)
+=
+P(A\mid B)P(B)</span></p>
+<p>and therefore</p>
+<p><span class="math display">P(A\cap B)
+=
+(0.6)(0.5)
+=
+0.3.</span></p>
+</details>
+</div>
+<hr>
+<div class="practice-box">
+<p>A bag contains:</p>
+<ul>
+<li>4 red balls</li>
+<li>6 blue balls</li>
+</ul>
+<p>Two balls are drawn without replacement.</p>
+<p>Given that the first ball is blue, what is the probability that the second ball is red?</p>
+<details>
+<summary>
+Click to show answer
+</summary>
+<p>After learning that the first ball was blue, the bag contains:</p>
+<ul>
+<li>4 red</li>
+<li>5 blue</li>
+</ul>
+<p>Therefore:</p>
+<p><span class="math display">P(\text{second red}\mid\text{first blue})
+=
+\frac49.</span></p>
+<p>The condition changed the composition of the bag.</p>
+</details>
+</div>
+<hr>
+</section>
+<section id="conditional-probability-as-information" class="level1">
+<h1>Conditional Probability as Information</h1>
+<p>Remember that probability is dependent on what information we have.</p>
+<p>For example:</p>
+<p><span class="math display">P(\text{rain tomorrow})</span></p>
+<p>could be different from</p>
+<p><span class="math display">P(\text{rain tomorrow}\mid\text{storm system approaching}).</span></p>
+<p>Likewise,</p>
+<p><span class="math display">P(\text{machine fails})</span></p>
+<p>could be different from</p>
+<p><span class="math display">P(\text{machine fails}\mid\text{temperature is above threshold}).</span></p>
+<p>The underlying event has not changed. Instead, our information has changed.</p>
+<p>The notation</p>
+<p><span class="math display">P(A\mid B)</span></p>
+<p>can be read as:</p>
+<blockquote class="blockquote">
+<p><strong>Our probability assignment to</strong> <span class="math inline">A</span>, after incorporating the information <span class="math inline">B</span>.</p>
+</blockquote>
+<p>This interpretation becomes increasingly important later when we work with Bayesian methods.</p>
+<p>For now:</p>
+<p><span class="math display">\boxed{
+\text{New information}
+\longrightarrow
+\text{restricted universe}
+\longrightarrow
+\text{new probability}
+}</span></p>
+<hr>
+</section>
+<section id="from-conditional-probability-to-bayes" class="level1">
+<h1>From Conditional Probability to Bayes</h1>
+<p>Suppose:</p>
+<ul>
+<li><span class="math inline">D</span> = a disease is present</li>
+<li><span class="math inline">T</span> = a test is positive</li>
+</ul>
+<p>A medical test might give us:</p>
+<p><span class="math display">P(T\mid D).</span></p>
+<p>That answers:</p>
+<blockquote class="blockquote">
+<p>If the disease is present, how often is the test positive?</p>
+</blockquote>
+<p>But what we usually want to know is:</p>
+<p><span class="math display">P(D\mid T).</span></p>
+<p>That asks:</p>
+<blockquote class="blockquote">
+<p>Given that the test is positive, how likely is the disease?</p>
+</blockquote>
+<p>These are <strong>not the same question</strong>. But given the information that we have we need to approach the problem using different tools.</p>
+<section id="formulating-bayes-theorem" class="level2">
+<h2 class="anchored" data-anchor-id="formulating-bayes-theorem">Formulating Bayes’ Theorem</h2>
+<p>Start with the multiplication rule:</p>
+<p><span class="math display">P(A\cap B)
+=
+P(A\mid B)P(B).</span></p>
+<p>But we can also write the same intersection in the opposite direction:</p>
+<p><span class="math display">P(A\cap B)
+=
+P(B\mid A)P(A).</span></p>
+<p>Since both expressions equal the same quantity,</p>
+<p><span class="math display">P(A\mid B)P(B)
+=
+P(B\mid A)P(A).</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\boxed{
+P(A\mid B)
+=
+\frac{P(B\mid A)P(A)}{P(B)}
+}</span></p>
+<p>Bayes’ theorem is not an unrelated new formula but instead a consequence of conditional probability. Fundamentally, Bayesian inference is built out of conditional probability.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

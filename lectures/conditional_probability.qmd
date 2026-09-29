@@ -2,12 +2,1043 @@
 title: "5: Conditional Probability"
 ---
 
-We have already discussed the idea of conditional probability during our introduction to sample and state spaces. But for our previous problems, while we made to state our assumptions, these were not included directly in the mathematical notation we used.
+# Conditional Probability
 
-Consider a state space $\Omega$ with two events, $A$ and $B$.
+We have already discussed the idea of conditional probability during our introduction to sample and state spaces. But this was in the context of the general idea of probability itself. We will now focus on how the incorporation of new information is computed.
 
-Now consider that Event $B$ has just occurred. The old universe $\Omega$ is irrelevant. Everything outside of $B$ has ceased to exist. $B$ is the **new universe**.
+### **What should happen to a probability when we learn something new?**
 
-Now consider that Event $A$ occurs **after we know** event $B$ has occurred. The numerator (the physical space of the intersection) has not changed at all. What changed is the denominator: we must re-normalize the new universe so that its total measure equals 1 (Axiom 2 from Week 4).
+Suppose we draw one card from a standard 52-card deck.
 
-What we have here is the **Conditional Probability** of Event $A$ given Event $B$ has occurred, which in notation is written as $P(A\vert{}B)$.
+Before seeing the card:
+
+$$P(\text{Ace})=\frac{4}{52}=\frac{1}{13}.$$
+
+Now suppose someone tells us:
+
+> "The card is a Heart."
+
+Does that information matter?
+
+Yes.
+
+We now know that the card must be one of the 13 Hearts.
+
+Among those 13 cards, only one is an Ace.
+
+Therefore,
+
+$$P(\text{Ace}\mid\text{Heart})
+=
+\frac{1}{13}.$$
+
+In this particular example the probability happened not to change.
+
+Now changing the information:
+
+> "The card is a Face Card."
+
+There are 12 Face Cards, and 3 of them are Hearts.
+
+If we ask for the probability that the card is a Heart:
+
+$$P(\text{Heart}\mid\text{Face})
+=
+\frac{3}{12}
+=
+\frac14.$$
+
+Our new information changed the probability from
+
+$$P(\text{Heart})=\frac{13}{52}=\frac14$$
+
+to
+
+$$P(\text{Heart}\mid\text{Face})=\frac14.$$
+
+But again, this new information did not change it.
+
+We will now choose something that does.
+
+> "The card is a Spade."
+
+Now:
+
+$$P(\text{Heart}\mid\text{Spade})=0.$$
+
+The new information makes Hearts impossible.
+
+Conditional probability fundamentally asks:
+
+> **How likely is** $A$ among the outcomes where $B$ is known to have occurred?
+
+The word **among** is extremely important.
+
+# Adjusting the Universe
+
+A useful question to ask is: **What is our universe now?**
+
+Originally, our universe is the entire space $\Omega.$
+
+If we learn that $B$ occurred, outcomes outside $B$ are no longer relevant. We effectively throw them away.
+
+The new universe is:
+
+$$B.$$
+
+If we want the probability that $A$ occurs within this new universe, we need the outcomes that are simultaneously in $A$ and $B$:
+
+$$A\cap B.$$
+
+Therefore, in a finite equally likely sample space,
+
+$$\boxed{
+P(A\mid B)
+=
+\frac{|A\cap B|}{|B|}
+}$$
+
+provided $B$ is not empty.
+
+------------------------------------------------------------------------
+
+# Formal Definition
+
+The general definition is
+
+$$\boxed{
+P(A\mid B)
+=
+\frac{P(A\cap B)}{P(B)}
+}$$
+
+provided
+
+$$P(B)>0.$$
+
+This is read as:
+
+> The probability of $A$, given $B$, is the probability that both $A$ and $B$ occur, divided by the probability that $B$ occurs.
+
+The denominator controls for **the** **outcomes are still possible after we learn** $B$.
+
+------------------------------------------------------------------------
+
+# Different Interpretations of Conditional Probability
+
+## Interpretation 1: Restricted sample space
+
+Knowing $B$ occurred restricts our sample space from $\Omega$ to $B.$
+
+Then we ask how much of $B$ is also in $A$.
+
+## Interpretation 2: "Among"
+
+$P(A\mid B)$ means:
+
+> **Among the** $B$ cases, what fraction are also $A$?
+
+For example:
+
+> Among students who own a laptop, what fraction are engineering majors?
+
+The denominator is **laptop owners**, not all students.
+
+## Interpretation 3: Renormalization
+
+The original probabilities of all outcomes outside $B$ become zero. The probabilities inside $B$ are rescaled so that they add to one.
+
+This is particularly useful later when discussing Bayesian inference.
+
+------------------------------------------------------------------------
+
+::: example-box
+Roll a fair six-sided die.
+
+Let
+
+$$A=\{\text{even}\}$$
+
+and
+
+$$B=\{\text{greater than 3}\}.$$
+
+The original sample space is
+
+$$\Omega=\{1,2,3,4,5,6\}.$$
+
+The condition $B$ tells us:
+
+$$B=\{4,5,6\}.$$
+
+So our universe is now:
+
+$$\{4,5,6\}.$$
+
+Of those three outcomes, two are even:
+
+$$\{4,6\}.$$
+
+Therefore,
+
+$$P(A\mid B)=\frac{2}{3}.$$
+:::
+
+What happened to 1, 2, and 3?
+
+These outcomes became **impossible given the information**.
+
+------------------------------------------------------------------------
+
+# Applying Conditional Probability to Counting-based Problems
+
+For a counting-based conditional probability problem:
+
+### Step 1
+
+Identify the condition.
+
+What do we know?
+
+$$B$$
+
+### Step 2
+
+Restrict the sample space.
+
+List or visualize the outcomes satisfying $B$.
+
+### Step 3
+
+Ask what also satisfies $A$.
+
+Find
+
+$$A\cap B.$$
+
+### Step 4
+
+Divide.
+
+$$P(A\mid B)
+=
+\frac{|A\cap B|}{|B|}.$$
+
+::: example-box
+Roll two fair six-sided dice.
+
+There are 36 equally likely ordered outcomes.
+
+Suppose we are told:
+
+> The sum is greater than 8.
+
+What is the probability that the first die is a 6?
+
+Let
+
+$$B=\{\text{sum}>8\}.$$
+
+The possible outcomes satisfying $B$ are:
+
+$$(3,6)$$
+
+$$(4,5),(4,6)$$
+
+$$(5,4),(5,5),(5,6)$$
+
+$$(6,3),(6,4),(6,5),(6,6).$$
+
+There are 10 possible outcomes.
+
+Now restrict further to outcomes where the first die is 6:
+
+$$(6,3),(6,4),(6,5),(6,6).$$
+
+There are 4.
+
+Therefore,
+
+$$P(\text{first die}=6\mid\text{sum}>8)
+=
+\frac{4}{10}
+=
+\frac25.$$
+:::
+
+Note that the original denominator was 36 and the conditional denominator is 10. Why?
+
+Because after learning that the sum exceeds 8, only those 10 outcomes remain possible.
+
+------------------------------------------------------------------------
+
+# Translating Language into Probability
+
+There are many equivalent statements ordinary language that refer to conditional probability, this list is only a few of them.
+
+| Language                                 | Mathematical expression |
+|------------------------------------------|-------------------------|
+| "given that $B$"                         | $P(A\mid B)$            |
+| "assuming $B$"                           | $P(A\mid B)$            |
+| "if we know $B$"                         | $P(A\mid B)$            |
+| "among the $B$ cases"                    | $P(A\mid B)$            |
+| "of the $B$ outcomes, how many are $A$?" | $P(A\mid B)$            |
+| "the probability of both $A$ and $B$"    | $P(A\cap B)$            |
+
+A particularly useful test is:
+
+> **What is the denominator supposed to represent?**
+
+If the question says:
+
+> "Among the people who..."
+
+then the denominator should be the number of people who satisfy that condition.
+
+------------------------------------------------------------------------
+
+::: example-box
+Suppose a class contains 40 students.
+
+- 24 are engineering majors.
+- 10 of the engineering majors are seniors.
+
+Choose a student at random.
+
+What is the probability the student is a senior **given that the student is an engineering major**?
+
+Let
+
+$$E=\{\text{engineering major}\}$$
+
+and
+
+$$S=\{\text{senior}\}.$$
+
+We want
+
+$$P(S\mid E).$$
+
+We are no longer considering all 40 students.
+
+We are considering the 24 engineering students.
+
+Of those 24 students, 10 are seniors.
+
+Therefore,
+
+$$P(S\mid E)
+=
+\frac{10}{24}
+=
+\frac{5}{12}.$$
+:::
+
+A seemingly reasonable, but incorrect answer is $10/40$.
+
+But $10/40$ answers a different question:
+
+$$P(S\cap E).$$
+
+It is the probability that a randomly selected student is **both** a senior and an engineering major.
+
+------------------------------------------------------------------------
+
+# Conditional Probability and Intersections
+
+
+Recall that the probabiity of the intersection of the events $A$ and $B$ ($P(A\cap B)$) asks:
+
+> What is the probability that **both** $A$ and $B$ happen?
+
+Conditional probability $$P(A\mid B)$$ instead asks:
+
+> If I already know $B$ happened, how likely is $A$?
+
+These ideas are related, but they are not the same quantity.
+
+The definition gives:
+
+$$P(A\mid B)
+=
+\frac{P(A\cap B)}{P(B)}.$$
+
+Rearranging gives the **multiplication rule**:
+
+$$\boxed{
+P(A\cap B)=P(A\mid B)P(B)
+}$$
+
+This is one of the most useful consequences of conditional probability.
+
+------------------------------------------------------------------------
+
+::: example-box
+
+Draw two cards from a standard deck without replacement.
+
+What is the probability that both cards are Aces?
+
+We can think sequentially.
+
+**First card**
+
+$$P(\text{Ace})=\frac4{52}.$$
+
+**Second card**
+
+If the first card was an Ace, then there are:
+
+- 3 Aces remaining
+- 51 cards remaining
+
+Therefore:
+
+$$P(\text{second Ace}\mid\text{first Ace})
+=
+\frac3{51}.$$
+
+The probability of both events is therefore
+
+$$P(\text{both Aces})
+=
+\frac4{52}\frac3{51}.$$
+
+Thus:
+
+$$P(\text{both Aces})
+=
+\frac{1}{221}.$$
+
+:::
+
+
+------------------------------------------------------------------------
+
+# Dependence and Independence
+
+Now suppose we replace the first card before drawing again.
+
+Then:
+
+$$P(\text{second Ace}\mid\text{first Ace})
+=
+\frac4{52}.$$
+
+So:
+
+### Without replacement
+
+$$P(\text{second Ace}\mid\text{first Ace})
+=
+\frac3{51}.$$
+
+### With replacement
+
+$$P(\text{second Ace}\mid\text{first Ace})
+=
+\frac4{52}.$$
+
+This demonstrates the idea of **dependence**:
+
+> If knowing what happened previously changes the probability of what happens next, the events are dependent.
+
+
+Now, if we ask the question: **Does knowing** $B$ happened change the probability of $A$?
+
+If it does not, then:
+
+$$P(A\mid B)=P(A).$$
+
+This is the conceptual definition of independence.
+
+For events $A$ and $B$, assuming $P(B)>0$,
+
+$$\boxed{
+A\text{ and }B\text{ are independent}
+\iff
+P(A\mid B)=P(A)
+}$$
+
+From this, the multiplication rule gives the familiar equivalent form:
+
+$$\boxed{
+P(A\cap B)=P(A)P(B)
+}$$
+
+------------------------------------------------------------------------
+
+::: example-box
+
+Flip a fair coin twice.
+
+Let
+
+$$A=\{\text{first flip is Heads}\}$$
+
+and
+
+$$B=\{\text{second flip is Heads}\}.$$
+
+Before knowing anything about the first flip:
+
+$$P(B)=\frac12.$$
+
+After learning that the first flip was Heads:
+
+$$P(B\mid A)=\frac12.$$
+
+The information did not change the probability.
+
+Therefore the events are independent.
+
+:::
+------------------------------------------------------------------------
+
+## Independence and Mutual Exclusivity
+
+**Mutually exclusive:**
+
+> Knowing one occurred tells you the other did not occur.
+
+**Independent:**
+
+> Knowing one occurred tells you nothing about whether the other occurred.
+
+These are almost opposite ideas.
+
+For nonzero-probability events, mutually exclusive events cannot be independent.
+
+::: example-box
+
+Consider a single die.
+
+Let
+
+$$A=\{\text{roll a 1}\}$$
+
+and
+
+$$B=\{\text{roll a 6}\}.$$
+
+These events are **mutually exclusive**. That is, they cannot happen simultaneously.
+
+Therefore:
+
+$$P(A\cap B)=0.$$
+
+But:
+
+$$P(B)=\frac16$$
+
+while
+
+$$P(B\mid A)=0.$$
+
+Knowing that $A$ occurred changes the probability of $B$. Therefore they are **not independent**.
+
+:::
+
+------------------------------------------------------------------------
+
+# 16. Tree Diagrams
+
+Conditional probability becomes especially useful when an experiment happens in stages.
+
+We can use a tree diagram to make the structure visible.
+
+Suppose:
+
+1.  An initial event $A$ or $A^c$ occurs.
+2.  Then $B$ or $B^c$ occurs conditional on the first event.
+
+The structure is:
+
+``` text
+                    ┌── B
+             ┌──────┤
+             │      └── Bᶜ
+        A ───┤
+             │
+             │      ┌── B
+             └──────┤
+                    └── Bᶜ
+                  Aᶜ
+```
+
+The branches carry probabilities such as:
+
+$$P(A),\quad P(A^c)$$
+
+followed by
+
+$$P(B\mid A),\quad P(B^c\mid A)$$
+
+and
+
+$$P(B\mid A^c),\quad P(B^c\mid A^c).$$
+
+
+## Using Tree Diagrams
+
+There are two simple operations.
+
+### Along a path: multiply
+
+For example,
+
+$$P(A\cap B)
+=
+P(A)P(B\mid A).$$
+
+### Across alternative paths: add
+
+If $B$ can happen through two mutually exclusive paths,
+
+$$P(B)
+=
+P(A\cap B)+P(A^c\cap B).$$
+
+Therefore,
+
+$$P(B)
+=
+P(A)P(B\mid A)
++
+P(A^c)P(B\mid A^c).$$
+
+
+
+------------------------------------------------------------------------
+
+::: example-box
+
+Suppose:
+
+**Urn 1**
+
+- 3 red
+- 2 blue
+
+**Urn 2**
+
+- 1 red
+- 4 blue
+
+We draw one ball from Urn 1 and transfer it to Urn 2.
+
+Then draw one ball from Urn 2.
+
+What is the probability that the second draw is red?
+
+There are two ways the second ball can be red.
+
+**Path 1: Transfer a red**
+
+Probability:
+
+$$\frac35.$$
+
+Then Urn 2 contains:
+
+- 2 red
+- 4 blue
+
+so
+
+$$P(\text{red second}\mid\text{red transferred})
+=
+\frac26.$$
+
+Thus:
+
+$$\frac35\frac26.$$
+
+**Path 2: Transfer a blue**
+
+Probability:
+
+$$\frac25.$$
+
+Then Urn 2 contains:
+
+- 1 red
+- 5 blue
+
+so
+
+$$P(\text{red second}\mid\text{blue transferred})
+=
+\frac16.$$
+
+Thus:
+
+$$\frac25\frac16.$$
+
+Add the two paths:
+
+$$P(\text{second red})
+=
+\frac35\frac26
++
+\frac25\frac16.$$
+
+Therefore,
+
+$$P(\text{second red})
+=
+\frac4{15}.$$
+
+
+:::
+------------------------------------------------------------------------
+
+# Practice
+
+::: practice-box
+A card is known to be a Spade.
+
+What is the probability that it is an Ace?
+
+<details>
+
+<summary>Click to show answer</summary>
+
+There are 13 Spades.
+
+One is an Ace.
+
+$$P(\text{Ace}\mid\text{Spade})
+=
+\frac1{13}.$$
+
+</details>
+:::
+
+------------------------------------------------------------------------
+
+::: practice-box
+A die is known to have produced a number greater than 3.
+
+What is the probability that the number is even?
+
+<details>
+
+<summary>Click to show answer</summary>
+
+Remaining possibilities:
+
+$$\{4,5,6\}.$$
+
+Even possibilities:
+
+$$\{4,6\}.$$
+
+Therefore:
+
+$$P(\text{Even}\mid>3)=\frac23.$$
+
+</details>
+:::
+
+------------------------------------------------------------------------
+
+::: practice-box
+Two dice are rolled.
+
+Given that the sum is even, what is the probability that both dice are even?
+
+<details>
+
+<summary>Click to show answer</summary>
+
+The sum is even when:
+
+- both dice are even, or
+- both dice are odd.
+
+There are 18 outcomes with even sum.
+
+There are 9 outcomes with both dice even.
+
+Therefore:
+
+$$P(\text{both even}\mid\text{even sum})
+=
+\frac9{18}
+=
+\frac12.$$
+
+</details>
+:::
+
+------------------------------------------------------------------------
+
+::: practice-box
+Suppose:
+
+$$P(A)=0.4,$$
+
+$$P(B)=0.5,$$
+
+and
+
+$$P(A\cap B)=0.2.$$
+
+Find:
+
+$$P(A\mid B).$$
+
+<details>
+
+<summary>Click to show answer</summary>
+
+$$P(A\mid B)
+=
+\frac{P(A\cap B)}{P(B)}
+=
+\frac{0.2}{0.5}
+=
+0.4.$$
+
+Notice:
+
+$$P(A\mid B)=P(A).$$
+
+This suggests that $A$ and $B$ are independent.
+
+</details>
+:::
+
+------------------------------------------------------------------------
+
+::: practice-box
+Suppose:
+
+$$P(A\mid B)=0.7,$$
+
+$$P(B)=0.3,$$
+
+and
+
+$$P(A)=0.4.$$
+
+Find:
+
+$$P(B\mid A).$$
+
+<details>
+
+<summary>Click to show answer</summary>
+
+Start with the intersection:
+
+$$P(A\cap B)
+=
+P(A\mid B)P(B)$$
+
+so
+
+$$P(A\cap B)
+=
+(0.7)(0.3)
+=
+0.21.$$
+
+Now:
+
+$$P(B\mid A)
+=
+\frac{P(A\cap B)}{P(A)}
+=
+\frac{0.21}{0.4}
+=
+0.525.$$
+
+Therefore,
+
+$$P(B\mid A)=0.525.$$
+
+Note that there is no rule saying
+
+$$P(A\mid B)=P(B\mid A).$$
+
+The two quantities answer different questions.
+
+This is the conceptual problem that Bayes' theorem will eventually solve.
+
+</details>
+:::
+
+------------------------------------------------------------------------
+
+::: practice-box
+Suppose:
+
+$$P(A)=0.6$$
+
+and
+
+$$P(B)=0.5.$$
+
+If $A$ and $B$ are independent, find
+
+$$P(A\cap B).$$
+
+<details>
+
+<summary>Click to show answer</summary>
+
+Since independence means
+
+$$P(A\mid B)=P(A),$$
+
+we have
+
+$$P(A\cap B)
+=
+P(A\mid B)P(B)$$
+
+and therefore
+
+$$P(A\cap B)
+=
+(0.6)(0.5)
+=
+0.3.$$
+
+</details>
+:::
+
+------------------------------------------------------------------------
+
+::: practice-box
+A bag contains:
+
+- 4 red balls
+- 6 blue balls
+
+Two balls are drawn without replacement.
+
+Given that the first ball is blue, what is the probability that the second ball is red?
+
+<details>
+
+<summary>Click to show answer</summary>
+
+After learning that the first ball was blue, the bag contains:
+
+- 4 red
+- 5 blue
+
+Therefore:
+
+$$P(\text{second red}\mid\text{first blue})
+=
+\frac49.$$
+
+The condition changed the composition of the bag.
+
+</details>
+:::
+
+------------------------------------------------------------------------
+
+# Conditional Probability as Information
+
+Remember that probability is dependent on what information we have.
+
+For example:
+
+$$P(\text{rain tomorrow})$$
+
+could be different from
+
+$$P(\text{rain tomorrow}\mid\text{storm system approaching}).$$
+
+Likewise,
+
+$$P(\text{machine fails})$$
+
+could be different from
+
+$$P(\text{machine fails}\mid\text{temperature is above threshold}).$$
+
+The underlying event has not changed. Instead, our information has changed.
+
+The notation
+
+$$P(A\mid B)$$
+
+can be read as:
+
+> **Our probability assignment to** $A$, after incorporating the information $B$.
+
+This interpretation becomes increasingly important later when we work with Bayesian methods.
+
+For now:
+
+$$\boxed{
+\text{New information}
+\longrightarrow
+\text{restricted universe}
+\longrightarrow
+\text{new probability}
+}$$
+
+------------------------------------------------------------------------
+
+# From Conditional Probability to Bayes
+
+Suppose:
+
+- $D$ = a disease is present
+- $T$ = a test is positive
+
+A medical test might give us:
+
+$$P(T\mid D).$$
+
+That answers:
+
+> If the disease is present, how often is the test positive?
+
+But what we usually want to know is:
+
+$$P(D\mid T).$$
+
+That asks:
+
+> Given that the test is positive, how likely is the disease?
+
+These are **not the same question**. But given the information that we have we need to approach the problem using different tools.
+
+## Formulating Bayes' Theorem
+
+Start with the multiplication rule:
+
+$$P(A\cap B)
+=
+P(A\mid B)P(B).$$
+
+But we can also write the same intersection in the opposite direction:
+
+$$P(A\cap B)
+=
+P(B\mid A)P(A).$$
+
+Since both expressions equal the same quantity,
+
+$$P(A\mid B)P(B)
+=
+P(B\mid A)P(A).$$
+
+Therefore,
+
+$$\boxed{
+P(A\mid B)
+=
+\frac{P(B\mid A)P(A)}{P(B)}
+}$$
+
+Bayes' theorem is not an unrelated new formula but instead a consequence of conditional probability. Fundamentally, Bayesian inference is built out of conditional probability.

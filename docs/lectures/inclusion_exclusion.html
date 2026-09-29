@@ -208,6 +208,12 @@ window.Quarto = {
  <span class="menu-text">4: Axioms of Probability</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/conditional_probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5: Conditional Probability</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -362,7 +368,7 @@ Click to show answer
 <p>We can think of a stars-and-bars distribution as a restricted anagram problem.</p>
 <p>There are <span class="math inline">10</span> identical stars and <span class="math inline">2</span> identical bars, giving <span class="math inline">12</span> total positions. Choose which <span class="math inline">2</span> positions contain bars; all remaining positions contain stars.</p>
 <p>Number of distributions = <span class="math inline">\binom{12}{2} = 66</span>.</p>
-<p>Equivalently, the repeated-character calculation is <span class="math inline">\frac{12!}/{10!2!}</span>.</p>
+<p>Equivalently, the repeated-character calculation is <span class="math inline">\frac{12!}{10!2!}</span>.</p>
 <div class="practice-box">
 <p>How many ways are there to distribute 8 identical tokens among Alice, Bob, Charlie, and Dana, allowing zero?</p>
 <details>
@@ -402,8 +408,8 @@ Click to show answer
 <h3 class="anchored" data-anchor-id="why-this-is-a-different-mathematical-architecture">Why this is a different mathematical architecture</h3>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 24%">
-<col style="width: 35%">
+<col style="width: 25%">
+<col style="width: 34%">
 <col style="width: 40%">
 </colgroup>
 <thead>
@@ -468,7 +474,7 @@ Click to show answer
 </div>
 <div class="practice-box">
 <p>Five identical $100 chips are distributed among three players, but every player must receive at least one. How many possible distributions are there?</p>
-Hint: It can be easier to handle constraints by modifying the physical model before counting.
+<p>Hint: It can be easier to handle constraints by modifying the physical model before counting.</p>
 <details>
 <summary>
 Click to show answer
