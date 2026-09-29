@@ -18,7 +18,7 @@ website:
           - lectures/inclusion_exclusion.qmd
           - lectures/axioms.qmd
           - lectures/conditional_probability.qmd
-          #- lectures/bayes_theorem.qmd
+          - lectures/bayes_theorem.qmd
       - section: "Random Variables"
       - section: "Introduction to Inference"
 
