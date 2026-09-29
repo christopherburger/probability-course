@@ -2,11 +2,9 @@
 title: "5: Conditional Probability"
 ---
 
-# Conditional Probability
-
 We have already discussed the idea of conditional probability during our introduction to sample and state spaces. But this was in the context of the general idea of probability itself. We will now focus on how the incorporation of new information is computed.
 
-### **What should happen to a probability when we learn something new?**
+**What should happen to a probability when we learn something new?**
 
 Suppose we draw one card from a standard 52-card deck.
 
@@ -104,7 +102,7 @@ provided $B$ is not empty.
 
 # Formal Definition
 
-The general definition is
+The general definition of conditional probability is
 
 $$\boxed{
 P(A\mid B)
@@ -346,7 +344,6 @@ It is the probability that a randomly selected student is **both** a senior and 
 
 # Conditional Probability and Intersections
 
-
 Recall that the probabiity of the intersection of the events $A$ and $B$ ($P(A\cap B)$) asks:
 
 > What is the probability that **both** $A$ and $B$ happen?
@@ -374,7 +371,6 @@ This is one of the most useful consequences of conditional probability.
 ------------------------------------------------------------------------
 
 ::: example-box
-
 Draw two cards from a standard deck without replacement.
 
 What is the probability that both cards are Aces?
@@ -409,9 +405,7 @@ Thus:
 $$P(\text{both Aces})
 =
 \frac{1}{221}.$$
-
 :::
-
 
 ------------------------------------------------------------------------
 
@@ -443,7 +437,6 @@ This demonstrates the idea of **dependence**:
 
 > If knowing what happened previously changes the probability of what happens next, the events are dependent.
 
-
 Now, if we ask the question: **Does knowing** $B$ happened change the probability of $A$?
 
 If it does not, then:
@@ -469,7 +462,6 @@ P(A\cap B)=P(A)P(B)
 ------------------------------------------------------------------------
 
 ::: example-box
-
 Flip a fair coin twice.
 
 Let
@@ -491,8 +483,8 @@ $$P(B\mid A)=\frac12.$$
 The information did not change the probability.
 
 Therefore the events are independent.
-
 :::
+
 ------------------------------------------------------------------------
 
 ## Independence and Mutual Exclusivity
@@ -510,7 +502,6 @@ These are almost opposite ideas.
 For nonzero-probability events, mutually exclusive events cannot be independent.
 
 ::: example-box
-
 Consider a single die.
 
 Let
@@ -536,12 +527,11 @@ while
 $$P(B\mid A)=0.$$
 
 Knowing that $A$ occurred changes the probability of $B$. Therefore they are **not independent**.
-
 :::
 
 ------------------------------------------------------------------------
 
-# 16. Tree Diagrams
+# Tree Diagrams
 
 Conditional probability becomes especially useful when an experiment happens in stages.
 
@@ -578,7 +568,6 @@ and
 
 $$P(B\mid A^c),\quad P(B^c\mid A^c).$$
 
-
 ## Using Tree Diagrams
 
 There are two simple operations.
@@ -601,18 +590,13 @@ P(A\cap B)+P(A^c\cap B).$$
 
 Therefore,
 
-$$P(B)
+## $$P(B)
 =
 P(A)P(B\mid A)
 +
 P(A^c)P(B\mid A^c).$$
 
-
-
-------------------------------------------------------------------------
-
 ::: example-box
-
 Suppose:
 
 **Urn 1**
@@ -688,9 +672,8 @@ Therefore,
 $$P(\text{second red})
 =
 \frac4{15}.$$
-
-
 :::
+
 ------------------------------------------------------------------------
 
 # Practice
