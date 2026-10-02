@@ -1,3 +1,1268 @@
 ---
-title: "6: Bayes's Theorem"
+title: "6: Bayes' Theorem"
 ---
+
+We have just learned from our discussion on conditional probability: $P(A\cap B) = P(A\mid B)P(B)$.
+
+But we can describe the same intersection in the other direction: $P(A\cap B) = P(B\mid A)P(A)$.
+
+Both expressions describe exactly the same event.
+
+Therefore:
+
+$$
+P(A\mid B)P(B)
+=
+P(B\mid A)P(A).
+$$
+
+If we divide by $P(B)$:
+
+$$
+\boxed{
+P(A\mid B)
+=
+\frac{P(B\mid A)P(A)}
+{P(B)}
+}
+$$
+
+This is Bayes' theorem.
+
+Note that Bayes' theorem is **not a new axiom**. It follows directly from our original definition of conditional probability.
+
+## Applying Bayes' Theorem
+
+Suppose:
+
+- $A$ = some hypothesis
+- $B$ = observed evidence
+
+We may know:
+
+$$P(A)$$
+
+and
+
+$$P(B\mid A).$$
+
+But what we want is:
+
+$$P(A\mid B).$$
+
+Bayes lets us move from:
+
+$$\boxed{\text{hypothesis}\rightarrow\text{evidence}}$$
+
+to:
+
+$$\boxed{\text{evidence}\rightarrow\text{hypothesis}}$$
+
+Bayes's theorem gives us a systematic way to reverse a conditional probability.
+
+------------------------------------------------------------------------
+
+Suppose a medical test comes back positive. What is the probability that the patient actually has the disease?
+
+Instinctively, we want to know:
+
+$$P(\text{Disease}\mid\text{Positive}).$$
+
+But suppose the test manufacturer tells us:
+
+> "If a person has the disease, the test is positive 99% of the time."
+
+That statement is:
+
+$$P(\text{Positive}\mid\text{Disease})=0.99.$$
+
+Are those the same thing?
+
+No.
+
+This is the central problem.
+
+$$
+\boxed{
+P(\text{Positive}\mid\text{Disease})
+\neq
+P(\text{Disease}\mid\text{Positive})
+}
+$$
+
+in general.
+
+The first asks:
+
+> **How well does the test detect disease?**
+
+The second asks:
+
+> **Given the test result, how plausible is disease?**
+
+Bayes' theorem lets us answer the second question.
+
+------------------------------------------------------------------------
+
+# Bayesian Vocabulary
+
+Bayesian problems become much easier once we learn to identify the four main ideas in Bayesian inference.
+
+## Prior
+
+$$P(A)$$
+
+The probability assigned to $A$ **before considering the new evidence**.
+
+We can think of this as: What did we believe before seeing $B$?
+
+------------------------------------------------------------------------
+
+## Likelihood
+
+$$
+P(B\mid A)
+$$
+
+How probable is the observed evidence if $A$ is true?
+
+We can think of this as: If $A$ were true, how expected would this evidence be?
+
+------------------------------------------------------------------------
+
+## Evidence
+
+$$P(B)$$
+
+The overall probability of observing $B$.
+
+We can think of this as: How surprising is this evidence before deciding which hypothesis is true?
+
+------------------------------------------------------------------------
+
+## Posterior
+
+$$P(A\mid B)$$
+
+The probability of $A$ **after incorporating the evidence**.
+
+We can think of this as: Now that we have seen $B$, what should we believe about $A$?
+
+------------------------------------------------------------------------
+
+## Using Bayesian Terminology
+
+$$
+\boxed{
+\text{Prior}
+\quad+\quad
+\text{Evidence}
+\quad\longrightarrow\quad
+\text{Posterior}
+}
+$$
+
+More specifically:
+
+$$
+\boxed{
+P(A)
++
+B
+\longrightarrow
+P(A\mid B)
+}
+$$
+
+The likelihood describes how well $A$ predicts the evidence.
+
+So:
+
+$$
+\boxed{
+\text{Prior}
+\times
+\text{Likelihood}
+\div
+\text{Evidence}
+=
+\text{Posterior}
+}
+$$
+
+or
+
+$$
+\boxed{
+P(A\mid B)
+=
+\frac{
+P(B\mid A)P(A)
+}{
+P(B)
+}
+}
+$$
+
+------------------------------------------------------------------------
+
+# A General Bayesian Workflow
+
+### Step 1 — Identify the hypothesis
+
+What are we trying to determine?
+
+$$P(A\mid B)$$
+
+### Step 2 — Identify the evidence
+
+What did we observe?
+
+$$B$$
+
+### Step 3 — Find the prior
+
+What was the probability of the hypothesis before the evidence?
+
+$$P(A)$$
+
+### Step 4 — Find the likelihood
+
+How probable is the evidence if the hypothesis is true?
+
+$$P(B\mid A)$$
+
+### Step 5 — Calculate the evidence
+
+How can $B$ happen?
+
+For two complementary hypotheses:
+
+$$
+P(B)
+=
+P(B\mid A)P(A)
++
+P(B\mid A^c)P(A^c).
+$$
+
+### Step 6 — Apply Bayes
+
+$$
+P(A\mid B)
+=
+\frac{P(B\mid A)P(A)}
+{P(B)}.
+$$
+
+### Step 7 — Interpret
+
+Did the evidence increase or decrease our belief in $A$?
+
+------------------------------------------------------------------------
+
+# The Base-Rate Problem
+
+Let us return to the medical test example.
+
+Suppose:
+
+- Disease prevalence: $1\%$
+- Test sensitivity: $99\%$
+- False-positive rate: $5\%$
+
+Let $D=\text{disease}$ and $T=\text{positive test}.$
+
+We know that $P(D)=0.01$ and $P(T\mid D^c)=0.05.$
+
+Our question is:
+
+$$P(D\mid T)=?$$
+
+This is where many people make the mistake $P(D\mid T)=0.99.$
+
+But $0.99$ is actually $P(T\mid D).$
+
+------------------------------------------------------------------------
+
+## Using Counting
+
+Before using the formula, we will solve the problem by counting.
+
+Suppose we test 10,000 people.
+
+**People with disease:**
+
+$$0.01(10,000)=100.$$
+
+Of those 100:
+
+$$0.99(100)=99$$
+
+test positive.
+
+\
+
+**People without disease:**
+
+$$10,000-100=9,900.$$
+
+Of those:
+
+$$0.05(9,900)=495$$
+
+test positive.
+
+\
+
+So the positive tests consist of:
+
+$$99+495=594.$$
+
+Only 99 of those 594 people actually have the disease.
+
+\
+
+Therefore:
+
+$$P(D\mid T)
+=
+\frac{99}{594}
+\approx0.167.
+$$
+
+So:
+
+$$\boxed{
+P(D\mid T)\approx16.7\%
+}
+$$
+
+despite a 99% sensitivity.
+
+
+
+------------------------------------------------------------------------
+
+## Using Bayes
+
+We know:
+
+$$P(D)=0.01$$
+
+$$P(T\mid D)=0.99$$
+
+$$P(T\mid D^c)=0.05.$$
+
+First calculate the probability of a positive test.
+
+There are two ways to get a positive result:
+
+1.  The person has the disease and tests positive.
+2.  The person does not have the disease and tests positive.
+
+Therefore:
+
+$$P(T)
+=
+P(T\mid D)P(D)
++
+P(T\mid D^c)P(D^c).
+$$
+
+So:
+
+$$P(T)
+=
+(0.99)(0.01)
++
+(0.05)(0.99).
+$$
+
+Thus:
+
+$$P(T)=0.0099+0.0495=0.0594.$$
+
+Now apply Bayes:
+
+$$P(D\mid T)
+=
+\frac{P(T\mid D)P(D)}
+{P(T)}.$$
+
+Therefore:
+
+$$P(D\mid T)
+=
+\frac{(0.99)(0.01)}
+{0.0594}
+\approx0.167.
+$$
+
+This is same answer we found using counting.
+
+------------------------------------------------------------------------
+
+This example illustrates an important point in that people often think:
+
+> "The test is 99% accurate!"
+
+But that statement is ambiguous.
+
+The 99% refers to $P(T\mid D).$
+
+It does **not** refer to $P(D\mid T).$
+
+The large number of healthy people matters. Even a relatively small false-positive rate can generate many false positives when the underlying condition is rare.
+
+This is known as the **base-rate effect**.
+
+------------------------------------------------------------------------
+
+# Generalizing Bayes' Formula
+
+For two complementary hypotheses $A$ and $A^c$:
+
+$$\boxed{
+P(A\mid B)
+=
+\frac{
+P(B\mid A)P(A)
+}{
+P(B\mid A)P(A)
++
+P(B\mid A^c)P(A^c)
+}
+}
+$$
+
+This form can be useful starting out because it makes the denominator explicit.
+
+------------------------------------------------------------------------
+
+Now suppose there are several possible hypotheses:
+
+$$H_1,H_2,\ldots,H_n$$
+
+and exactly one is true.
+
+Then:
+
+$$\boxed{
+P(H_i\mid B)
+=
+\frac{
+P(B\mid H_i)P(H_i)
+}{
+\sum_{j=1}^{n}P(B\mid H_j)P(H_j)
+}
+}
+$$
+
+The interpretation is:
+
+> Posterior probability = the probability mass assigned to this hypothesis after seeing the evidence, divided by the total probability mass assigned to all hypotheses after seeing the evidence.
+
+------------------------------------------------------------------------
+
+::: example-box
+Suppose a company has two factories.
+
+### Factory A
+
+Produces 60% of the parts.
+
+$$P(A)=0.60$$
+
+Defect rate:
+
+$$P(D\mid A)=0.02$$
+
+### Factory B
+
+Produces 40% of the parts.
+
+$$P(B)=0.40$$
+
+Defect rate:
+
+$$P(D\mid B)=0.05.$$
+
+A randomly selected part is found to be defective.
+
+What is the probability that it came from Factory B?
+
+We want:
+
+$$P(B\mid D).$$
+
+------------------------------------------------------------------------
+
+**Step 1: Identify the prior**
+
+$$P(B)=0.40.$$
+
+------------------------------------------------------------------------
+
+**Step 2: Identify the likelihood**
+
+$$P(D\mid B)=0.05.$$
+
+------------------------------------------------------------------------
+
+**Step 3: Calculate the evidence**
+
+A defective part can come from either factory:
+
+$$P(D)
+=
+P(D\mid A)P(A)
++
+P(D\mid B)P(B).
+$$
+
+Thus:
+
+$$P(D)
+=
+(0.02)(0.60)+(0.05)(0.40)$$
+
+$$=0.012+0.020$$
+
+$$=0.032.
+$$
+
+------------------------------------------------------------------------
+
+**Step 4: Apply Bayes**
+
+$$
+P(B\mid D)=\frac{(0.05)(0.40)}{0.032}
+$$
+
+
+
+$$
+= \frac{0.020}{0.032} = 0.625. 
+$$
+
+Therefore:
+
+$$
+\boxed{
+P(B\mid D)=0.625
+}
+$$
+
+:::
+
+------------------------------------------------------------------------
+
+Considering our factory example above, before seeing the defect:
+
+$$P(B)=0.40.
+$$
+
+After seeing the defect:
+
+$$P(B\mid D)=0.625.
+$$
+
+The evidence increased our probability assignment to Factory B.
+
+Why?
+
+Because defects are more likely under Factory B:
+
+$$P(D\mid B)=0.05
+$$
+
+than under Factory A:
+
+$$P(D\mid A)=0.02.
+$$
+
+The evidence therefore favors Factory B.
+
+This is the essence of Bayesian updating.
+
+------------------------------------------------------------------------
+
+Now suppose instead the evidence was:
+
+> The part passed an unusually stringent inspection.
+
+If passing is much more likely under Factory A than Factory B, then the posterior probability of Factory A should increase.
+
+Our new evidence changes the relative plausibility of competing hypotheses.
+
+------------------------------------------------------------------------
+
+# Strong Evidence and Weak Evidence
+
+Consider:
+
+$$
+P(B\mid A)=0.51
+$$
+
+versus
+
+$$
+P(B\mid A)=0.99.
+$$
+
+The first is only weakly informative and the second is much stronger.
+
+But the likelihood alone does not determine the posterior. We also need the prior and the behavior of the competing hypotheses.
+
+For example, if:
+
+$$
+P(B\mid A)=0.99
+$$
+
+but
+
+$$
+P(B\mid A^c)=0.98,
+$$
+
+then $B$ is not very useful for distinguishing $A$ from $A^c$.
+
+The evidence is common under both hypotheses.
+
+------------------------------------------------------------------------
+
+# The Likelihood Ratio
+
+Compare:
+
+$$P(B\mid A)$$
+
+with
+
+$$P(B\mid A^c).$$
+
+Their ratio is:
+
+$$
+\boxed{
+\frac{P(B\mid A)}
+{P(B\mid A^c)}
+}
+$$
+
+This tells us how much more compatible the evidence is with $A$ than with $A^c$.
+
+- If the ratio is exactly 1 then the evidence does not distinguish between them.
+
+- If it is much greater than 1, the evidence favors $A$.
+
+- If it is much less than 1, the evidence favors $A^c$.
+
+------------------------------------------------------------------------
+
+# Prior Odds and Posterior Odds
+
+There is another form of Bayes often encountered in testing and gambling.
+
+Starting with:
+
+$$
+P(A\mid B)
+=
+\frac{P(B\mid A)P(A)}
+{P(B)}.
+$$
+
+For complementary hypotheses, one can derive:
+
+$$
+\boxed{
+\frac{P(A\mid B)}
+{P(A^c\mid B)}
+=
+\frac{P(B\mid A)}
+{P(B\mid A^c)}
+\frac{P(A)}
+{P(A^c)}
+}
+$$
+
+In words:
+
+$$
+\boxed{
+\text{Posterior odds}
+=
+\text{Likelihood ratio}
+\times
+\text{Prior odds}
+}
+$$
+
+This is a useful alternative way to think about repeated Bayesian updating.
+
+------------------------------------------------------------------------
+
+# Repeated Evidence
+
+::: example-box 
+
+Suppose we have two coins.
+
+**Coin A**
+
+Fair:
+
+$$P(H\mid A)=0.5.$$
+
+**Coin B**
+
+Biased:
+
+$$P(H\mid B)=0.8.$$
+
+Suppose we choose Coin B with probability 0.25:
+
+$$P(B)=0.25.$$
+
+Thus:
+
+$$P(A)=0.75.$$
+
+We flip the selected coin once and observe Heads.
+
+What is:
+
+$$P(B\mid H)?$$
+
+Our evidence is:
+
+$$P(H)
+=
+P(H\mid A)P(A)
++
+P(H\mid B)P(B).
+$$
+
+Therefore:
+
+$$P(H)
+=
+(0.5)(0.75)+(0.8)(0.25)
+$$
+
+$$=0.375+0.200$$
+
+$$=0.575.$$
+
+Now Bayes:
+
+$$
+P(B\mid H)=\frac{(0.8)(0.25)}{0.575}
+$$
+
+$$\approx0.348.$$
+
+Before observing the flip:
+
+$$P(B)=0.25.$$
+
+After observing Heads:
+
+$$P(B\mid H)\approx0.348.$$
+
+The evidence increased our belief that we selected the biased coin.
+
+::: 
+
+------------------------------------------------------------------------
+
+Now suppose we observe multiple flips.
+
+The natural question becomes:
+
+> What happens as evidence accumulates?
+
+Suppose Coin B has:
+
+$$P(H\mid B)=0.8$$
+
+while Coin A has:
+
+$$P(H\mid A)=0.5.$$
+
+A single Head provides some evidence for B. Two Heads provide more. Three Heads provides even more.
+
+The posterior should continually update as new evidence arrives.
+
+This is one of the big reasons that Bayesian inference is useful. Probability is not assigned just once. It can be updated as information arrives.
+
+------------------------------------------------------------------------
+
+## Sequential Updating
+
+Suppose we start with:
+
+$$P(B)=0.25.$$
+
+After observing $H_1$:
+
+$$P(B\mid H_1).$$
+
+Then after observing $H_2$:
+
+$$P(B\mid H_1,H_2).$$
+
+Then:
+
+$$P(B\mid H_1,H_2,H_3).$$
+
+And so on. Each posterior can become the prior for the next update.
+
+
+
+We can view the process as:
+
+``` text
+Prior
+  │
+  ▼
+Observe evidence
+  │
+  ▼
+Posterior
+  │
+  ▼
+New prior
+  │
+  ▼
+Observe more evidence
+  │
+  ▼
+New posterior
+```
+------------------------------------------------------------------------
+
+# Common Bayes Mistakes
+
+## Reversing the conditional
+
+$P(B\mid A)=0.99$ does not imply $P(A\mid B)=0.99.$
+
+## Ignoring the base rate
+
+It is incorrect to focus entirely on:
+
+$$P(B\mid A).$$
+
+But Bayes also requires:
+
+$$P(A).$$
+
+The prior matters.
+
+## Forgetting alternative explanations
+
+Always remember to include all alternative explanations. If you calculate:
+
+$$P(B\mid A)P(A)$$
+
+and stop.
+
+That quantity is:
+
+$$P(A\cap B),$$
+
+not
+
+$$P(A\mid B).$$
+
+Remember that the denominator must account for all ways the evidence could occur.
+
+------------------------------------------------------------------------
+
+## Thinking the prior is arbitrary
+
+A prior is not necessarily a personal guess.
+
+It can represent:
+
+- known population frequencies
+- historical data
+- physical constraints
+- previous experiments
+- an explicitly chosen modeling assumption
+
+The important thing is that the source of the prior should be made explicit.
+
+------------------------------------------------------------------------
+
+## Assuming Causality
+
+A common error is to see:
+
+$$P(B\mid A)$$
+
+and think:
+
+> "A causes B."
+
+But conditional probability does not establish causation.
+
+For example:
+
+$$P(\text{ice cream sales}\mid\text{high temperature})$$
+
+can be high without ice cream sales being the cause of high temperature.
+
+Likewise:
+
+$$P(\text{test positive}\mid\text{disease})$$
+
+does not mean that the disease is the only causal explanation for the test result.
+
+------------------------------------------------------------------------
+
+## Misconceptions About Baye's Theorem
+
+Note that Bayes' theorem does **not** say:
+
+- that prior beliefs are always subjective;
+- that evidence automatically proves a hypothesis;
+- that the most probable hypothesis is certainly true;
+- that $P(A\mid B)=P(B\mid A)$;
+- that a high likelihood automatically implies a high posterior;
+- that probability itself determines what decision should be made.
+
+Bayes is only a mathematical rule for updating probability assignments when evidence arrives.
+
+------------------------------------------------------------------------
+
+## Bayes and Decision-Making
+
+A posterior probability is often not the final goal.
+
+Suppose:
+
+$$P(\text{defective}\mid\text{measurement})=0.08.$$
+
+What should we do?
+
+That depends on:
+
+- cost of a false positive
+- cost of a false negative
+- cost of additional testing
+- consequences of the decision
+
+We can use probability to inform the decision. But probability does not, by itself, determine the optimal decision. 
+
+------------------------------------------------------------------------
+
+# Bayes and Classification
+
+Suppose we observe features:
+
+$$X=x.$$
+
+We want to determine which class $C_i$ is most probable.
+
+Bayes gives:
+
+$$P(C_i\mid X=x)
+=
+\frac{
+P(X=x\mid C_i)P(C_i)
+}{
+P(X=x)
+}.$$
+
+The denominator is the same for every class, so for comparison:
+
+$$P(C_i\mid X=x)
+\propto
+P(X=x\mid C_i)P(C_i).$$
+
+This is the basic idea behind **Bayesian classification**. We will see later that many classification problems are effectively just Bayesian questions in disguise.
+
+------------------------------------------------------------------------
+
+
+# Practice
+
+::: practice-box
+Suppose:
+
+$$P(A)=0.3$$
+
+$$P(B\mid A)=0.8$$
+
+$$P(B\mid A^c)=0.2.$$
+
+Find:
+
+$$P(A\mid B).$$
+
+<details>
+
+<summary>Click to show answer</summary>
+
+First:
+
+$$P(A^c)=0.7.$$
+
+Then:
+
+$$P(B)
+=
+(0.8)(0.3)+(0.2)(0.7)$$
+
+$$=0.24+0.14
+=
+0.38.$$
+
+Therefore:
+
+$$P(A\mid B)
+=
+\frac{0.8(0.3)}{0.38}$$
+
+$$=
+\frac{0.24}{0.38}
+\approx0.632.$$
+
+</details>
+
+
+:::
+
+------------------------------------------------------------------------
+
+::: practice-box
+Factory A produces 70% of products and has a 1% defect rate.
+
+Factory B produces 30% and has a 4% defect rate.
+
+A product is defective.
+
+Find:
+
+$$P(B\mid D).$$
+
+<details>
+
+<summary>Click to show answer</summary>
+
+$$P(D)
+=
+(0.01)(0.70)+(0.04)(0.30)$$
+
+$$=0.007+0.012
+=
+0.019.$$
+
+Therefore:
+
+$$P(B\mid D)
+=
+\frac{(0.04)(0.30)}
+{0.019}$$
+
+$$=
+\frac{0.012}{0.019}
+\approx0.632.$$
+
+We see that, perhaps contrary to inutition, Factory B produced only 30% of the products but accounts for approximately 63.2% of the defective products.
+
+</details>
+
+
+:::
+
+------------------------------------------------------------------------
+
+::: practice-box
+Three machines produce parts:
+
+| Machine | Production | Defect rate |
+|---------|-----------:|------------:|
+| A       |        50% |          1% |
+| B       |        30% |          2% |
+| C       |        20% |          5% |
+
+A randomly selected part is defective.
+
+What is the probability it came from Machine C?
+
+
+
+<details>
+
+<summary>Click to show answer</summary>
+
+We want:
+
+$$P(C\mid D).$$
+
+First calculate:
+
+$$P(D)
+=
+(0.01)(0.50)
++
+(0.02)(0.30)
++
+(0.05)(0.20).$$
+
+Thus:
+
+$$P(D)=0.005+0.006+0.010=0.021.$$
+
+Then:
+
+$$P(C\mid D)
+=
+\frac{(0.05)(0.20)}
+{0.021}$$
+
+$$=
+\frac{0.010}{0.021}
+\approx0.476.$$
+
+So although Machine C produces only 20% of the parts, it accounts for approximately 47.6% of the defective parts.
+
+</details>
+
+
+:::
+
+------------------------------------------------------------------------
+
+::: practice-box
+A test has:
+
+$$P(D)=0.01$$
+
+and
+
+$$P(T\mid D)=0.99.$$
+
+Someone says:
+
+> "Therefore, if the test is positive, there is a 99% probability that the person has the disease."
+
+**What probability did the person actually calculate?**
+
+<details>
+
+<summary>Click to show answer</summary>
+
+$$P(T\mid D).$$
+
+But the question asks for:
+
+$$P(D\mid T).$$
+
+</details>
+
+
+
+:::
+
+------------------------------------------------------------------------
+
+::: practice-box
+Suppose:
+
+$$P(A)=0.4$$
+
+and
+
+$$P(B\mid A)=0.3$$
+
+$$P(B\mid A^c)=0.3.$$
+
+What happens to our probability of $A$ after observing $B$?
+
+<details>
+
+<summary>Click to show answer</summary>
+
+Because:
+
+$$P(B\mid A)=P(B\mid A^c),$$
+
+the evidence occurs equally often under both hypotheses.
+
+Therefore, $B$ provides no information for distinguishing $A$ from $A^c$.
+
+$$P(A\mid B)=P(A)=0.4.$$
+
+We can see from this problem that evidence only changes our beliefs when its probability differs across the hypotheses. That is, the evidence is relevant.
+
+</details>
+
+
+:::
+
+------------------------------------------------------------------------
+
+::: practice-box
+Suppose:
+
+$$P(A)=0.4$$
+
+but:
+
+$$P(B\mid A)=0.9$$
+
+and
+
+$$P(B\mid A^c)=0.1.$$
+
+Calculate:
+
+$$P(A\mid B).$$
+
+
+<details>
+
+<summary>Click to show answer</summary>
+
+The evidence is much more likely if $A$ is true than if $A$ is false.
+
+We should recognize before calculating that:
+
+$$P(A\mid B)>P(A).$$
+
+Now let us verify it mathematically.
+
+$$P(B)
+=
+(0.9)(0.4)+(0.1)(0.6)$$
+
+$$=0.36+0.06
+=
+0.42.$$
+
+Therefore:
+
+$$P(A\mid B)
+=
+\frac{0.36}{0.42}
+\approx0.857.$$
+
+So the evidence moves our probability from:
+
+$$0.40\rightarrow0.857.$$
+
+</details>
+
+
+:::
+
+------------------------------------------------------------------------
+

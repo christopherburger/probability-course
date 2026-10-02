@@ -51,6 +51,193 @@
     "text": "In earlier counting problems, we asked how many outcomes are possible and how many satisfy a condition. For a finite uniform sample space, probability is normalized counting:\nP(A) = |A| / |Ω|\nProbability theory generalizes this idea. Instead of requiring every outcome to have equal weight, we require the assignment of probability to behave consistently.\nOutcome — One possible result of an experiment.\nSample space Ω — The collection of all possible outcomes.\nEvent A — A subset of Ω; the outcomes for which some condition is true.\nP(A) — The probability assigned to event A.\nThe transition into Week 4 represents a dangerous pivot point. Up until now, students have lived entirely in a discrete, uniform world where probability is just counting: P(A) = \\frac{\\vert{}A\\vert{}}{\\vert{}\\Omega\\vert{}}.\nIf you do not explicitly destroy this assumption before introducing the formal axioms, students will drag the “Uniform Measure Fallacy” into every subsequent topic. They will try to solve continuous probability, Markov chains, and Bayesian updates by just counting states and dividing, which will lead to catastrophic modeling errors.\nHere is how to structure Week 4 to transition them from raw counting to formal measure theory, using Kolmogorov’s axioms as the scaffolding.\nPhase 1: Breaking the Uniform Assumption (The “Loaded Dice” Diagnostic)\nBefore you teach the axioms, you must prove to them that counting is no longer sufficient.\nThe Setup: Introduce a game with a biased coin or a loaded die. For example, a coin where P(\\text{Heads}) = \\frac{2}{3}.\nAsk them to calculate the probability of getting exactly one Head in two flips.\nThe Trap: Students who are stuck in Week 3 will define the state space as \\Omega = \\{HH, HT, TH, TT\\}. They will identify the event as A = \\{HT, TH\\}. They will count the states and proudly state P(A) = \\frac{2}{4} = \\frac{1}{2}.\nThe Destruction: You must stop the class here and ruthlessly expose the flaw.\nAsk them: “Does your mathematical model match the physical reality of the loaded coin?”\nForce them to realize that the state HH is physically much heavier (more likely) than the state TT.\nThe Epiphany: Counting states only works if every state has the exact same “weight.” Once the universe becomes non-uniform, counting is useless. We need a new mathematical machine."
   },
   {
+    "objectID": "lectures/bayes_theorem.html",
+    "href": "lectures/bayes_theorem.html",
+    "title": "6: Bayes’ Theorem",
+    "section": "",
+    "text": "We have just learned from our discussion on conditional probability: P(A\\cap B) = P(A\\mid B)P(B).\nBut we can describe the same intersection in the other direction: P(A\\cap B) = P(B\\mid A)P(A).\nBoth expressions describe exactly the same event.\nTherefore:\nP(A\\mid B)P(B)\n=\nP(B\\mid A)P(A).\nIf we divide by P(B):\n\\boxed{\nP(A\\mid B)\n=\n\\frac{P(B\\mid A)P(A)}\n{P(B)}\n}\nThis is Bayes’ theorem.\nNote that Bayes’ theorem is not a new axiom. It follows directly from our original definition of conditional probability.",
+    "crumbs": [
+      "Foundations",
+      "6: Bayes' Theorem"
+    ]
+  },
+  {
+    "objectID": "lectures/bayes_theorem.html#applying-bayes-theorem",
+    "href": "lectures/bayes_theorem.html#applying-bayes-theorem",
+    "title": "6: Bayes’ Theorem",
+    "section": "Applying Bayes’ Theorem",
+    "text": "Applying Bayes’ Theorem\nSuppose:\n\nA = some hypothesis\nB = observed evidence\n\nWe may know:\nP(A)\nand\nP(B\\mid A).\nBut what we want is:\nP(A\\mid B).\nBayes lets us move from:\n\\boxed{\\text{hypothesis}\\rightarrow\\text{evidence}}\nto:\n\\boxed{\\text{evidence}\\rightarrow\\text{hypothesis}}\nBayes’s theorem gives us a systematic way to reverse a conditional probability.\n\nSuppose a medical test comes back positive. What is the probability that the patient actually has the disease?\nInstinctively, we want to know:\nP(\\text{Disease}\\mid\\text{Positive}).\nBut suppose the test manufacturer tells us:\n\n“If a person has the disease, the test is positive 99% of the time.”\n\nThat statement is:\nP(\\text{Positive}\\mid\\text{Disease})=0.99.\nAre those the same thing?\nNo.\nThis is the central problem.\n\n\\boxed{\nP(\\text{Positive}\\mid\\text{Disease})\n\\neq\nP(\\text{Disease}\\mid\\text{Positive})\n}\n\nin general.\nThe first asks:\n\nHow well does the test detect disease?\n\nThe second asks:\n\nGiven the test result, how plausible is disease?\n\nBayes’ theorem lets us answer the second question.",
+    "crumbs": [
+      "Foundations",
+      "6: Bayes' Theorem"
+    ]
+  },
+  {
+    "objectID": "lectures/bayes_theorem.html#prior",
+    "href": "lectures/bayes_theorem.html#prior",
+    "title": "6: Bayes’ Theorem",
+    "section": "Prior",
+    "text": "Prior\nP(A)\nThe probability assigned to A before considering the new evidence.\nWe can think of this as: What did we believe before seeing B?",
+    "crumbs": [
+      "Foundations",
+      "6: Bayes' Theorem"
+    ]
+  },
+  {
+    "objectID": "lectures/bayes_theorem.html#likelihood",
+    "href": "lectures/bayes_theorem.html#likelihood",
+    "title": "6: Bayes’ Theorem",
+    "section": "Likelihood",
+    "text": "Likelihood\n\nP(B\\mid A)\n\nHow probable is the observed evidence if A is true?\nWe can think of this as: If A were true, how expected would this evidence be?",
+    "crumbs": [
+      "Foundations",
+      "6: Bayes' Theorem"
+    ]
+  },
+  {
+    "objectID": "lectures/bayes_theorem.html#evidence",
+    "href": "lectures/bayes_theorem.html#evidence",
+    "title": "6: Bayes’ Theorem",
+    "section": "Evidence",
+    "text": "Evidence\nP(B)\nThe overall probability of observing B.\nWe can think of this as: How surprising is this evidence before deciding which hypothesis is true?",
+    "crumbs": [
+      "Foundations",
+      "6: Bayes' Theorem"
+    ]
+  },
+  {
+    "objectID": "lectures/bayes_theorem.html#posterior",
+    "href": "lectures/bayes_theorem.html#posterior",
+    "title": "6: Bayes’ Theorem",
+    "section": "Posterior",
+    "text": "Posterior\nP(A\\mid B)\nThe probability of A after incorporating the evidence.\nWe can think of this as: Now that we have seen B, what should we believe about A?",
+    "crumbs": [
+      "Foundations",
+      "6: Bayes' Theorem"
+    ]
+  },
+  {
+    "objectID": "lectures/bayes_theorem.html#using-bayesian-terminology",
+    "href": "lectures/bayes_theorem.html#using-bayesian-terminology",
+    "title": "6: Bayes’ Theorem",
+    "section": "Using Bayesian Terminology",
+    "text": "Using Bayesian Terminology\n\n\\boxed{\n\\text{Prior}\n\\quad+\\quad\n\\text{Evidence}\n\\quad\\longrightarrow\\quad\n\\text{Posterior}\n}\n\nMore specifically:\n\n\\boxed{\nP(A)\n+\nB\n\\longrightarrow\nP(A\\mid B)\n}\n\nThe likelihood describes how well A predicts the evidence.\nSo:\n\n\\boxed{\n\\text{Prior}\n\\times\n\\text{Likelihood}\n\\div\n\\text{Evidence}\n=\n\\text{Posterior}\n}\n\nor\n\n\\boxed{\nP(A\\mid B)\n=\n\\frac{\nP(B\\mid A)P(A)\n}{\nP(B)\n}\n}",
+    "crumbs": [
+      "Foundations",
+      "6: Bayes' Theorem"
+    ]
+  },
+  {
+    "objectID": "lectures/bayes_theorem.html#using-counting",
+    "href": "lectures/bayes_theorem.html#using-counting",
+    "title": "6: Bayes’ Theorem",
+    "section": "Using Counting",
+    "text": "Using Counting\nBefore using the formula, we will solve the problem by counting.\nSuppose we test 10,000 people.\nPeople with disease:\n0.01(10,000)=100.\nOf those 100:\n0.99(100)=99\ntest positive.\n\n\nPeople without disease:\n10,000-100=9,900.\nOf those:\n0.05(9,900)=495\ntest positive.\n\n\nSo the positive tests consist of:\n99+495=594.\nOnly 99 of those 594 people actually have the disease.\n\n\nTherefore:\nP(D\\mid T)\n=\n\\frac{99}{594}\n\\approx0.167.\n\nSo:\n\\boxed{\nP(D\\mid T)\\approx16.7\\%\n}\n\ndespite a 99% sensitivity.",
+    "crumbs": [
+      "Foundations",
+      "6: Bayes' Theorem"
+    ]
+  },
+  {
+    "objectID": "lectures/bayes_theorem.html#using-bayes",
+    "href": "lectures/bayes_theorem.html#using-bayes",
+    "title": "6: Bayes’ Theorem",
+    "section": "Using Bayes",
+    "text": "Using Bayes\nWe know:\nP(D)=0.01\nP(T\\mid D)=0.99\nP(T\\mid D^c)=0.05.\nFirst calculate the probability of a positive test.\nThere are two ways to get a positive result:\n\nThe person has the disease and tests positive.\nThe person does not have the disease and tests positive.\n\nTherefore:\nP(T)\n=\nP(T\\mid D)P(D)\n+\nP(T\\mid D^c)P(D^c).\n\nSo:\nP(T)\n=\n(0.99)(0.01)\n+\n(0.05)(0.99).\n\nThus:\nP(T)=0.0099+0.0495=0.0594.\nNow apply Bayes:\nP(D\\mid T)\n=\n\\frac{P(T\\mid D)P(D)}\n{P(T)}.\nTherefore:\nP(D\\mid T)\n=\n\\frac{(0.99)(0.01)}\n{0.0594}\n\\approx0.167.\n\nThis is same answer we found using counting.\n\nThis example illustrates an important point in that people often think:\n\n“The test is 99% accurate!”\n\nBut that statement is ambiguous.\nThe 99% refers to P(T\\mid D).\nIt does not refer to P(D\\mid T).\nThe large number of healthy people matters. Even a relatively small false-positive rate can generate many false positives when the underlying condition is rare.\nThis is known as the base-rate effect.",
+    "crumbs": [
+      "Foundations",
+      "6: Bayes' Theorem"
+    ]
+  },
+  {
+    "objectID": "lectures/bayes_theorem.html#sequential-updating",
+    "href": "lectures/bayes_theorem.html#sequential-updating",
+    "title": "6: Bayes’ Theorem",
+    "section": "Sequential Updating",
+    "text": "Sequential Updating\nSuppose we start with:\nP(B)=0.25.\nAfter observing H_1:\nP(B\\mid H_1).\nThen after observing H_2:\nP(B\\mid H_1,H_2).\nThen:\nP(B\\mid H_1,H_2,H_3).\nAnd so on. Each posterior can become the prior for the next update.\nWe can view the process as:\nPrior\n  │\n  ▼\nObserve evidence\n  │\n  ▼\nPosterior\n  │\n  ▼\nNew prior\n  │\n  ▼\nObserve more evidence\n  │\n  ▼\nNew posterior",
+    "crumbs": [
+      "Foundations",
+      "6: Bayes' Theorem"
+    ]
+  },
+  {
+    "objectID": "lectures/bayes_theorem.html#reversing-the-conditional",
+    "href": "lectures/bayes_theorem.html#reversing-the-conditional",
+    "title": "6: Bayes’ Theorem",
+    "section": "Reversing the conditional",
+    "text": "Reversing the conditional\nP(B\\mid A)=0.99 does not imply P(A\\mid B)=0.99.",
+    "crumbs": [
+      "Foundations",
+      "6: Bayes' Theorem"
+    ]
+  },
+  {
+    "objectID": "lectures/bayes_theorem.html#ignoring-the-base-rate",
+    "href": "lectures/bayes_theorem.html#ignoring-the-base-rate",
+    "title": "6: Bayes’ Theorem",
+    "section": "Ignoring the base rate",
+    "text": "Ignoring the base rate\nIt is incorrect to focus entirely on:\nP(B\\mid A).\nBut Bayes also requires:\nP(A).\nThe prior matters.",
+    "crumbs": [
+      "Foundations",
+      "6: Bayes' Theorem"
+    ]
+  },
+  {
+    "objectID": "lectures/bayes_theorem.html#forgetting-alternative-explanations",
+    "href": "lectures/bayes_theorem.html#forgetting-alternative-explanations",
+    "title": "6: Bayes’ Theorem",
+    "section": "Forgetting alternative explanations",
+    "text": "Forgetting alternative explanations\nAlways remember to include all alternative explanations. If you calculate:\nP(B\\mid A)P(A)\nand stop.\nThat quantity is:\nP(A\\cap B),\nnot\nP(A\\mid B).\nRemember that the denominator must account for all ways the evidence could occur.",
+    "crumbs": [
+      "Foundations",
+      "6: Bayes' Theorem"
+    ]
+  },
+  {
+    "objectID": "lectures/bayes_theorem.html#thinking-the-prior-is-arbitrary",
+    "href": "lectures/bayes_theorem.html#thinking-the-prior-is-arbitrary",
+    "title": "6: Bayes’ Theorem",
+    "section": "Thinking the prior is arbitrary",
+    "text": "Thinking the prior is arbitrary\nA prior is not necessarily a personal guess.\nIt can represent:\n\nknown population frequencies\nhistorical data\nphysical constraints\nprevious experiments\nan explicitly chosen modeling assumption\n\nThe important thing is that the source of the prior should be made explicit.",
+    "crumbs": [
+      "Foundations",
+      "6: Bayes' Theorem"
+    ]
+  },
+  {
+    "objectID": "lectures/bayes_theorem.html#assuming-causality",
+    "href": "lectures/bayes_theorem.html#assuming-causality",
+    "title": "6: Bayes’ Theorem",
+    "section": "Assuming Causality",
+    "text": "Assuming Causality\nA common error is to see:\nP(B\\mid A)\nand think:\n\n“A causes B.”\n\nBut conditional probability does not establish causation.\nFor example:\nP(\\text{ice cream sales}\\mid\\text{high temperature})\ncan be high without ice cream sales being the cause of high temperature.\nLikewise:\nP(\\text{test positive}\\mid\\text{disease})\ndoes not mean that the disease is the only causal explanation for the test result.",
+    "crumbs": [
+      "Foundations",
+      "6: Bayes' Theorem"
+    ]
+  },
+  {
+    "objectID": "lectures/bayes_theorem.html#misconceptions-about-bayes-theorem",
+    "href": "lectures/bayes_theorem.html#misconceptions-about-bayes-theorem",
+    "title": "6: Bayes’ Theorem",
+    "section": "Misconceptions About Baye’s Theorem",
+    "text": "Misconceptions About Baye’s Theorem\nNote that Bayes’ theorem does not say:\n\nthat prior beliefs are always subjective;\nthat evidence automatically proves a hypothesis;\nthat the most probable hypothesis is certainly true;\nthat P(A\\mid B)=P(B\\mid A);\nthat a high likelihood automatically implies a high posterior;\nthat probability itself determines what decision should be made.\n\nBayes is only a mathematical rule for updating probability assignments when evidence arrives.",
+    "crumbs": [
+      "Foundations",
+      "6: Bayes' Theorem"
+    ]
+  },
+  {
+    "objectID": "lectures/bayes_theorem.html#bayes-and-decision-making",
+    "href": "lectures/bayes_theorem.html#bayes-and-decision-making",
+    "title": "6: Bayes’ Theorem",
+    "section": "Bayes and Decision-Making",
+    "text": "Bayes and Decision-Making\nA posterior probability is often not the final goal.\nSuppose:\nP(\\text{defective}\\mid\\text{measurement})=0.08.\nWhat should we do?\nThat depends on:\n\ncost of a false positive\ncost of a false negative\ncost of additional testing\nconsequences of the decision\n\nWe can use probability to inform the decision. But probability does not, by itself, determine the optimal decision.",
+    "crumbs": [
+      "Foundations",
+      "6: Bayes' Theorem"
+    ]
+  },
+  {
     "objectID": "lectures/axioms.html",
     "href": "lectures/axioms.html",
     "title": "4: Axioms of Probability",
