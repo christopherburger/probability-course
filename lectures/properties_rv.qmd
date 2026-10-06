@@ -1,0 +1,189 @@
+---
+title: "Properties of Random Variables"
+---
+
+# The Expected Value
+
+The expected value (commonly called the mean) is denoted as $E[X]$. This represents the **probability-weighted** average of all possible outcomes for a random variable. 
+
+## Discrete Random Variables
+
+For Discrete RVs, the expectation is calculated by multiplying each possible value $x$ by its probability $p(x)$ and summing them all together: 
+
+$$E[X]=\sum_{x:p(x)>0}xp(x)$$
+
+
+- $Binomial(n, p)$: $E[X]=np$. 
+
+- -If we think about what a binomal random variable represents this is intuitive: if you flip a coin 10 times ($n=10$) with a 50% chance of heads ($p=0.5$), you expect 5 heads.   
+
+- $Geometric(p)$: $E[X]=\frac{1}{p}$. 
+
+- - Like the binomial, this is easy to reason our way towards. If you have a 1 in 4 chance of success ($p=0.25$), you would expect it to take 4 trials to get your first success.  
+
+- $Poisson(\lambda)$: $E[X]=\lambda$. 
+
+- - This follows directly from the definition of the Poisson distribution, where $\lambda$ represents the average rate of occurrence. 
+
+## Continuous Random Variables
+
+Now since the variable can take on an uncountably infinite number possible values, the summation must be replaced replaced by an integral over the entire real line: $$E[X]=\int_{-\infty}^{\infty}xf(x)dx$$
+
+Like for Discrete RVs we have product of the value $x$ and its probability density $f(x)$ but now our operation is integration. 
+
+- Uniform(a,b): $E[X]=\frac{a+b}{2}$. 
+- - This calculates the exact midpoint of the interval between $a$ and $b$.  
+
+- Exponential(λ): $E[X]=\frac{1}{\lambda}$. 
+- - The expected time between events is the inverse of the rate parameter.   
+ 
+- Normal($\mu,\sigma^{2}$): $E[X]=\mu$. 
+
+- - The expected value is simply the mean parameter $\mu$, which sits at the exact center of the bell curve. 
+
+## Calculating Expectations
+
+We will now consider the question of how to calculate the expection if we have some function applied to our random variable, denoted as $Y = g(X)$.
+
+The good news is that we do not need to find the new probability distribution for $Y$ and instead can calculate the expectation using the original distribution of $X$.
+
+
+- Continuous RVs: You can evaluate the expectation by integrating the function $g(x)$ multiplied by the original probability density function $f_{X}(x)$: $E[Y]=\int_{-\infty}^{\infty}yf_{Y}(y)dy=E[g(X)]=\int_{-\infty}^{\infty}g(x)f_{X}(x)dx$.   
+
+- Discrete RVs: Similarly, you sum the function $g(x)$ multiplied by the original probability mass function $p(x)$: $E[Y]=\sum_{x:p(x)>0}g(x)p(x)$. 
+
+::: example-box
+
+Let $X\sim Uniform(0,1),Y=X^{3}$, find $E[Y]$   
+
+First, we need to think about what is meant by the PDF for a $Uniform(0,1)$ distribution. 
+
+Because the interval length is 1, the constant density $f_X(x)$ is just $1$ for $0 < x < 1$, and $0$ elsewhere.
+
+Applying the continuous formula for $g(x) = x^3$:$$E[Y] = \int_{0}^{1} x^{3} (1) dx$$
+
+$$E[Y] = \left[ \frac{x^{4}}{4} \right]_{0}^{1}$$
+
+$$E[Y] = \frac{1^{4}}{4} - \frac{0^{4}}{4} = \frac{1}{4}$$
+
+:::
+
+::: example-box
+
+Let $X$ be an arbitrary random variable, and let $a, b$ be real-valued constants. What is $E[aX+b]$?   
+
+This is known as the "linearity of expectation." 
+
+We will use the continuous formula here (though the proof is functionally the same for discrete variables replacing the integral with a summation):
+
+$$E[aX+b] = \int_{-\infty}^{\infty} (ax+b)f_{X}(x)dx$$
+
+Distributing the integral yields:
+
+$$E[aX+b] = \int_{-\infty}^{\infty} axf_{X}(x)dx + \int_{-\infty}^{\infty} bf_{X}(x)dx$$
+
+Factoring the constants out of the integrals:
+
+$$E[aX+b] = a \int_{-\infty}^{\infty} xf_{X}(x)dx + b \int_{-\infty}^{\infty} f_{X}(x)dx$$
+
+We know that $\int xf_{X}(x)dx$ is the definition of $E[X]$, and $\int f_{X}(x)dx$ is the total probability which always equals $1$. 
+
+Therefore, this simplifies to:
+
+$$E[aX+b] = aE[X] + b$$
+
+This linearity property gives us some substantial advantages when it comes to simplification.
+
+- We can split up sums of random variables in an expectation into the sum of the expectations.
+
+- We can pull through constant multiplicative values through the expectation.
+
+- We also get that the expected value of a constant is the constant itself.
+
+:::
+
+## Moments
+
+n-th moment: This is the expected value of the random variable raised to the power of $n$, denoted as $E[X^{n}]$. 
+
+The first moment ($n=1$) is just the mean, $E[X]$.   
+
+n-th central moment: This calculates the expected value of the difference between the random variable and its mean, raised to the $n$-th power: $E[(X-E[X])^{n}]$. 
+
+It measures how the distribution behaves around its center. 
+
+# The Variance
+
+The variance, $Var(X)$, is the second central moment, $E[(X-E[X])^{2}]$. 
+
+It measures the average squared distance from the mean, quantifying the spread of the distribution. 
+
+## An Alternative Formula
+
+$Var(X)=E[X^{2}]-(E[X])^{2}$
+
+::: example-box
+Show that $Var(X)=E[X^{2}]-(E[X])^{2}$.
+
+Using the definition of variance:
+
+$$Var(X) = E[(X-E[X])^{2}]$$
+
+By expanding the interior we have:
+
+$$E[(X^2 - 2XE[X] + (E[X]^2)]]$$
+
+Then applying the linearity of expectation:
+
+$$E[X^2] - 2E[XE[X]] + E[(E[X])^2]$$
+
+Now, the expactation results in a number, which is a constant value and so this can be pulled out of the expectation.
+
+$$E[X^2] - 2E[X]E[X] + (E[X])^2$$
+
+Simplifying gives us:
+
+$$E[X^{2}]-(E[X])^{2}$$
+
+:::
+
+::: example-box
+
+$X$ output of tossing a die, find $Var(X)$   Let $X$ be the result of a standard 6-sided die roll. Each outcome (1, 2, 3, 4, 5, 6) has a probability of $1/6$. To use the computational formula, we need $E[X]$ and $E[X^{2}]$.First, calculate the mean, $E[X]$:$$E[X] = \sum_{x=1}^{6} x p(x) = 1\left(\frac{1}{6}\right) + 2\left(\frac{1}{6}\right) + \dots + 6\left(\frac{1}{6}\right)$$$$E[X] = \frac{1+2+3+4+5+6}{6} = \frac{21}{6} = \frac{7}{2}$$Next, calculate the second moment, $E[X^{2}]$:$$E[X^2] = \sum_{x=1}^{6} x^2 p(x) = 1^2\left(\frac{1}{6}\right) + 2^2\left(\frac{1}{6}\right) + \dots + 6^2\left(\frac{1}{6}\right)$$$$E[X^2] = \frac{1+4+9+16+25+36}{6} = \frac{91}{6}$$Now, plug both into the variance formula:$$Var(X) = E[X^2] - (E[X])^2$$$$Var(X) = \frac{91}{6} - \left(\frac{7}{2}\right)^2$$$$Var(X) = \frac{91}{6} - \frac{49}{4} = \frac{182}{12} - \frac{147}{12} = \frac{35}{12}$$
+
+:::
+
+::: example-box
+$X\sim\mathcal{N}(\mu,\sigma^{2})$, find $Var(X)$   
+This is essentially a definitional question. By standard notation for the Normal distribution, the first parameter ($\mu$) is the mean, and the second parameter ($\sigma^{2}$) is the variance. So, $Var(X) = \sigma^{2}$. (If you needed to prove this from scratch, you would evaluate the integral $\int_{-\infty}^{\infty}(x-\mu)^2 \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}} dx$, which integrates out to $\sigma^{2}$).
+:::
+
+
+
+
+# Joint Distributions
+
+Jointly Distributed RVs introduces scenarios where we are tracking multiple random variables simultaneously rather than just one in isolation. The slide acts as an outline with several blank formulas that we can fill in with their standard definitions:   Joint PMF / PDF:For discrete variables, the joint Probability Mass Function is $p_{X,Y}(x,y) = P(X=x, Y=y)$. It gives the probability that $X$ takes the value $x$ and $Y$ takes the value $y$ at the same time.For continuous variables, the joint Probability Density Function is $f_{X,Y}(x,y)$. To find the probability that the variables fall into a certain 2D region, you take the double integral of this function over that region.Joint CDF: The joint Cumulative Distribution Function calculates the probability that both variables are less than or equal to their respective threshold values. It applies to both discrete and continuous variables: $F_{X,Y}(x,y) = P(X \le x, Y \le y)$.   $E[g(X,Y)]=$: This is the extension of calculating the expectation of a function, now with two variables.   Discrete: $E[g(X,Y)] = \sum_{x}\sum_{y} g(x,y)p_{X,Y}(x,y)$Continuous: $E[g(X,Y)] = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} g(x,y)f_{X,Y}(x,y)dxdy$$E[\sum_{i=1}^{N}a_{i}X_{i}]=$: This formula represents a vital concept called the Linearity of Expectation applied to multiple variables. The expectation of a sum is always equal to the sum of the expectations, meaning:
+   $$E\left[\sum_{i=1}^{N}a_{i}X_{i}\right] = \sum_{i=1}^{N}a_{i}E[X_{i}]$$
+   
+   Crucially, this property holds absolutely true whether the random variables are independent or not.
+
+
+::: example-box
+
+   The Expected Sum of 10 Dice
+The problem asks for the expected sum obtained when 10 fair dice are rolled.
+Rather than trying to find the massive, complicated probability distribution for the sum of 10 dice (which ranges from 10 to 60), we define the total sum $X$ as the addition of 10 individual random variables:
+   $$X = X_1 + X_2 + \dots + X_{10}$$Here, $X_i$ represents the outcome of the $i$-th die roll. We already calculated the expected value of a single die roll to be $3.5$ (or $7/2$). Applying the linearity of expectation, we can simply sum the individual expectations:$$E[X] = E[X_1 + X_2 + \dots + X_{10}] = E[X_1] + E[X_2] + \dots + E[X_{10}]$$$$E[X] = 10 \times 3.5 = 35$$The expected sum is 35.
+
+:::
+
+
+::: example-box
+
+The Hat Problem
+At a party, $N$ men throw their hats into the center of a room. The hats are mixed up, each man randomly selects one, and we need to find the expected number of men who select their own hats.   Trying to calculate the exact probability of 0, 1, 2, or $N$ men getting their hats requires complex combinatorics (derangements). Instead, we use Indicator Random Variables.Let $I_i$ be an indicator for the $i$-th man:$I_i = 1$ if man $i$ gets his own hat.$I_i = 0$ if man $i$ does not.The total number of men who get their own hat ($X$) is the sum of these indicators:$$X = I_1 + I_2 + \dots + I_N$$To find the expected value of an indicator variable, we just find the probability of the event occurring. Since the hats are completely mixed up, the chance that man $i$ randomly grabs his specific hat out of the pile of $N$ hats is simply $1/N$. Therefore, $E[I_i] = 1/N$.Now we apply linearity of expectation. Crucially, this works even though the variables are not independent (if man 1 grabs man 2's hat, man 2's probability is affected). Linearity of expectation holds regardless of independence:$$E[X] = E[I_1] + E[I_2] + \dots + E[I_N]$$$$E[X] = \frac{1}{N} + \frac{1}{N} + \dots + \frac{1}{N} \quad \text{(summed } N \text{ times)}$$$$E[X] = N \left( \frac{1}{N} \right) = 1$$The expected number of men who get their own hat is exactly 1, completely regardless of whether there are 5 men or 5,000 men at the party.
+:::
+
+
+# Moment Generating Functions

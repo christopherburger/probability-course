@@ -1,0 +1,116 @@
+---
+title: "Continuous Random Variables"
+---
+
+Continuous RVs shifts focus to variables that can take on an infinite number of possible values within a given continuous range.
+
+# The Probability Density Function
+
+Probability Density Function (PDF): Denoted as $f_{X}(x)$, the PDF replaces the PMF used for discrete variables. Because continuous variables have infinite possible exact values, the probability of any single exact value is zero. 
+
+Instead, you calculate the probability that $X$ falls within a specific set of real values, $B$, by taking the integral of the PDF over that region: $P(X\in B)=\int_{B}f(x)dx$. 
+
+# The Continuous CDF
+
+The Cumulative Distribution Function $F(z)$ evaluates the total accumulated probability up to a value $z$ by integrating the PDF from negative infinity to $z$: $F(z)=\int_{-\infty}^{z}f(x)dx$. 
+
+# Common Continuous Random Variables
+
+## Uniform
+
+The Uniform distribution, denoted $X\sim Uniform(a,b)$, represents a variable where all outcomes in the interval from $a$ to $b$ are equally likely. 
+
+The PDF is flat and constant over this interval: $f(x)=\frac{1}{b-a}$ for $a<x<b$, and $0$ otherwise. 
+
+::: example-box
+
+What is the CDF, $F(x)$,  of a uniform random variable $X \sim U(a,b)$?
+
+As we have the PDF, we need to integrate this over negative infinity to $x$. We can make this easier by appealing to the known properties of integration and partition the limits of integration into three intervals:
+
+For $x \le a$, the PDF is 0, meaning no probability has accumulated yet:
+
+$$F(x) = \int_{-\infty}^{x} 0 \, dt = 0$$For $a < x < b$, we integrate the constant PDF from the start of the interval $a$ up to the variable $x$:
+
+$$F(x) = \int_{a}^{x} \frac{1}{b-a} \, dt = \left[ \frac{t}{b-a} \right]_{a}^{x} = \frac{x-a}{b-a}$$
+
+For $x \ge b$, the accumulated probability has reached its maximum of 1, as we integrate over the entire valid interval from $a$ to $b$:
+
+$$F(x) = \int_{a}^{b} \frac{1}{b-a} \, dt = \left[ \frac{t}{b-a} \right]_{a}^{b} = \frac{b-a}{b-a} = 1$$
+
+Putting it all together, the CDF for a Uniform RV is expressed as the following piecewise function:
+
+$$F(x)=\begin{cases}0,&x \le a\\ \frac{x-a}{b-a},&a<x<b\\ 1,&x \ge b\end{cases}$$
+
+:::
+
+## Exponential
+
+The Exponential Random Variable, denoted as $X\sim Exp(\lambda)$ is often used to model the time elapsed between independent continuous events. 
+
+The PDF for this variable is $f(x)=\lambda e^{-\lambda x}$ for $x\ge0$   (And implicitly, $f(x)=0$ for $x<0$)
+
+::: example-box
+
+What is the CDF, $F(x)$,  of a uniform random variable $X \sim Exp(\lambda)$?
+
+We can find this by evaluating the integral of the PDF from $0$ up to a given variable $x$ (assuming $x \ge 0$):   $$F(x) = \int_{0}^{x} \lambda e^{-\lambda t} dt$$
+
+To solve this, we can apply standard integration rules. The antiderivative of $\lambda e^{-\lambda t}$ is $-e^{-\lambda t}$. 
+
+We evaluate this from $0$ to $x$:$$F(x) = \left[ -e^{-\lambda t} \right]_{0}^{x}$$
+
+$$F(x) = (-e^{-\lambda x}) - (-e^{-\lambda(0)})$$
+
+$$F(x) = -e^{-\lambda x} - (-e^{0})$$$$F(x) = -e^{-\lambda x} - (-1)$$
+
+$$F(x) = 1 - e^{-\lambda x}$$
+
+For any value less than 0, no probability has accumulated. 
+
+Therefore, the complete CDF for an Exponential RV is:$$F(x)=\begin{cases}1 - e^{-\lambda x},&x\ge0\\ 0,&x<0\end{cases}$$
+
+:::
+
+## Gamma 
+
+The Gamma Random Variable, denoted $X\sim Gamma(\alpha,\lambda)$ is often used to model wait times until a specific number of events occur especially in the context of reliability and aging.
+
+- Gamma PDF: The probability density function is defined as $f(x)=\frac{\lambda e^{-\lambda x}(\lambda x)^{\alpha-1}}{\Gamma(\alpha)}$ for $x\ge0$, and $0$ for $x<0$. 
+
+This distribution relies on two strictly positive parameters: $\alpha>0$ and $\lambda>0$.  
+
+ The Gamma Function: The denominator in the PDF features the Gamma function itself, which is defined by the integral $\Gamma(\alpha)=\int_{0}^{\infty}e^{-x}x^{\alpha-1}dx$. 
+ 
+ This component acts as a normalizing constant to ensure the total probability across the distribution integrates to 1. 
+
+Factorial Relationship: The slide highlights that the Gamma function serves as a continuous extension of the factorial function, following the recursive rule $\Gamma(\alpha)=(\alpha-1)\Gamma(\alpha-1)$.   
+
+Integer Values: When evaluating the Gamma function for an integer $n$, it simplifies cleanly to a standard factorial: $\Gamma(n)=(n-1)!$. The slide notes that this specific integer relationship can be mathematically proven using induction.   
+
+
+### Exponential as a Special Case of the Gamma Distribution
+
+### The Memoryless Property
+
+### 
+
+## Normal
+
+the Normal Random Variable, denoted as $X\sim\mathcal{N}(\mu,\sigma^{2})$. 
+
+In this notation, $\mu$ represents the mean (the center of the distribution) and $\sigma^2$ represents the variance (the spread).  
+
+ The slide highlights the two main components of this distribution:Normal PDF: The probability density function that creates the classic "bell curve" shape is given as $f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}}$. 
+ 
+   Linear Transformations: The slide ends with an open question: If you create a new variable $Y=\alpha X+\beta$, what is the distribution of $Y$, or $Y \sim ?$   
+   
+   A fundamental property of the Normal distribution is that any linear transformation of a strictly Normal random variable results in another Normal random variable. 
+   
+   To define the distribution of $Y$, we simply need to calculate its new mean and variance:New Mean: Expected values shift linearly, so the new mean is simply $\alpha\mu + \beta$.
+   
+   New Variance: Variance is a measure of spread, so it is unaffected by the constant addition of $\beta$. 
+   
+   However, multiplying the variable by $\alpha$ scales the variance by the square of that constant, resulting in $\alpha^2\sigma^2$.
+   
+   Putting this together, the answer to the slide's prompt is that $Y$ follows a Normal distribution with the updated parameters:$$Y \sim \mathcal{N}(\alpha\mu + \beta, \alpha^2\sigma^2)$$

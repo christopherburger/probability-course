@@ -1,0 +1,144 @@
+---
+title: "Discrete Random Variables"
+---
+
+A discrete random variable is a rule that assigns distinct, separated numerical values to the outcomes of a random process. 
+
+Its set of possible values is **countable**, which formally is a mapping between the values and the set of natural numbers. Informally this means you can list the values out, either finitely (like $\{1, 2, 3\}$) or infinitely (like the non-negative integers $\{0, 1, 2, \dots\}$).
+
+# Probability Mass Function
+
+Any discrete random variable $X$ is defined by its Probability Mass Function (PMF), denoted $p(x) = P(X = x)$. The PMF is the probability of the outcome $x$.
+
+The PMF has the following properties (which should seem familiar based on our discussion of the axioms earlier):
+
+- **Non-negativity**: Every probability must be zero or positive:
+$$p(x) \ge 0$$
+
+- **Total probability sums to 1**: Summing over all possible outcomes accounts for all possibilities:
+$$\sum_x p(x) = 1$$
+
+# Discrete CDF
+
+The CDF accumulates probability up to a threshold, $F(x) = P(X \le x) = \sum_{t \le x} p(t)$.
+
+Because probability concentrates at specific points with discrete random variables, $F(x)$ forms a step function that jumps upward by $p(x)$ at each supported value of $X$ and remains constant otherwise.
+
+# Common Discrete Random Variables
+
+## Bernoulli
+
+The Bernoulli random variable models a single trial with exactly two outcomes (commonly defined as success/failure). 
+
+The probability of success (1) is $p$, and the probability of failure (0) is $1-p$, where $p \in (0,1)$. Note that this interval is open, if we included the endpoints then there would be instances where the random variable would not be random at all as the probability of success or failure is extreme (guaranteed to happen).
+
+## Binomial
+
+The Binomial random variable extends the Bernoulli concept to $n$ independent trials, calculating the probability of getting exactly $i$ successes. 
+
+The PMF is given by $p(i)=\binom{n}{i}p^{i}(1-p)^{n-i}$ for $i=0,1,\dots,n$. 
+
+::: example-box
+An airplane works if at least half of its engines work. Assume that we can model the engine failing probability as $1-p$. 
+
+When is a 4-engine airplane safer than a 2-engine airplane?
+
+
+Since the probability of an engine failing is $1-p$, the probability of an engine functioning successfully must then be $1 - (1-p) = p$. 
+
+We can model the number of working engines using the Binomial distribution.
+
+For a 2-engine airplane to fly, at least 1 engine (half of 2) must work. 
+
+We sum the probabilities of exactly 1 and exactly 2 engines working (as these are mutually exclusive outcomes):
+
+$$P(\text{2-engine success}) = \binom{2}{1}p^{1}(1-p)^{1} + \binom{2}{2}p^{2}(1-p)^{0}$$
+
+$$P(\text{2-engine success}) = 2p(1-p) + p^{2} = 2p - p^{2}$$
+
+For a 4-engine airplane to fly, at least 2 engines (half of 4) must work. 
+
+We sum the probabilities of exactly 2, 3, and 4 engines working:
+
+$$P(\text{4-engine success}) = \binom{4}{2}p^{2}(1-p)^{2} + \binom{4}{3}p^{3}(1-p)^{1} + \binom{4}{4}p^{4}(1-p)^{0}$$
+
+$$P(\text{4-engine success}) = 6p^{2}(1 - 2p + p^{2}) + 4p^{3}(1-p) + p^{4}$$
+
+$$P(\text{4-engine success}) = 6p^{2} - 12p^{3} + 6p^{4} + 4p^{3} - 4p^{4} + p^{4} = 3p^{4} - 8p^{3} + 6p^{2}$$
+
+To find when the 4-engine airplane is safer, we set its success probability greater than or equal to the 2-engine airplane's success probability:
+
+$$3p^{4} - 8p^{3} + 6p^{2} \ge 2p - p^{2}$$
+
+$$3p^{4} - 8p^{3} + 7p^{2} - 2p \ge 0$$
+
+Factoring out $p$ gives:
+
+$$p(3p^{3} - 8p^{2} + 7p - 2) \ge 0$$
+
+This factors to:
+
+$$p(p-1)^{2}(3p-2) \ge 0$$
+
+Because $p$ is a probability between 0 and 1, $p$ is positive and $(p-1)^{2}$ is always positive. We can then divide by these terms without concern about division by zero or reversing the inequality. 
+
+Therefore, the inequality holds true only when:
+
+$$3p - 2 \ge 0$$
+
+$$p \ge 2/3$$
+
+So, a 4-engine airplane is safer than a 2-engine airplane only when the probability of a single engine working successfully is at least 2/3.
+
+:::
+
+## Geometric
+
+This models the number of independent trials required to achieve the first success. 
+
+The probability of needing exactly $i$ trials is given by $P(X=i)=(1-p)^{i-1}p$, for $i=1,2,\dots$. 
+
+We can think of this as experiencing exactly $i-1$ failures, all back-to-back, denoted by $(1-p)^{i-1}$, then followed immediately by one success, denoted by $p$. 
+
+## Negative Binomial
+
+
+## Poisson
+
+This distribution is used for modeling the number of discrete events that happen within a fixed unit of time or space. 
+
+The Probability Mass Function is $p(i)=P(X=i)=e^{-\lambda}\frac{\lambda^{i}}{i!}$, for $i=0,1,\dots$. 
+
+The parameter $\lambda$ represents the average rate of occurrence for these events.  
+
+### The Poisson Approximation to the Binomial
+
+The Poisson distribution can be used to approximate the Binomial distribution when the number of trials $n$ is large and the probability of success $p$ is small. In this case, you set $\lambda=np$.  
+
+
+::: example-box
+The average number of particles appearing in one second is 3.2. What's the probability that no more than 2 such particles appear in one second?
+
+
+We can solve this by defining a Poisson random variable $X$ representing the number of particles appearing in one second. 
+
+We are given the average rate $\lambda = 3.2$. And we need to find the probability that no more than 2 particles appear, which is $P(X \le 2)$. 
+
+Appealing to the compement rule we can sum the probabilities of exactly 0, 1, and 2 particles appearing:
+
+$$P(X \le 2) = P(X=0) + P(X=1) + P(X=2)$$
+
+Using the Poisson PMF formula $P(X=i)=e^{-\lambda}\frac{\lambda^{i}}{i!}$:
+
+$P(X=0) = e^{-3.2}\frac{3.2^0}{0!} = e^{-3.2}(1) = e^{-3.2}$$P(X=1) = e^{-3.2}\frac{3.2^1}{1!} = 3.2e^{-3.2}$$P(X=2) = e^{-3.2}\frac{3.2^2}{2!} = e^{-3.2}\frac{10.24}{2} = 5.12e^{-3.2}$
+
+Now, we sum these probabilities together:
+
+$$P(X \le 2) = e^{-3.2} + 3.2e^{-3.2} + 5.12e^{-3.2}$$
+
+$$P(X \le 2) = e^{-3.2}(1 + 3.2 + 5.12)$$
+
+$$P(X \le 2) = 9.32e^{-3.2}$$
+
+After calculating this, we get approximately $0.3799$, meaning there is about a 38% chance that 2 or fewer particles will appear in that one-second window.
+:::

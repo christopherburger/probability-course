@@ -1,0 +1,97 @@
+---
+title: "6: Random Variables"
+---
+
+A random varialbe is a mathematical mapping from our space $S$ to the real numbers.
+
+Recall that $S$ that is the set of all possible outcomes of our experiment.
+
+This mapping allows us to translate the probability of events into an associated numerical value.
+
+Thinking back to some of our earlier examples:
+
+Consider the experiment where we roll two dice. Instead of calculating probabilities for specific pairs of outcomes like (2,1), we can instead define a random variable $X$ as the sum of the dice. $X$ then maps the outcomes to the set ${2, 3, ..., 11, 12}.
+
+Now consider the experiment where we flip two coins. If $X$ is defined as the number of heads, then our state space is ${TT, HT, TH, HH}$ and this space is mapped to the set ${0,1,2}$. 
+
+The probability $P(X = 0) = \frac{1}{4}$ because we can see that is only one outcome $TT$.
+
+The probability $P(X = 1) = \frac{1}{2}$ because it accounts for both the $TH$ and $HT$ outcomes.
+
+---
+
+Random varibles can be described as either **discrete** or **continuous**.
+
+- Discrete random variables are used with discrete data, which means we are working with distinct countable values.
+
+- Continuous random variables can take on any real value within a continuous range.
+
+Each type of random variable will have their own dedicated discussion later on.
+
+
+# The Cumulative Distribution Function
+
+The Cumulative Distribution Function (CDF) calculates the probability that a random variable $X$ will take a value less than or equal to a specific number $z$. This is mathematically expressed as:
+$$ F_X(z) = P(X \leq z)$$
+
+The CDF has the following properties:
+
+- Nondecreasing: $F_X(z) \leq F_X(z + \epsilon), \epsilon > 0$
+
+- Upper limit of 1. That is, $F(\infty) = 1$
+
+- Lower limit of 0. That is, $F(-\infty) = 0$
+
+- $P(a \leq X \leq b) = F_X(b) - F_X(a)$
+
+::: example-box
+
+Let $P(1) = \frac{1}{2}, $P(2) = \frac{1}{4} and $P(3) = \frac{1}{4}.
+
+Find $F(x)$.
+
+The cumulative distribution function (CDF) $F(x) = P(X \le x)$ for this (discrete) random variable is a step function:
+
+$$F(x) = \begin{cases}  0, & x < 1 \\ \frac{1}{2} = 0.5, & 1 \le x < 2 \\ \frac{1}{2} + \frac{1}{4} = \frac{3}{4} = 0.75, & 2 \le x < 3 \\ 1.0, & x \ge 3  \end{cases}
+$$
+
+A plot of $F(x) is:
+
+```{python}
+#| echo: true
+#| code-fold: true
+#| 
+import matplotlib.pyplot as plt
+
+# Define intervals [x_start, x_end] and their corresponding F(x) values
+intervals = [
+    (-0.5, 1, 0.0),
+    (1, 2, 0.5),
+    (2, 3, 0.75),
+    (3, 4.5, 1.0)
+]
+
+plt.figure(figsize=(7, 4.5))
+
+for x_start, x_end, y in intervals:
+    plt.plot([x_start, x_end], [y, y], color='tab:blue', linewidth=2)
+
+plt.scatter([1, 2, 3], [0.5, 0.75, 1.0], color='tab:blue', s=45, zorder=3)
+
+plt.scatter([1, 2, 3], [0.0, 0.5, 0.75], color='white', edgecolor='tab:blue', linewidth=1.5, s=45, zorder=3)
+
+plt.title(r'Cumulative Distribution Function $F(x)$', fontsize=13, pad=10)
+plt.xlabel(r'$x$', fontsize=11)
+plt.ylabel(r'$F(x)$', fontsize=11)
+plt.xlim(-0.5, 4.5)
+plt.ylim(-0.1, 1.15)
+plt.yticks([0.0, 0.25, 0.5, 0.75, 1.0], ['0', '1/4', '1/2', '3/4', '1'])
+plt.xticks([0, 1, 2, 3, 4])
+plt.grid(True, linestyle='--', alpha=0.5)
+
+plt.tight_layout()
+plt.show()
+```
+
+:::
+
