@@ -1,0 +1,63 @@
+---
+title: "11: Variance"
+---
+
+# Moments
+
+n-th moment: This is the expected value of the random variable raised to the power of $n$, denoted as $E[X^{n}]$. 
+
+The first moment ($n=1$) is just the mean, $E[X]$.   
+
+n-th central moment: This calculates the expected value of the difference between the random variable and its mean, raised to the $n$-th power: $E[(X-E[X])^{n}]$. 
+
+It measures how the distribution behaves around its center. 
+
+# The Variance
+
+The variance, $Var(X)$, is the second central moment, $E[(X-E[X])^{2}]$. 
+
+It measures the average squared distance from the mean, quantifying the spread of the distribution. 
+
+## An Alternative Formula
+
+$Var(X)=E[X^{2}]-(E[X])^{2}$
+
+::: example-box
+Show that $Var(X)=E[X^{2}]-(E[X])^{2}$.
+
+Using the definition of variance:
+
+$$Var(X) = E[(X-E[X])^{2}]$$
+
+By expanding the interior we have:
+
+$$E[(X^2 - 2XE[X] + (E[X]^2)]]$$
+
+Then applying the linearity of expectation:
+
+$$E[X^2] - 2E[XE[X]] + E[(E[X])^2]$$
+
+Now, the expactation results in a number, which is a constant value and so this can be pulled out of the expectation.
+
+$$E[X^2] - 2E[X]E[X] + (E[X])^2$$
+
+Simplifying gives us:
+
+$$E[X^{2}]-(E[X])^{2}$$
+
+:::
+
+::: example-box
+
+$X$ output of tossing a die, find $Var(X)$   Let $X$ be the result of a standard 6-sided die roll. Each outcome (1, 2, 3, 4, 5, 6) has a probability of $1/6$. To use the computational formula, we need $E[X]$ and $E[X^{2}]$.First, calculate the mean, $E[X]$:$$E[X] = \sum_{x=1}^{6} x p(x) = 1\left(\frac{1}{6}\right) + 2\left(\frac{1}{6}\right) + \dots + 6\left(\frac{1}{6}\right)$$$$E[X] = \frac{1+2+3+4+5+6}{6} = \frac{21}{6} = \frac{7}{2}$$Next, calculate the second moment, $E[X^{2}]$:$$E[X^2] = \sum_{x=1}^{6} x^2 p(x) = 1^2\left(\frac{1}{6}\right) + 2^2\left(\frac{1}{6}\right) + \dots + 6^2\left(\frac{1}{6}\right)$$$$E[X^2] = \frac{1+4+9+16+25+36}{6} = \frac{91}{6}$$Now, plug both into the variance formula:$$Var(X) = E[X^2] - (E[X])^2$$$$Var(X) = \frac{91}{6} - \left(\frac{7}{2}\right)^2$$$$Var(X) = \frac{91}{6} - \frac{49}{4} = \frac{182}{12} - \frac{147}{12} = \frac{35}{12}$$
+
+:::
+
+::: example-box
+$X\sim\mathcal{N}(\mu,\sigma^{2})$, find $Var(X)$   
+This is essentially a definitional question. By standard notation for the Normal distribution, the first parameter ($\mu$) is the mean, and the second parameter ($\sigma^{2}$) is the variance. So, $Var(X) = \sigma^{2}$. (If you needed to prove this from scratch, you would evaluate the integral $\int_{-\infty}^{\infty}(x-\mu)^2 \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}} dx$, which integrates out to $\sigma^{2}$).
+:::
+
+
+
+

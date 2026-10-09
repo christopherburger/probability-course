@@ -2,13 +2,13 @@
 title: "3: The Principle of Inclusion-Exclusion"
 ---
 
-Before calculating, we need to identify what is being counted, what is distinguishable, and where overlap or separation occurs. Memorizing formulas is not the goal, these ideas emerge from common structure between similar problems.
+Before calculating, we need to identify what is being counted, what is distinguishable, and where overlap or separation occurs.
 
 # Inclusion–Exclusion as Subtraction-Based Compression
 
-A common failure mode in elementary probability is that we learn the inclusion–exclusion formula before we understand why the correction is necessary. The result is symbolic pattern matching: add the sets, subtract an intersection, and hope the signs are right.
+A common failure mode in elementary probability is that we learn the inclusion–exclusion formula before we understand why the correction is necessary. The result ends up being symbolic pattern matching.
 
-What we need is a map of the sample space. We should be able to point to the regions that were counted, identify which regions were counted more than once, and explain how to compensate.
+Instead, we need a map of the sample space. We should be able to point to the regions that were counted, identify which regions were counted more than once, and explain how to correct the overcounting.
 
 ## A Continued Example
 
@@ -104,7 +104,7 @@ Inclusion–exclusion is best viewed as compression. The Venn diagram is the det
 
 # Stars and Bars
 
-Stars and Bars is often taught as a formula for nonnegative integer solutions. That description is mathematically correct but often too terse to see the generalizability. Another interpretation is a representation theorem: every distribution of identical objects among distinct recipients can be encoded by a string of stars separated into recipient zones.
+Stars and Bars is often taught as a formula for nonnegative integer solutions. That description is mathematically correct can be difficult to see the generalizability. We will first start with another interpretation: every distribution of identical objects among distinct recipients can be encoded by a string of stars separated into recipient zones.
 
 ## The poker-chip problem
 
@@ -164,7 +164,7 @@ $\binom{n + k - 1}{k - 1}$
 
 ## The Physical Nature of the Objects Changes the Mathematics
 
-The physical identity of the objects determines what constitutes a different outcome. Changing identical keys into distinct keys does not merely change a number in the formula; it changes the sample-space architecture.
+The physical identity of the objects determines what constitutes a different outcome. Changing identical keys into distinct keys does not merely change a number in the formula; this fundamentally changes the sample-space architecture.
 
 ### The casino hotel-key problem
 
@@ -178,7 +178,7 @@ Only the number of keys received by each person matters. Let $(a,b,c)$ be the al
 
 Note here that the physical objects are indistinguishable. A person's allocation is summarized completely by a count.
 
-##### Five uniquely themed penthouse keys
+#### Five uniquely themed penthouse keys
 
 Assume the five keys correspond to five distinct suites: Roman, Egyptian, Art Deco, Presidential, and Ocean. A particular key can be assigned to any one of the three players.
 
@@ -199,6 +199,8 @@ Note that the objects are distinguishable. Which player receives which particula
 A useful question: *If I swap two objects between recipients, does the outcome change?*
 
 If **NO**, the objects may be indistinguishable for this problem. If **YES**, the objects are distinguishable and a different counting architecture is likely required.
+
+# Non-negative Integer Solutions 
 
 ## Practice
 

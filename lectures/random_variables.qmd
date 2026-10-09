@@ -1,26 +1,39 @@
 ---
-title: "6: Random Variables"
+title: "7: Random Variables"
 ---
 
-A random varialbe is a mathematical mapping from our space $S$ to the real numbers.
 
-Recall that $S$ that is the set of all possible outcomes of our experiment.
+Recall that $S$ that is the set of all possible outcomes of our experiment. A **random variable** is a mapping from our space $S$ to the real numbers.
 
 This mapping allows us to translate the probability of events into an associated numerical value.
 
 Thinking back to some of our earlier examples:
 
-Consider the experiment where we roll two dice. Instead of calculating probabilities for specific pairs of outcomes like (2,1), we can instead define a random variable $X$ as the sum of the dice. $X$ then maps the outcomes to the set ${2, 3, ..., 11, 12}.
+Consider the experiment where we roll two dice. 
+
+Instead of calculating probabilities for specific pairs of outcomes like (2,1), we can instead define a random variable $X$ as the sum of the dice. $X$ then maps the outcomes to the set ${2, 3, ..., 11, 12}.
 
 Now consider the experiment where we flip two coins. If $X$ is defined as the number of heads, then our state space is ${TT, HT, TH, HH}$ and this space is mapped to the set ${0,1,2}$. 
 
-The probability $P(X = 0) = \frac{1}{4}$ because we can see that is only one outcome $TT$.
+- The probability $P(X = 0) = \frac{1}{4}$ because we can see that is only one outcome $TT$.
 
-The probability $P(X = 1) = \frac{1}{2}$ because it accounts for both the $TH$ and $HT$ outcomes.
+- The probability $P(X = 1) = \frac{1}{2}$ because it accounts for both the $TH$ and $HT$ outcomes.
+
+___
+# Notation
+
+The standard notation used for random variables is a capital letter. $X$, $Y$, and $Z$ are commonly used as generic random variables.
+
+The corresponding lowercase letter represents an **arbitrary realization** of the random variable.
+
+$X = x$ means that the random variable $X$ has taken on the value of $x$. Alternatively, $x$ is the realization of $X$.
+
+When writing random variables (especially by hand) it is easy to put something like $x = x$. Keep the notation consistent to prevent confusion and mistakes.
+
 
 ---
 
-Random varibles can be described as either **discrete** or **continuous**.
+Random variables can be described as either **discrete** or **continuous**.
 
 - Discrete random variables are used with discrete data, which means we are working with distinct countable values.
 
@@ -31,7 +44,7 @@ Each type of random variable will have their own dedicated discussion later on.
 
 # The Cumulative Distribution Function
 
-The Cumulative Distribution Function (CDF) calculates the probability that a random variable $X$ will take a value less than or equal to a specific number $z$. This is mathematically expressed as:
+The Cumulative Distribution Function (CDF) calculates the probability that a random variable $X$ will take a value less than or equal to a specific number $z$. This is expressed mathematically as:
 $$ F_X(z) = P(X \leq z)$$
 
 The CDF has the following properties:
@@ -46,7 +59,7 @@ The CDF has the following properties:
 
 ::: example-box
 
-Let $P(1) = \frac{1}{2}, $P(2) = \frac{1}{4} and $P(3) = \frac{1}{4}.
+Let $P(1) = \frac{1}{2}, P(2) = \frac{1}{4} and P(3) = \frac{1}{4}$.
 
 Find $F(x)$.
 
@@ -55,7 +68,7 @@ The cumulative distribution function (CDF) $F(x) = P(X \le x)$ for this (discret
 $$F(x) = \begin{cases}  0, & x < 1 \\ \frac{1}{2} = 0.5, & 1 \le x < 2 \\ \frac{1}{2} + \frac{1}{4} = \frac{3}{4} = 0.75, & 2 \le x < 3 \\ 1.0, & x \ge 3  \end{cases}
 $$
 
-A plot of $F(x) is:
+A plot of F(x) is:
 
 ```{python}
 #| echo: true

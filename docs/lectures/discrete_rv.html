@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Content Conventions – Applied Probability</title>
+<title>8: Discrete Random Variables – Applied Probability</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,23 +26,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6388ad00bb6ecaefa25b9a98db1edf18.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6388ad00bb6ecaefa25b9a98db1edf18.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -71,8 +71,51 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
 
-<link rel="stylesheet" href="custom.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../custom.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -84,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Course Info</a></li><li class="breadcrumb-item"><a href="./conventions.html">Content Conventions</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/random_variables.html">Random Variables</a></li><li class="breadcrumb-item"><a href="../lectures/discrete_rv.html">8: Discrete Random Variables</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -99,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Applied Probability</a> 
+      <a href="../">Applied Probability</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -120,13 +163,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Course Overview</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./conventions.html" class="sidebar-item-text sidebar-link active">
+  <a href="../conventions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Content Conventions</span></a>
   </div>
 </li>
@@ -143,37 +186,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/state_space.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/state_space.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">1: Experiments, Spaces and the Multiplication Principle</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/permutations_combinations.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/permutations_combinations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2: Permutations and Combinations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/inclusion_exclusion.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/inclusion_exclusion.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">3: The Principle of Inclusion-Exclusion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/axioms.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/axioms.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">4: Axioms of Probability</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/conditional_probability.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/conditional_probability.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">5: Conditional Probability</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/bayes_theorem.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/bayes_theorem.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">6: Bayes’ Theorem</span></a>
   </div>
 </li>
@@ -190,55 +233,55 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/random_variables.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/random_variables.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">7: Random Variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/discrete_rv.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/discrete_rv.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">8: Discrete Random Variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/continuous_rv.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/continuous_rv.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">9: Continuous Random Variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/expectation.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/expectation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">10: Properties of Random Variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/variance.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/variance.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">11: Variance</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/joint_distributions.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/joint_distributions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">12: Joint Distributions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/mgfs.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/mgfs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">13: Variance</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/sample_statistics.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/sample_statistics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">14: Sample Statistics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/bounds.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/bounds.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">15: Bounds and Inequalities</span></a>
   </div>
 </li>
@@ -258,20 +301,29 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#core-material" id="toc-core-material" class="nav-link active" data-scroll-target="#core-material">1. Core Material</a></li>
-  <li><a href="#reference-concepts-functional-familiarity" id="toc-reference-concepts-functional-familiarity" class="nav-link" data-scroll-target="#reference-concepts-functional-familiarity">2. Reference Concepts (Functional Familiarity)</a></li>
-  <li><a href="#extended-information" id="toc-extended-information" class="nav-link" data-scroll-target="#extended-information">3. Extended Information</a></li>
-  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">4. Notes</a></li>
-  <li><a href="#practice" id="toc-practice" class="nav-link" data-scroll-target="#practice">5. Practice</a></li>
+  <li><a href="#probability-mass-function" id="toc-probability-mass-function" class="nav-link active" data-scroll-target="#probability-mass-function">Probability Mass Function</a></li>
+  <li><a href="#discrete-cdf" id="toc-discrete-cdf" class="nav-link" data-scroll-target="#discrete-cdf">Discrete CDF</a></li>
+  <li><a href="#common-discrete-random-variables" id="toc-common-discrete-random-variables" class="nav-link" data-scroll-target="#common-discrete-random-variables">Common Discrete Random Variables</a>
+  <ul class="collapse">
+  <li><a href="#bernoulli" id="toc-bernoulli" class="nav-link" data-scroll-target="#bernoulli">Bernoulli</a></li>
+  <li><a href="#binomial" id="toc-binomial" class="nav-link" data-scroll-target="#binomial">Binomial</a></li>
+  <li><a href="#geometric" id="toc-geometric" class="nav-link" data-scroll-target="#geometric">Geometric</a></li>
+  <li><a href="#negative-binomial" id="toc-negative-binomial" class="nav-link" data-scroll-target="#negative-binomial">Negative Binomial</a></li>
+  <li><a href="#hypergeometric" id="toc-hypergeometric" class="nav-link" data-scroll-target="#hypergeometric">Hypergeometric</a></li>
+  <li><a href="#poisson" id="toc-poisson" class="nav-link" data-scroll-target="#poisson">Poisson</a>
+  <ul class="collapse">
+  <li><a href="#the-poisson-approximation-to-the-binomial" id="toc-the-poisson-approximation-to-the-binomial" class="nav-link" data-scroll-target="#the-poisson-approximation-to-the-binomial">The Poisson Approximation to the Binomial</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Course Info</a></li><li class="breadcrumb-item"><a href="./conventions.html">Content Conventions</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/random_variables.html">Random Variables</a></li><li class="breadcrumb-item"><a href="../lectures/discrete_rv.html">8: Discrete Random Variables</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Content Conventions</h1>
+<h1 class="title">8: Discrete Random Variables</h1>
 </div>
 
 
@@ -288,42 +340,169 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>The information in these course notes is categorized into visual tiers.</p>
-<section id="core-material" class="level3">
-<h3 class="anchored" data-anchor-id="core-material">1. Core Material</h3>
-<div class="core-box">
-<p>These blocks contain the core content of the course. You are expected to be able to reproduce this information, derive the formulas, or perform the calculations from memory during examinations.</p>
-</div>
-<hr>
+<p>A discrete random variable is a rule that assigns distinct, separated numerical values to the outcomes of a random process.</p>
+<p>Its set of possible values is <strong>countable</strong>. Formally, this is a mapping between the values and the set of natural numbers. Informally, this means you can list the values out, either finitely (like <span class="math inline">\{1, 2, 3\}</span>) or infinitely (like the non-negative integers <span class="math inline">\{0, 1, 2, \dots\}</span>).</p>
+<section id="probability-mass-function" class="level1">
+<h1>Probability Mass Function</h1>
+<p>Any discrete random variable <span class="math inline">X</span> is defined by its Probability Mass Function (PMF), denoted:</p>
+<p><span class="math display">p(x) = P(X = x)</span></p>
+<p>The PMF is the probability of the outcome <span class="math inline">x</span>.</p>
+<p>The PMF has the following properties (which should seem familiar based on our discussion of the axioms earlier):</p>
+<ul>
+<li><p><strong>Non-negativity</strong>: Every probability must be zero or positive: <span class="math display">p(x) \ge 0</span></p></li>
+<li><p><strong>Total probability sums to 1</strong>: Summing over all possible outcomes accounts for all possibilities: <span class="math display">\sum_x p(x) = 1</span></p></li>
+</ul>
 </section>
-<section id="reference-concepts-functional-familiarity" class="level3">
-<h3 class="anchored" data-anchor-id="reference-concepts-functional-familiarity">2. Reference Concepts (Functional Familiarity)</h3>
-<div class="reference-box">
-<p>These blocks contain tools, syntax, or concepts that you should recognize and understand when you see them. You do not need to memorize these “cold,” but you should know they exist and where to find them.</p>
-</div>
-<hr>
+<section id="discrete-cdf" class="level1">
+<h1>Discrete CDF</h1>
+<p>The CDF accumulates probability up to a threshold, <span class="math inline">F(x) = P(X \le x) = \sum_{t \le x} p(t)</span>.</p>
+<p>Because probability concentrates at specific points with discrete random variables, <span class="math inline">F(x)</span> forms a step function that jumps upward by <span class="math inline">p(x)</span> at each supported value of <span class="math inline">X</span> and remains constant otherwise.</p>
 </section>
-<section id="extended-information" class="level3">
-<h3 class="anchored" data-anchor-id="extended-information">3. Extended Information</h3>
-<div class="extended-box">
-<p>These blocks are for students looking to further explore related content. This material is <strong>not testable</strong> but provides may prove useful for mastery of the core material in the course.</p>
-</div>
-<hr>
+<section id="common-discrete-random-variables" class="level1">
+<h1>Common Discrete Random Variables</h1>
+<section id="bernoulli" class="level2">
+<h2 class="anchored" data-anchor-id="bernoulli">Bernoulli</h2>
+<p>The Bernoulli random variable models a single trial with exactly two outcomes (commonly defined as success/failure).</p>
+<p>The probability of success (1) is <span class="math inline">p</span>, and the probability of failure (0) is <span class="math inline">1-p</span>, where <span class="math inline">p \in (0,1)</span>.</p>
+<p>Note that this interval is open, if we included the endpoints then we are allowing for the situation where the random variable would entirely predictable and so not random at all.</p>
 </section>
-<section id="notes" class="level3">
-<h3 class="anchored" data-anchor-id="notes">4. Notes</h3>
-<div class="note-box">
-<p>These blocks are for context, especially for definitions that are used in the course that may be defined differently elsewhere.</p>
+<section id="binomial" class="level2">
+<h2 class="anchored" data-anchor-id="binomial">Binomial</h2>
+<p>The Binomial random variable extends the Bernoulli concept to <span class="math inline">n</span> independent trials, calculating the probability of getting exactly <span class="math inline">i</span> successes.</p>
+<p>The PMF is given by:</p>
+<p><span class="math display">p(i)=\binom{n}{i}p^{i}(1-p)^{n-i} \;\; \text{for} \;\; i=0,1,\dots,n</span></p>
+<div class="example-box">
+<p>An airplane works if at least half of its engines work. Assume that we can model the engine failing probability as <span class="math inline">1-p</span>.</p>
+<p>When is a 4-engine airplane safer than a 2-engine airplane?</p>
+<p><br>
+</p>
+<p>Since the probability of an engine failing is <span class="math inline">1-p</span>, the probability of an engine functioning successfully must then be <span class="math inline">1 - (1-p) = p</span>.</p>
+<p>We can model the number of working engines using the Binomial distribution.</p>
+<p><br>
+</p>
+<p>For a 2-engine airplane to fly, at least 1 engine (half of 2) must work.</p>
+<p>We sum the probabilities of exactly 1 and exactly 2 engines working (as these are mutually exclusive outcomes):</p>
+<p><span class="math display">P(\text{2-engine success}) = \binom{2}{1}p^{1}(1-p)^{1} + \binom{2}{2}p^{2}(1-p)^{0}</span></p>
+<p><span class="math display">P(\text{2-engine success}) = 2p(1-p) + p^{2} = 2p - p^{2}</span></p>
+<p><br>
+</p>
+<p>For a 4-engine airplane to fly, at least 2 engines (half of 4) must work.</p>
+<p>We sum the probabilities of exactly 2, 3, and 4 engines working:</p>
+<p><span class="math display">P(\text{4-engine success}) = \binom{4}{2}p^{2}(1-p)^{2} + \binom{4}{3}p^{3}(1-p)^{1} + \binom{4}{4}p^{4}(1-p)^{0}</span></p>
+<p><span class="math display">P(\text{4-engine success}) = 6p^{2}(1 - 2p + p^{2}) + 4p^{3}(1-p) + p^{4}</span></p>
+<p><span class="math display">P(\text{4-engine success}) = 6p^{2} - 12p^{3} + 6p^{4} + 4p^{3} - 4p^{4} + p^{4} = 3p^{4} - 8p^{3} + 6p^{2}</span></p>
+<p><br>
+</p>
+<p>To find when the 4-engine airplane is safer, we set its success probability greater than or equal to the 2-engine airplane’s success probability:</p>
+<p><span class="math display">3p^{4} - 8p^{3} + 6p^{2} \ge 2p - p^{2}</span></p>
+<p><span class="math display">3p^{4} - 8p^{3} + 7p^{2} - 2p \ge 0</span></p>
+<p>Factoring out <span class="math inline">p</span> gives:</p>
+<p><span class="math display">p(3p^{3} - 8p^{2} + 7p - 2) \ge 0</span></p>
+<p>This factors to:</p>
+<p><span class="math display">p(p-1)^{2}(3p-2) \ge 0</span></p>
+<p>Because <span class="math inline">p</span> is a probability between 0 and 1, <span class="math inline">p</span> is positive and <span class="math inline">(p-1)^{2}</span> is always positive. We can then divide by these terms without concern about division by zero or reversing the inequality.</p>
+<p>Therefore, the inequality holds true only when:</p>
+<p><span class="math display">3p - 2 \ge 0</span></p>
+<p><span class="math display">p \ge 2/3</span></p>
+<p><br>
+</p>
+<p>So, a 4-engine airplane is safer than a 2-engine airplane only when the probability of a single engine working successfully is at least 2/3.</p>
 </div>
-<hr>
-</section>
-<section id="practice" class="level3">
-<h3 class="anchored" data-anchor-id="practice">5. Practice</h3>
 <div class="practice-box">
-<p>These blocks contain practice problems associated with their related section(s).</p>
+<p>The probability of a part failing a quality control inspection is modeled at 5%.</p>
+<ul>
+<li><p>What is the probability that out of a sample of 10 parts that no part passes inspection?</p></li>
+<li><p>That 5 pass inspection?</p></li>
+<li><p>That all 10 pass inspection?</p></li>
+</ul>
+<p><br>
+</p>
+<p>Since we have multiple parts and a problem statement that is in terms of a binary condition, we can use a Binomial distribution if we assume that the sequence of items is independent.</p>
+<p>Then given our problem statement, we can set <span class="math inline">p = 0.95</span> and <span class="math inline">n = 10</span>.</p>
+<p><br>
+</p>
+<p>For <strong>no part</strong> to pass inspection we have:</p>
+<p><span class="math display">P(0) = \binom{10}{0} (0.95^0)(1-0.95)^{10-0} \approx 0.0000000000001</span></p>
+<p><br>
+</p>
+<p>For five parts to pass inspection:</p>
+<p><span class="math display">P(5) = \binom{10}{5} (0.95^5)(1-0.95)^{10-5} \approx 0.0006</span></p>
+<p><br>
+</p>
+<p>For all ten parts to pass inspection:</p>
+<p><span class="math display">P(10) = \binom{10}{10} (0.95^{10})(1-0.95)^{10-10} \approx 0.599</span></p>
+<p><br>
+</p>
+</div>
+</section>
+<section id="geometric" class="level2">
+<h2 class="anchored" data-anchor-id="geometric">Geometric</h2>
+<p>This models the number of independent trials required to achieve the first success.</p>
+<p>The probability of needing exactly <span class="math inline">i</span> trials is given by <span class="math inline">P(X=i)=(1-p)^{i-1}p</span>, for <span class="math inline">i=1,2,\dots</span>.</p>
+<p>We can think of this as experiencing exactly <span class="math inline">i-1</span> failures, all back-to-back, denoted by <span class="math inline">(1-p)^{i-1}</span>, then followed immediately by one success, denoted by <span class="math inline">p</span>.</p>
+<div class="example-box">
+
+</div>
+</section>
+<section id="negative-binomial" class="level2">
+<h2 class="anchored" data-anchor-id="negative-binomial">Negative Binomial</h2>
+<div class="example-box">
+
+</div>
+</section>
+<section id="hypergeometric" class="level2">
+<h2 class="anchored" data-anchor-id="hypergeometric">Hypergeometric</h2>
+<div class="example-box">
+
+</div>
+</section>
+<section id="poisson" class="level2">
+<h2 class="anchored" data-anchor-id="poisson">Poisson</h2>
+<p>The Poisson distribution is used to model the number of events occurring during an interval.</p>
+<p>This interval can be time, area, volume, distance, etc.</p>
+<p>Examples are things like:</p>
+<ul>
+<li><p>Arrivals of customers in a queue</p></li>
+<li><p>Number of defects per batch</p></li>
+</ul>
+<p>The Probability Mass Function is <span class="math inline">p(x)=P(X=x)=e^{-\lambda}\frac{\lambda^{x}}{x!}</span>, for <span class="math inline">x=0,1,\dots</span> where:</p>
+<ul>
+<li><p><span class="math inline">\lambda</span> represents the average rate of occurrence for these events.</p></li>
+<li><p><span class="math inline">x</span> is the number of successes for the event.</p></li>
+<li><p><span class="math inline">e</span> is the exponential number.</p></li>
+</ul>
+<div class="example-box">
+<p>The average number of particles appearing in one second is 3.2. What’s the probability that no more than 2 such particles appear in one second?</p>
+<p>We can solve this by defining a Poisson random variable <span class="math inline">X</span> representing the number of particles appearing in one second.</p>
+<p>We are given the average rate <span class="math inline">\lambda = 3.2</span>. And we need to find the probability that no more than 2 particles appear, which is <span class="math inline">P(X \le 2)</span>.</p>
+<p>Appealing to the compement rule we can sum the probabilities of exactly 0, 1, and 2 particles appearing:</p>
+<p><span class="math display">P(X \le 2) = P(X=0) + P(X=1) + P(X=2)</span></p>
+<p>Using the Poisson PMF formula <span class="math inline">P(X=i)=e^{-\lambda}\frac{\lambda^{i}}{i!}</span>:</p>
+<p><span class="math inline">P(X=0) = e^{-3.2}\frac{3.2^0}{0!} = e^{-3.2}(1) = e^{-3.2}</span><span class="math inline">P(X=1) = e^{-3.2}\frac{3.2^1}{1!} = 3.2e^{-3.2}</span><span class="math inline">P(X=2) = e^{-3.2}\frac{3.2^2}{2!} = e^{-3.2}\frac{10.24}{2} = 5.12e^{-3.2}</span></p>
+<p>Now, we sum these probabilities together:</p>
+<p><span class="math display">P(X \le 2) = e^{-3.2} + 3.2e^{-3.2} + 5.12e^{-3.2}</span></p>
+<p><span class="math display">P(X \le 2) = e^{-3.2}(1 + 3.2 + 5.12)</span></p>
+<p><span class="math display">P(X \le 2) = 9.32e^{-3.2}</span></p>
+<p>After calculating this, we get approximately <span class="math inline">0.3799</span>, meaning there is about a 38% chance that 2 or fewer particles will appear in that one-second window.</p>
+</div>
+<div class="practice-box">
+<p>A machine has unpredictable breakdowns at a mean rate of 3.5 per week.</p>
+<ul>
+<li><p>What is the probability exactly 2 breakdowns per week?</p></li>
+<li><p>What is the probability of 3 or more breakdowns per week?</p></li>
+<li><p>What is the probability of exactly 2 breakdowns in one week and exactly two breakdowns in the following week?</p></li>
+</ul>
+</div>
+<section id="the-poisson-approximation-to-the-binomial" class="level3">
+<h3 class="anchored" data-anchor-id="the-poisson-approximation-to-the-binomial">The Poisson Approximation to the Binomial</h3>
+<p>The Poisson distribution can be used to approximate the Binomial distribution when the number of trials <span class="math inline">n</span> is large and the probability of success <span class="math inline">p</span> is small. In this case, you set <span class="math inline">\lambda=np</span>.</p>
+<div class="example-box">
+
 </div>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->

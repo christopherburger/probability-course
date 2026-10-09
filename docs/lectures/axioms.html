@@ -223,12 +223,73 @@ window.Quarto = {
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Random Variables</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Random Variables</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/random_variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7: Random Variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/discrete_rv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">8: Discrete Random Variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/continuous_rv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">9: Continuous Random Variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/expectation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">10: Properties of Random Variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/variance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11: Variance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/joint_distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">12: Joint Distributions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/mgfs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">13: Variance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/sample_statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">14: Sample Statistics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/bounds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">15: Bounds and Inequalities</span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Introduction to Inference</span></span>
+ <span class="menu-text">Inference</span></span>
   </li>
     </ul>
     </div>
@@ -276,19 +337,19 @@ window.Quarto = {
 <p>The Kolmogorov axioms are the rules that every probability assignment must obey. They should be understood as consistency requirements rather than as formulas to memorize.</p>
 <section id="axiom-1-nonnegativity" class="level2">
 <h2 class="anchored" data-anchor-id="axiom-1-nonnegativity"><strong>Axiom 1 — Nonnegativity</strong></h2>
-<p><strong>P(A) ≥ 0</strong></p>
+<p><span class="math display">P(A) ≥ 0</span></p>
 <p>Probabilities cannot be negative.</p>
 </section>
 <section id="axiom-2-normalization" class="level2">
 <h2 class="anchored" data-anchor-id="axiom-2-normalization"><strong>Axiom 2 — Normalization</strong></h2>
-<p><strong>P(Ω) = 1</strong></p>
+<p><span class="math display">P(Ω) = 1</span></p>
 <p>The entire modeled sample space has probability one.</p>
 </section>
 <section id="axiom-3-additivity-for-disjoint-events" class="level2">
 <h2 class="anchored" data-anchor-id="axiom-3-additivity-for-disjoint-events"><strong>Axiom 3 — Additivity for disjoint events</strong></h2>
-<p><span class="math inline">P(A∪B)=P(A)+P(B) \text{ when } A∩B=∅</span></p>
+<p><span class="math display">P(A∪B)=P(A)+P(B) \text{ when } A∩B=∅</span></p>
 <p>If events cannot occur together, their probabilities add. More generally, this extends to countably many mutually exclusive events.</p>
-<p>Note that the axioms do not tell us what probability a physical experiment should have. They tell us what a consistent probability model must obey once its probabilities are specified. |</p>
+<p>Note that the axioms do not tell us what probability a physical experiment should have. They tell us what a consistent probability model must obey once its probabilities are specified.</p>
 <section id="consequences-we-can-derive-from-the-axioms" class="level3">
 <h3 class="anchored" data-anchor-id="consequences-we-can-derive-from-the-axioms"><strong>Consequences we can derive from the Axioms</strong></h3>
 <div class="practice-box">

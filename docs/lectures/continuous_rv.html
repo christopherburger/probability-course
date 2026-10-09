@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Content Conventions – Applied Probability</title>
+<title>9: Continuous Random Variables – Applied Probability</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,23 +26,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6388ad00bb6ecaefa25b9a98db1edf18.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6388ad00bb6ecaefa25b9a98db1edf18.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -71,8 +71,51 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
 
-<link rel="stylesheet" href="custom.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../custom.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -84,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Course Info</a></li><li class="breadcrumb-item"><a href="./conventions.html">Content Conventions</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/random_variables.html">Random Variables</a></li><li class="breadcrumb-item"><a href="../lectures/continuous_rv.html">9: Continuous Random Variables</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -99,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Applied Probability</a> 
+      <a href="../">Applied Probability</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -120,13 +163,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Course Overview</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./conventions.html" class="sidebar-item-text sidebar-link active">
+  <a href="../conventions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Content Conventions</span></a>
   </div>
 </li>
@@ -143,37 +186,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/state_space.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/state_space.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">1: Experiments, Spaces and the Multiplication Principle</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/permutations_combinations.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/permutations_combinations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2: Permutations and Combinations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/inclusion_exclusion.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/inclusion_exclusion.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">3: The Principle of Inclusion-Exclusion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/axioms.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/axioms.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">4: Axioms of Probability</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/conditional_probability.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/conditional_probability.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">5: Conditional Probability</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/bayes_theorem.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/bayes_theorem.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">6: Bayes’ Theorem</span></a>
   </div>
 </li>
@@ -190,55 +233,55 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/random_variables.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/random_variables.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">7: Random Variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/discrete_rv.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/discrete_rv.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">8: Discrete Random Variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/continuous_rv.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/continuous_rv.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">9: Continuous Random Variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/expectation.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/expectation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">10: Properties of Random Variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/variance.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/variance.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">11: Variance</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/joint_distributions.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/joint_distributions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">12: Joint Distributions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/mgfs.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/mgfs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">13: Variance</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/sample_statistics.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/sample_statistics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">14: Sample Statistics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/bounds.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/bounds.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">15: Bounds and Inequalities</span></a>
   </div>
 </li>
@@ -258,20 +301,29 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#core-material" id="toc-core-material" class="nav-link active" data-scroll-target="#core-material">1. Core Material</a></li>
-  <li><a href="#reference-concepts-functional-familiarity" id="toc-reference-concepts-functional-familiarity" class="nav-link" data-scroll-target="#reference-concepts-functional-familiarity">2. Reference Concepts (Functional Familiarity)</a></li>
-  <li><a href="#extended-information" id="toc-extended-information" class="nav-link" data-scroll-target="#extended-information">3. Extended Information</a></li>
-  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">4. Notes</a></li>
-  <li><a href="#practice" id="toc-practice" class="nav-link" data-scroll-target="#practice">5. Practice</a></li>
+  <li><a href="#the-probability-density-function" id="toc-the-probability-density-function" class="nav-link active" data-scroll-target="#the-probability-density-function">The Probability Density Function</a></li>
+  <li><a href="#the-continuous-cdf" id="toc-the-continuous-cdf" class="nav-link" data-scroll-target="#the-continuous-cdf">The Continuous CDF</a></li>
+  <li><a href="#common-continuous-random-variables" id="toc-common-continuous-random-variables" class="nav-link" data-scroll-target="#common-continuous-random-variables">Common Continuous Random Variables</a>
+  <ul class="collapse">
+  <li><a href="#uniform" id="toc-uniform" class="nav-link" data-scroll-target="#uniform">Uniform</a></li>
+  <li><a href="#exponential" id="toc-exponential" class="nav-link" data-scroll-target="#exponential">Exponential</a></li>
+  <li><a href="#gamma" id="toc-gamma" class="nav-link" data-scroll-target="#gamma">Gamma</a>
+  <ul class="collapse">
+  <li><a href="#exponential-as-a-special-case-of-the-gamma-distribution" id="toc-exponential-as-a-special-case-of-the-gamma-distribution" class="nav-link" data-scroll-target="#exponential-as-a-special-case-of-the-gamma-distribution">Exponential as a Special Case of the Gamma Distribution</a></li>
+  <li><a href="#the-memoryless-property" id="toc-the-memoryless-property" class="nav-link" data-scroll-target="#the-memoryless-property">The Memoryless Property</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  </ul></li>
+  <li><a href="#normal" id="toc-normal" class="nav-link" data-scroll-target="#normal">Normal</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Course Info</a></li><li class="breadcrumb-item"><a href="./conventions.html">Content Conventions</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/random_variables.html">Random Variables</a></li><li class="breadcrumb-item"><a href="../lectures/continuous_rv.html">9: Continuous Random Variables</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Content Conventions</h1>
+<h1 class="title">9: Continuous Random Variables</h1>
 </div>
 
 
@@ -288,42 +340,86 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>The information in these course notes is categorized into visual tiers.</p>
-<section id="core-material" class="level3">
-<h3 class="anchored" data-anchor-id="core-material">1. Core Material</h3>
-<div class="core-box">
-<p>These blocks contain the core content of the course. You are expected to be able to reproduce this information, derive the formulas, or perform the calculations from memory during examinations.</p>
-</div>
-<hr>
+<p>Continuous RVs shifts focus to variables that can take on an infinite number of possible values within a given continuous range.</p>
+<section id="the-probability-density-function" class="level1">
+<h1>The Probability Density Function</h1>
+<p>Probability Density Function (PDF), denoted as <span class="math inline">f_{X}(x)</span>, replaces the PMF used for discrete variables. Because continuous variables have infinite possible exact values, the probability of any single value is zero.</p>
+<p>Instead, you calculate the probability that <span class="math inline">X</span> falls within a specific set of real values, <span class="math inline">B</span>, by taking the integral of the PDF over that region:</p>
+<p><span class="math display">P(X\in B)=\int_{B}f(x)dx</span></p>
 </section>
-<section id="reference-concepts-functional-familiarity" class="level3">
-<h3 class="anchored" data-anchor-id="reference-concepts-functional-familiarity">2. Reference Concepts (Functional Familiarity)</h3>
-<div class="reference-box">
-<p>These blocks contain tools, syntax, or concepts that you should recognize and understand when you see them. You do not need to memorize these “cold,” but you should know they exist and where to find them.</p>
-</div>
-<hr>
+<section id="the-continuous-cdf" class="level1">
+<h1>The Continuous CDF</h1>
+<p>The Cumulative Distribution Function <span class="math inline">F(z)</span> evaluates the total accumulated probability up to a value <span class="math inline">z</span> by integrating the PDF from negative infinity to <span class="math inline">z</span>: <span class="math inline">F(z)=\int_{-\infty}^{z}f(x)dx</span>.</p>
 </section>
-<section id="extended-information" class="level3">
-<h3 class="anchored" data-anchor-id="extended-information">3. Extended Information</h3>
-<div class="extended-box">
-<p>These blocks are for students looking to further explore related content. This material is <strong>not testable</strong> but provides may prove useful for mastery of the core material in the course.</p>
+<section id="common-continuous-random-variables" class="level1">
+<h1>Common Continuous Random Variables</h1>
+<section id="uniform" class="level2">
+<h2 class="anchored" data-anchor-id="uniform">Uniform</h2>
+<p>The Uniform distribution, denoted <span class="math inline">X\sim Uniform(a,b)</span>, represents a variable where all outcomes in the interval from <span class="math inline">a</span> to <span class="math inline">b</span> are equally likely.</p>
+<p>The PDF is flat and constant over this interval: <span class="math inline">f(x)=\frac{1}{b-a}</span> for <span class="math inline">a&lt;x&lt;b</span>, and <span class="math inline">0</span> otherwise.</p>
+<div class="example-box">
+<p>What is the CDF, <span class="math inline">F(x)</span>, of a uniform random variable <span class="math inline">X \sim U(a,b)</span>?</p>
+<p>As we have the PDF, we need to integrate this over negative infinity to <span class="math inline">x</span>. We can make this easier by appealing to the known properties of integration and partition the limits of integration into three intervals:</p>
+<p>For <span class="math inline">x \le a</span>, the PDF is 0, meaning no probability has accumulated yet:</p>
+<p><span class="math display">F(x) = \int_{-\infty}^{x} 0 \, dt = 0</span>For <span class="math inline">a &lt; x &lt; b</span>, we integrate the constant PDF from the start of the interval <span class="math inline">a</span> up to the variable <span class="math inline">x</span>:</p>
+<p><span class="math display">F(x) = \int_{a}^{x} \frac{1}{b-a} \, dt = \left[ \frac{t}{b-a} \right]_{a}^{x} = \frac{x-a}{b-a}</span></p>
+<p>For <span class="math inline">x \ge b</span>, the accumulated probability has reached its maximum of 1, as we integrate over the entire valid interval from <span class="math inline">a</span> to <span class="math inline">b</span>:</p>
+<p><span class="math display">F(x) = \int_{a}^{b} \frac{1}{b-a} \, dt = \left[ \frac{t}{b-a} \right]_{a}^{b} = \frac{b-a}{b-a} = 1</span></p>
+<p>Putting it all together, the CDF for a Uniform RV is expressed as the following piecewise function:</p>
+<p><span class="math display">F(x)=\begin{cases}0,&amp;x \le a\\ \frac{x-a}{b-a},&amp;a&lt;x&lt;b\\ 1,&amp;x \ge b\end{cases}</span></p>
 </div>
-<hr>
 </section>
-<section id="notes" class="level3">
-<h3 class="anchored" data-anchor-id="notes">4. Notes</h3>
-<div class="note-box">
-<p>These blocks are for context, especially for definitions that are used in the course that may be defined differently elsewhere.</p>
+<section id="exponential" class="level2">
+<h2 class="anchored" data-anchor-id="exponential">Exponential</h2>
+<p>The Exponential Random Variable, denoted as <span class="math inline">X\sim Exp(\lambda)</span> is often used to model the time elapsed between independent continuous events.</p>
+<p>The PDF for this variable is <span class="math inline">f(x)=\lambda e^{-\lambda x}</span> for <span class="math inline">x\ge0</span> (And implicitly, <span class="math inline">f(x)=0</span> for <span class="math inline">x&lt;0</span>)</p>
+<div class="example-box">
+<p>What is the CDF, <span class="math inline">F(x)</span>, of a uniform random variable <span class="math inline">X \sim Exp(\lambda)</span>?</p>
+<p>We can find this by evaluating the integral of the PDF from <span class="math inline">0</span> up to a given variable <span class="math inline">x</span> (assuming <span class="math inline">x \ge 0</span>): <span class="math display">F(x) = \int_{0}^{x} \lambda e^{-\lambda t} dt</span></p>
+<p>To solve this, we can apply standard integration rules. The antiderivative of <span class="math inline">\lambda e^{-\lambda t}</span> is <span class="math inline">-e^{-\lambda t}</span>.</p>
+<p>We evaluate this from <span class="math inline">0</span> to <span class="math inline">x</span>:<span class="math display">F(x) = \left[ -e^{-\lambda t} \right]_{0}^{x}</span></p>
+<p><span class="math display">F(x) = (-e^{-\lambda x}) - (-e^{-\lambda(0)})</span></p>
+<p><span class="math display">F(x) = -e^{-\lambda x} - (-e^{0})</span><span class="math display">F(x) = -e^{-\lambda x} - (-1)</span></p>
+<p><span class="math display">F(x) = 1 - e^{-\lambda x}</span></p>
+<p>For any value less than 0, no probability has accumulated.</p>
+<p>Therefore, the complete CDF for an Exponential RV is:<span class="math display">F(x)=\begin{cases}1 - e^{-\lambda x},&amp;x\ge0\\ 0,&amp;x&lt;0\end{cases}</span></p>
 </div>
-<hr>
 </section>
-<section id="practice" class="level3">
-<h3 class="anchored" data-anchor-id="practice">5. Practice</h3>
-<div class="practice-box">
-<p>These blocks contain practice problems associated with their related section(s).</p>
-</div>
+<section id="gamma" class="level2">
+<h2 class="anchored" data-anchor-id="gamma">Gamma</h2>
+<p>The Gamma Random Variable, denoted <span class="math inline">X\sim Gamma(\alpha,\lambda)</span> is often used to model wait times until a specific number of events occur especially in the context of reliability and aging.</p>
+<ul>
+<li>Gamma PDF: The probability density function is defined as <span class="math inline">f(x)=\frac{\lambda e^{-\lambda x}(\lambda x)^{\alpha-1}}{\Gamma(\alpha)}</span> for <span class="math inline">x\ge0</span>, and <span class="math inline">0</span> for <span class="math inline">x&lt;0</span>.</li>
+</ul>
+<p>This distribution relies on two strictly positive parameters: <span class="math inline">\alpha&gt;0</span> and <span class="math inline">\lambda&gt;0</span>.</p>
+<p>The Gamma Function: The denominator in the PDF features the Gamma function itself, which is defined by the integral <span class="math inline">\Gamma(\alpha)=\int_{0}^{\infty}e^{-x}x^{\alpha-1}dx</span>.</p>
+<p>This component acts as a normalizing constant to ensure the total probability across the distribution integrates to 1.</p>
+<p>Factorial Relationship: The slide highlights that the Gamma function serves as a continuous extension of the factorial function, following the recursive rule <span class="math inline">\Gamma(\alpha)=(\alpha-1)\Gamma(\alpha-1)</span>.</p>
+<p>Integer Values: When evaluating the Gamma function for an integer <span class="math inline">n</span>, it simplifies cleanly to a standard factorial: <span class="math inline">\Gamma(n)=(n-1)!</span>. The slide notes that this specific integer relationship can be mathematically proven using induction.</p>
+<section id="exponential-as-a-special-case-of-the-gamma-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="exponential-as-a-special-case-of-the-gamma-distribution">Exponential as a Special Case of the Gamma Distribution</h3>
+</section>
+<section id="the-memoryless-property" class="level3">
+<h3 class="anchored" data-anchor-id="the-memoryless-property">The Memoryless Property</h3>
+</section>
+<section id="section" class="level3">
+<h3 class="anchored" data-anchor-id="section"></h3>
+</section>
+</section>
+<section id="normal" class="level2">
+<h2 class="anchored" data-anchor-id="normal">Normal</h2>
+<p>the Normal Random Variable, denoted as <span class="math inline">X\sim\mathcal{N}(\mu,\sigma^{2})</span>.</p>
+<p>In this notation, <span class="math inline">\mu</span> represents the mean (the center of the distribution) and <span class="math inline">\sigma^2</span> represents the variance (the spread).</p>
+<p>The slide highlights the two main components of this distribution:Normal PDF: The probability density function that creates the classic “bell curve” shape is given as <span class="math inline">f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}}</span>.</p>
+<p>Linear Transformations: The slide ends with an open question: If you create a new variable <span class="math inline">Y=\alpha X+\beta</span>, what is the distribution of <span class="math inline">Y</span>, or <span class="math inline">Y \sim ?</span></p>
+<p>A fundamental property of the Normal distribution is that any linear transformation of a strictly Normal random variable results in another Normal random variable.</p>
+<p>To define the distribution of <span class="math inline">Y</span>, we simply need to calculate its new mean and variance:New Mean: Expected values shift linearly, so the new mean is simply <span class="math inline">\alpha\mu + \beta</span>.</p>
+<p>New Variance: Variance is a measure of spread, so it is unaffected by the constant addition of <span class="math inline">\beta</span>.</p>
+<p>However, multiplying the variable by <span class="math inline">\alpha</span> scales the variance by the square of that constant, resulting in <span class="math inline">\alpha^2\sigma^2</span>.</p>
+<p>Putting this together, the answer to the slide’s prompt is that <span class="math inline">Y</span> follows a Normal distribution with the updated parameters:<span class="math display">Y \sim \mathcal{N}(\alpha\mu + \beta, \alpha^2\sigma^2)</span></p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

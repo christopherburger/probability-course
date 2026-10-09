@@ -44,11 +44,110 @@
     ]
   },
   {
+    "objectID": "lectures/random_variables.html",
+    "href": "lectures/random_variables.html",
+    "title": "7: Random Variables",
+    "section": "",
+    "text": "Recall that S that is the set of all possible outcomes of our experiment. A random variable is a mapping from our space S to the real numbers.\nThis mapping allows us to translate the probability of events into an associated numerical value.\nThinking back to some of our earlier examples:\nConsider the experiment where we roll two dice.\nInstead of calculating probabilities for specific pairs of outcomes like (2,1), we can instead define a random variable X as the sum of the dice. X then maps the outcomes to the set ${2, 3, …, 11, 12}.\nNow consider the experiment where we flip two coins. If X is defined as the number of heads, then our state space is {TT, HT, TH, HH} and this space is mapped to the set {0,1,2}.\n\nThe probability P(X = 0) = \\frac{1}{4} because we can see that is only one outcome TT.\nThe probability P(X = 1) = \\frac{1}{2} because it accounts for both the TH and HT outcomes.\n\n\n\nNotation\nThe standard notation used for random variables is a capital letter. X, Y, and Z are commonly used as generic random variables.\nThe corresponding lowercase letter represents an arbitrary realization of the random variable.\nX = x means that the random variable X has taken on the value of x. Alternatively, x is the realization of X.\nWhen writing random variables (especially by hand) it is easy to put something like x = x. Keep the notation consistent to prevent confusion and mistakes.\n\nRandom variables can be described as either discrete or continuous.\n\nDiscrete random variables are used with discrete data, which means we are working with distinct countable values.\nContinuous random variables can take on any real value within a continuous range.\n\nEach type of random variable will have their own dedicated discussion later on.\n\n\nThe Cumulative Distribution Function\nThe Cumulative Distribution Function (CDF) calculates the probability that a random variable X will take a value less than or equal to a specific number z. This is expressed mathematically as:  F_X(z) = P(X \\leq z)\nThe CDF has the following properties:\n\nNondecreasing: F_X(z) \\leq F_X(z + \\epsilon), \\epsilon &gt; 0\nUpper limit of 1. That is, F(\\infty) = 1\nLower limit of 0. That is, F(-\\infty) = 0\nP(a \\leq X \\leq b) = F_X(b) - F_X(a)\n\n\nLet P(1) = \\frac{1}{2}, P(2) = \\frac{1}{4} and P(3) = \\frac{1}{4}.\nFind F(x).\nThe cumulative distribution function (CDF) F(x) = P(X \\le x) for this (discrete) random variable is a step function:\nF(x) = \\begin{cases}  0, & x &lt; 1 \\\\ \\frac{1}{2} = 0.5, & 1 \\le x &lt; 2 \\\\ \\frac{1}{2} + \\frac{1}{4} = \\frac{3}{4} = 0.75, & 2 \\le x &lt; 3 \\\\ 1.0, & x \\ge 3  \\end{cases}\n\nA plot of F(x) is:\n\n\nCode\nimport matplotlib.pyplot as plt\n\n# Define intervals [x_start, x_end] and their corresponding F(x) values\nintervals = [\n    (-0.5, 1, 0.0),\n    (1, 2, 0.5),\n    (2, 3, 0.75),\n    (3, 4.5, 1.0)\n]\n\nplt.figure(figsize=(7, 4.5))\n\nfor x_start, x_end, y in intervals:\n    plt.plot([x_start, x_end], [y, y], color='tab:blue', linewidth=2)\n\nplt.scatter([1, 2, 3], [0.5, 0.75, 1.0], color='tab:blue', s=45, zorder=3)\n\nplt.scatter([1, 2, 3], [0.0, 0.5, 0.75], color='white', edgecolor='tab:blue', linewidth=1.5, s=45, zorder=3)\n\nplt.title(r'Cumulative Distribution Function $F(x)$', fontsize=13, pad=10)\nplt.xlabel(r'$x$', fontsize=11)\nplt.ylabel(r'$F(x)$', fontsize=11)\nplt.xlim(-0.5, 4.5)\nplt.ylim(-0.1, 1.15)\nplt.yticks([0.0, 0.25, 0.5, 0.75, 1.0], ['0', '1/4', '1/2', '3/4', '1'])\nplt.xticks([0, 1, 2, 3, 4])\nplt.grid(True, linestyle='--', alpha=0.5)\n\nplt.tight_layout()\nplt.show()",
+    "crumbs": [
+      "Random Variables",
+      "7: Random Variables"
+    ]
+  },
+  {
     "objectID": "lectures/axioms2.html",
     "href": "lectures/axioms2.html",
     "title": "Applied Probability",
     "section": "",
     "text": "In earlier counting problems, we asked how many outcomes are possible and how many satisfy a condition. For a finite uniform sample space, probability is normalized counting:\nP(A) = |A| / |Ω|\nProbability theory generalizes this idea. Instead of requiring every outcome to have equal weight, we require the assignment of probability to behave consistently.\nOutcome — One possible result of an experiment.\nSample space Ω — The collection of all possible outcomes.\nEvent A — A subset of Ω; the outcomes for which some condition is true.\nP(A) — The probability assigned to event A.\nThe transition into Week 4 represents a dangerous pivot point. Up until now, students have lived entirely in a discrete, uniform world where probability is just counting: P(A) = \\frac{\\vert{}A\\vert{}}{\\vert{}\\Omega\\vert{}}.\nIf you do not explicitly destroy this assumption before introducing the formal axioms, students will drag the “Uniform Measure Fallacy” into every subsequent topic. They will try to solve continuous probability, Markov chains, and Bayesian updates by just counting states and dividing, which will lead to catastrophic modeling errors.\nHere is how to structure Week 4 to transition them from raw counting to formal measure theory, using Kolmogorov’s axioms as the scaffolding.\nPhase 1: Breaking the Uniform Assumption (The “Loaded Dice” Diagnostic)\nBefore you teach the axioms, you must prove to them that counting is no longer sufficient.\nThe Setup: Introduce a game with a biased coin or a loaded die. For example, a coin where P(\\text{Heads}) = \\frac{2}{3}.\nAsk them to calculate the probability of getting exactly one Head in two flips.\nThe Trap: Students who are stuck in Week 3 will define the state space as \\Omega = \\{HH, HT, TH, TT\\}. They will identify the event as A = \\{HT, TH\\}. They will count the states and proudly state P(A) = \\frac{2}{4} = \\frac{1}{2}.\nThe Destruction: You must stop the class here and ruthlessly expose the flaw.\nAsk them: “Does your mathematical model match the physical reality of the loaded coin?”\nForce them to realize that the state HH is physically much heavier (more likely) than the state TT.\nThe Epiphany: Counting states only works if every state has the exact same “weight.” Once the universe becomes non-uniform, counting is useless. We need a new mathematical machine."
+  },
+  {
+    "objectID": "lectures/conditional_probability.html",
+    "href": "lectures/conditional_probability.html",
+    "title": "5: Conditional Probability",
+    "section": "",
+    "text": "We have already discussed the idea of conditional probability during our introduction to sample and state spaces. But this was in the context of the general idea of probability itself. We will now focus on how the incorporation of new information is computed.\nWhat should happen to a probability when we learn something new?\nSuppose we draw one card from a standard 52-card deck.\nBefore seeing the card:\nP(\\text{Ace})=\\frac{4}{52}=\\frac{1}{13}.\nNow suppose someone tells us:\nDoes that information matter?\nYes.\nWe now know that the card must be one of the 13 Hearts.\nAmong those 13 cards, only one is an Ace.\nTherefore,\nP(\\text{Ace}\\mid\\text{Heart})\n=\n\\frac{1}{13}.\nIn this particular example the probability happened not to change.\nNow changing the information:\nThere are 12 Face Cards, and 3 of them are Hearts.\nIf we ask for the probability that the card is a Heart:\nP(\\text{Heart}\\mid\\text{Face})\n=\n\\frac{3}{12}\n=\n\\frac14.\nOur new information changed the probability from\nP(\\text{Heart})=\\frac{13}{52}=\\frac14\nto\nP(\\text{Heart}\\mid\\text{Face})=\\frac14.\nBut again, this new information did not change it.\nWe will now choose something that does.\nNow:\nP(\\text{Heart}\\mid\\text{Spade})=0.\nThe new information makes Hearts impossible.\nConditional probability fundamentally asks:\nThe word among is extremely important.",
+    "crumbs": [
+      "Foundations",
+      "5: Conditional Probability"
+    ]
+  },
+  {
+    "objectID": "lectures/conditional_probability.html#interpretation-1-restricted-sample-space",
+    "href": "lectures/conditional_probability.html#interpretation-1-restricted-sample-space",
+    "title": "5: Conditional Probability",
+    "section": "Interpretation 1: Restricted sample space",
+    "text": "Interpretation 1: Restricted sample space\nKnowing B occurred restricts our sample space from \\Omega to B.\nThen we ask how much of B is also in A.",
+    "crumbs": [
+      "Foundations",
+      "5: Conditional Probability"
+    ]
+  },
+  {
+    "objectID": "lectures/conditional_probability.html#interpretation-2-among",
+    "href": "lectures/conditional_probability.html#interpretation-2-among",
+    "title": "5: Conditional Probability",
+    "section": "Interpretation 2: “Among”",
+    "text": "Interpretation 2: “Among”\nP(A\\mid B) means:\n\nAmong the B cases, what fraction are also A?\n\nFor example:\n\nAmong students who own a laptop, what fraction are engineering majors?\n\nThe denominator is laptop owners, not all students.",
+    "crumbs": [
+      "Foundations",
+      "5: Conditional Probability"
+    ]
+  },
+  {
+    "objectID": "lectures/conditional_probability.html#interpretation-3-renormalization",
+    "href": "lectures/conditional_probability.html#interpretation-3-renormalization",
+    "title": "5: Conditional Probability",
+    "section": "Interpretation 3: Renormalization",
+    "text": "Interpretation 3: Renormalization\nThe original probabilities of all outcomes outside B become zero. The probabilities inside B are rescaled so that they add to one.\nThis is particularly useful later when discussing Bayesian inference.\n\n\nRoll a fair six-sided die.\nLet\nA=\\{\\text{even}\\}\nand\nB=\\{\\text{greater than 3}\\}.\nThe original sample space is\n\\Omega=\\{1,2,3,4,5,6\\}.\nThe condition B tells us:\nB=\\{4,5,6\\}.\nSo our universe is now:\n\\{4,5,6\\}.\nOf those three outcomes, two are even:\n\\{4,6\\}.\nTherefore,\nP(A\\mid B)=\\frac{2}{3}.\n\nWhat happened to 1, 2, and 3?\nThese outcomes became impossible given the information.",
+    "crumbs": [
+      "Foundations",
+      "5: Conditional Probability"
+    ]
+  },
+  {
+    "objectID": "lectures/conditional_probability.html#independence-and-mutual-exclusivity",
+    "href": "lectures/conditional_probability.html#independence-and-mutual-exclusivity",
+    "title": "5: Conditional Probability",
+    "section": "Independence and Mutual Exclusivity",
+    "text": "Independence and Mutual Exclusivity\nMutually exclusive:\n\nKnowing one occurred tells you the other did not occur.\n\nIndependent:\n\nKnowing one occurred tells you nothing about whether the other occurred.\n\nThese are almost opposite ideas.\nFor nonzero-probability events, mutually exclusive events cannot be independent.\n\nConsider a single die.\nLet\nA=\\{\\text{roll a 1}\\}\nand\nB=\\{\\text{roll a 6}\\}.\nThese events are mutually exclusive. That is, they cannot happen simultaneously.\nTherefore:\nP(A\\cap B)=0.\nBut:\nP(B)=\\frac16\nwhile\nP(B\\mid A)=0.\nKnowing that A occurred changes the probability of B. Therefore they are not independent.",
+    "crumbs": [
+      "Foundations",
+      "5: Conditional Probability"
+    ]
+  },
+  {
+    "objectID": "lectures/conditional_probability.html#using-tree-diagrams",
+    "href": "lectures/conditional_probability.html#using-tree-diagrams",
+    "title": "5: Conditional Probability",
+    "section": "Using Tree Diagrams",
+    "text": "Using Tree Diagrams\nThere are two simple operations.\n\nAlong a path: multiply\nFor example,\nP(A\\cap B)\n=\nP(A)P(B\\mid A).\n\n\nAcross alternative paths: add\nIf B can happen through two mutually exclusive paths,\nP(B)\n=\nP(A\\cap B)+P(A^c\\cap B).\nTherefore,",
+    "crumbs": [
+      "Foundations",
+      "5: Conditional Probability"
+    ]
+  },
+  {
+    "objectID": "lectures/conditional_probability.html#pb-papbmid-a-pacpbmid-ac.",
+    "href": "lectures/conditional_probability.html#pb-papbmid-a-pacpbmid-ac.",
+    "title": "5: Conditional Probability",
+    "section": "P(B)\n=\nP(A)P(B\\mid A)\n+\nP(A^c)P(B\\mid A^c).",
+    "text": "P(B)\n=\nP(A)P(B\\mid A)\n+\nP(A^c)P(B\\mid A^c).\n\nSuppose:\nUrn 1\n\n3 red\n2 blue\n\nUrn 2\n\n1 red\n4 blue\n\nWe draw one ball from Urn 1 and transfer it to Urn 2.\nThen draw one ball from Urn 2.\nWhat is the probability that the second draw is red?\nThere are two ways the second ball can be red.\nPath 1: Transfer a red\nProbability:\n\\frac35.\nThen Urn 2 contains:\n\n2 red\n4 blue\n\nso\nP(\\text{red second}\\mid\\text{red transferred})\n=\n\\frac26.\nThus:\n\\frac35\\frac26.\nPath 2: Transfer a blue\nProbability:\n\\frac25.\nThen Urn 2 contains:\n\n1 red\n5 blue\n\nso\nP(\\text{red second}\\mid\\text{blue transferred})\n=\n\\frac16.\nThus:\n\\frac25\\frac16.\nAdd the two paths:\nP(\\text{second red})\n=\n\\frac35\\frac26\n+\n\\frac25\\frac16.\nTherefore,\nP(\\text{second red})\n=\n\\frac4{15}.",
+    "crumbs": [
+      "Foundations",
+      "5: Conditional Probability"
+    ]
+  },
+  {
+    "objectID": "lectures/conditional_probability.html#formulating-bayes-theorem",
+    "href": "lectures/conditional_probability.html#formulating-bayes-theorem",
+    "title": "5: Conditional Probability",
+    "section": "Formulating Bayes’ Theorem",
+    "text": "Formulating Bayes’ Theorem\nStart with the multiplication rule:\nP(A\\cap B)\n=\nP(A\\mid B)P(B).\nBut we can also write the same intersection in the opposite direction:\nP(A\\cap B)\n=\nP(B\\mid A)P(A).\nSince both expressions equal the same quantity,\nP(A\\mid B)P(B)\n=\nP(B\\mid A)P(A).\nTherefore,\n\\boxed{\nP(A\\mid B)\n=\n\\frac{P(B\\mid A)P(A)}{P(B)}\n}\nBayes’ theorem is not an unrelated new formula but instead a consequence of conditional probability. Fundamentally, Bayesian inference is built out of conditional probability.",
+    "crumbs": [
+      "Foundations",
+      "5: Conditional Probability"
+    ]
   },
   {
     "objectID": "lectures/bayes_theorem.html",
@@ -238,6 +337,116 @@
     ]
   },
   {
+    "objectID": "lectures/discrete_rv.html",
+    "href": "lectures/discrete_rv.html",
+    "title": "8: Discrete Random Variables",
+    "section": "",
+    "text": "A discrete random variable is a rule that assigns distinct, separated numerical values to the outcomes of a random process.\nIts set of possible values is countable. Formally, this is a mapping between the values and the set of natural numbers. Informally, this means you can list the values out, either finitely (like \\{1, 2, 3\\}) or infinitely (like the non-negative integers \\{0, 1, 2, \\dots\\}).",
+    "crumbs": [
+      "Random Variables",
+      "8: Discrete Random Variables"
+    ]
+  },
+  {
+    "objectID": "lectures/discrete_rv.html#bernoulli",
+    "href": "lectures/discrete_rv.html#bernoulli",
+    "title": "8: Discrete Random Variables",
+    "section": "Bernoulli",
+    "text": "Bernoulli\nThe Bernoulli random variable models a single trial with exactly two outcomes (commonly defined as success/failure).\nThe probability of success (1) is p, and the probability of failure (0) is 1-p, where p \\in (0,1).\nNote that this interval is open, if we included the endpoints then we are allowing for the situation where the random variable would entirely predictable and so not random at all.",
+    "crumbs": [
+      "Random Variables",
+      "8: Discrete Random Variables"
+    ]
+  },
+  {
+    "objectID": "lectures/discrete_rv.html#binomial",
+    "href": "lectures/discrete_rv.html#binomial",
+    "title": "8: Discrete Random Variables",
+    "section": "Binomial",
+    "text": "Binomial\nThe Binomial random variable extends the Bernoulli concept to n independent trials, calculating the probability of getting exactly i successes.\nThe PMF is given by:\np(i)=\\binom{n}{i}p^{i}(1-p)^{n-i} \\;\\; \\text{for} \\;\\; i=0,1,\\dots,n\n\nAn airplane works if at least half of its engines work. Assume that we can model the engine failing probability as 1-p.\nWhen is a 4-engine airplane safer than a 2-engine airplane?\n\n\nSince the probability of an engine failing is 1-p, the probability of an engine functioning successfully must then be 1 - (1-p) = p.\nWe can model the number of working engines using the Binomial distribution.\n\n\nFor a 2-engine airplane to fly, at least 1 engine (half of 2) must work.\nWe sum the probabilities of exactly 1 and exactly 2 engines working (as these are mutually exclusive outcomes):\nP(\\text{2-engine success}) = \\binom{2}{1}p^{1}(1-p)^{1} + \\binom{2}{2}p^{2}(1-p)^{0}\nP(\\text{2-engine success}) = 2p(1-p) + p^{2} = 2p - p^{2}\n\n\nFor a 4-engine airplane to fly, at least 2 engines (half of 4) must work.\nWe sum the probabilities of exactly 2, 3, and 4 engines working:\nP(\\text{4-engine success}) = \\binom{4}{2}p^{2}(1-p)^{2} + \\binom{4}{3}p^{3}(1-p)^{1} + \\binom{4}{4}p^{4}(1-p)^{0}\nP(\\text{4-engine success}) = 6p^{2}(1 - 2p + p^{2}) + 4p^{3}(1-p) + p^{4}\nP(\\text{4-engine success}) = 6p^{2} - 12p^{3} + 6p^{4} + 4p^{3} - 4p^{4} + p^{4} = 3p^{4} - 8p^{3} + 6p^{2}\n\n\nTo find when the 4-engine airplane is safer, we set its success probability greater than or equal to the 2-engine airplane’s success probability:\n3p^{4} - 8p^{3} + 6p^{2} \\ge 2p - p^{2}\n3p^{4} - 8p^{3} + 7p^{2} - 2p \\ge 0\nFactoring out p gives:\np(3p^{3} - 8p^{2} + 7p - 2) \\ge 0\nThis factors to:\np(p-1)^{2}(3p-2) \\ge 0\nBecause p is a probability between 0 and 1, p is positive and (p-1)^{2} is always positive. We can then divide by these terms without concern about division by zero or reversing the inequality.\nTherefore, the inequality holds true only when:\n3p - 2 \\ge 0\np \\ge 2/3\n\n\nSo, a 4-engine airplane is safer than a 2-engine airplane only when the probability of a single engine working successfully is at least 2/3.\n\n\nThe probability of a part failing a quality control inspection is modeled at 5%.\n\nWhat is the probability that out of a sample of 10 parts that no part passes inspection?\nThat 5 pass inspection?\nThat all 10 pass inspection?\n\n\n\nSince we have multiple parts and a problem statement that is in terms of a binary condition, we can use a Binomial distribution if we assume that the sequence of items is independent.\nThen given our problem statement, we can set p = 0.95 and n = 10.\n\n\nFor no part to pass inspection we have:\nP(0) = \\binom{10}{0} (0.95^0)(1-0.95)^{10-0} \\approx 0.0000000000001\n\n\nFor five parts to pass inspection:\nP(5) = \\binom{10}{5} (0.95^5)(1-0.95)^{10-5} \\approx 0.0006\n\n\nFor all ten parts to pass inspection:\nP(10) = \\binom{10}{10} (0.95^{10})(1-0.95)^{10-10} \\approx 0.599",
+    "crumbs": [
+      "Random Variables",
+      "8: Discrete Random Variables"
+    ]
+  },
+  {
+    "objectID": "lectures/discrete_rv.html#geometric",
+    "href": "lectures/discrete_rv.html#geometric",
+    "title": "8: Discrete Random Variables",
+    "section": "Geometric",
+    "text": "Geometric\nThis models the number of independent trials required to achieve the first success.\nThe probability of needing exactly i trials is given by P(X=i)=(1-p)^{i-1}p, for i=1,2,\\dots.\nWe can think of this as experiencing exactly i-1 failures, all back-to-back, denoted by (1-p)^{i-1}, then followed immediately by one success, denoted by p.",
+    "crumbs": [
+      "Random Variables",
+      "8: Discrete Random Variables"
+    ]
+  },
+  {
+    "objectID": "lectures/discrete_rv.html#negative-binomial",
+    "href": "lectures/discrete_rv.html#negative-binomial",
+    "title": "8: Discrete Random Variables",
+    "section": "Negative Binomial",
+    "text": "Negative Binomial",
+    "crumbs": [
+      "Random Variables",
+      "8: Discrete Random Variables"
+    ]
+  },
+  {
+    "objectID": "lectures/discrete_rv.html#hypergeometric",
+    "href": "lectures/discrete_rv.html#hypergeometric",
+    "title": "8: Discrete Random Variables",
+    "section": "Hypergeometric",
+    "text": "Hypergeometric",
+    "crumbs": [
+      "Random Variables",
+      "8: Discrete Random Variables"
+    ]
+  },
+  {
+    "objectID": "lectures/discrete_rv.html#poisson",
+    "href": "lectures/discrete_rv.html#poisson",
+    "title": "8: Discrete Random Variables",
+    "section": "Poisson",
+    "text": "Poisson\nThe Poisson distribution is used to model the number of events occurring during an interval.\nThis interval can be time, area, volume, distance, etc.\nExamples are things like:\n\nArrivals of customers in a queue\nNumber of defects per batch\n\nThe Probability Mass Function is p(x)=P(X=x)=e^{-\\lambda}\\frac{\\lambda^{x}}{x!}, for x=0,1,\\dots where:\n\n\\lambda represents the average rate of occurrence for these events.\nx is the number of successes for the event.\ne is the exponential number.\n\n\nThe average number of particles appearing in one second is 3.2. What’s the probability that no more than 2 such particles appear in one second?\nWe can solve this by defining a Poisson random variable X representing the number of particles appearing in one second.\nWe are given the average rate \\lambda = 3.2. And we need to find the probability that no more than 2 particles appear, which is P(X \\le 2).\nAppealing to the compement rule we can sum the probabilities of exactly 0, 1, and 2 particles appearing:\nP(X \\le 2) = P(X=0) + P(X=1) + P(X=2)\nUsing the Poisson PMF formula P(X=i)=e^{-\\lambda}\\frac{\\lambda^{i}}{i!}:\nP(X=0) = e^{-3.2}\\frac{3.2^0}{0!} = e^{-3.2}(1) = e^{-3.2}P(X=1) = e^{-3.2}\\frac{3.2^1}{1!} = 3.2e^{-3.2}P(X=2) = e^{-3.2}\\frac{3.2^2}{2!} = e^{-3.2}\\frac{10.24}{2} = 5.12e^{-3.2}\nNow, we sum these probabilities together:\nP(X \\le 2) = e^{-3.2} + 3.2e^{-3.2} + 5.12e^{-3.2}\nP(X \\le 2) = e^{-3.2}(1 + 3.2 + 5.12)\nP(X \\le 2) = 9.32e^{-3.2}\nAfter calculating this, we get approximately 0.3799, meaning there is about a 38% chance that 2 or fewer particles will appear in that one-second window.\n\n\nA machine has unpredictable breakdowns at a mean rate of 3.5 per week.\n\nWhat is the probability exactly 2 breakdowns per week?\nWhat is the probability of 3 or more breakdowns per week?\nWhat is the probability of exactly 2 breakdowns in one week and exactly two breakdowns in the following week?\n\n\n\nThe Poisson Approximation to the Binomial\nThe Poisson distribution can be used to approximate the Binomial distribution when the number of trials n is large and the probability of success p is small. In this case, you set \\lambda=np.",
+    "crumbs": [
+      "Random Variables",
+      "8: Discrete Random Variables"
+    ]
+  },
+  {
+    "objectID": "lectures/joint_distributions.html",
+    "href": "lectures/joint_distributions.html",
+    "title": "12: Joint Distributions",
+    "section": "",
+    "text": "Joint Distributions\nJointly Distributed RVs introduces scenarios where we are tracking multiple random variables simultaneously rather than just one in isolation. The slide acts as an outline with several blank formulas that we can fill in with their standard definitions: Joint PMF / PDF:For discrete variables, the joint Probability Mass Function is p_{X,Y}(x,y) = P(X=x, Y=y). It gives the probability that X takes the value x and Y takes the value y at the same time.For continuous variables, the joint Probability Density Function is f_{X,Y}(x,y). To find the probability that the variables fall into a certain 2D region, you take the double integral of this function over that region.Joint CDF: The joint Cumulative Distribution Function calculates the probability that both variables are less than or equal to their respective threshold values. It applies to both discrete and continuous variables: F_{X,Y}(x,y) = P(X \\le x, Y \\le y). E[g(X,Y)]=: This is the extension of calculating the expectation of a function, now with two variables. Discrete: E[g(X,Y)] = \\sum_{x}\\sum_{y} g(x,y)p_{X,Y}(x,y)Continuous: E[g(X,Y)] = \\int_{-\\infty}^{\\infty}\\int_{-\\infty}^{\\infty} g(x,y)f_{X,Y}(x,y)dxdyE[\\sum_{i=1}^{N}a_{i}X_{i}]=: This formula represents a vital concept called the Linearity of Expectation applied to multiple variables. The expectation of a sum is always equal to the sum of the expectations, meaning: E\\left[\\sum_{i=1}^{N}a_{i}X_{i}\\right] = \\sum_{i=1}^{N}a_{i}E[X_{i}]\nCrucially, this property holds absolutely true whether the random variables are independent or not.\n\nThe Expected Sum of 10 Dice The problem asks for the expected sum obtained when 10 fair dice are rolled. Rather than trying to find the massive, complicated probability distribution for the sum of 10 dice (which ranges from 10 to 60), we define the total sum X as the addition of 10 individual random variables: X = X_1 + X_2 + \\dots + X_{10}Here, X_i represents the outcome of the i-th die roll. We already calculated the expected value of a single die roll to be 3.5 (or 7/2). Applying the linearity of expectation, we can simply sum the individual expectations:E[X] = E[X_1 + X_2 + \\dots + X_{10}] = E[X_1] + E[X_2] + \\dots + E[X_{10}]E[X] = 10 \\times 3.5 = 35The expected sum is 35.\n\n\nThe Hat Problem At a party, N men throw their hats into the center of a room. The hats are mixed up, each man randomly selects one, and we need to find the expected number of men who select their own hats. Trying to calculate the exact probability of 0, 1, 2, or N men getting their hats requires complex combinatorics (derangements). Instead, we use Indicator Random Variables.Let I_i be an indicator for the i-th man:I_i = 1 if man i gets his own hat.I_i = 0 if man i does not.The total number of men who get their own hat (X) is the sum of these indicators:X = I_1 + I_2 + \\dots + I_NTo find the expected value of an indicator variable, we just find the probability of the event occurring. Since the hats are completely mixed up, the chance that man i randomly grabs his specific hat out of the pile of N hats is simply 1/N. Therefore, E[I_i] = 1/N.Now we apply linearity of expectation. Crucially, this works even though the variables are not independent (if man 1 grabs man 2’s hat, man 2’s probability is affected). Linearity of expectation holds regardless of independence:E[X] = E[I_1] + E[I_2] + \\dots + E[I_N]E[X] = \\frac{1}{N} + \\frac{1}{N} + \\dots + \\frac{1}{N} \\quad \\text{(summed } N \\text{ times)}E[X] = N \\left( \\frac{1}{N} \\right) = 1The expected number of men who get their own hat is exactly 1, completely regardless of whether there are 5 men or 5,000 men at the party.",
+    "crumbs": [
+      "Random Variables",
+      "12: Joint Distributions"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Course Overview",
+    "section": "",
+    "text": "This is the central repository for the lecture notes for CSCI 4999. These notes provide an overview of the content covered during lecture.\nMore in-depth information can be found in the course section available on Blackboard.",
+    "crumbs": [
+      "Course Info",
+      "Course Overview"
+    ]
+  },
+  {
+    "objectID": "conventions.html",
+    "href": "conventions.html",
+    "title": "Content Conventions",
+    "section": "",
+    "text": "The information in these course notes is categorized into visual tiers.\n\n1. Core Material\n\nThese blocks contain the core content of the course. You are expected to be able to reproduce this information, derive the formulas, or perform the calculations from memory during examinations.\n\n\n\n\n2. Reference Concepts (Functional Familiarity)\n\nThese blocks contain tools, syntax, or concepts that you should recognize and understand when you see them. You do not need to memorize these “cold,” but you should know they exist and where to find them.\n\n\n\n\n3. Extended Information\n\nThese blocks are for students looking to further explore related content. This material is not testable but provides may prove useful for mastery of the core material in the course.\n\n\n\n\n4. Notes\n\nThese blocks are for context, especially for definitions that are used in the course that may be defined differently elsewhere.\n\n\n\n\n5. Practice\n\nThese blocks contain practice problems associated with their related section(s).",
+    "crumbs": [
+      "Course Info",
+      "Content Conventions"
+    ]
+  },
+  {
     "objectID": "lectures/axioms.html",
     "href": "lectures/axioms.html",
     "title": "4: Axioms of Probability",
@@ -275,7 +484,7 @@
     "href": "lectures/axioms.html#axiom-3-additivity-for-disjoint-events",
     "title": "4: Axioms of Probability",
     "section": "Axiom 3 — Additivity for disjoint events",
-    "text": "Axiom 3 — Additivity for disjoint events\nP(A∪B)=P(A)+P(B) \\text{ when } A∩B=∅\nIf events cannot occur together, their probabilities add. More generally, this extends to countably many mutually exclusive events.\nNote that the axioms do not tell us what probability a physical experiment should have. They tell us what a consistent probability model must obey once its probabilities are specified. |\n\nConsequences we can derive from the Axioms\n\nWhat is the probability of the empty set (\\emptyset)?\n\n\nClick to show answer\n\nAnswer: Because Ω and ∅ are disjoint and Ω∪∅=Ω, additivity gives P(Ω)=P(Ω)+P(∅). Therefore P(∅)=0.\n\n\n\nFor some event A in our space \\Omega what is the probability of the complement of A (A^c)?\n\n\nClick to show answer\n\nAnswer: A and Aᶜ partition Ω, so P(Aᶜ)=1−P(A).",
+    "text": "Axiom 3 — Additivity for disjoint events\nP(A∪B)=P(A)+P(B) \\text{ when } A∩B=∅\nIf events cannot occur together, their probabilities add. More generally, this extends to countably many mutually exclusive events.\nNote that the axioms do not tell us what probability a physical experiment should have. They tell us what a consistent probability model must obey once its probabilities are specified.\n\nConsequences we can derive from the Axioms\n\nWhat is the probability of the empty set (\\emptyset)?\n\n\nClick to show answer\n\nAnswer: Because Ω and ∅ are disjoint and Ω∪∅=Ω, additivity gives P(Ω)=P(Ω)+P(∅). Therefore P(∅)=0.\n\n\n\nFor some event A in our space \\Omega what is the probability of the complement of A (A^c)?\n\n\nClick to show answer\n\nAnswer: A and Aᶜ partition Ω, so P(Aᶜ)=1−P(A).",
     "crumbs": [
       "Foundations",
       "4: Axioms of Probability"
@@ -301,28 +510,6 @@
     "crumbs": [
       "Foundations",
       "4: Axioms of Probability"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Course Overview",
-    "section": "",
-    "text": "This is the central repository for the lecture notes for CSCI 4999. These notes provide an overview of the content covered during lecture.\nMore in-depth information can be found in the course section available on Blackboard.",
-    "crumbs": [
-      "Course Info",
-      "Course Overview"
-    ]
-  },
-  {
-    "objectID": "conventions.html",
-    "href": "conventions.html",
-    "title": "Content Conventions",
-    "section": "",
-    "text": "The information in these course notes is categorized into visual tiers.\n\n1. Core Material\n\nThese blocks contain the core content of the course. You are expected to be able to reproduce this information, derive the formulas, or perform the calculations from memory during examinations.\n\n\n\n\n2. Reference Concepts (Functional Familiarity)\n\nThese blocks contain tools, syntax, or concepts that you should recognize and understand when you see them. You do not need to memorize these “cold,” but you should know they exist and where to find them.\n\n\n\n\n3. Extended Information\n\nThese blocks are for students looking to further explore related content. This material is not testable but provides may prove useful for mastery of the core material in the course.\n\n\n\n\n4. Notes\n\nThese blocks are for context, especially for definitions that are used in the course that may be defined differently elsewhere.\n\n\n\n\n5. Practice\n\nThese blocks contain practice problems associated with their related section(s).",
-    "crumbs": [
-      "Course Info",
-      "Content Conventions"
     ]
   },
   {
@@ -359,91 +546,135 @@
     ]
   },
   {
-    "objectID": "lectures/conditional_probability.html",
-    "href": "lectures/conditional_probability.html",
-    "title": "5: Conditional Probability",
+    "objectID": "lectures/variance.html",
+    "href": "lectures/variance.html",
+    "title": "11: Variance",
     "section": "",
-    "text": "We have already discussed the idea of conditional probability during our introduction to sample and state spaces. But this was in the context of the general idea of probability itself. We will now focus on how the incorporation of new information is computed.\nWhat should happen to a probability when we learn something new?\nSuppose we draw one card from a standard 52-card deck.\nBefore seeing the card:\nP(\\text{Ace})=\\frac{4}{52}=\\frac{1}{13}.\nNow suppose someone tells us:\nDoes that information matter?\nYes.\nWe now know that the card must be one of the 13 Hearts.\nAmong those 13 cards, only one is an Ace.\nTherefore,\nP(\\text{Ace}\\mid\\text{Heart})\n=\n\\frac{1}{13}.\nIn this particular example the probability happened not to change.\nNow changing the information:\nThere are 12 Face Cards, and 3 of them are Hearts.\nIf we ask for the probability that the card is a Heart:\nP(\\text{Heart}\\mid\\text{Face})\n=\n\\frac{3}{12}\n=\n\\frac14.\nOur new information changed the probability from\nP(\\text{Heart})=\\frac{13}{52}=\\frac14\nto\nP(\\text{Heart}\\mid\\text{Face})=\\frac14.\nBut again, this new information did not change it.\nWe will now choose something that does.\nNow:\nP(\\text{Heart}\\mid\\text{Spade})=0.\nThe new information makes Hearts impossible.\nConditional probability fundamentally asks:\nThe word among is extremely important.",
+    "text": "n-th moment: This is the expected value of the random variable raised to the power of n, denoted as E[X^{n}].\nThe first moment (n=1) is just the mean, E[X].\nn-th central moment: This calculates the expected value of the difference between the random variable and its mean, raised to the n-th power: E[(X-E[X])^{n}].\nIt measures how the distribution behaves around its center.",
     "crumbs": [
-      "Foundations",
-      "5: Conditional Probability"
+      "Random Variables",
+      "11: Variance"
     ]
   },
   {
-    "objectID": "lectures/conditional_probability.html#interpretation-1-restricted-sample-space",
-    "href": "lectures/conditional_probability.html#interpretation-1-restricted-sample-space",
-    "title": "5: Conditional Probability",
-    "section": "Interpretation 1: Restricted sample space",
-    "text": "Interpretation 1: Restricted sample space\nKnowing B occurred restricts our sample space from \\Omega to B.\nThen we ask how much of B is also in A.",
+    "objectID": "lectures/variance.html#an-alternative-formula",
+    "href": "lectures/variance.html#an-alternative-formula",
+    "title": "11: Variance",
+    "section": "An Alternative Formula",
+    "text": "An Alternative Formula\nVar(X)=E[X^{2}]-(E[X])^{2}\n\nShow that Var(X)=E[X^{2}]-(E[X])^{2}.\nUsing the definition of variance:\nVar(X) = E[(X-E[X])^{2}]\nBy expanding the interior we have:\nE[(X^2 - 2XE[X] + (E[X]^2)]]\nThen applying the linearity of expectation:\nE[X^2] - 2E[XE[X]] + E[(E[X])^2]\nNow, the expactation results in a number, which is a constant value and so this can be pulled out of the expectation.\nE[X^2] - 2E[X]E[X] + (E[X])^2\nSimplifying gives us:\nE[X^{2}]-(E[X])^{2}\n\n\nX output of tossing a die, find Var(X) Let X be the result of a standard 6-sided die roll. Each outcome (1, 2, 3, 4, 5, 6) has a probability of 1/6. To use the computational formula, we need E[X] and E[X^{2}].First, calculate the mean, E[X]:E[X] = \\sum_{x=1}^{6} x p(x) = 1\\left(\\frac{1}{6}\\right) + 2\\left(\\frac{1}{6}\\right) + \\dots + 6\\left(\\frac{1}{6}\\right)E[X] = \\frac{1+2+3+4+5+6}{6} = \\frac{21}{6} = \\frac{7}{2}Next, calculate the second moment, E[X^{2}]:E[X^2] = \\sum_{x=1}^{6} x^2 p(x) = 1^2\\left(\\frac{1}{6}\\right) + 2^2\\left(\\frac{1}{6}\\right) + \\dots + 6^2\\left(\\frac{1}{6}\\right)E[X^2] = \\frac{1+4+9+16+25+36}{6} = \\frac{91}{6}Now, plug both into the variance formula:Var(X) = E[X^2] - (E[X])^2Var(X) = \\frac{91}{6} - \\left(\\frac{7}{2}\\right)^2Var(X) = \\frac{91}{6} - \\frac{49}{4} = \\frac{182}{12} - \\frac{147}{12} = \\frac{35}{12}\n\n\nX\\sim\\mathcal{N}(\\mu,\\sigma^{2}), find Var(X)\nThis is essentially a definitional question. By standard notation for the Normal distribution, the first parameter (\\mu) is the mean, and the second parameter (\\sigma^{2}) is the variance. So, Var(X) = \\sigma^{2}. (If you needed to prove this from scratch, you would evaluate the integral \\int_{-\\infty}^{\\infty}(x-\\mu)^2 \\frac{1}{\\sqrt{2\\pi}\\sigma}e^{-\\frac{(x-\\mu)^{2}}{2\\sigma^{2}}} dx, which integrates out to \\sigma^{2}).",
     "crumbs": [
-      "Foundations",
-      "5: Conditional Probability"
+      "Random Variables",
+      "11: Variance"
     ]
   },
   {
-    "objectID": "lectures/conditional_probability.html#interpretation-2-among",
-    "href": "lectures/conditional_probability.html#interpretation-2-among",
-    "title": "5: Conditional Probability",
-    "section": "Interpretation 2: “Among”",
-    "text": "Interpretation 2: “Among”\nP(A\\mid B) means:\n\nAmong the B cases, what fraction are also A?\n\nFor example:\n\nAmong students who own a laptop, what fraction are engineering majors?\n\nThe denominator is laptop owners, not all students.",
+    "objectID": "lectures/continuous_rv.html",
+    "href": "lectures/continuous_rv.html",
+    "title": "9: Continuous Random Variables",
+    "section": "",
+    "text": "Continuous RVs shifts focus to variables that can take on an infinite number of possible values within a given continuous range.",
     "crumbs": [
-      "Foundations",
-      "5: Conditional Probability"
+      "Random Variables",
+      "9: Continuous Random Variables"
     ]
   },
   {
-    "objectID": "lectures/conditional_probability.html#interpretation-3-renormalization",
-    "href": "lectures/conditional_probability.html#interpretation-3-renormalization",
-    "title": "5: Conditional Probability",
-    "section": "Interpretation 3: Renormalization",
-    "text": "Interpretation 3: Renormalization\nThe original probabilities of all outcomes outside B become zero. The probabilities inside B are rescaled so that they add to one.\nThis is particularly useful later when discussing Bayesian inference.\n\n\nRoll a fair six-sided die.\nLet\nA=\\{\\text{even}\\}\nand\nB=\\{\\text{greater than 3}\\}.\nThe original sample space is\n\\Omega=\\{1,2,3,4,5,6\\}.\nThe condition B tells us:\nB=\\{4,5,6\\}.\nSo our universe is now:\n\\{4,5,6\\}.\nOf those three outcomes, two are even:\n\\{4,6\\}.\nTherefore,\nP(A\\mid B)=\\frac{2}{3}.\n\nWhat happened to 1, 2, and 3?\nThese outcomes became impossible given the information.",
+    "objectID": "lectures/continuous_rv.html#uniform",
+    "href": "lectures/continuous_rv.html#uniform",
+    "title": "9: Continuous Random Variables",
+    "section": "Uniform",
+    "text": "Uniform\nThe Uniform distribution, denoted X\\sim Uniform(a,b), represents a variable where all outcomes in the interval from a to b are equally likely.\nThe PDF is flat and constant over this interval: f(x)=\\frac{1}{b-a} for a&lt;x&lt;b, and 0 otherwise.\n\nWhat is the CDF, F(x), of a uniform random variable X \\sim U(a,b)?\nAs we have the PDF, we need to integrate this over negative infinity to x. We can make this easier by appealing to the known properties of integration and partition the limits of integration into three intervals:\nFor x \\le a, the PDF is 0, meaning no probability has accumulated yet:\nF(x) = \\int_{-\\infty}^{x} 0 \\, dt = 0For a &lt; x &lt; b, we integrate the constant PDF from the start of the interval a up to the variable x:\nF(x) = \\int_{a}^{x} \\frac{1}{b-a} \\, dt = \\left[ \\frac{t}{b-a} \\right]_{a}^{x} = \\frac{x-a}{b-a}\nFor x \\ge b, the accumulated probability has reached its maximum of 1, as we integrate over the entire valid interval from a to b:\nF(x) = \\int_{a}^{b} \\frac{1}{b-a} \\, dt = \\left[ \\frac{t}{b-a} \\right]_{a}^{b} = \\frac{b-a}{b-a} = 1\nPutting it all together, the CDF for a Uniform RV is expressed as the following piecewise function:\nF(x)=\\begin{cases}0,&x \\le a\\\\ \\frac{x-a}{b-a},&a&lt;x&lt;b\\\\ 1,&x \\ge b\\end{cases}",
     "crumbs": [
-      "Foundations",
-      "5: Conditional Probability"
+      "Random Variables",
+      "9: Continuous Random Variables"
     ]
   },
   {
-    "objectID": "lectures/conditional_probability.html#independence-and-mutual-exclusivity",
-    "href": "lectures/conditional_probability.html#independence-and-mutual-exclusivity",
-    "title": "5: Conditional Probability",
-    "section": "Independence and Mutual Exclusivity",
-    "text": "Independence and Mutual Exclusivity\nMutually exclusive:\n\nKnowing one occurred tells you the other did not occur.\n\nIndependent:\n\nKnowing one occurred tells you nothing about whether the other occurred.\n\nThese are almost opposite ideas.\nFor nonzero-probability events, mutually exclusive events cannot be independent.\n\nConsider a single die.\nLet\nA=\\{\\text{roll a 1}\\}\nand\nB=\\{\\text{roll a 6}\\}.\nThese events are mutually exclusive. That is, they cannot happen simultaneously.\nTherefore:\nP(A\\cap B)=0.\nBut:\nP(B)=\\frac16\nwhile\nP(B\\mid A)=0.\nKnowing that A occurred changes the probability of B. Therefore they are not independent.",
+    "objectID": "lectures/continuous_rv.html#exponential",
+    "href": "lectures/continuous_rv.html#exponential",
+    "title": "9: Continuous Random Variables",
+    "section": "Exponential",
+    "text": "Exponential\nThe Exponential Random Variable, denoted as X\\sim Exp(\\lambda) is often used to model the time elapsed between independent continuous events.\nThe PDF for this variable is f(x)=\\lambda e^{-\\lambda x} for x\\ge0 (And implicitly, f(x)=0 for x&lt;0)\n\nWhat is the CDF, F(x), of a uniform random variable X \\sim Exp(\\lambda)?\nWe can find this by evaluating the integral of the PDF from 0 up to a given variable x (assuming x \\ge 0): F(x) = \\int_{0}^{x} \\lambda e^{-\\lambda t} dt\nTo solve this, we can apply standard integration rules. The antiderivative of \\lambda e^{-\\lambda t} is -e^{-\\lambda t}.\nWe evaluate this from 0 to x:F(x) = \\left[ -e^{-\\lambda t} \\right]_{0}^{x}\nF(x) = (-e^{-\\lambda x}) - (-e^{-\\lambda(0)})\nF(x) = -e^{-\\lambda x} - (-e^{0})F(x) = -e^{-\\lambda x} - (-1)\nF(x) = 1 - e^{-\\lambda x}\nFor any value less than 0, no probability has accumulated.\nTherefore, the complete CDF for an Exponential RV is:F(x)=\\begin{cases}1 - e^{-\\lambda x},&x\\ge0\\\\ 0,&x&lt;0\\end{cases}",
     "crumbs": [
-      "Foundations",
-      "5: Conditional Probability"
+      "Random Variables",
+      "9: Continuous Random Variables"
     ]
   },
   {
-    "objectID": "lectures/conditional_probability.html#using-tree-diagrams",
-    "href": "lectures/conditional_probability.html#using-tree-diagrams",
-    "title": "5: Conditional Probability",
-    "section": "Using Tree Diagrams",
-    "text": "Using Tree Diagrams\nThere are two simple operations.\n\nAlong a path: multiply\nFor example,\nP(A\\cap B)\n=\nP(A)P(B\\mid A).\n\n\nAcross alternative paths: add\nIf B can happen through two mutually exclusive paths,\nP(B)\n=\nP(A\\cap B)+P(A^c\\cap B).\nTherefore,",
+    "objectID": "lectures/continuous_rv.html#gamma",
+    "href": "lectures/continuous_rv.html#gamma",
+    "title": "9: Continuous Random Variables",
+    "section": "Gamma",
+    "text": "Gamma\nThe Gamma Random Variable, denoted X\\sim Gamma(\\alpha,\\lambda) is often used to model wait times until a specific number of events occur especially in the context of reliability and aging.\n\nGamma PDF: The probability density function is defined as f(x)=\\frac{\\lambda e^{-\\lambda x}(\\lambda x)^{\\alpha-1}}{\\Gamma(\\alpha)} for x\\ge0, and 0 for x&lt;0.\n\nThis distribution relies on two strictly positive parameters: \\alpha&gt;0 and \\lambda&gt;0.\nThe Gamma Function: The denominator in the PDF features the Gamma function itself, which is defined by the integral \\Gamma(\\alpha)=\\int_{0}^{\\infty}e^{-x}x^{\\alpha-1}dx.\nThis component acts as a normalizing constant to ensure the total probability across the distribution integrates to 1.\nFactorial Relationship: The slide highlights that the Gamma function serves as a continuous extension of the factorial function, following the recursive rule \\Gamma(\\alpha)=(\\alpha-1)\\Gamma(\\alpha-1).\nInteger Values: When evaluating the Gamma function for an integer n, it simplifies cleanly to a standard factorial: \\Gamma(n)=(n-1)!. The slide notes that this specific integer relationship can be mathematically proven using induction.\n\nExponential as a Special Case of the Gamma Distribution\n\n\nThe Memoryless Property",
     "crumbs": [
-      "Foundations",
-      "5: Conditional Probability"
+      "Random Variables",
+      "9: Continuous Random Variables"
     ]
   },
   {
-    "objectID": "lectures/conditional_probability.html#pb-papbmid-a-pacpbmid-ac.",
-    "href": "lectures/conditional_probability.html#pb-papbmid-a-pacpbmid-ac.",
-    "title": "5: Conditional Probability",
-    "section": "P(B)\n=\nP(A)P(B\\mid A)\n+\nP(A^c)P(B\\mid A^c).",
-    "text": "P(B)\n=\nP(A)P(B\\mid A)\n+\nP(A^c)P(B\\mid A^c).\n\nSuppose:\nUrn 1\n\n3 red\n2 blue\n\nUrn 2\n\n1 red\n4 blue\n\nWe draw one ball from Urn 1 and transfer it to Urn 2.\nThen draw one ball from Urn 2.\nWhat is the probability that the second draw is red?\nThere are two ways the second ball can be red.\nPath 1: Transfer a red\nProbability:\n\\frac35.\nThen Urn 2 contains:\n\n2 red\n4 blue\n\nso\nP(\\text{red second}\\mid\\text{red transferred})\n=\n\\frac26.\nThus:\n\\frac35\\frac26.\nPath 2: Transfer a blue\nProbability:\n\\frac25.\nThen Urn 2 contains:\n\n1 red\n5 blue\n\nso\nP(\\text{red second}\\mid\\text{blue transferred})\n=\n\\frac16.\nThus:\n\\frac25\\frac16.\nAdd the two paths:\nP(\\text{second red})\n=\n\\frac35\\frac26\n+\n\\frac25\\frac16.\nTherefore,\nP(\\text{second red})\n=\n\\frac4{15}.",
+    "objectID": "lectures/continuous_rv.html#normal",
+    "href": "lectures/continuous_rv.html#normal",
+    "title": "9: Continuous Random Variables",
+    "section": "Normal",
+    "text": "Normal\nthe Normal Random Variable, denoted as X\\sim\\mathcal{N}(\\mu,\\sigma^{2}).\nIn this notation, \\mu represents the mean (the center of the distribution) and \\sigma^2 represents the variance (the spread).\nThe slide highlights the two main components of this distribution:Normal PDF: The probability density function that creates the classic “bell curve” shape is given as f(x)=\\frac{1}{\\sqrt{2\\pi}\\sigma}e^{-\\frac{(x-\\mu)^{2}}{2\\sigma^{2}}}.\nLinear Transformations: The slide ends with an open question: If you create a new variable Y=\\alpha X+\\beta, what is the distribution of Y, or Y \\sim ?\nA fundamental property of the Normal distribution is that any linear transformation of a strictly Normal random variable results in another Normal random variable.\nTo define the distribution of Y, we simply need to calculate its new mean and variance:New Mean: Expected values shift linearly, so the new mean is simply \\alpha\\mu + \\beta.\nNew Variance: Variance is a measure of spread, so it is unaffected by the constant addition of \\beta.\nHowever, multiplying the variable by \\alpha scales the variance by the square of that constant, resulting in \\alpha^2\\sigma^2.\nPutting this together, the answer to the slide’s prompt is that Y follows a Normal distribution with the updated parameters:Y \\sim \\mathcal{N}(\\alpha\\mu + \\beta, \\alpha^2\\sigma^2)",
     "crumbs": [
-      "Foundations",
-      "5: Conditional Probability"
+      "Random Variables",
+      "9: Continuous Random Variables"
     ]
   },
   {
-    "objectID": "lectures/conditional_probability.html#formulating-bayes-theorem",
-    "href": "lectures/conditional_probability.html#formulating-bayes-theorem",
-    "title": "5: Conditional Probability",
-    "section": "Formulating Bayes’ Theorem",
-    "text": "Formulating Bayes’ Theorem\nStart with the multiplication rule:\nP(A\\cap B)\n=\nP(A\\mid B)P(B).\nBut we can also write the same intersection in the opposite direction:\nP(A\\cap B)\n=\nP(B\\mid A)P(A).\nSince both expressions equal the same quantity,\nP(A\\mid B)P(B)\n=\nP(B\\mid A)P(A).\nTherefore,\n\\boxed{\nP(A\\mid B)\n=\n\\frac{P(B\\mid A)P(A)}{P(B)}\n}\nBayes’ theorem is not an unrelated new formula but instead a consequence of conditional probability. Fundamentally, Bayesian inference is built out of conditional probability.",
+    "objectID": "lectures/mgfs.html",
+    "href": "lectures/mgfs.html",
+    "title": "13: Variance",
+    "section": "",
+    "text": "Moment Generating Functions",
     "crumbs": [
-      "Foundations",
-      "5: Conditional Probability"
+      "Random Variables",
+      "13: Variance"
+    ]
+  },
+  {
+    "objectID": "lectures/expectation.html",
+    "href": "lectures/expectation.html",
+    "title": "10: Properties of Random Variables",
+    "section": "",
+    "text": "The expected value (commonly called the mean) is denoted as E[X]. This represents the probability-weighted average of all possible outcomes for a random variable.\n\n\nFor Discrete RVs, the expectation is calculated by multiplying each possible value x by its probability p(x) and summing them all together:\nE[X]=\\sum_{x:p(x)&gt;0}xp(x)\n\nBinomial(n, p): E[X]=np.\n-If we think about what a binomal random variable represents this is intuitive: if you flip a coin 10 times (n=10) with a 50% chance of heads (p=0.5), you expect 5 heads.\nGeometric(p): E[X]=\\frac{1}{p}.\n\nLike the binomial, this is easy to reason our way towards. If you have a 1 in 4 chance of success (p=0.25), you would expect it to take 4 trials to get your first success.\n\nPoisson(\\lambda): E[X]=\\lambda.\n\nThis follows directly from the definition of the Poisson distribution, where \\lambda represents the average rate of occurrence.\n\n\n\n\n\nNow since the variable can take on an uncountably infinite number possible values, the summation must be replaced replaced by an integral over the entire real line: E[X]=\\int_{-\\infty}^{\\infty}xf(x)dx\nLike for Discrete RVs we have product of the value x and its probability density f(x) but now our operation is integration.\n\nUniform(a,b): E[X]=\\frac{a+b}{2}.\n\nThis calculates the exact midpoint of the interval between a and b.\n\nExponential(λ): E[X]=\\frac{1}{\\lambda}.\n\nThe expected time between events is the inverse of the rate parameter.\n\nNormal(\\mu,\\sigma^{2}): E[X]=\\mu.\n\nThe expected value is simply the mean parameter \\mu, which sits at the exact center of the bell curve.\n\n\n\n\n\nWe will now consider the question of how to calculate the expection if we have some function applied to our random variable, denoted as Y = g(X).\nThe good news is that we do not need to find the new probability distribution for Y and instead can calculate the expectation using the original distribution of X.\n\nContinuous RVs: You can evaluate the expectation by integrating the function g(x) multiplied by the original probability density function f_{X}(x): E[Y]=\\int_{-\\infty}^{\\infty}yf_{Y}(y)dy=E[g(X)]=\\int_{-\\infty}^{\\infty}g(x)f_{X}(x)dx.\nDiscrete RVs: Similarly, you sum the function g(x) multiplied by the original probability mass function p(x): E[Y]=\\sum_{x:p(x)&gt;0}g(x)p(x).\n\n\nLet X\\sim Uniform(0,1),Y=X^{3}, find E[Y]\nFirst, we need to think about what is meant by the PDF for a Uniform(0,1) distribution.\nBecause the interval length is 1, the constant density f_X(x) is just 1 for 0 &lt; x &lt; 1, and 0 elsewhere.\nApplying the continuous formula for g(x) = x^3:E[Y] = \\int_{0}^{1} x^{3} (1) dx\nE[Y] = \\left[ \\frac{x^{4}}{4} \\right]_{0}^{1}\nE[Y] = \\frac{1^{4}}{4} - \\frac{0^{4}}{4} = \\frac{1}{4}\n\n\nLet X be an arbitrary random variable, and let a, b be real-valued constants. What is E[aX+b]?\nThis is known as the “linearity of expectation.”\nWe will use the continuous formula here (though the proof is functionally the same for discrete variables replacing the integral with a summation):\nE[aX+b] = \\int_{-\\infty}^{\\infty} (ax+b)f_{X}(x)dx\nDistributing the integral yields:\nE[aX+b] = \\int_{-\\infty}^{\\infty} axf_{X}(x)dx + \\int_{-\\infty}^{\\infty} bf_{X}(x)dx\nFactoring the constants out of the integrals:\nE[aX+b] = a \\int_{-\\infty}^{\\infty} xf_{X}(x)dx + b \\int_{-\\infty}^{\\infty} f_{X}(x)dx\nWe know that \\int xf_{X}(x)dx is the definition of E[X], and \\int f_{X}(x)dx is the total probability which always equals 1.\nTherefore, this simplifies to:\nE[aX+b] = aE[X] + b\nThis linearity property gives us some substantial advantages when it comes to simplification.\n\nWe can split up sums of random variables in an expectation into the sum of the expectations.\nWe can pull through constant multiplicative values through the expectation.\nWe also get that the expected value of a constant is the constant itself.",
+    "crumbs": [
+      "Random Variables",
+      "10: Properties of Random Variables"
+    ]
+  },
+  {
+    "objectID": "lectures/expectation.html#discrete-random-variables",
+    "href": "lectures/expectation.html#discrete-random-variables",
+    "title": "10: Properties of Random Variables",
+    "section": "",
+    "text": "For Discrete RVs, the expectation is calculated by multiplying each possible value x by its probability p(x) and summing them all together:\nE[X]=\\sum_{x:p(x)&gt;0}xp(x)\n\nBinomial(n, p): E[X]=np.\n-If we think about what a binomal random variable represents this is intuitive: if you flip a coin 10 times (n=10) with a 50% chance of heads (p=0.5), you expect 5 heads.\nGeometric(p): E[X]=\\frac{1}{p}.\n\nLike the binomial, this is easy to reason our way towards. If you have a 1 in 4 chance of success (p=0.25), you would expect it to take 4 trials to get your first success.\n\nPoisson(\\lambda): E[X]=\\lambda.\n\nThis follows directly from the definition of the Poisson distribution, where \\lambda represents the average rate of occurrence.",
+    "crumbs": [
+      "Random Variables",
+      "10: Properties of Random Variables"
+    ]
+  },
+  {
+    "objectID": "lectures/expectation.html#continuous-random-variables",
+    "href": "lectures/expectation.html#continuous-random-variables",
+    "title": "10: Properties of Random Variables",
+    "section": "",
+    "text": "Now since the variable can take on an uncountably infinite number possible values, the summation must be replaced replaced by an integral over the entire real line: E[X]=\\int_{-\\infty}^{\\infty}xf(x)dx\nLike for Discrete RVs we have product of the value x and its probability density f(x) but now our operation is integration.\n\nUniform(a,b): E[X]=\\frac{a+b}{2}.\n\nThis calculates the exact midpoint of the interval between a and b.\n\nExponential(λ): E[X]=\\frac{1}{\\lambda}.\n\nThe expected time between events is the inverse of the rate parameter.\n\nNormal(\\mu,\\sigma^{2}): E[X]=\\mu.\n\nThe expected value is simply the mean parameter \\mu, which sits at the exact center of the bell curve.",
+    "crumbs": [
+      "Random Variables",
+      "10: Properties of Random Variables"
+    ]
+  },
+  {
+    "objectID": "lectures/expectation.html#calculating-expectations",
+    "href": "lectures/expectation.html#calculating-expectations",
+    "title": "10: Properties of Random Variables",
+    "section": "",
+    "text": "We will now consider the question of how to calculate the expection if we have some function applied to our random variable, denoted as Y = g(X).\nThe good news is that we do not need to find the new probability distribution for Y and instead can calculate the expectation using the original distribution of X.\n\nContinuous RVs: You can evaluate the expectation by integrating the function g(x) multiplied by the original probability density function f_{X}(x): E[Y]=\\int_{-\\infty}^{\\infty}yf_{Y}(y)dy=E[g(X)]=\\int_{-\\infty}^{\\infty}g(x)f_{X}(x)dx.\nDiscrete RVs: Similarly, you sum the function g(x) multiplied by the original probability mass function p(x): E[Y]=\\sum_{x:p(x)&gt;0}g(x)p(x).\n\n\nLet X\\sim Uniform(0,1),Y=X^{3}, find E[Y]\nFirst, we need to think about what is meant by the PDF for a Uniform(0,1) distribution.\nBecause the interval length is 1, the constant density f_X(x) is just 1 for 0 &lt; x &lt; 1, and 0 elsewhere.\nApplying the continuous formula for g(x) = x^3:E[Y] = \\int_{0}^{1} x^{3} (1) dx\nE[Y] = \\left[ \\frac{x^{4}}{4} \\right]_{0}^{1}\nE[Y] = \\frac{1^{4}}{4} - \\frac{0^{4}}{4} = \\frac{1}{4}\n\n\nLet X be an arbitrary random variable, and let a, b be real-valued constants. What is E[aX+b]?\nThis is known as the “linearity of expectation.”\nWe will use the continuous formula here (though the proof is functionally the same for discrete variables replacing the integral with a summation):\nE[aX+b] = \\int_{-\\infty}^{\\infty} (ax+b)f_{X}(x)dx\nDistributing the integral yields:\nE[aX+b] = \\int_{-\\infty}^{\\infty} axf_{X}(x)dx + \\int_{-\\infty}^{\\infty} bf_{X}(x)dx\nFactoring the constants out of the integrals:\nE[aX+b] = a \\int_{-\\infty}^{\\infty} xf_{X}(x)dx + b \\int_{-\\infty}^{\\infty} f_{X}(x)dx\nWe know that \\int xf_{X}(x)dx is the definition of E[X], and \\int f_{X}(x)dx is the total probability which always equals 1.\nTherefore, this simplifies to:\nE[aX+b] = aE[X] + b\nThis linearity property gives us some substantial advantages when it comes to simplification.\n\nWe can split up sums of random variables in an expectation into the sum of the expectations.\nWe can pull through constant multiplicative values through the expectation.\nWe also get that the expected value of a constant is the constant itself.",
+    "crumbs": [
+      "Random Variables",
+      "10: Properties of Random Variables"
     ]
   },
   {
@@ -451,7 +682,7 @@
     "href": "lectures/inclusion_exclusion.html",
     "title": "3: The Principle of Inclusion-Exclusion",
     "section": "",
-    "text": "Before calculating, we need to identify what is being counted, what is distinguishable, and where overlap or separation occurs. Memorizing formulas is not the goal, these ideas emerge from common structure between similar problems.",
+    "text": "Before calculating, we need to identify what is being counted, what is distinguishable, and where overlap or separation occurs.",
     "crumbs": [
       "Foundations",
       "3: The Principle of Inclusion-Exclusion"
@@ -528,7 +759,7 @@
     "href": "lectures/inclusion_exclusion.html#the-physical-nature-of-the-objects-changes-the-mathematics",
     "title": "3: The Principle of Inclusion-Exclusion",
     "section": "The Physical Nature of the Objects Changes the Mathematics",
-    "text": "The Physical Nature of the Objects Changes the Mathematics\nThe physical identity of the objects determines what constitutes a different outcome. Changing identical keys into distinct keys does not merely change a number in the formula; it changes the sample-space architecture.\n\nThe casino hotel-key problem\nA casino manager is handing out 5 complimentary hotel room keys to 3 distinct high rollers. Compare two versions.\n\nFive identical standard-room keys\nAssume the five keys are interchangeable: giving Alice key 1 and Bob key 2 is not meaningfully different from giving Alice key 2 and Bob key 1.\nOnly the number of keys received by each person matters. Let (a,b,c) be the allocations. Then a+b+c=5 with a,b,c ≥ 0. This is a stars-and-bars problem with 5 stars and 2 bars, so the state-space size is \\binom{7}{2} 21.\nNote here that the physical objects are indistinguishable. A person’s allocation is summarized completely by a count.\n\nFive uniquely themed penthouse keys\nAssume the five keys correspond to five distinct suites: Roman, Egyptian, Art Deco, Presidential, and Ocean. A particular key can be assigned to any one of the three players.\nEach of the 5 distinct keys has 3 possible recipients. Therefore the number of assignments is 3^5 = 243.\nNote that the objects are distinguishable. Which player receives which particular key matters.\n\n\n\n\nWhy this is a different mathematical architecture\n\n\n\n\n\n\n\n\nFeature\nIdentical keys\nDistinct keys\n\n\n\n\nWhat matters?\nHow many each player gets\nWhich key each player gets\n\n\nObject identity\nIrrelevant\nRelevant\n\n\nRepresentation\nStars + bars\n5 independent key assignments\n\n\nTypical structure\nInteger solutions\nFunctions / assignments\n\n\nState-space size\n\\binom{7}{2} = 21\n3^5 = 243\n\n\n\nA useful question: If I swap two objects between recipients, does the outcome change?\nIf NO, the objects may be indistinguishable for this problem. If YES, the objects are distinguishable and a different counting architecture is likely required.",
+    "text": "The Physical Nature of the Objects Changes the Mathematics\nThe physical identity of the objects determines what constitutes a different outcome. Changing identical keys into distinct keys does not merely change a number in the formula; this fundamentally changes the sample-space architecture.\n\nThe casino hotel-key problem\nA casino manager is handing out 5 complimentary hotel room keys to 3 distinct high rollers. Compare two versions.\n\nFive identical standard-room keys\nAssume the five keys are interchangeable: giving Alice key 1 and Bob key 2 is not meaningfully different from giving Alice key 2 and Bob key 1.\nOnly the number of keys received by each person matters. Let (a,b,c) be the allocations. Then a+b+c=5 with a,b,c ≥ 0. This is a stars-and-bars problem with 5 stars and 2 bars, so the state-space size is \\binom{7}{2} 21.\nNote here that the physical objects are indistinguishable. A person’s allocation is summarized completely by a count.\n\n\nFive uniquely themed penthouse keys\nAssume the five keys correspond to five distinct suites: Roman, Egyptian, Art Deco, Presidential, and Ocean. A particular key can be assigned to any one of the three players.\nEach of the 5 distinct keys has 3 possible recipients. Therefore the number of assignments is 3^5 = 243.\nNote that the objects are distinguishable. Which player receives which particular key matters.\n\n\n\nWhy this is a different mathematical architecture\n\n\n\n\n\n\n\n\nFeature\nIdentical keys\nDistinct keys\n\n\n\n\nWhat matters?\nHow many each player gets\nWhich key each player gets\n\n\nObject identity\nIrrelevant\nRelevant\n\n\nRepresentation\nStars + bars\n5 independent key assignments\n\n\nTypical structure\nInteger solutions\nFunctions / assignments\n\n\nState-space size\n\\binom{7}{2} = 21\n3^5 = 243\n\n\n\nA useful question: If I swap two objects between recipients, does the outcome change?\nIf NO, the objects may be indistinguishable for this problem. If YES, the objects are distinguishable and a different counting architecture is likely required.",
     "crumbs": [
       "Foundations",
       "3: The Principle of Inclusion-Exclusion"

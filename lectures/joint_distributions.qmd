@@ -1,0 +1,29 @@
+---
+title: "12: Joint Distributions"
+---
+
+# Joint Distributions
+
+Jointly Distributed RVs introduces scenarios where we are tracking multiple random variables simultaneously rather than just one in isolation. The slide acts as an outline with several blank formulas that we can fill in with their standard definitions:   Joint PMF / PDF:For discrete variables, the joint Probability Mass Function is $p_{X,Y}(x,y) = P(X=x, Y=y)$. It gives the probability that $X$ takes the value $x$ and $Y$ takes the value $y$ at the same time.For continuous variables, the joint Probability Density Function is $f_{X,Y}(x,y)$. To find the probability that the variables fall into a certain 2D region, you take the double integral of this function over that region.Joint CDF: The joint Cumulative Distribution Function calculates the probability that both variables are less than or equal to their respective threshold values. It applies to both discrete and continuous variables: $F_{X,Y}(x,y) = P(X \le x, Y \le y)$.   $E[g(X,Y)]=$: This is the extension of calculating the expectation of a function, now with two variables.   Discrete: $E[g(X,Y)] = \sum_{x}\sum_{y} g(x,y)p_{X,Y}(x,y)$Continuous: $E[g(X,Y)] = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} g(x,y)f_{X,Y}(x,y)dxdy$$E[\sum_{i=1}^{N}a_{i}X_{i}]=$: This formula represents a vital concept called the Linearity of Expectation applied to multiple variables. The expectation of a sum is always equal to the sum of the expectations, meaning:
+   $$E\left[\sum_{i=1}^{N}a_{i}X_{i}\right] = \sum_{i=1}^{N}a_{i}E[X_{i}]$$
+   
+   Crucially, this property holds absolutely true whether the random variables are independent or not.
+
+
+::: example-box
+
+   The Expected Sum of 10 Dice
+The problem asks for the expected sum obtained when 10 fair dice are rolled.
+Rather than trying to find the massive, complicated probability distribution for the sum of 10 dice (which ranges from 10 to 60), we define the total sum $X$ as the addition of 10 individual random variables:
+   $$X = X_1 + X_2 + \dots + X_{10}$$Here, $X_i$ represents the outcome of the $i$-th die roll. We already calculated the expected value of a single die roll to be $3.5$ (or $7/2$). Applying the linearity of expectation, we can simply sum the individual expectations:$$E[X] = E[X_1 + X_2 + \dots + X_{10}] = E[X_1] + E[X_2] + \dots + E[X_{10}]$$$$E[X] = 10 \times 3.5 = 35$$The expected sum is 35.
+
+:::
+
+
+::: example-box
+
+The Hat Problem
+At a party, $N$ men throw their hats into the center of a room. The hats are mixed up, each man randomly selects one, and we need to find the expected number of men who select their own hats.   Trying to calculate the exact probability of 0, 1, 2, or $N$ men getting their hats requires complex combinatorics (derangements). Instead, we use Indicator Random Variables.Let $I_i$ be an indicator for the $i$-th man:$I_i = 1$ if man $i$ gets his own hat.$I_i = 0$ if man $i$ does not.The total number of men who get their own hat ($X$) is the sum of these indicators:$$X = I_1 + I_2 + \dots + I_N$$To find the expected value of an indicator variable, we just find the probability of the event occurring. Since the hats are completely mixed up, the chance that man $i$ randomly grabs his specific hat out of the pile of $N$ hats is simply $1/N$. Therefore, $E[I_i] = 1/N$.Now we apply linearity of expectation. Crucially, this works even though the variables are not independent (if man 1 grabs man 2's hat, man 2's probability is affected). Linearity of expectation holds regardless of independence:$$E[X] = E[I_1] + E[I_2] + \dots + E[I_N]$$$$E[X] = \frac{1}{N} + \frac{1}{N} + \dots + \frac{1}{N} \quad \text{(summed } N \text{ times)}$$$$E[X] = N \left( \frac{1}{N} \right) = 1$$The expected number of men who get their own hat is exactly 1, completely regardless of whether there are 5 men or 5,000 men at the party.
+:::
+
+

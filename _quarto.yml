@@ -19,8 +19,19 @@ website:
           - lectures/axioms.qmd
           - lectures/conditional_probability.qmd
           - lectures/bayes_theorem.qmd
+
       - section: "Random Variables"
-      - section: "Introduction to Inference"
+        contents:
+          - lectures/random_variables.qmd
+          - lectures/discrete_rv.qmd
+          - lectures/continuous_rv.qmd
+          - lectures/expectation.qmd
+          - lectures/variance.qmd
+          - lectures/joint_distributions.qmd
+          - lectures/mgfs.qmd
+          - lectures/sample_statistics.qmd
+          - lectures/bounds.qmd
+      - section: "Inference"
 
 format:
   html:

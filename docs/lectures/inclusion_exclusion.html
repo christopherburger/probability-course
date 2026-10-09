@@ -223,12 +223,73 @@ window.Quarto = {
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Random Variables</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Random Variables</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/random_variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7: Random Variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/discrete_rv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">8: Discrete Random Variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/continuous_rv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">9: Continuous Random Variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/expectation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">10: Properties of Random Variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/variance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11: Variance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/joint_distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">12: Joint Distributions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/mgfs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">13: Variance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/sample_statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">14: Sample Statistics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/bounds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">15: Bounds and Inequalities</span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Introduction to Inference</span></span>
+ <span class="menu-text">Inference</span></span>
   </li>
     </ul>
     </div>
@@ -256,6 +317,9 @@ window.Quarto = {
   <li><a href="#the-casino-hotel-key-problem" id="toc-the-casino-hotel-key-problem" class="nav-link" data-scroll-target="#the-casino-hotel-key-problem">The casino hotel-key problem</a></li>
   <li><a href="#why-this-is-a-different-mathematical-architecture" id="toc-why-this-is-a-different-mathematical-architecture" class="nav-link" data-scroll-target="#why-this-is-a-different-mathematical-architecture">Why this is a different mathematical architecture</a></li>
   </ul></li>
+  </ul></li>
+  <li><a href="#non-negative-integer-solutions" id="toc-non-negative-integer-solutions" class="nav-link" data-scroll-target="#non-negative-integer-solutions">Non-negative Integer Solutions</a>
+  <ul class="collapse">
   <li><a href="#practice" id="toc-practice" class="nav-link" data-scroll-target="#practice">Practice</a></li>
   </ul></li>
   </ul>
@@ -283,11 +347,11 @@ window.Quarto = {
 </header>
 
 
-<p>Before calculating, we need to identify what is being counted, what is distinguishable, and where overlap or separation occurs. Memorizing formulas is not the goal, these ideas emerge from common structure between similar problems.</p>
+<p>Before calculating, we need to identify what is being counted, what is distinguishable, and where overlap or separation occurs.</p>
 <section id="inclusionexclusion-as-subtraction-based-compression" class="level1">
 <h1>Inclusion–Exclusion as Subtraction-Based Compression</h1>
-<p>A common failure mode in elementary probability is that we learn the inclusion–exclusion formula before we understand why the correction is necessary. The result is symbolic pattern matching: add the sets, subtract an intersection, and hope the signs are right.</p>
-<p>What we need is a map of the sample space. We should be able to point to the regions that were counted, identify which regions were counted more than once, and explain how to compensate.</p>
+<p>A common failure mode in elementary probability is that we learn the inclusion–exclusion formula before we understand why the correction is necessary. The result ends up being symbolic pattern matching.</p>
+<p>Instead, we need a map of the sample space. We should be able to point to the regions that were counted, identify which regions were counted more than once, and explain how to correct the overcounting.</p>
 <section id="a-continued-example" class="level2">
 <h2 class="anchored" data-anchor-id="a-continued-example">A Continued Example</h2>
 <p>Consider a standard 52-card deck. Let <span class="math inline">A</span> be the event that the card is a Heart, and <span class="math inline">B</span> the event that the card is a Face Card (Jack, Queen, or King). Recall that there are 13 Hearts and 12 Face Cards.</p>
@@ -353,7 +417,7 @@ Click to show answer
 </section>
 <section id="stars-and-bars" class="level1">
 <h1>Stars and Bars</h1>
-<p>Stars and Bars is often taught as a formula for nonnegative integer solutions. That description is mathematically correct but often too terse to see the generalizability. Another interpretation is a representation theorem: every distribution of identical objects among distinct recipients can be encoded by a string of stars separated into recipient zones.</p>
+<p>Stars and Bars is often taught as a formula for nonnegative integer solutions. That description is mathematically correct can be difficult to see the generalizability. We will first start with another interpretation: every distribution of identical objects among distinct recipients can be encoded by a string of stars separated into recipient zones.</p>
 <section id="the-poker-chip-problem" class="level2">
 <h2 class="anchored" data-anchor-id="the-poker-chip-problem">The poker-chip problem</h2>
 <p>Suppose a poker table has 10 identical $100 chips and three distinct players: Alice, Bob, and Charlie. Any player may receive zero chips.</p>
@@ -393,7 +457,7 @@ Click to show answer
 </section>
 <section id="the-physical-nature-of-the-objects-changes-the-mathematics" class="level2">
 <h2 class="anchored" data-anchor-id="the-physical-nature-of-the-objects-changes-the-mathematics">The Physical Nature of the Objects Changes the Mathematics</h2>
-<p>The physical identity of the objects determines what constitutes a different outcome. Changing identical keys into distinct keys does not merely change a number in the formula; it changes the sample-space architecture.</p>
+<p>The physical identity of the objects determines what constitutes a different outcome. Changing identical keys into distinct keys does not merely change a number in the formula; this fundamentally changes the sample-space architecture.</p>
 <section id="the-casino-hotel-key-problem" class="level3">
 <h3 class="anchored" data-anchor-id="the-casino-hotel-key-problem">The casino hotel-key problem</h3>
 <p>A casino manager is handing out 5 complimentary hotel room keys to 3 distinct high rollers. Compare two versions.</p>
@@ -402,12 +466,12 @@ Click to show answer
 <p>Assume the five keys are interchangeable: giving Alice key 1 and Bob key 2 is not meaningfully different from giving Alice key 2 and Bob key 1.</p>
 <p>Only the number of keys received by each person matters. Let <span class="math inline">(a,b,c)</span> be the allocations. Then <span class="math inline">a+b+c=5</span> with <span class="math inline">a,b,c ≥ 0</span>. This is a stars-and-bars problem with 5 stars and 2 bars, so the state-space size is <span class="math inline">\binom{7}{2} 21</span>.</p>
 <p>Note here that the physical objects are indistinguishable. A person’s allocation is summarized completely by a count.</p>
-<section id="five-uniquely-themed-penthouse-keys" class="level5">
-<h5 class="anchored" data-anchor-id="five-uniquely-themed-penthouse-keys">Five uniquely themed penthouse keys</h5>
+</section>
+<section id="five-uniquely-themed-penthouse-keys" class="level4">
+<h4 class="anchored" data-anchor-id="five-uniquely-themed-penthouse-keys">Five uniquely themed penthouse keys</h4>
 <p>Assume the five keys correspond to five distinct suites: Roman, Egyptian, Art Deco, Presidential, and Ocean. A particular key can be assigned to any one of the three players.</p>
 <p>Each of the 5 distinct keys has 3 possible recipients. Therefore the number of assignments is <span class="math inline">3^5 = 243</span>.</p>
 <p>Note that the objects are distinguishable. Which player receives which particular key matters.</p>
-</section>
 </section>
 </section>
 <section id="why-this-is-a-different-mathematical-architecture" class="level3">
@@ -457,6 +521,9 @@ Click to show answer
 <p>If <strong>NO</strong>, the objects may be indistinguishable for this problem. If <strong>YES</strong>, the objects are distinguishable and a different counting architecture is likely required.</p>
 </section>
 </section>
+</section>
+<section id="non-negative-integer-solutions" class="level1">
+<h1>Non-negative Integer Solutions</h1>
 <section id="practice" class="level2">
 <h2 class="anchored" data-anchor-id="practice">Practice</h2>
 <div class="practice-box">

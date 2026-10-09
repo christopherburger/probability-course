@@ -6,23 +6,23 @@ The Kolmogorov axioms are the rules that every probability assignment must obey.
 
 ## **Axiom 1 — Nonnegativity**
 
-**P(A) ≥ 0**
+$$P(A) ≥ 0$$
 
 Probabilities cannot be negative.
 
 ## **Axiom 2 — Normalization**
 
-**P(Ω) = 1**
+$$P(Ω) = 1$$
 
 The entire modeled sample space has probability one.
 
 ## **Axiom 3 — Additivity for disjoint events**
 
-$P(A∪B)=P(A)+P(B) \text{ when } A∩B=∅$
+$$P(A∪B)=P(A)+P(B) \text{ when } A∩B=∅$$
 
 If events cannot occur together, their probabilities add. More generally, this extends to countably many mutually exclusive events.
 
-Note that the axioms do not tell us what probability a physical experiment should have. They tell us what a consistent probability model must obey once its probabilities are specified. \|
+Note that the axioms do not tell us what probability a physical experiment should have. They tell us what a consistent probability model must obey once its probabilities are specified.
 
 ### **Consequences we can derive from the Axioms**
 

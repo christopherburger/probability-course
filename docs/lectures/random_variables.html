@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Content Conventions – Applied Probability</title>
+<title>7: Random Variables – Applied Probability</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,26 +23,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6388ad00bb6ecaefa25b9a98db1edf18.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6388ad00bb6ecaefa25b9a98db1edf18.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -71,8 +106,51 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
 
-<link rel="stylesheet" href="custom.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../custom.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -84,7 +162,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Course Info</a></li><li class="breadcrumb-item"><a href="./conventions.html">Content Conventions</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/random_variables.html">Random Variables</a></li><li class="breadcrumb-item"><a href="../lectures/random_variables.html">7: Random Variables</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -99,7 +177,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Applied Probability</a> 
+      <a href="../">Applied Probability</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -120,13 +198,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Course Overview</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./conventions.html" class="sidebar-item-text sidebar-link active">
+  <a href="../conventions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Content Conventions</span></a>
   </div>
 </li>
@@ -143,37 +221,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/state_space.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/state_space.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">1: Experiments, Spaces and the Multiplication Principle</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/permutations_combinations.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/permutations_combinations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2: Permutations and Combinations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/inclusion_exclusion.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/inclusion_exclusion.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">3: The Principle of Inclusion-Exclusion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/axioms.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/axioms.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">4: Axioms of Probability</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/conditional_probability.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/conditional_probability.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">5: Conditional Probability</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/bayes_theorem.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/bayes_theorem.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">6: Bayes’ Theorem</span></a>
   </div>
 </li>
@@ -190,55 +268,55 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/random_variables.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/random_variables.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">7: Random Variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/discrete_rv.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/discrete_rv.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">8: Discrete Random Variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/continuous_rv.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/continuous_rv.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">9: Continuous Random Variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/expectation.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/expectation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">10: Properties of Random Variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/variance.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/variance.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">11: Variance</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/joint_distributions.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/joint_distributions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">12: Joint Distributions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/mgfs.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/mgfs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">13: Variance</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/sample_statistics.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/sample_statistics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">14: Sample Statistics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lectures/bounds.html" class="sidebar-item-text sidebar-link">
+  <a href="../lectures/bounds.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">15: Bounds and Inequalities</span></a>
   </div>
 </li>
@@ -258,20 +336,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#core-material" id="toc-core-material" class="nav-link active" data-scroll-target="#core-material">1. Core Material</a></li>
-  <li><a href="#reference-concepts-functional-familiarity" id="toc-reference-concepts-functional-familiarity" class="nav-link" data-scroll-target="#reference-concepts-functional-familiarity">2. Reference Concepts (Functional Familiarity)</a></li>
-  <li><a href="#extended-information" id="toc-extended-information" class="nav-link" data-scroll-target="#extended-information">3. Extended Information</a></li>
-  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">4. Notes</a></li>
-  <li><a href="#practice" id="toc-practice" class="nav-link" data-scroll-target="#practice">5. Practice</a></li>
+  <li><a href="#notation" id="toc-notation" class="nav-link active" data-scroll-target="#notation">Notation</a></li>
+  <li><a href="#the-cumulative-distribution-function" id="toc-the-cumulative-distribution-function" class="nav-link" data-scroll-target="#the-cumulative-distribution-function">The Cumulative Distribution Function</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Course Info</a></li><li class="breadcrumb-item"><a href="./conventions.html">Content Conventions</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/random_variables.html">Random Variables</a></li><li class="breadcrumb-item"><a href="../lectures/random_variables.html">7: Random Variables</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Content Conventions</h1>
+<h1 class="title">7: Random Variables</h1>
 </div>
 
 
@@ -288,39 +363,90 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>The information in these course notes is categorized into visual tiers.</p>
-<section id="core-material" class="level3">
-<h3 class="anchored" data-anchor-id="core-material">1. Core Material</h3>
-<div class="core-box">
-<p>These blocks contain the core content of the course. You are expected to be able to reproduce this information, derive the formulas, or perform the calculations from memory during examinations.</p>
-</div>
+<p>Recall that <span class="math inline">S</span> that is the set of all possible outcomes of our experiment. A <strong>random variable</strong> is a mapping from our space <span class="math inline">S</span> to the real numbers.</p>
+<p>This mapping allows us to translate the probability of events into an associated numerical value.</p>
+<p>Thinking back to some of our earlier examples:</p>
+<p>Consider the experiment where we roll two dice.</p>
+<p>Instead of calculating probabilities for specific pairs of outcomes like (2,1), we can instead define a random variable <span class="math inline">X</span> as the sum of the dice. <span class="math inline">X</span> then maps the outcomes to the set ${2, 3, …, 11, 12}.</p>
+<p>Now consider the experiment where we flip two coins. If <span class="math inline">X</span> is defined as the number of heads, then our state space is <span class="math inline">{TT, HT, TH, HH}</span> and this space is mapped to the set <span class="math inline">{0,1,2}</span>.</p>
+<ul>
+<li><p>The probability <span class="math inline">P(X = 0) = \frac{1}{4}</span> because we can see that is only one outcome <span class="math inline">TT</span>.</p></li>
+<li><p>The probability <span class="math inline">P(X = 1) = \frac{1}{2}</span> because it accounts for both the <span class="math inline">TH</span> and <span class="math inline">HT</span> outcomes.</p></li>
+</ul>
 <hr>
-</section>
-<section id="reference-concepts-functional-familiarity" class="level3">
-<h3 class="anchored" data-anchor-id="reference-concepts-functional-familiarity">2. Reference Concepts (Functional Familiarity)</h3>
-<div class="reference-box">
-<p>These blocks contain tools, syntax, or concepts that you should recognize and understand when you see them. You do not need to memorize these “cold,” but you should know they exist and where to find them.</p>
-</div>
+<section id="notation" class="level1">
+<h1>Notation</h1>
+<p>The standard notation used for random variables is a capital letter. <span class="math inline">X</span>, <span class="math inline">Y</span>, and <span class="math inline">Z</span> are commonly used as generic random variables.</p>
+<p>The corresponding lowercase letter represents an <strong>arbitrary realization</strong> of the random variable.</p>
+<p><span class="math inline">X = x</span> means that the random variable <span class="math inline">X</span> has taken on the value of <span class="math inline">x</span>. Alternatively, <span class="math inline">x</span> is the realization of <span class="math inline">X</span>.</p>
+<p>When writing random variables (especially by hand) it is easy to put something like <span class="math inline">x = x</span>. Keep the notation consistent to prevent confusion and mistakes.</p>
 <hr>
+<p>Random variables can be described as either <strong>discrete</strong> or <strong>continuous</strong>.</p>
+<ul>
+<li><p>Discrete random variables are used with discrete data, which means we are working with distinct countable values.</p></li>
+<li><p>Continuous random variables can take on any real value within a continuous range.</p></li>
+</ul>
+<p>Each type of random variable will have their own dedicated discussion later on.</p>
 </section>
-<section id="extended-information" class="level3">
-<h3 class="anchored" data-anchor-id="extended-information">3. Extended Information</h3>
-<div class="extended-box">
-<p>These blocks are for students looking to further explore related content. This material is <strong>not testable</strong> but provides may prove useful for mastery of the core material in the course.</p>
+<section id="the-cumulative-distribution-function" class="level1">
+<h1>The Cumulative Distribution Function</h1>
+<p>The Cumulative Distribution Function (CDF) calculates the probability that a random variable <span class="math inline">X</span> will take a value less than or equal to a specific number <span class="math inline">z</span>. This is expressed mathematically as: <span class="math display"> F_X(z) = P(X \leq z)</span></p>
+<p>The CDF has the following properties:</p>
+<ul>
+<li><p>Nondecreasing: <span class="math inline">F_X(z) \leq F_X(z + \epsilon), \epsilon &gt; 0</span></p></li>
+<li><p>Upper limit of 1. That is, <span class="math inline">F(\infty) = 1</span></p></li>
+<li><p>Lower limit of 0. That is, <span class="math inline">F(-\infty) = 0</span></p></li>
+<li><p><span class="math inline">P(a \leq X \leq b) = F_X(b) - F_X(a)</span></p></li>
+</ul>
+<div class="example-box">
+<p>Let <span class="math inline">P(1) = \frac{1}{2}, P(2) = \frac{1}{4} and P(3) = \frac{1}{4}</span>.</p>
+<p>Find <span class="math inline">F(x)</span>.</p>
+<p>The cumulative distribution function (CDF) <span class="math inline">F(x) = P(X \le x)</span> for this (discrete) random variable is a step function:</p>
+<p><span class="math display">F(x) = \begin{cases}  0, &amp; x &lt; 1 \\ \frac{1}{2} = 0.5, &amp; 1 \le x &lt; 2 \\ \frac{1}{2} + \frac{1}{4} = \frac{3}{4} = 0.75, &amp; 2 \le x &lt; 3 \\ 1.0, &amp; x \ge 3  \end{cases}
+</span></p>
+<p>A plot of F(x) is:</p>
+<div id="4a85d53c" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define intervals [x_start, x_end] and their corresponding F(x) values</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>intervals <span class="op">=</span> [</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    (<span class="op">-</span><span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">0.0</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span>, <span class="dv">2</span>, <span class="fl">0.5</span>),</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">2</span>, <span class="dv">3</span>, <span class="fl">0.75</span>),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">3</span>, <span class="fl">4.5</span>, <span class="fl">1.0</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="fl">4.5</span>))</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x_start, x_end, y <span class="kw">in</span> intervals:</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    plt.plot([x_start, x_end], [y, y], color<span class="op">=</span><span class="st">'tab:blue'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>plt.scatter([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">1.0</span>], color<span class="op">=</span><span class="st">'tab:blue'</span>, s<span class="op">=</span><span class="dv">45</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>plt.scatter([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="fl">0.0</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>], color<span class="op">=</span><span class="st">'white'</span>, edgecolor<span class="op">=</span><span class="st">'tab:blue'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, s<span class="op">=</span><span class="dv">45</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="vs">r'Cumulative Distribution Function </span><span class="dv">$</span><span class="vs">F</span><span class="kw">(</span><span class="vs">x</span><span class="kw">)</span><span class="dv">$</span><span class="vs">'</span>, fontsize<span class="op">=</span><span class="dv">13</span>, pad<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r'</span><span class="dv">$</span><span class="vs">x</span><span class="dv">$</span><span class="vs">'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r'</span><span class="dv">$</span><span class="vs">F</span><span class="kw">(</span><span class="vs">x</span><span class="kw">)</span><span class="dv">$</span><span class="vs">'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">4.5</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="op">-</span><span class="fl">0.1</span>, <span class="fl">1.15</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>plt.yticks([<span class="fl">0.0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">1.0</span>], [<span class="st">'0'</span>, <span class="st">'1/4'</span>, <span class="st">'1/2'</span>, <span class="st">'3/4'</span>, <span class="st">'1'</span>])</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>plt.xticks([<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>])</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="random_variables_files/figure-html/cell-2-output-1.png" width="663" height="422" class="figure-img"></p>
+</figure>
 </div>
-<hr>
-</section>
-<section id="notes" class="level3">
-<h3 class="anchored" data-anchor-id="notes">4. Notes</h3>
-<div class="note-box">
-<p>These blocks are for context, especially for definitions that are used in the course that may be defined differently elsewhere.</p>
 </div>
-<hr>
-</section>
-<section id="practice" class="level3">
-<h3 class="anchored" data-anchor-id="practice">5. Practice</h3>
-<div class="practice-box">
-<p>These blocks contain practice problems associated with their related section(s).</p>
+</div>
 </div>
 
 
