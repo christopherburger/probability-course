@@ -1,5 +1,5 @@
 ---
-title: "10: Properties of Random Variables"
+title: "10: Expected Value"
 ---
 
 # The Expected Value

@@ -4,7 +4,19 @@ title: "12: Joint Distributions"
 
 # Joint Distributions
 
-Jointly Distributed RVs introduces scenarios where we are tracking multiple random variables simultaneously rather than just one in isolation. The slide acts as an outline with several blank formulas that we can fill in with their standard definitions:   Joint PMF / PDF:For discrete variables, the joint Probability Mass Function is $p_{X,Y}(x,y) = P(X=x, Y=y)$. It gives the probability that $X$ takes the value $x$ and $Y$ takes the value $y$ at the same time.For continuous variables, the joint Probability Density Function is $f_{X,Y}(x,y)$. To find the probability that the variables fall into a certain 2D region, you take the double integral of this function over that region.Joint CDF: The joint Cumulative Distribution Function calculates the probability that both variables are less than or equal to their respective threshold values. It applies to both discrete and continuous variables: $F_{X,Y}(x,y) = P(X \le x, Y \le y)$.   $E[g(X,Y)]=$: This is the extension of calculating the expectation of a function, now with two variables.   Discrete: $E[g(X,Y)] = \sum_{x}\sum_{y} g(x,y)p_{X,Y}(x,y)$Continuous: $E[g(X,Y)] = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} g(x,y)f_{X,Y}(x,y)dxdy$$E[\sum_{i=1}^{N}a_{i}X_{i}]=$: This formula represents a vital concept called the Linearity of Expectation applied to multiple variables. The expectation of a sum is always equal to the sum of the expectations, meaning:
+Jointly Distributed are for the scenarios where we are working with multiple random variables simultaneously rather than just one in isolation. 
+
+Joint PMF / PDF:For discrete variables, the joint Probability Mass Function is $p_{X,Y}(x,y) = P(X=x, Y=y)$. 
+
+It gives the probability that $X$ takes the value $x$ and $Y$ takes the value $y$ at the same time.For continuous variables, the joint Probability Density Function is $f_{X,Y}(x,y)$. 
+
+To find the probability that the variables fall into a certain 2D region, you take the double integral of this function over that region.
+
+Joint CDF: The joint Cumulative Distribution Function calculates the probability that both variables are less than or equal to their respective threshold values. 
+
+It applies to both discrete and continuous variables: $F_{X,Y}(x,y) = P(X \le x, Y \le y)$.   $E[g(X,Y)]=$: 
+
+This is the extension of calculating the expectation of a function, now with two variables.   Discrete: $E[g(X,Y)] = \sum_{x}\sum_{y} g(x,y)p_{X,Y}(x,y)$Continuous: $E[g(X,Y)] = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} g(x,y)f_{X,Y}(x,y)dxdy$$E[\sum_{i=1}^{N}a_{i}X_{i}]=$: This formula represents a vital concept called the Linearity of Expectation applied to multiple variables. The expectation of a sum is always equal to the sum of the expectations, meaning:
    $$E\left[\sum_{i=1}^{N}a_{i}X_{i}\right] = \sum_{i=1}^{N}a_{i}E[X_{i}]$$
    
    Crucially, this property holds absolutely true whether the random variables are independent or not.
