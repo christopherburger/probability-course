@@ -49,13 +49,96 @@ $$E[X^{2}]-(E[X])^{2}$$
 
 ::: example-box
 
-$X$ output of tossing a die, find $Var(X)$   Let $X$ be the result of a standard 6-sided die roll. Each outcome (1, 2, 3, 4, 5, 6) has a probability of $1/6$. To use the computational formula, we need $E[X]$ and $E[X^{2}]$.First, calculate the mean, $E[X]$:$$E[X] = \sum_{x=1}^{6} x p(x) = 1\left(\frac{1}{6}\right) + 2\left(\frac{1}{6}\right) + \dots + 6\left(\frac{1}{6}\right)$$$$E[X] = \frac{1+2+3+4+5+6}{6} = \frac{21}{6} = \frac{7}{2}$$Next, calculate the second moment, $E[X^{2}]$:$$E[X^2] = \sum_{x=1}^{6} x^2 p(x) = 1^2\left(\frac{1}{6}\right) + 2^2\left(\frac{1}{6}\right) + \dots + 6^2\left(\frac{1}{6}\right)$$$$E[X^2] = \frac{1+4+9+16+25+36}{6} = \frac{91}{6}$$Now, plug both into the variance formula:$$Var(X) = E[X^2] - (E[X])^2$$$$Var(X) = \frac{91}{6} - \left(\frac{7}{2}\right)^2$$$$Var(X) = \frac{91}{6} - \frac{49}{4} = \frac{182}{12} - \frac{147}{12} = \frac{35}{12}$$
+Let $X$ be output of tossing a standard, fair die.
+
+Find $Var(X)$   
+
+\
+
+Let $X$ be the result of a standard 6-sided die roll. Each outcome (1, 2, 3, 4, 5, 6) has a probability of $1/6$. 
+
+To use the computational formula, we need $E[X]$ and $E[X^{2}]$.
+
+First, calculate the mean, $E[X]$:
+
+$$E[X] = \sum_{x=1}^{6} x p(x) = 1\left(\frac{1}{6}\right) + 2\left(\frac{1}{6}\right) + \dots + 6\left(\frac{1}{6}\right)$$
+
+$$E[X] = \frac{1+2+3+4+5+6}{6} = \frac{21}{6} = \frac{7}{2}$$
+
+Next, calculate the second moment, $E[X^{2}]$:
+
+$$E[X^2] = \sum_{x=1}^{6} x^2 p(x) = 1^2\left(\frac{1}{6}\right) + 2^2\left(\frac{1}{6}\right) + \dots + 6^2\left(\frac{1}{6}\right)$$$$E[X^2] = \frac{1+4+9+16+25+36}{6} = \frac{91}{6}$$
+
+Now, plug both into the variance formula:
+
+$$Var(X) = E[X^2] - (E[X])^2$$
+
+$$Var(X) = \frac{91}{6} - \left(\frac{7}{2}\right)^2$$$$Var(X) = \frac{91}{6} - \frac{49}{4} = \frac{182}{12} - \frac{147}{12} = \frac{35}{12}$$
 
 :::
 
 ::: example-box
-$X\sim\mathcal{N}(\mu,\sigma^{2})$, find $Var(X)$   
-This is essentially a definitional question. By standard notation for the Normal distribution, the first parameter ($\mu$) is the mean, and the second parameter ($\sigma^{2}$) is the variance. So, $Var(X) = \sigma^{2}$. (If you needed to prove this from scratch, you would evaluate the integral $\int_{-\infty}^{\infty}(x-\mu)^2 \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}} dx$, which integrates out to $\sigma^{2}$).
+Let $X\sim\mathcal{N}(\mu,\sigma^{2})$.
+
+Find $Var(X)$   
+
+
+This is essentially a definitional question. By standard notation for the Normal distribution, the first parameter ($\mu$) is the mean, and the second parameter ($\sigma^{2}$) is the variance. So, $Var(X) = \sigma^{2}$. 
+
+We can also prove this from scratch, by evaluating the integral: 
+
+$$\int_{-\infty}^{\infty}(x-\mu)^2 \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}} dx$$
+
+To begin, let define $z = x - \mu$.
+
+Then using $z$ as a substitution we have:
+
+ - $d(z + \mu) = dz + d(\mu)$
+ 
+ Because $\mu$ is a fixed constant (the mean), it does not change. The differential of any constant is zero, so $d(\mu) = 0$. As such, the differential becomes $dz = dx$.
+
+- As $x \to \infty$, $z \to \infty$.
+
+- As $x \to -\infty$, $z \to -\infty$.
+
+\
+
+Using this, we can pull the constant out front, giving us:
+
+$$\frac{1}{\sqrt{2\pi}\sigma} \int_{-\infty}^{\infty} z^2 e^{-\frac{z^2}{2\sigma^2}} dz$$
+
+We can now use integration by parts ($\int u dv = uv - \int v du$).
+
+First, let us split $z^2$ into $z \cdot z$ to set up our parts:
+
+Let $u = z$, which means $du = dz$.
+
+Let $dv = z e^{-\frac{z^2}{2\sigma^2}} dz$. 
+
+Integrating this using substitution ($w = -\frac{z^2}{2\sigma^2}$), results in $v = -\sigma^2 e^{-\frac{z^2}{2\sigma^2}}$.
+
+\
+
+Now, using integration by parts:
+
+$$\frac{1}{\sqrt{2\pi}\sigma} \left[ \left( -z\sigma^2 e^{-\frac{z^2}{2\sigma^2}} \right)_{-\infty}^{\infty} - \int_{-\infty}^{\infty} \left(-\sigma^2 e^{-\frac{z^2}{2\sigma^2}}\right) dz \right]$$
+
+The first term goes to $0$ since we know that asymptotically $e^{-z^2}$ dominates $z$ as it approaches $\pm\infty$. 
+
+\
+
+For the second term:
+
+$$\frac{1}{\sqrt{2\pi}\sigma} \left[ \sigma^2 \int_{-\infty}^{\infty} e^{-\frac{z^2}{2\sigma^2}} dz \right]$$
+
+This integral is not easily solvable but is considered a standard integral (a Gaussian integral) which is known to evaluate to $\sqrt{2\pi}\sigma$. 
+
+Substituting this gives us:
+
+$$\frac{1}{\sqrt{2\pi}\sigma} \left[ \sigma^2 (\sqrt{2\pi}\sigma) \right] = \sigma^2$$
+
+Which is exactly the variance of $X$.
+
 :::
 
 

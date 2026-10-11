@@ -4,38 +4,179 @@ title: "12: Joint Distributions"
 
 # Joint Distributions
 
-Jointly Distributed are for the scenarios where we are working with multiple random variables simultaneously rather than just one in isolation. 
+Jointly distributed random variables are for the scenarios where we are working with multiple random variables simultaneously rather than just one in isolation. 
 
-Joint PMF / PDF:For discrete variables, the joint Probability Mass Function is $p_{X,Y}(x,y) = P(X=x, Y=y)$. 
+# Joint PMF / PDF:
 
-It gives the probability that $X$ takes the value $x$ and $Y$ takes the value $y$ at the same time.For continuous variables, the joint Probability Density Function is $f_{X,Y}(x,y)$. 
+For discrete variables, the joint Probability Mass Function is 
+
+$$p_{X,Y}(x,y) = P(X=x, Y=y)$$
+
+It gives the probability that $X$ takes the value $x$ and $Y$ takes the value $y$ at the same time.
+
+For continuous variables, the joint Probability Density Function is $$f_{X,Y}(x,y)$$
 
 To find the probability that the variables fall into a certain 2D region, you take the double integral of this function over that region.
 
-Joint CDF: The joint Cumulative Distribution Function calculates the probability that both variables are less than or equal to their respective threshold values. 
 
-It applies to both discrete and continuous variables: $F_{X,Y}(x,y) = P(X \le x, Y \le y)$.   $E[g(X,Y)]=$: 
+# Joint CDF
 
-This is the extension of calculating the expectation of a function, now with two variables.   Discrete: $E[g(X,Y)] = \sum_{x}\sum_{y} g(x,y)p_{X,Y}(x,y)$Continuous: $E[g(X,Y)] = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} g(x,y)f_{X,Y}(x,y)dxdy$$E[\sum_{i=1}^{N}a_{i}X_{i}]=$: This formula represents a vital concept called the Linearity of Expectation applied to multiple variables. The expectation of a sum is always equal to the sum of the expectations, meaning:
+The joint Cumulative Distribution Function calculates the probability that both variables are less than or equal to their respective threshold values. 
+
+It applies to both discrete and continuous variables: $F_{X,Y}(x,y) = P(X \le x, Y \le y)$.   
+
+# Expectations
+
+$E[g(X,Y)]=$ is the extension of calculating the expectation of a function, now with two variables.   
+
+Discrete: $E[g(X,Y)] = \sum_{x}\sum_{y} g(x,y)p_{X,Y}(x,y)$
+
+Continuous: $E[g(X,Y)] = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} g(x,y)f_{X,Y}(x,y)dxdy$
+
+## The Linearity of Expectation
+
+$E[\sum_{i=1}^{N}a_{i}X_{i}]=$: The expectation of a sum is always equal to the sum of the expectations, meaning:
    $$E\left[\sum_{i=1}^{N}a_{i}X_{i}\right] = \sum_{i=1}^{N}a_{i}E[X_{i}]$$
    
-   Crucially, this property holds absolutely true whether the random variables are independent or not.
+
+
+We will show the linearity of the expectation:
+
+$E[\sum_{i=1}^{N}a_{i}X_{i}]=$
+
+:::
+
+   Note that this property holds true whether the random variables are independent or not.
+
 
 
 ::: example-box
 
-   The Expected Sum of 10 Dice
-The problem asks for the expected sum obtained when 10 fair dice are rolled.
-Rather than trying to find the massive, complicated probability distribution for the sum of 10 dice (which ranges from 10 to 60), we define the total sum $X$ as the addition of 10 individual random variables:
-   $$X = X_1 + X_2 + \dots + X_{10}$$Here, $X_i$ represents the outcome of the $i$-th die roll. We already calculated the expected value of a single die roll to be $3.5$ (or $7/2$). Applying the linearity of expectation, we can simply sum the individual expectations:$$E[X] = E[X_1 + X_2 + \dots + X_{10}] = E[X_1] + E[X_2] + \dots + E[X_{10}]$$$$E[X] = 10 \times 3.5 = 35$$The expected sum is 35.
+   
+What is the expected value of the sum obtained when 10 fair dice are rolled?
+
+\
+
+Trying to find the probability distribution for the sum of 10 dice (which ranges from 10 to 60) is very complicated. Instead, we define the total sum $X$ as the addition of 10 individual random variables:
+   $$X = X_1 + X_2 + \dots + X_{10}$$
+   
+Here, $X_i$ represents the outcome of the $i$-th die roll. 
+
+Recall that the expected value of a single die roll is $3.5$. 
+
+Applying the linearity of expectation, we can sum the individual expectations:
+$$E[X] = E[X_1 + X_2 + \dots + X_{10}] = E[X_1] + E[X_2] + \dots + E[X_{10}]$$
+
+$$E[X] = 10 \times 3.5 = 35$$
+
+And so the expected sum is 35.
 
 :::
 
 
 ::: example-box
 
-The Hat Problem
-At a party, $N$ men throw their hats into the center of a room. The hats are mixed up, each man randomly selects one, and we need to find the expected number of men who select their own hats.   Trying to calculate the exact probability of 0, 1, 2, or $N$ men getting their hats requires complex combinatorics (derangements). Instead, we use Indicator Random Variables.Let $I_i$ be an indicator for the $i$-th man:$I_i = 1$ if man $i$ gets his own hat.$I_i = 0$ if man $i$ does not.The total number of men who get their own hat ($X$) is the sum of these indicators:$$X = I_1 + I_2 + \dots + I_N$$To find the expected value of an indicator variable, we just find the probability of the event occurring. Since the hats are completely mixed up, the chance that man $i$ randomly grabs his specific hat out of the pile of $N$ hats is simply $1/N$. Therefore, $E[I_i] = 1/N$.Now we apply linearity of expectation. Crucially, this works even though the variables are not independent (if man 1 grabs man 2's hat, man 2's probability is affected). Linearity of expectation holds regardless of independence:$$E[X] = E[I_1] + E[I_2] + \dots + E[I_N]$$$$E[X] = \frac{1}{N} + \frac{1}{N} + \dots + \frac{1}{N} \quad \text{(summed } N \text{ times)}$$$$E[X] = N \left( \frac{1}{N} \right) = 1$$The expected number of men who get their own hat is exactly 1, completely regardless of whether there are 5 men or 5,000 men at the party.
+
+At a party, $N$ men throw their hats into the center of a room. The hats are mixed up, each man randomly selects one. What is the expected number of men who select their own hat?
+
+\
+
+ Trying to calculate the exact probability of 0, 1, 2, or $N$ men getting their hats requires complex combinatorics (derangements). 
+ 
+ Instead, we use an idea called an **Indicator Random Variable**. Indicators (sometimes called dummy variables) are a special type of variable that takes on $1$ if some condition is met and $0$ otherwise.
+ 
+ Let $I_i$ be an indicator for the $i$-th man: 
+ 
+ - $I_i = 1$ if man $i$ gets his own hat. 
+
+ - $I_i = 0$ if man $i$ does not.
+ 
+ The total number of men who get their own hat ($X$) is the sum of these indicators:
+
+ $$X = I_1 + I_2 + \dots + I_N$$
+ 
+ To find the expected value of an indicator variable, we only need to find the probability of the event occurring. 
+ 
+ Since the hats are assumed to be random (that is, uniformly and arbitrarily selected), the chance that man $i$ grabs his specific hat out of the pile of $N$ hats is $1/N$.
+ 
+  Therefore, $E[I_i] = 1/N$.
+  
+  Now we apply linearity of expectation. 
+  
+  Despite that the variables are not independent (if man 1 grabs man 2's hat, man 2's probability is affected), the linearity of expectation is not affected by this. 
+    
+  $$E[X] = E[I_1] + E[I_2] + \dots + E[I_N]$$
+  
+  $$E[X] = \frac{1}{N} + \frac{1}{N} + \dots + \frac{1}{N} \quad \text{(summed } N \text{ times)}$$
+  
+  $$E[X] = N \left( \frac{1}{N} \right) = 1$$
+  
+  The expected number of men who get their own hat is 1. Note that this holds regardless of whether there are 5 men or 5,000 men at the party.
 :::
 
+# Marginal Distributions
 
+Given a joint distribution, we can extract the probability of a single event using the process of marginalization. Depending on whether the distribution is discrete or continuous we either sum or integration out all other variables apart from those we are interested in. This essentially collapses a larger multidimensional distribution down to a smaller (often single) dimension.
+
+Marginalization is commonly used to account for uncertainty of necessary intermediate variables in statistical and machine learning models while giving us a final output that does not include them.
+
+Marginalization is not new to us, we have seen it previously when calculation conditional probabilities.
+
+To find the probability of $X$ given $Y$, denoted $P(X\vert{}Y)$, you must divide the joint probability by the marginal probability of $Y$:
+$$P(X\vert{}Y) = \frac{P(X,Y)}{P(Y)}$$
+
+$P(X,Y)$ is the joint distribution of random variables $X$ and $Y$ while $P(Y)$ can be viewed as the marginal distribution of $Y$.
+
+
+
+## Discrete Variables
+
+Let $X$ and $Y$ be discrete random variables with a joint Probability Mass Function (PMF) given by the following table:
+
+Y=1Y=2Y=3$X=0$$0.1$$0.2$$0.1$$X=1$$0.3$$0.1$$0.2$
+
+To find the marginal distribution of $X$, denoted $P(X=x)$, sum the probabilities across all possible values of $Y$ (summing across the rows):
+
+$$P(X=x) = \sum_{y} P(X=x, Y=y)$$
+
+$P(X=0) = 0.1 + 0.2 + 0.1 = \mathbf{0.4}$
+
+$P(X=1) = 0.3 + 0.1 + 0.2 = \mathbf{0.6}$
+
+To find the marginal distribution of $Y$, denoted $P(Y=y)$, sum the probabilities across all possible values of $X$ (summing down the columns):
+
+$$P(Y=y) = \sum_{x} P(X=x, Y=y)$$
+
+$P(Y=1) = 0.1 + 0.3 = \mathbf{0.4}$
+
+$P(Y=2) = 0.2 + 0.1 = \mathbf{0.3}$
+
+$P(Y=3) = 0.1 + 0.2 = \mathbf{0.3}$(Note that both marginal distributions sum to 1.0, confirming they are valid probability distributions).
+
+## Continuous Variables
+
+Let $X$ and $Y$ be continuous random variables with the following joint Probability Density Function (PDF):
+
+$$f(x,y) = x + y \quad \text{for } 0 \le x \le 1 \text{ and } 0 \le y \le 1$$
+
+To find the marginal PDF of $X$, denoted $f_X(x)$, integrate the joint PDF over all possible values of $Y$. Since the function is only defined from $0$ to $1$ for $Y$:
+
+$$f_X(x) = \int_{-\infty}^{\infty} f(x,y) \, dy$$
+
+$$f_X(x) = \int_{0}^{1} (x + y) \, dy$$
+
+Evaluate the integral with respect to $y$, treating $x$ as a constant:
+
+$$f_X(x) = \left[ xy + \frac{y^2}{2} \right]_{y=0}^{y=1}$$
+
+$$f_X(x) = \left( x(1) + \frac{1^2}{2} \right) - (0 + 0)$$
+
+$$f_X(x) = x + \frac{1}{2} \quad \text{for } 0 \le x \le 1$$
+
+To find the marginal PDF of $Y$, denoted $f_Y(y)$, perform the exact same process, but integrate over all possible values of $X$:$$f_Y(y) = \int_{-\infty}^{\infty} f(x,y) \, dx$$
+
+$$f_Y(y) = \int_{0}^{1} (x + y) \, dx$$
+
+$$f_Y(y) = \left[ \frac{x^2}{2} + xy \right]_{x=0}^{x=1}$$
+
+$$f_Y(y) = y + \frac{1}{2} \quad \text{for } 0 \le y \le 1$$
