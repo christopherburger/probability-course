@@ -31,7 +31,9 @@ website:
           - lectures/mgfs.qmd
           - lectures/sample_statistics.qmd
           - lectures/bounds.qmd
+          - lectures/clt.qmd
       - section: "Inference"
+      - section: "Stochastic Processes"
 
 format:
   html:
