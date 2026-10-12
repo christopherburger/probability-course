@@ -285,11 +285,56 @@ window.Quarto = {
  <span class="menu-text">15: Bounds and Inequalities</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/clt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">16: The Central Limit Therorem</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
  <span class="menu-text">Inference</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Stochastic Processes</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendix</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/sets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/complex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Complex Numbers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/convolution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Convolution</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/transforms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Transforms</span></a>
+  </div>
+</li>
+      </ul>
   </li>
     </ul>
     </div>
@@ -302,6 +347,17 @@ window.Quarto = {
    
   <ul>
   <li><a href="#joint-distributions" id="toc-joint-distributions" class="nav-link active" data-scroll-target="#joint-distributions">Joint Distributions</a></li>
+  <li><a href="#joint-pmf-pdf" id="toc-joint-pmf-pdf" class="nav-link" data-scroll-target="#joint-pmf-pdf">Joint PMF / PDF:</a></li>
+  <li><a href="#joint-cdf" id="toc-joint-cdf" class="nav-link" data-scroll-target="#joint-cdf">Joint CDF</a></li>
+  <li><a href="#expectations" id="toc-expectations" class="nav-link" data-scroll-target="#expectations">Expectations</a>
+  <ul class="collapse">
+  <li><a href="#the-linearity-of-expectation" id="toc-the-linearity-of-expectation" class="nav-link" data-scroll-target="#the-linearity-of-expectation">The Linearity of Expectation</a></li>
+  </ul></li>
+  <li><a href="#marginal-distributions" id="toc-marginal-distributions" class="nav-link" data-scroll-target="#marginal-distributions">Marginal Distributions</a>
+  <ul class="collapse">
+  <li><a href="#discrete-variables" id="toc-discrete-variables" class="nav-link" data-scroll-target="#discrete-variables">Discrete Variables</a></li>
+  <li><a href="#continuous-variables" id="toc-continuous-variables" class="nav-link" data-scroll-target="#continuous-variables">Continuous Variables</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -329,22 +385,107 @@ window.Quarto = {
 
 <section id="joint-distributions" class="level1">
 <h1>Joint Distributions</h1>
-<p>Jointly Distributed are for the scenarios where we are working with multiple random variables simultaneously rather than just one in isolation.</p>
-<p>Joint PMF / PDF:For discrete variables, the joint Probability Mass Function is <span class="math inline">p_{X,Y}(x,y) = P(X=x, Y=y)</span>.</p>
-<p>It gives the probability that <span class="math inline">X</span> takes the value <span class="math inline">x</span> and <span class="math inline">Y</span> takes the value <span class="math inline">y</span> at the same time.For continuous variables, the joint Probability Density Function is <span class="math inline">f_{X,Y}(x,y)</span>.</p>
+<p>Jointly distributed random variables are for the scenarios where we are working with multiple random variables simultaneously rather than just one in isolation.</p>
+</section>
+<section id="joint-pmf-pdf" class="level1">
+<h1>Joint PMF / PDF:</h1>
+<p>For discrete variables, the joint Probability Mass Function is</p>
+<p><span class="math display">p_{X,Y}(x,y) = P(X=x, Y=y)</span></p>
+<p>It gives the probability that <span class="math inline">X</span> takes the value <span class="math inline">x</span> and <span class="math inline">Y</span> takes the value <span class="math inline">y</span> at the same time.</p>
+<p>For continuous variables, the joint Probability Density Function is <span class="math display">f_{X,Y}(x,y)</span></p>
 <p>To find the probability that the variables fall into a certain 2D region, you take the double integral of this function over that region.</p>
-<p>Joint CDF: The joint Cumulative Distribution Function calculates the probability that both variables are less than or equal to their respective threshold values.</p>
-<p>It applies to both discrete and continuous variables: <span class="math inline">F_{X,Y}(x,y) = P(X \le x, Y \le y)</span>. <span class="math inline">E[g(X,Y)]=</span>:</p>
-<p>This is the extension of calculating the expectation of a function, now with two variables. Discrete: <span class="math inline">E[g(X,Y)] = \sum_{x}\sum_{y} g(x,y)p_{X,Y}(x,y)</span>Continuous: <span class="math inline">E[g(X,Y)] = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} g(x,y)f_{X,Y}(x,y)dxdy</span><span class="math inline">E[\sum_{i=1}^{N}a_{i}X_{i}]=</span>: This formula represents a vital concept called the Linearity of Expectation applied to multiple variables. The expectation of a sum is always equal to the sum of the expectations, meaning: <span class="math display">E\left[\sum_{i=1}^{N}a_{i}X_{i}\right] = \sum_{i=1}^{N}a_{i}E[X_{i}]</span></p>
-<p>Crucially, this property holds absolutely true whether the random variables are independent or not.</p>
+</section>
+<section id="joint-cdf" class="level1">
+<h1>Joint CDF</h1>
+<p>The joint Cumulative Distribution Function calculates the probability that both variables are less than or equal to their respective threshold values.</p>
+<p>It applies to both discrete and continuous variables: <span class="math inline">F_{X,Y}(x,y) = P(X \le x, Y \le y)</span>.</p>
+</section>
+<section id="expectations" class="level1">
+<h1>Expectations</h1>
+<p><span class="math inline">E[g(X,Y)]=</span> is the extension of calculating the expectation of a function, now with two variables.</p>
+<p>Discrete: <span class="math inline">E[g(X,Y)] = \sum_{x}\sum_{y} g(x,y)p_{X,Y}(x,y)</span></p>
+<p>Continuous: <span class="math inline">E[g(X,Y)] = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} g(x,y)f_{X,Y}(x,y)dxdy</span></p>
+<section id="the-linearity-of-expectation" class="level2">
+<h2 class="anchored" data-anchor-id="the-linearity-of-expectation">The Linearity of Expectation</h2>
+<p><span class="math inline">E[\sum_{i=1}^{N}a_{i}X_{i}]=</span>: The expectation of a sum is always equal to the sum of the expectations, meaning: <span class="math display">E\left[\sum_{i=1}^{N}a_{i}X_{i}\right] = \sum_{i=1}^{N}a_{i}E[X_{i}]</span></p>
+<p>We will show the linearity of the expectation:</p>
+<p><span class="math inline">E[\sum_{i=1}^{N}a_{i}X_{i}]=</span></p>
+<p>Note that this property holds true whether the random variables are independent or not.</p>
 <div class="example-box">
-<p>The Expected Sum of 10 Dice The problem asks for the expected sum obtained when 10 fair dice are rolled. Rather than trying to find the massive, complicated probability distribution for the sum of 10 dice (which ranges from 10 to 60), we define the total sum <span class="math inline">X</span> as the addition of 10 individual random variables: <span class="math display">X = X_1 + X_2 + \dots + X_{10}</span>Here, <span class="math inline">X_i</span> represents the outcome of the <span class="math inline">i</span>-th die roll. We already calculated the expected value of a single die roll to be <span class="math inline">3.5</span> (or <span class="math inline">7/2</span>). Applying the linearity of expectation, we can simply sum the individual expectations:<span class="math display">E[X] = E[X_1 + X_2 + \dots + X_{10}] = E[X_1] + E[X_2] + \dots + E[X_{10}]</span><span class="math display">E[X] = 10 \times 3.5 = 35</span>The expected sum is 35.</p>
+<p>What is the expected value of the sum obtained when 10 fair dice are rolled?</p>
+<p><br>
+</p>
+<p>Trying to find the probability distribution for the sum of 10 dice (which ranges from 10 to 60) is very complicated. Instead, we define the total sum <span class="math inline">X</span> as the addition of 10 individual random variables: <span class="math display">X = X_1 + X_2 + \dots + X_{10}</span></p>
+<p>Here, <span class="math inline">X_i</span> represents the outcome of the <span class="math inline">i</span>-th die roll.</p>
+<p>Recall that the expected value of a single die roll is <span class="math inline">3.5</span>.</p>
+<p>Applying the linearity of expectation, we can sum the individual expectations: <span class="math display">E[X] = E[X_1 + X_2 + \dots + X_{10}] = E[X_1] + E[X_2] + \dots + E[X_{10}]</span></p>
+<p><span class="math display">E[X] = 10 \times 3.5 = 35</span></p>
+<p>And so the expected sum is 35.</p>
 </div>
 <div class="example-box">
-<p>The Hat Problem At a party, <span class="math inline">N</span> men throw their hats into the center of a room. The hats are mixed up, each man randomly selects one, and we need to find the expected number of men who select their own hats. Trying to calculate the exact probability of 0, 1, 2, or <span class="math inline">N</span> men getting their hats requires complex combinatorics (derangements). Instead, we use Indicator Random Variables.Let <span class="math inline">I_i</span> be an indicator for the <span class="math inline">i</span>-th man:<span class="math inline">I_i = 1</span> if man <span class="math inline">i</span> gets his own hat.<span class="math inline">I_i = 0</span> if man <span class="math inline">i</span> does not.The total number of men who get their own hat (<span class="math inline">X</span>) is the sum of these indicators:<span class="math display">X = I_1 + I_2 + \dots + I_N</span>To find the expected value of an indicator variable, we just find the probability of the event occurring. Since the hats are completely mixed up, the chance that man <span class="math inline">i</span> randomly grabs his specific hat out of the pile of <span class="math inline">N</span> hats is simply <span class="math inline">1/N</span>. Therefore, <span class="math inline">E[I_i] = 1/N</span>.Now we apply linearity of expectation. Crucially, this works even though the variables are not independent (if man 1 grabs man 2’s hat, man 2’s probability is affected). Linearity of expectation holds regardless of independence:<span class="math display">E[X] = E[I_1] + E[I_2] + \dots + E[I_N]</span><span class="math display">E[X] = \frac{1}{N} + \frac{1}{N} + \dots + \frac{1}{N} \quad \text{(summed } N \text{ times)}</span><span class="math display">E[X] = N \left( \frac{1}{N} \right) = 1</span>The expected number of men who get their own hat is exactly 1, completely regardless of whether there are 5 men or 5,000 men at the party.</p>
+<p>At a party, <span class="math inline">N</span> men throw their hats into the center of a room. The hats are mixed up, each man randomly selects one. What is the expected number of men who select their own hat?</p>
+<p><br>
+</p>
+<p>Trying to calculate the exact probability of 0, 1, 2, or <span class="math inline">N</span> men getting their hats requires complex combinatorics (derangements).</p>
+<p>Instead, we use an idea called an <strong>Indicator Random Variable</strong>. Indicators (sometimes called dummy variables) are a special type of variable that takes on <span class="math inline">1</span> if some condition is met and <span class="math inline">0</span> otherwise.</p>
+<p>Let <span class="math inline">I_i</span> be an indicator for the <span class="math inline">i</span>-th man:</p>
+<ul>
+<li><p><span class="math inline">I_i = 1</span> if man <span class="math inline">i</span> gets his own hat.</p></li>
+<li><p><span class="math inline">I_i = 0</span> if man <span class="math inline">i</span> does not.</p></li>
+</ul>
+<p>The total number of men who get their own hat (<span class="math inline">X</span>) is the sum of these indicators:</p>
+<p><span class="math display">X = I_1 + I_2 + \dots + I_N</span></p>
+<p>To find the expected value of an indicator variable, we only need to find the probability of the event occurring.</p>
+<p>Since the hats are assumed to be random (that is, uniformly and arbitrarily selected), the chance that man <span class="math inline">i</span> grabs his specific hat out of the pile of <span class="math inline">N</span> hats is <span class="math inline">1/N</span>.</p>
+<p>Therefore, <span class="math inline">E[I_i] = 1/N</span>.</p>
+<p>Now we apply linearity of expectation.</p>
+<p>Despite that the variables are not independent (if man 1 grabs man 2’s hat, man 2’s probability is affected), the linearity of expectation is not affected by this.</p>
+<p><span class="math display">E[X] = E[I_1] + E[I_2] + \dots + E[I_N]</span></p>
+<p><span class="math display">E[X] = \frac{1}{N} + \frac{1}{N} + \dots + \frac{1}{N} \quad \text{(summed } N \text{ times)}</span></p>
+<p><span class="math display">E[X] = N \left( \frac{1}{N} \right) = 1</span></p>
+<p>The expected number of men who get their own hat is 1. Note that this holds regardless of whether there are 5 men or 5,000 men at the party.</p>
 </div>
+</section>
+</section>
+<section id="marginal-distributions" class="level1">
+<h1>Marginal Distributions</h1>
+<p>Given a joint distribution, we can extract the probability of a single event using the process of marginalization. Depending on whether the distribution is discrete or continuous we either sum or integration out all other variables apart from those we are interested in. This essentially collapses a larger multidimensional distribution down to a smaller (often single) dimension.</p>
+<p>Marginalization is commonly used to account for uncertainty of necessary intermediate variables in statistical and machine learning models while giving us a final output that does not include them.</p>
+<p>Marginalization is not new to us, we have seen it previously when calculation conditional probabilities.</p>
+<p>To find the probability of <span class="math inline">X</span> given <span class="math inline">Y</span>, denoted <span class="math inline">P(X\vert{}Y)</span>, you must divide the joint probability by the marginal probability of <span class="math inline">Y</span>: <span class="math display">P(X\vert{}Y) = \frac{P(X,Y)}{P(Y)}</span></p>
+<p><span class="math inline">P(X,Y)</span> is the joint distribution of random variables <span class="math inline">X</span> and <span class="math inline">Y</span> while <span class="math inline">P(Y)</span> can be viewed as the marginal distribution of <span class="math inline">Y</span>.</p>
+<section id="discrete-variables" class="level2">
+<h2 class="anchored" data-anchor-id="discrete-variables">Discrete Variables</h2>
+<p>Let <span class="math inline">X</span> and <span class="math inline">Y</span> be discrete random variables with a joint Probability Mass Function (PMF) given by the following table:</p>
+<p>Y=1Y=2Y=3<span class="math inline">X=0</span><span class="math inline">0.1</span><span class="math inline">0.2</span><span class="math inline">0.1</span><span class="math inline">X=1</span><span class="math inline">0.3</span><span class="math inline">0.1</span><span class="math inline">0.2</span></p>
+<p>To find the marginal distribution of <span class="math inline">X</span>, denoted <span class="math inline">P(X=x)</span>, sum the probabilities across all possible values of <span class="math inline">Y</span> (summing across the rows):</p>
+<p><span class="math display">P(X=x) = \sum_{y} P(X=x, Y=y)</span></p>
+<p><span class="math inline">P(X=0) = 0.1 + 0.2 + 0.1 = \mathbf{0.4}</span></p>
+<p><span class="math inline">P(X=1) = 0.3 + 0.1 + 0.2 = \mathbf{0.6}</span></p>
+<p>To find the marginal distribution of <span class="math inline">Y</span>, denoted <span class="math inline">P(Y=y)</span>, sum the probabilities across all possible values of <span class="math inline">X</span> (summing down the columns):</p>
+<p><span class="math display">P(Y=y) = \sum_{x} P(X=x, Y=y)</span></p>
+<p><span class="math inline">P(Y=1) = 0.1 + 0.3 = \mathbf{0.4}</span></p>
+<p><span class="math inline">P(Y=2) = 0.2 + 0.1 = \mathbf{0.3}</span></p>
+<p><span class="math inline">P(Y=3) = 0.1 + 0.2 = \mathbf{0.3}</span>(Note that both marginal distributions sum to 1.0, confirming they are valid probability distributions).</p>
+</section>
+<section id="continuous-variables" class="level2">
+<h2 class="anchored" data-anchor-id="continuous-variables">Continuous Variables</h2>
+<p>Let <span class="math inline">X</span> and <span class="math inline">Y</span> be continuous random variables with the following joint Probability Density Function (PDF):</p>
+<p><span class="math display">f(x,y) = x + y \quad \text{for } 0 \le x \le 1 \text{ and } 0 \le y \le 1</span></p>
+<p>To find the marginal PDF of <span class="math inline">X</span>, denoted <span class="math inline">f_X(x)</span>, integrate the joint PDF over all possible values of <span class="math inline">Y</span>. Since the function is only defined from <span class="math inline">0</span> to <span class="math inline">1</span> for <span class="math inline">Y</span>:</p>
+<p><span class="math display">f_X(x) = \int_{-\infty}^{\infty} f(x,y) \, dy</span></p>
+<p><span class="math display">f_X(x) = \int_{0}^{1} (x + y) \, dy</span></p>
+<p>Evaluate the integral with respect to <span class="math inline">y</span>, treating <span class="math inline">x</span> as a constant:</p>
+<p><span class="math display">f_X(x) = \left[ xy + \frac{y^2}{2} \right]_{y=0}^{y=1}</span></p>
+<p><span class="math display">f_X(x) = \left( x(1) + \frac{1^2}{2} \right) - (0 + 0)</span></p>
+<p><span class="math display">f_X(x) = x + \frac{1}{2} \quad \text{for } 0 \le x \le 1</span></p>
+<p>To find the marginal PDF of <span class="math inline">Y</span>, denoted <span class="math inline">f_Y(y)</span>, perform the exact same process, but integrate over all possible values of <span class="math inline">X</span>:<span class="math display">f_Y(y) = \int_{-\infty}^{\infty} f(x,y) \, dx</span></p>
+<p><span class="math display">f_Y(y) = \int_{0}^{1} (x + y) \, dx</span></p>
+<p><span class="math display">f_Y(y) = \left[ \frac{x^2}{2} + xy \right]_{x=0}^{x=1}</span></p>
+<p><span class="math display">f_Y(y) = y + \frac{1}{2} \quad \text{for } 0 \le y \le 1</span></p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

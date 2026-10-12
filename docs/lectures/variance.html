@@ -252,7 +252,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lectures/expectation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">10: Properties of Random Variables</span></a>
+ <span class="menu-text">10: Expected Value</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -270,7 +270,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../lectures/mgfs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">13: Variance</span></a>
+ <span class="menu-text">13: Moment Generating Functions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -285,11 +285,56 @@ window.Quarto = {
  <span class="menu-text">15: Bounds and Inequalities</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/clt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">16: The Central Limit Therorem</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
  <span class="menu-text">Inference</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Stochastic Processes</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendix</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/sets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/complex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Complex Numbers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/convolution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Convolution</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/transforms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Transforms</span></a>
+  </div>
+</li>
+      </ul>
   </li>
     </ul>
     </div>
@@ -359,11 +404,59 @@ window.Quarto = {
 <p><span class="math display">E[X^{2}]-(E[X])^{2}</span></p>
 </div>
 <div class="example-box">
-<p><span class="math inline">X</span> output of tossing a die, find <span class="math inline">Var(X)</span> Let <span class="math inline">X</span> be the result of a standard 6-sided die roll. Each outcome (1, 2, 3, 4, 5, 6) has a probability of <span class="math inline">1/6</span>. To use the computational formula, we need <span class="math inline">E[X]</span> and <span class="math inline">E[X^{2}]</span>.First, calculate the mean, <span class="math inline">E[X]</span>:<span class="math display">E[X] = \sum_{x=1}^{6} x p(x) = 1\left(\frac{1}{6}\right) + 2\left(\frac{1}{6}\right) + \dots + 6\left(\frac{1}{6}\right)</span><span class="math display">E[X] = \frac{1+2+3+4+5+6}{6} = \frac{21}{6} = \frac{7}{2}</span>Next, calculate the second moment, <span class="math inline">E[X^{2}]</span>:<span class="math display">E[X^2] = \sum_{x=1}^{6} x^2 p(x) = 1^2\left(\frac{1}{6}\right) + 2^2\left(\frac{1}{6}\right) + \dots + 6^2\left(\frac{1}{6}\right)</span><span class="math display">E[X^2] = \frac{1+4+9+16+25+36}{6} = \frac{91}{6}</span>Now, plug both into the variance formula:<span class="math display">Var(X) = E[X^2] - (E[X])^2</span><span class="math display">Var(X) = \frac{91}{6} - \left(\frac{7}{2}\right)^2</span><span class="math display">Var(X) = \frac{91}{6} - \frac{49}{4} = \frac{182}{12} - \frac{147}{12} = \frac{35}{12}</span></p>
+<p>Let <span class="math inline">X</span> be output of tossing a standard, fair die.</p>
+<p>Find <span class="math inline">Var(X)</span></p>
+<p><br>
+</p>
+<p>Let <span class="math inline">X</span> be the result of a standard 6-sided die roll. Each outcome (1, 2, 3, 4, 5, 6) has a probability of <span class="math inline">1/6</span>.</p>
+<p>To use the computational formula, we need <span class="math inline">E[X]</span> and <span class="math inline">E[X^{2}]</span>.</p>
+<p>First, calculate the mean, <span class="math inline">E[X]</span>:</p>
+<p><span class="math display">E[X] = \sum_{x=1}^{6} x p(x) = 1\left(\frac{1}{6}\right) + 2\left(\frac{1}{6}\right) + \dots + 6\left(\frac{1}{6}\right)</span></p>
+<p><span class="math display">E[X] = \frac{1+2+3+4+5+6}{6} = \frac{21}{6} = \frac{7}{2}</span></p>
+<p>Next, calculate the second moment, <span class="math inline">E[X^{2}]</span>:</p>
+<p><span class="math display">E[X^2] = \sum_{x=1}^{6} x^2 p(x) = 1^2\left(\frac{1}{6}\right) + 2^2\left(\frac{1}{6}\right) + \dots + 6^2\left(\frac{1}{6}\right)</span><span class="math display">E[X^2] = \frac{1+4+9+16+25+36}{6} = \frac{91}{6}</span></p>
+<p>Now, plug both into the variance formula:</p>
+<p><span class="math display">Var(X) = E[X^2] - (E[X])^2</span></p>
+<p><span class="math display">Var(X) = \frac{91}{6} - \left(\frac{7}{2}\right)^2</span><span class="math display">Var(X) = \frac{91}{6} - \frac{49}{4} = \frac{182}{12} - \frac{147}{12} = \frac{35}{12}</span></p>
 </div>
 <div class="example-box">
-<p><span class="math inline">X\sim\mathcal{N}(\mu,\sigma^{2})</span>, find <span class="math inline">Var(X)</span><br>
-This is essentially a definitional question. By standard notation for the Normal distribution, the first parameter (<span class="math inline">\mu</span>) is the mean, and the second parameter (<span class="math inline">\sigma^{2}</span>) is the variance. So, <span class="math inline">Var(X) = \sigma^{2}</span>. (If you needed to prove this from scratch, you would evaluate the integral <span class="math inline">\int_{-\infty}^{\infty}(x-\mu)^2 \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}} dx</span>, which integrates out to <span class="math inline">\sigma^{2}</span>).</p>
+<p>Let <span class="math inline">X\sim\mathcal{N}(\mu,\sigma^{2})</span>.</p>
+<p>Find <span class="math inline">Var(X)</span></p>
+<p>This is essentially a definitional question. By standard notation for the Normal distribution, the first parameter (<span class="math inline">\mu</span>) is the mean, and the second parameter (<span class="math inline">\sigma^{2}</span>) is the variance. So, <span class="math inline">Var(X) = \sigma^{2}</span>.</p>
+<p>We can also prove this from scratch, by evaluating the integral:</p>
+<p><span class="math display">\int_{-\infty}^{\infty}(x-\mu)^2 \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}} dx</span></p>
+<p>To begin, let define <span class="math inline">z = x - \mu</span>.</p>
+<p>Then using <span class="math inline">z</span> as a substitution we have:</p>
+<ul>
+<li><span class="math inline">d(z + \mu) = dz + d(\mu)</span></li>
+</ul>
+<p>Because <span class="math inline">\mu</span> is a fixed constant (the mean), it does not change. The differential of any constant is zero, so <span class="math inline">d(\mu) = 0</span>. As such, the differential becomes <span class="math inline">dz = dx</span>.</p>
+<ul>
+<li><p>As <span class="math inline">x \to \infty</span>, <span class="math inline">z \to \infty</span>.</p></li>
+<li><p>As <span class="math inline">x \to -\infty</span>, <span class="math inline">z \to -\infty</span>.</p></li>
+</ul>
+<p><br>
+</p>
+<p>Using this, we can pull the constant out front, giving us:</p>
+<p><span class="math display">\frac{1}{\sqrt{2\pi}\sigma} \int_{-\infty}^{\infty} z^2 e^{-\frac{z^2}{2\sigma^2}} dz</span></p>
+<p>We can now use integration by parts (<span class="math inline">\int u dv = uv - \int v du</span>).</p>
+<p>First, let us split <span class="math inline">z^2</span> into <span class="math inline">z \cdot z</span> to set up our parts:</p>
+<p>Let <span class="math inline">u = z</span>, which means <span class="math inline">du = dz</span>.</p>
+<p>Let <span class="math inline">dv = z e^{-\frac{z^2}{2\sigma^2}} dz</span>.</p>
+<p>Integrating this using substitution (<span class="math inline">w = -\frac{z^2}{2\sigma^2}</span>), results in <span class="math inline">v = -\sigma^2 e^{-\frac{z^2}{2\sigma^2}}</span>.</p>
+<p><br>
+</p>
+<p>Now, using integration by parts:</p>
+<p><span class="math display">\frac{1}{\sqrt{2\pi}\sigma} \left[ \left( -z\sigma^2 e^{-\frac{z^2}{2\sigma^2}} \right)_{-\infty}^{\infty} - \int_{-\infty}^{\infty} \left(-\sigma^2 e^{-\frac{z^2}{2\sigma^2}}\right) dz \right]</span></p>
+<p>The first term goes to <span class="math inline">0</span> since we know that asymptotically <span class="math inline">e^{-z^2}</span> dominates <span class="math inline">z</span> as it approaches <span class="math inline">\pm\infty</span>.</p>
+<p><br>
+</p>
+<p>For the second term:</p>
+<p><span class="math display">\frac{1}{\sqrt{2\pi}\sigma} \left[ \sigma^2 \int_{-\infty}^{\infty} e^{-\frac{z^2}{2\sigma^2}} dz \right]</span></p>
+<p>This integral is not easily solvable but is considered a standard integral (a Gaussian integral) which is known to evaluate to <span class="math inline">\sqrt{2\pi}\sigma</span>.</p>
+<p>Substituting this gives us:</p>
+<p><span class="math display">\frac{1}{\sqrt{2\pi}\sigma} \left[ \sigma^2 (\sqrt{2\pi}\sigma) \right] = \sigma^2</span></p>
+<p>Which is exactly the variance of <span class="math inline">X</span>.</p>
 </div>
 
 

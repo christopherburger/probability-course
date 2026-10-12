@@ -44,9 +44,8 @@ We will show the linearity of the expectation:
 
 $E[\sum_{i=1}^{N}a_{i}X_{i}]=$
 
-:::
 
-   Note that this property holds true whether the random variables are independent or not.
+Note that this property holds true whether the random variables are independent or not.
 
 
 
