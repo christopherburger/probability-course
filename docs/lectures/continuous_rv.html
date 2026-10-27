@@ -432,15 +432,17 @@ window.Quarto = {
 </section>
 <section id="gamma" class="level2">
 <h2 class="anchored" data-anchor-id="gamma">Gamma</h2>
-<p>The Gamma Random Variable, denoted <span class="math inline">X\sim Gamma(\alpha,\lambda)</span> is often used to model wait times until a specific number of events occur especially in the context of reliability and aging.</p>
+<p>The Gamma Random Variable, denoted <span class="math inline">X\sim Gamma(\alpha,\lambda)</span>, is often used to model wait times until a specific number of events occur especially in the context of reliability and aging.</p>
 <ul>
 <li>Gamma PDF: The probability density function is defined as <span class="math inline">f(x)=\frac{\lambda e^{-\lambda x}(\lambda x)^{\alpha-1}}{\Gamma(\alpha)}</span> for <span class="math inline">x\ge0</span>, and <span class="math inline">0</span> for <span class="math inline">x&lt;0</span>.</li>
 </ul>
-<p>This distribution relies on two strictly positive parameters: <span class="math inline">\alpha&gt;0</span> and <span class="math inline">\lambda&gt;0</span>.</p>
+<p>This distribution relies on two positive parameters: <span class="math inline">\alpha&gt;0</span> and <span class="math inline">\lambda&gt;0</span>.</p>
 <p>The Gamma Function: The denominator in the PDF features the Gamma function itself, which is defined by the integral <span class="math inline">\Gamma(\alpha)=\int_{0}^{\infty}e^{-x}x^{\alpha-1}dx</span>.</p>
 <p>This component acts as a normalizing constant to ensure the total probability across the distribution integrates to 1.</p>
-<p>Factorial Relationship: The slide highlights that the Gamma function serves as a continuous extension of the factorial function, following the recursive rule <span class="math inline">\Gamma(\alpha)=(\alpha-1)\Gamma(\alpha-1)</span>.</p>
-<p>Integer Values: When evaluating the Gamma function for an integer <span class="math inline">n</span>, it simplifies cleanly to a standard factorial: <span class="math inline">\Gamma(n)=(n-1)!</span>. The slide notes that this specific integer relationship can be mathematically proven using induction.</p>
+<p>Note that the Gamma function serves as a continuous extension of the factorial function, following the recursive rule <span class="math inline">\Gamma(\alpha)=(\alpha-1)\Gamma(\alpha-1)</span>.</p>
+<ul>
+<li>When evaluating the Gamma function for an integer <span class="math inline">n</span>, it simplifies cleanly to a standard factorial: <span class="math inline">\Gamma(n)=(n-1)!</span>.</li>
+</ul>
 <section id="exponential-as-a-special-case-of-the-gamma-distribution" class="level3">
 <h3 class="anchored" data-anchor-id="exponential-as-a-special-case-of-the-gamma-distribution">Exponential as a Special Case of the Gamma Distribution</h3>
 </section>
@@ -453,15 +455,26 @@ window.Quarto = {
 </section>
 <section id="normal" class="level2">
 <h2 class="anchored" data-anchor-id="normal">Normal</h2>
-<p>the Normal Random Variable, denoted as <span class="math inline">X\sim\mathcal{N}(\mu,\sigma^{2})</span>.</p>
+<p>The Gaussian (or Normal) Random Variable, denoted as <span class="math inline">X\sim\mathcal{N}(\mu,\sigma^{2})</span>, is commonly encountered in mathematics and the physical sciences.</p>
 <p>In this notation, <span class="math inline">\mu</span> represents the mean (the center of the distribution) and <span class="math inline">\sigma^2</span> represents the variance (the spread).</p>
-<p>The slide highlights the two main components of this distribution:Normal PDF: The probability density function that creates the classic “bell curve” shape is given as <span class="math inline">f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}}</span>.</p>
-<p>Linear Transformations: The slide ends with an open question: If you create a new variable <span class="math inline">Y=\alpha X+\beta</span>, what is the distribution of <span class="math inline">Y</span>, or <span class="math inline">Y \sim ?</span></p>
-<p>A fundamental property of the Normal distribution is that any linear transformation of a strictly Normal random variable results in another Normal random variable.</p>
-<p>To define the distribution of <span class="math inline">Y</span>, we simply need to calculate its new mean and variance:New Mean: Expected values shift linearly, so the new mean is simply <span class="math inline">\alpha\mu + \beta</span>.</p>
-<p>New Variance: Variance is a measure of spread, so it is unaffected by the constant addition of <span class="math inline">\beta</span>.</p>
+<ul>
+<li>PDF: <span class="math inline">f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}}</span>.</li>
+<li><ul>
+<li>This results in the “bell curve” shape that is characteristic of the normal distribution</li>
+</ul></li>
+</ul>
+<div class="example-box">
+<p>Let <span class="math inline">X\sim\mathcal{N}(\mu,\sigma^{2})</span>.</p>
+<p>If we define a new variable <span class="math inline">Y=\alpha X+\beta</span>, what is the distribution of <span class="math inline">Y</span>, or <span class="math inline">Y \sim ?</span></p>
+<p>A fundamental property of the Normal distribution is that any linear transformation of a Normal random variable results in another Normal random variable.</p>
+<p>To define the distribution of <span class="math inline">Y</span>, we simply need to calculate its new mean and variance:</p>
+<ul>
+<li><p>New Mean: Expected values shift linearly, so the new mean is simply <span class="math inline">\alpha\mu + \beta</span>.</p></li>
+<li><p>New Variance: Variance is a measure of spread, so it is unaffected by the constant addition of <span class="math inline">\beta</span>.</p></li>
+</ul>
 <p>However, multiplying the variable by <span class="math inline">\alpha</span> scales the variance by the square of that constant, resulting in <span class="math inline">\alpha^2\sigma^2</span>.</p>
-<p>Putting this together, the answer to the slide’s prompt is that <span class="math inline">Y</span> follows a Normal distribution with the updated parameters:<span class="math display">Y \sim \mathcal{N}(\alpha\mu + \beta, \alpha^2\sigma^2)</span></p>
+<p>Putting this together, <span class="math inline">Y</span> follows a Normal distribution with the updated parameters:<span class="math display">Y \sim \mathcal{N}(\alpha\mu + \beta, \alpha^2\sigma^2)</span></p>
+</div>
 
 
 </section>
