@@ -33,6 +33,13 @@ website:
           - lectures/bounds.qmd
           - lectures/clt.qmd
       - section: "Inference"
+        contents:
+        - lectures/chapter0.qmd
+        - lectures/chapter2.qmd
+        - lectures/chapter3.qmd
+        - lectures/chapter4.qmd
+        - lectures/chapter5.qmd
+        - lectures/chapter6.qmd
       - section: "Stochastic Processes"
       - section: "Appendix"
         contents: 
