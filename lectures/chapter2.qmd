@@ -19,6 +19,7 @@ title: "Chapter 2"
 ## Hard
 
 ### 2H1
+\
 
 <details>
 
@@ -110,6 +111,7 @@ The probability we calculated is greater than the original probability of 15%. S
 </details>
 
 ### 2H2
+\
 
 <details>
 
@@ -147,6 +149,7 @@ We were originally given $P(T|A)$ which is a description of how likely the obser
 </details>
 
 ### 2H3
+\
 
 <details>
 
@@ -189,12 +192,14 @@ $$
 P(A\mid T_1,S_2)=0.36
 $$
 
+This problem is a useful demonstration of sequential Bayesian inference. Note that the evidence does not necessarily push us **consistently** toward one hypothesis, we now consider species A to be slightly more plausible. 
+
 </details>
 
-This problem is a useful demonstration of sequential Bayesian inference. Note that the evidence does not necessarily push us **consistently** toward one hypothesis, we now consider species A to be slightly more plausible. 
 
 
 ### 2H4
+\
 
 <details>
 
