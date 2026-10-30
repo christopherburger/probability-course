@@ -1,5 +1,5 @@
 /* Base padding and spacing for all custom boxes */
-.core-box, .reference-box, .extended-box, .note-box, .practice-box {
+.core-box, .reference-box, .extended-box, .note-box, .practice-box, .example-box {
   margin: 1.5em 0;
   padding: 1em 1.5em;
   box-shadow: 0 4px 6px rgba(0,0,0,0.05);
@@ -99,7 +99,7 @@
 }
 
 .practice-box::before {
-  content: "  📝 Practice";
+  content: "  📄 Practice";
   display: block;
   font-weight: 700;
   color: #6a1b9a;

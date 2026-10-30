@@ -24,15 +24,19 @@ $$\sum_x p(x) = 1$$
 
 # Discrete CDF
 
-The CDF accumulates probability up to a threshold, $F(x) = P(X \le x) = \sum_{t \le x} p(t)$.
+The discrete CDF is:
 
-Because probability concentrates at specific points with discrete random variables, $F(x)$ forms a step function that jumps upward by $p(x)$ at each supported value of $X$ and remains constant otherwise.
+ $$F(x) = P(X \le x) = \sum_{t \le x} p(t)$$
+
+We know that the CDF accumulates probability up to a threshold and that this probability concentrates at specific points with discrete random variables. 
+
+So, $F(x)$ forms a step function that jumps upward by $p(x)$ at each supported value of $X$ and remains constant otherwise.
 
 # Common Discrete Random Variables
 
 ## Bernoulli
 
-The Bernoulli random variable models a single trial with exactly two outcomes (commonly defined as success/failure). 
+The Bernoulli random variable models a single trial with exactly two outcomes (commonly denoted as success/failure). 
 
 The probability of success (1) is $p$, and the probability of failure (0) is $1-p$, where $p \in (0,1)$. 
 
@@ -116,11 +120,9 @@ The probability of a part failing a quality control inspection is modeled at 5%.
 
 - What is the probability that out of a sample of 10 parts that no part passes inspection?
 
-- That 5 pass inspection?
+<details>
 
-- That all 10 pass inspection?
-
-\
+<summary>Click to show answer</summary>
 
 Since we have multiple parts and a problem statement that is in terms of a binary condition, we can use a Binomial distribution if we assume that the sequence of items is independent.
 
@@ -132,19 +134,31 @@ For **no part** to pass inspection we have:
 
 $$P(0) = \binom{10}{0} (0.95^0)(1-0.95)^{10-0} \approx 0.0000000000001$$
 
-\
+</details>
+
+- That 5 pass inspection?
+
+<details>
+
+<summary>Click to show answer</summary>
 
 For five parts to pass inspection:
 
 $$P(5) = \binom{10}{5} (0.95^5)(1-0.95)^{10-5} \approx 0.0006$$
 
-\
+</details>
+
+- That all 10 pass inspection?
+
+<details>
+
+<summary>Click to show answer</summary>
 
 For all ten parts to pass inspection:
 
 $$P(10) = \binom{10}{10} (0.95^{10})(1-0.95)^{10-10} \approx 0.599$$
 
-\
+</details>
 
 
 :::
@@ -158,6 +172,27 @@ We can think of this as experiencing exactly $i-1$ failures, all back-to-back, d
 
 ::: example-box
 
+Let there be 30 red balls, 20 yellow balls, and 10 green balls in an urn. You select a ball at random (you are no more likely to choose one ball over any other), observe the color, and put it back in the urn.
+
+What is the probability of pulling a red ball on your fourth attempt?
+
+\
+
+$$P⁡(Red)=\frac{30}{30+20+10}=\frac{1}{2},P(Not Red)=\frac{20+10}{30+20+10}=\frac{1}{2}$$
+
+Then $$𝑃(𝑥=4)=P⁡(Red)P⁡(Not Red)^{4−1}=\frac{1}{2}(\frac{1}{2})^(4−1)=0.0625$$
+
+
+:::
+
+::: practice-box
+
+<details>
+
+<summary>Click to show answer</summary>
+
+</details>
+
 :::
 
 ## Negative Binomial
@@ -166,9 +201,29 @@ We can think of this as experiencing exactly $i-1$ failures, all back-to-back, d
 
 :::
 
+::: practice-box
+
+<details>
+
+<summary>Click to show answer</summary>
+
+</details>
+
+:::
+
 ## Hypergeometric
 
 ::: example-box
+
+:::
+
+::: practice-box
+
+<details>
+
+<summary>Click to show answer</summary>
+
+</details>
 
 :::
 
@@ -197,6 +252,7 @@ The Probability Mass Function is $p(x)=P(X=x)=e^{-\lambda}\frac{\lambda^{x}}{x!}
 ::: example-box
 The average number of particles appearing in one second is 3.2. What's the probability that no more than 2 such particles appear in one second?
 
+\
 
 We can solve this by defining a Poisson random variable $X$ representing the number of particles appearing in one second. 
 
@@ -208,7 +264,11 @@ $$P(X \le 2) = P(X=0) + P(X=1) + P(X=2)$$
 
 Using the Poisson PMF formula $P(X=i)=e^{-\lambda}\frac{\lambda^{i}}{i!}$:
 
-$P(X=0) = e^{-3.2}\frac{3.2^0}{0!} = e^{-3.2}(1) = e^{-3.2}$$P(X=1) = e^{-3.2}\frac{3.2^1}{1!} = 3.2e^{-3.2}$$P(X=2) = e^{-3.2}\frac{3.2^2}{2!} = e^{-3.2}\frac{10.24}{2} = 5.12e^{-3.2}$
+$$P(X=0) = e^{-3.2}\frac{3.2^0}{0!} = e^{-3.2}(1) = e^{-3.2}$$
+
+$$P(X=1) = e^{-3.2}\frac{3.2^1}{1!} = 3.2e^{-3.2}$$
+
+$$P(X=2) = e^{-3.2}\frac{3.2^2}{2!} = e^{-3.2}\frac{10.24}{2} = 5.12e^{-3.2}$$
 
 Now, we sum these probabilities together:
 
@@ -226,17 +286,94 @@ A machine has unpredictable breakdowns at a mean rate of 3.5 per week.
 
 - What is the probability exactly 2 breakdowns per week?
 
+<details>
+
+<summary>Click to show answer</summary>
+
+$𝜆=3.5 , 𝑥=2$
+
+$$𝑃(𝑥)=  \frac{(𝜆^𝑥 𝑒^{−𝜆})}{𝑥!}$$
+
+$$𝑃(2)=  \frac{(3.5^2 𝑒^{−3.5})}{2!} ≈ 0.185$$
+
+
+</details>
+
 - What is the probability of 3 or more breakdowns per week?
 
+<details>
+
+<summary>Click to show answer</summary>
+
+$𝜆=3.5$
+
+$$𝑃(𝑥≥𝑦)=1−𝑃(𝑥<𝑦)=1−(\frac{𝜆^0 𝑒^{−𝜆}}{0!}+\frac{𝜆^1 𝑒^{−𝜆}}{1!}+…+\frac{𝜆^{𝑦−1} 𝑒^{−𝜆}}{𝑦−1!})$$
+
+$$𝑃(𝑥≥3)=1−𝑃(𝑥<3)=1−(\frac{3.5^0 𝑒^{−3.5}}{0!} + \frac{3.5^1 𝑒^{−3.5}}{1!}+ \frac{3.5^2 𝑒^{−3.5}}{2!}) ≈1 −0.321=0.679$$
+
+
+</details>
+
 - What is the probability of exactly 2 breakdowns in one week and exactly two breakdowns in the following week?
+
+<details>
+
+<summary>Click to show answer</summary>
+
+The Poisson process assumption gives us that disjoint time intervals are independent. Since the weeks are independent, we multiply the probabilities for each week together.
+
+We have already calculated a single week's probability in the first part:
+
+$$𝑃(2)=  \frac{(3.5^2 𝑒^{−3.5})}{2!} ≈ 0.185$$
+
+So, our answer is $0.185^2 \sim 0.034$.
+
+
+</details>
 
 :::
 
 ### The Poisson Approximation to the Binomial
 
-The Poisson distribution can be used to approximate the Binomial distribution when the number of trials $n$ is large and the probability of success $p$ is small. In this case, you set $\lambda=np$.  
+The Poisson distribution can be used to approximate the Binomial distribution when the number of trials $n$ is large and the probability of success $p$ is small by using $\lambda=np$.  
+
+The guideline is $𝑛≥20$ and $𝑝≤0.05$ or $𝑛≥100$ and $𝑛𝑝≤10$. We can then write the binomial probabilities as $(𝑘;𝑛,𝑝)$ where:
+ $$𝜆=𝑛𝑝$$ 
+$$𝑃(𝑘) =  \frac{𝜆^𝑘 𝑒^{−𝜆}}{𝑘!}$$
 
 
 ::: example-box
+
+It is estimated that 5% of all output from a machine is defective. 
+
+If we randomly sample 150 items from the machine, what is the probability that more than 1 is defective?
+
+\
+
+We have $𝑛 = 150≥ 100$ and $𝑛𝑝 = 7.5≤ 10$ and so we will use the Poisson approximation to the binomial:
+
+$$𝑃(𝑥>1)=1−𝑃(𝑥≤1)=1−(𝑃(0)+𝑃(1))$$
+\
+
+$$1−(\frac{7.5^0 𝑒^{−7.5}}{0!}+ \frac{7.5^1 𝑒^{−7.5}}{1!})≈1−0.0047=0.9953 $$
+ \
+
+ For this problem, we can calculate without much trouble the actual binomial probabilities.
+ $$1−\frac{150!}{0!(150−0)!} (0.05^0) (0.95^{150}) + \frac{150!}{1!(150−1)!} (0.05^1) (0.95^{149}) ≈1−0.0041=0.9959$$
+
+We see that error between the true value and the approximation is quite small at: 
+$$
+\frac{0.9959−0.9953}{0.9959}≈0.06\%$$
+
+
+:::
+
+::: practice-box
+
+<details>
+
+<summary>Click to show answer</summary>
+
+</details>
 
 :::

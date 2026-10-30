@@ -71,6 +71,49 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../custom.css">
 </head>
@@ -341,8 +384,25 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#solutions-to-end-of-chapter-exercises" id="toc-solutions-to-end-of-chapter-exercises" class="nav-link active" data-scroll-target="#solutions-to-end-of-chapter-exercises">Solutions to End of Chapter Exercises:</a>
+  <ul class="collapse">
+  <li><a href="#easy" id="toc-easy" class="nav-link" data-scroll-target="#easy">Easy</a></li>
+  <li><a href="#medium" id="toc-medium" class="nav-link" data-scroll-target="#medium">Medium</a></li>
+  <li><a href="#hard" id="toc-hard" class="nav-link" data-scroll-target="#hard">Hard</a>
+  <ul class="collapse">
+  <li><a href="#h1" id="toc-h1" class="nav-link" data-scroll-target="#h1">2H1</a></li>
+  <li><a href="#h2" id="toc-h2" class="nav-link" data-scroll-target="#h2">2H2</a></li>
+  <li><a href="#h3" id="toc-h3" class="nav-link" data-scroll-target="#h3">2H3</a></li>
+  <li><a href="#h4" id="toc-h4" class="nav-link" data-scroll-target="#h4">2H4</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -366,7 +426,268 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<hr>
+<section id="solutions-to-end-of-chapter-exercises" class="level1">
+<h1>Solutions to End of Chapter Exercises:</h1>
+<section id="easy" class="level2">
+<h2 class="anchored" data-anchor-id="easy">Easy</h2>
+<hr>
+</section>
+<section id="medium" class="level2">
+<h2 class="anchored" data-anchor-id="medium">Medium</h2>
+<hr>
+</section>
+<section id="hard" class="level2">
+<h2 class="anchored" data-anchor-id="hard">Hard</h2>
+<section id="h1" class="level3">
+<h3 class="anchored" data-anchor-id="h1">2H1</h3>
+<details>
+<summary>
+Click to show answer
+</summary>
+<p>We have two hypotheses:</p>
+<ul>
+<li><span class="math inline">A</span>: The panda belongs to species A.</li>
+<li><span class="math inline">B</span>: The panda belongs to species B.</li>
+</ul>
+<p>The problem gives us the following information:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Species A</th>
+<th>Species B</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Prior probability</td>
+<td>0.50</td>
+<td>0.50</td>
+</tr>
+<tr class="even">
+<td>Probability of twins</td>
+<td>0.10</td>
+<td>0.20</td>
+</tr>
+<tr class="odd">
+<td>Probability of singleton</td>
+<td>0.90</td>
+<td>0.80</td>
+</tr>
+</tbody>
+</table>
+<p>We will use <span class="math inline">T</span> for a twin birth, <span class="math inline">S</span> for a single birth. We will also make explicit the assumption that the birth outcomes are independent conditional on the mother’s species (that is, once we know the mother’s species then there is no other information available that could be used to change the probability of the outcome of a future birth).</p>
+<p>We know the mother has already given birth to twins. We want:</p>
+<p><span class="math display">
+P(T_2\mid T_1)
+</span></p>
+<p>where <span class="math inline">T_1</span> represents twins on the first birth and <span class="math inline">T_2</span> twins on the second.</p>
+<p>Note that <strong>the first twin birth changes our beliefs about the mother’s species</strong>.</p>
+<p>Before observing the first birth, we had:</p>
+<p><span class="math display">
+P(A)=P(B)=0.5
+</span></p>
+<p>After observing twins, we apply Bayes’ theorem:</p>
+<p><span class="math display">
+P(A\mid T_1)
+=\frac{P(T_1\mid A)P(A)}{P(T_1)}
+</span></p>
+<p>The denominator is calculated using the law of total probability:</p>
+<p><span class="math display">
+P(T_1)=P(T_1\mid A)P(A)+P(T_1\mid B)P(B)
+</span></p>
+<p>Substituting:</p>
+<p><span class="math display">
+P(T_1)=(0.1)(0.5)+(0.2)(0.5)=0.15
+</span></p>
+<p>Therefore:</p>
+<p><span class="math display">
+P(A\mid T_1)=\frac{0.1(0.5)}{0.15}=\frac13
+</span></p>
+<p>Similarly:</p>
+<p><span class="math display">
+P(B\mid T_1)=\frac23
+</span></p>
+<p>We now have updated beliefs about the species. The second birth can be twins under either hypothesis, so:</p>
+<p><span class="math display">
+P(T_2\mid T_1)
+=P(T_2\mid A)P(A\mid T_1)+P(T_2\mid B)P(B\mid T_1)
+</span></p>
+<p>Substituting:</p>
+<p><span class="math display">
+=\left(\frac{1}{10}\right)\left(\frac13\right)
++\left(\frac15\right)\left(\frac23\right)
+</span></p>
+<p><span class="math display">
+P(T_2\mid T_1)=\frac16\approx16.67\%
+</span></p>
+<p>The probability we calculated is greater than the original probability of 15%. Since observing twins makes species B more plausible, and species B has a higher twin-birth rate, we would expect some increase in our resulting probability.</p>
+</details>
+</section>
+<section id="h2" class="level3">
+<h3 class="anchored" data-anchor-id="h2">2H2</h3>
+<details>
+<summary>
+Click to show answer
+</summary>
+<p>This is actually the intermediate calculated we performed in the earlier question.</p>
+<p>Using our notation from part 1:</p>
+<p>We want:</p>
+<p><span class="math display">
+P(A\mid T)
+</span></p>
+<p>Using Bayes’ theorem:</p>
+<p><span class="math display">
+P(A\mid T)=
+\frac{P(T\mid A)P(A)}
+{P(T\mid A)P(A)+P(T\mid B)P(B)}
+</span></p>
+<p><span class="math display">
+=\frac{(0.1)(0.5)}
+{(0.1)(0.5)+(0.2)(0.5)}
+</span></p>
+<p><span class="math display">
+P(A\mid T)=\frac13\approx33.33\%
+</span></p>
+<p>We were originally given <span class="math inline">P(T|A)</span> which is a description of how likely the observation of twins is under our hypothesis that the panda is species A. What we just calculated is how plausible our hypothesis of species A is given that we have observed the event that twins were born.</p>
+</details>
+</section>
+<section id="h3" class="level3">
+<h3 class="anchored" data-anchor-id="h3">2H3</h3>
+<details>
+<summary>
+Click to show answer
+</summary>
+<p>Now we have a second birth, this time a single.</p>
+<p>We now want:</p>
+<p><span class="math display">
+P(A\mid T_1,S_2)
+</span></p>
+<p>From the second part, our updated probabilities are:</p>
+<p><span class="math display">
+P(A\mid T_1)=\frac13,\qquad P(B\mid T_1)=\frac23
+</span></p>
+<p>We can treat these as the priors for our next update.</p>
+<p><span class="math display">
+P(A\mid T_1,S_2)=
+\frac{P(S_2\mid A)P(A\mid T_1)}
+{P(S_2\mid A)P(A\mid T_1)+P(S_2\mid B)P(B\mid T_1)}
+</span></p>
+<p>Substituting:</p>
+<p><span class="math display">
+=\frac{0.9(\frac13)}
+{0.9(\frac13)+0.8(\frac23)}
+</span></p>
+<p><span class="math display">
+=\frac{0.3}{0.3+0.53333}
+</span></p>
+<p><span class="math display">
+P(A\mid T_1,S_2)=0.36
+</span></p>
+</details>
+<p>This problem is a useful demonstration of sequential Bayesian inference. Note that the evidence does not necessarily push us <strong>consistently</strong> toward one hypothesis, we now consider species A to be slightly more plausible.</p>
+</section>
+<section id="h4" class="level3">
+<h3 class="anchored" data-anchor-id="h4">2H4</h3>
+<details>
+<summary>
+Click to show answer
+</summary>
+<p>We now have an updated collection of information.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Species A</th>
+<th>Species B</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Prior probability</td>
+<td>0.50</td>
+<td>0.50</td>
+</tr>
+<tr class="even">
+<td>Probability of twins</td>
+<td>0.10</td>
+<td>0.20</td>
+</tr>
+<tr class="odd">
+<td>Probability of singleton</td>
+<td>0.90</td>
+<td>0.80</td>
+</tr>
+<tr class="even">
+<td>Probability test says A</td>
+<td>0.80</td>
+<td>0.35</td>
+</tr>
+</tbody>
+</table>
+<p>With our new addition, we will use <span class="math inline">+</span> for a genetic test reporting species A.</p>
+<p>We now have a new observation: the genetic test reports species A.</p>
+<p>The test has:</p>
+<p><span class="math display">
+P(+\mid A)=0.8
+</span></p>
+<p><span class="math display">
+P(+\mid B)=1-0.65=0.35
+</span></p>
+<p>Note that the second probability is the false-positive rate: a species B panda has a 35% chance of being identified as species A.</p>
+<section id="part-1" class="level4">
+<h4 class="anchored" data-anchor-id="part-1">Part 1</h4>
+<p>Using equal prior probabilities:</p>
+<p><span class="math display">
+P(A\mid +)=
+\frac{P(+\mid A)P(A)}
+{P(+\mid A)P(A)+P(+\mid B)P(B)}
+</span></p>
+<p><span class="math display">
+=\frac{(0.8)(0.5)}
+{(0.8)(0.5)+(0.35)(0.5)}
+</span></p>
+<p><span class="math display">
+=\frac{0.4}{0.575}
+</span></p>
+<p><span class="math display">
+P(A\mid +)=\frac{16}{23}\approx69.57\%
+</span></p>
+<p>The positive genetic test favors species A, but because the test is imperfect, we do not have an extreme-valued probability.</p>
+</section>
+<section id="part-2" class="level4">
+<h4 class="anchored" data-anchor-id="part-2">Part 2</h4>
+<p>We already calculated:</p>
+<p><span class="math display">
+P(A\mid T_1,S_2)=0.36
+</span></p>
+<p><span class="math display">
+P(B\mid T_1,S_2)=0.64
+</span></p>
+<p>We can use these as our new priors when incorporating the test:</p>
+<p><span class="math display">
+P(A\mid T_1,S_2,+)
+=\frac{P(+\mid A)P(A\mid T_1,S_2)}
+{P(+\mid A)P(A\mid T_1,S_2)+P(+\mid B)P(B\mid T_1,S_2)}
+</span></p>
+<p>Substituting:</p>
+<p><span class="math display">
+=\frac{(0.8)(0.36)}
+{(0.8)(0.36)+(0.35)(0.64)}
+</span></p>
+<p><span class="math display">
+=\frac{0.288}{0.288+0.224}
+</span></p>
+<p><span class="math display">
+P(A\mid T_1,S_2,+)=0.5625
+</span></p>
+</section></details>
 
+
+</section>
+</section>
+</section>
 
 
 </main> <!-- /main -->
