@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.20">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,13 +12,10 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
+code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: 1.5em;}
-div.column{flex: auto;}
-@media screen {
-div.columns{gap: min(4vw, 1.5em);}
-div.column{overflow-x: auto;}
-}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -42,10 +39,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-17888a1159294d3eb470f19f6f52f5a5.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-7f2fd26b669c19c010417720255ddf26.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-6388ad00bb6ecaefa25b9a98db1edf18.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -398,9 +395,13 @@ window.Quarto = {
   <li><a href="#continuous-random-variables" id="toc-continuous-random-variables" class="nav-link" data-scroll-target="#continuous-random-variables">Continuous Random Variables</a></li>
   <li><a href="#calculating-expectations-of-functions-of-random-variables" id="toc-calculating-expectations-of-functions-of-random-variables" class="nav-link" data-scroll-target="#calculating-expectations-of-functions-of-random-variables">Calculating Expectations of Functions of Random Variables</a>
   <ul class="collapse">
-  <li><a href="#continuous-rvs" id="toc-continuous-rvs" class="nav-link" data-scroll-target="#continuous-rvs">Continuous RVs</a></li>
+  <li><a href="#continuous-rvs" id="toc-continuous-rvs" class="nav-link" data-scroll-target="#continuous-rvs">Continuous RVs:</a></li>
   <li><a href="#discrete-rvs" id="toc-discrete-rvs" class="nav-link" data-scroll-target="#discrete-rvs">Discrete RVs:</a></li>
   </ul></li>
+  </ul></li>
+  <li><a href="#expectations-of-common-distributions" id="toc-expectations-of-common-distributions" class="nav-link" data-scroll-target="#expectations-of-common-distributions">Expectations of Common Distributions</a>
+  <ul class="collapse">
+  <li><a href="#parameterization-conventions" id="toc-parameterization-conventions" class="nav-link" data-scroll-target="#parameterization-conventions">Parameterization conventions</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -515,7 +516,7 @@ window.Quarto = {
 <p>We will now consider the question of how to calculate the expectation if we have some function applied to our random variable, denoted as <span class="math inline">Y = g(X)</span>.</p>
 <p>The good news is that we do not need to find the new probability distribution for <span class="math inline">Y</span> and instead can calculate the expectation using the original distribution of <span class="math inline">X</span>.</p>
 <section id="continuous-rvs" class="level3">
-<h3 class="anchored" data-anchor-id="continuous-rvs">Continuous RVs</h3>
+<h3 class="anchored" data-anchor-id="continuous-rvs">Continuous RVs:</h3>
 <p>You can evaluate the expectation by integrating the function <span class="math inline">g(x)</span> multiplied by the original probability density function <span class="math inline">f_{X}(x)</span>:</p>
 <p><span class="math display">E[Y]=\int_{-\infty}^{\infty}yf_{Y}(y)dy=E[g(X)]=\int_{-\infty}^{\infty}g(x)f_{X}(x)dx</span></p>
 </section>
@@ -554,9 +555,110 @@ window.Quarto = {
 <li><p>We also get that the expected value of a constant is the constant itself.</p></li>
 </ul>
 </div>
-
-
 </section>
+</section>
+</section>
+<section id="expectations-of-common-distributions" class="level1">
+<h1>Expectations of Common Distributions</h1>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Distribution</th>
+<th>Parameters</th>
+<th><span class="math inline">E[X]</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Discrete</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Bernoulli</td>
+<td><span class="math inline">p</span></td>
+<td><span class="math inline">p</span></td>
+</tr>
+<tr class="odd">
+<td>Binomial</td>
+<td><span class="math inline">n,p</span></td>
+<td><span class="math inline">np</span></td>
+</tr>
+<tr class="even">
+<td>Geometric</td>
+<td><span class="math inline">p</span></td>
+<td><span class="math inline">\frac{1}{p}</span></td>
+</tr>
+<tr class="odd">
+<td>Negative Binomial</td>
+<td><span class="math inline">r,p</span></td>
+<td><span class="math inline">\frac{r}{p}</span></td>
+</tr>
+<tr class="even">
+<td>Hypergeometric</td>
+<td><span class="math inline">N,K,n</span></td>
+<td><span class="math inline">n\frac{K}{N}</span></td>
+</tr>
+<tr class="odd">
+<td>Poisson</td>
+<td><span class="math inline">\lambda</span></td>
+<td><span class="math inline">\lambda</span></td>
+</tr>
+<tr class="even">
+<td>Discrete Uniform</td>
+<td><span class="math inline">1,\ldots,m</span></td>
+<td><span class="math inline">\frac{m+1}{2}</span></td>
+</tr>
+<tr class="odd">
+<td><strong>Continuous</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Uniform</td>
+<td><span class="math inline">a,b</span></td>
+<td><span class="math inline">\frac{a+b}{2}</span></td>
+</tr>
+<tr class="odd">
+<td>Exponential</td>
+<td><span class="math inline">\lambda</span></td>
+<td><span class="math inline">\frac{1}{\lambda}</span></td>
+</tr>
+<tr class="even">
+<td>Normal</td>
+<td><span class="math inline">\mu,\sigma^2</span></td>
+<td><span class="math inline">\mu</span></td>
+</tr>
+<tr class="odd">
+<td>Gamma</td>
+<td><span class="math inline">\alpha,\beta</span></td>
+<td><span class="math inline">\frac{\alpha}{\beta}</span></td>
+</tr>
+<tr class="even">
+<td>Beta</td>
+<td><span class="math inline">\alpha,\beta</span></td>
+<td><span class="math inline">\frac{\alpha}{\alpha+\beta}</span></td>
+</tr>
+<tr class="odd">
+<td>Chi-Squared</td>
+<td><span class="math inline">k</span></td>
+<td><span class="math inline">k</span></td>
+</tr>
+</tbody>
+</table>
+<section id="parameterization-conventions" class="level2">
+<h2 class="anchored" data-anchor-id="parameterization-conventions">Parameterization conventions</h2>
+<p>For distributions have multiple definitions, we use the following:</p>
+<ul>
+<li><strong>Geometric:</strong> <span class="math inline">X</span> counts the number of trials until the first success, including the successful trial. Its support is <span class="math inline">1,2,\ldots</span>. If counting failures instead, the mean is <span class="math inline">(1-p)/p</span>; the variance is unchanged.</li>
+<li><strong>Negative Binomial:</strong> <span class="math inline">X</span> counts the total number of trials required to obtain <span class="math inline">r</span> successes. If counting failures before the <span class="math inline">r</span>-th success instead, the mean is <span class="math inline">r(1-p)/p</span>; the variance is unchanged.</li>
+<li><strong>Hypergeometric:</strong> <span class="math inline">N</span> is the population size, <span class="math inline">K</span> is the number of successes in the population, and <span class="math inline">n</span> is the sample size. The variance formula assumes <span class="math inline">N&gt;1</span>.</li>
+<li><strong>Gamma:</strong> Uses the <em>shape-rate</em> parameterization, with shape <span class="math inline">\alpha</span> and rate <span class="math inline">\beta</span>. For the shape-scale convention with scale <span class="math inline">\theta=1/\beta</span>, the mean is <span class="math inline">\alpha\theta</span> and variance is <span class="math inline">\alpha\theta^2</span>.</li>
+<li><strong>Exponential:</strong> <span class="math inline">\lambda</span> is the rate parameter.</li>
+</ul>
+<p>All formulas assume the standard valid parameter ranges for their distributions.</p>
+
+
 </section>
 </section>
 

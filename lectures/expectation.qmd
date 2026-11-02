@@ -156,5 +156,32 @@ This linearity property gives us some advantages when it comes to simplification
 
 # Expectations of Common Distributions
 
-Here is a table of the expected values of some common distributions:
+| Distribution | Parameters | $E[X]$ |
+|--------|--------|--------|
+| **Discrete** |  |  |
+| Bernoulli | $p$ | $p$ |
+| Binomial | $n,p$ | $np$ |
+| Geometric | $p$ | $\frac{1}{p}$ |
+| Negative Binomial | $r,p$ | $\frac{r}{p}$ |
+| Hypergeometric | $N,K,n$ | $n\frac{K}{N}$ |
+| Poisson | $\lambda$ | $\lambda$ |
+| Discrete Uniform | $1,\ldots,m$ | $\frac{m+1}{2}$ |
+| **Continuous** |  |  |
+| Uniform | $a,b$ | $\frac{a+b}{2}$ |
+| Exponential | $\lambda$ | $\frac{1}{\lambda}$ |
+| Normal | $\mu,\sigma^2$ | $\mu$ |
+| Gamma | $\alpha,\beta$ | $\frac{\alpha}{\beta}$ |
+| Beta | $\alpha,\beta$ | $\frac{\alpha}{\alpha+\beta}$ |
+| Chi-Squared | $k$ | $k$ |
 
+## Parameterization conventions
+
+For distributions have multiple definitions, we use the following:
+
+- **Geometric\:** $X$ counts the number of trials until the first success, including the successful trial. Its support is $1,2,\ldots$\. If counting failures instead, the mean is $(1-p)/p$; the variance is unchanged.
+- **Negative Binomial\:** $X$ counts the total number of trials required to obtain $r$ successes. If counting failures before the $r$\-th success instead, the mean is $r(1-p)/p$; the variance is unchanged.
+- **Hypergeometric\:** $N$ is the population size, $K$ is the number of successes in the population, and $n$ is the sample size. The variance formula assumes $N>1$\.
+- **Gamma\:** Uses the *shape-rate* parameterization, with shape $\alpha$ and rate $\beta$\. For the shape-scale convention with scale $\theta=1/\beta$, the mean is $\alpha\theta$ and variance is $\alpha\theta^2$\.
+- **Exponential\:** $\lambda$ is the rate parameter.
+
+All formulas assume the standard valid parameter ranges for their distributions.

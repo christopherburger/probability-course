@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.20">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,13 +12,10 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
+code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: 1.5em;}
-div.column{flex: auto;}
-@media screen {
-div.columns{gap: min(4vw, 1.5em);}
-div.column{overflow-x: auto;}
-}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -42,10 +39,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-17888a1159294d3eb470f19f6f52f5a5.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-7f2fd26b669c19c010417720255ddf26.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-6388ad00bb6ecaefa25b9a98db1edf18.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -397,7 +394,10 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#an-alternative-formula" id="toc-an-alternative-formula" class="nav-link" data-scroll-target="#an-alternative-formula">An Alternative Formula</a></li>
   </ul></li>
-  <li><a href="#variances-of-common-distributions" id="toc-variances-of-common-distributions" class="nav-link" data-scroll-target="#variances-of-common-distributions">Variances of Common Distributions</a></li>
+  <li><a href="#variances-of-common-distributions" id="toc-variances-of-common-distributions" class="nav-link" data-scroll-target="#variances-of-common-distributions">Variances of Common Distributions</a>
+  <ul class="collapse">
+  <li><a href="#parameterization-conventions" id="toc-parameterization-conventions" class="nav-link" data-scroll-target="#parameterization-conventions">Parameterization conventions</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -521,9 +521,128 @@ window.Quarto = {
 </section>
 <section id="variances-of-common-distributions" class="level1">
 <h1>Variances of Common Distributions</h1>
-<p>Here is a table of the variances of some common distributions:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Distribution</th>
+<th>Parameters</th>
+<th>Mean <span class="math inline">E[X]</span></th>
+<th>Variance <span class="math inline">\operatorname{Var}(X)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Discrete Distributions</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Bernoulli</td>
+<td><span class="math inline">p</span></td>
+<td><span class="math inline">p</span></td>
+<td><span class="math inline">p(1-p)</span></td>
+</tr>
+<tr class="odd">
+<td>Binomial</td>
+<td><span class="math inline">n,p</span></td>
+<td><span class="math inline">np</span></td>
+<td><span class="math inline">np(1-p)</span></td>
+</tr>
+<tr class="even">
+<td>Geometric</td>
+<td><span class="math inline">p</span></td>
+<td><span class="math inline">\frac{1}{p}</span></td>
+<td><span class="math inline">\frac{1-p}{p^2}</span></td>
+</tr>
+<tr class="odd">
+<td>Negative Binomial</td>
+<td><span class="math inline">r,p</span></td>
+<td><span class="math inline">\frac{r}{p}</span></td>
+<td><span class="math inline">\frac{r(1-p)}{p^2}</span></td>
+</tr>
+<tr class="even">
+<td>Hypergeometric</td>
+<td><span class="math inline">N,K,n</span></td>
+<td><span class="math inline">n\frac{K}{N}</span></td>
+<td><span class="math inline">n\frac{K}{N}\left(1-\frac{K}{N}\right)\frac{N-n}{N-1}</span></td>
+</tr>
+<tr class="odd">
+<td>Poisson</td>
+<td><span class="math inline">\lambda</span></td>
+<td><span class="math inline">\lambda</span></td>
+<td><span class="math inline">\lambda</span></td>
+</tr>
+<tr class="even">
+<td>Discrete Uniform</td>
+<td><span class="math inline">1,\ldots,m</span></td>
+<td><span class="math inline">\frac{m+1}{2}</span></td>
+<td><span class="math inline">\frac{m^2-1}{12}</span></td>
+</tr>
+<tr class="odd">
+<td><strong>Continuous Distributions</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Uniform</td>
+<td><span class="math inline">a,b</span></td>
+<td><span class="math inline">\frac{a+b}{2}</span></td>
+<td><span class="math inline">\frac{(b-a)^2}{12}</span></td>
+</tr>
+<tr class="odd">
+<td>Exponential</td>
+<td><span class="math inline">\lambda</span></td>
+<td><span class="math inline">\frac{1}{\lambda}</span></td>
+<td><span class="math inline">\frac{1}{\lambda^2}</span></td>
+</tr>
+<tr class="even">
+<td>Normal</td>
+<td><span class="math inline">\mu,\sigma^2</span></td>
+<td><span class="math inline">\mu</span></td>
+<td><span class="math inline">\sigma^2</span></td>
+</tr>
+<tr class="odd">
+<td>Gamma</td>
+<td><span class="math inline">\alpha,\beta</span></td>
+<td><span class="math inline">\frac{\alpha}{\beta}</span></td>
+<td><span class="math inline">\frac{\alpha}{\beta^2}</span></td>
+</tr>
+<tr class="even">
+<td>Beta</td>
+<td><span class="math inline">\alpha,\beta</span></td>
+<td><span class="math inline">\frac{\alpha}{\alpha+\beta}</span></td>
+<td><span class="math inline">\frac{\alpha\beta}{(\alpha+\beta)^2(\alpha+\beta+1)}</span></td>
+</tr>
+<tr class="odd">
+<td>Chi-Squared</td>
+<td><span class="math inline">k</span></td>
+<td><span class="math inline">k</span></td>
+<td><span class="math inline">2k</span></td>
+</tr>
+</tbody>
+</table>
+<section id="parameterization-conventions" class="level2">
+<h2 class="anchored" data-anchor-id="parameterization-conventions">Parameterization conventions</h2>
+<p>These matter because some distributions have multiple common definitions.</p>
+<ul>
+<li><strong>Geometric:</strong> <span class="math inline">X</span> counts the number of trials until the first success, including the successful trial. Its support is <span class="math inline">1,2,\ldots</span>. If counting failures instead, the mean is <span class="math inline">(1-p)/p</span>; the variance is unchanged.</li>
+<li><strong>Negative Binomial:</strong> <span class="math inline">X</span> counts the total number of trials required to obtain <span class="math inline">r</span> successes. If counting failures before the <span class="math inline">r</span>-th success instead, the mean is <span class="math inline">r(1-p)/p</span>; the variance is unchanged.</li>
+<li><strong>Hypergeometric:</strong> <span class="math inline">N</span> is the population size, <span class="math inline">K</span> is the number of successes in the population, and <span class="math inline">n</span> is the sample size. The variance formula assumes <span class="math inline">N&gt;1</span>.</li>
+<li><strong>Gamma:</strong> Uses the <em>shape-rate</em> parameterization, with shape <span class="math inline">\alpha</span> and rate <span class="math inline">\beta</span>. For the shape-scale convention with scale <span class="math inline">\theta=1/\beta</span>, the mean is <span class="math inline">\alpha\theta</span> and variance is <span class="math inline">\alpha\theta^2</span>.</li>
+<li><strong>Exponential:</strong> <span class="math inline">\lambda</span> is the rate parameter.</li>
+</ul>
+<p>All formulas assume the standard valid parameter ranges for their distributions.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

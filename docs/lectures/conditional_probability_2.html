@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Conditional Probability Revisted – Applied Probability</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6388ad00bb6ecaefa25b9a98db1edf18.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../custom.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      Applied Probability
+      </li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Applied Probability</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Course Info</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../conventions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Content Conventions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/state_space.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1: Experiments, Spaces and the Multiplication Principle</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/permutations_combinations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2: Permutations and Combinations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/inclusion_exclusion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3: The Principle of Inclusion-Exclusion</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/axioms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4: Axioms of Probability</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/conditional_probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5: Conditional Probability</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/bayes_theorem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6: Bayes’ Theorem</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Random Variables</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/random_variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7: Random Variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/discrete_rv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">8: Discrete Random Variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/continuous_rv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">9: Continuous Random Variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/expectation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">10: Expected Value</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/variance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11: Variance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/joint_distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">12: Joint Distributions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/mgfs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">13: Moment Generating Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/sample_statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">14: Sample Statistics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/bounds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">15: Bounds and Inequalities</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/clt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">16: The Central Limit Therorem</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Inference</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/chapter0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical Rethinking</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/chapter2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Chapter 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/chapter3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Chapter 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/chapter4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Chapter 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/chapter5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Chapter 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/chapter6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Chapter 6</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Stochastic Processes</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendix</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/sets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/complex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Complex Numbers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/convolution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Convolution</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/transforms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Transforms</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-discrete-case" id="toc-the-discrete-case" class="nav-link active" data-scroll-target="#the-discrete-case">The Discrete Case</a>
+  <ul class="collapse">
+  <li><a href="#conditional-cumulative-distribution-function" id="toc-conditional-cumulative-distribution-function" class="nav-link" data-scroll-target="#conditional-cumulative-distribution-function">Conditional cumulative distribution function</a></li>
+  <li><a href="#conditional-expectation" id="toc-conditional-expectation" class="nav-link" data-scroll-target="#conditional-expectation">Conditional expectation</a></li>
+  <li><a href="#example-1-conditional-expectation-from-a-joint-pmf" id="toc-example-1-conditional-expectation-from-a-joint-pmf" class="nav-link" data-scroll-target="#example-1-conditional-expectation-from-a-joint-pmf">Example 1: Conditional expectation from a joint PMF</a>
+  <ul class="collapse">
+  <li><a href="#step-1-organize-the-joint-distribution" id="toc-step-1-organize-the-joint-distribution" class="nav-link" data-scroll-target="#step-1-organize-the-joint-distribution">Step 1: Organize the joint distribution</a></li>
+  <li><a href="#step-2-determine-the-conditional-distribution" id="toc-step-2-determine-the-conditional-distribution" class="nav-link" data-scroll-target="#step-2-determine-the-conditional-distribution">Step 2: Determine the conditional distribution</a></li>
+  <li><a href="#step-3-calculate-the-conditional-expectation" id="toc-step-3-calculate-the-conditional-expectation" class="nav-link" data-scroll-target="#step-3-calculate-the-conditional-expectation">Step 3: Calculate the conditional expectation</a></li>
+  <li><a href="#a-useful-extension" id="toc-a-useful-extension" class="nav-link" data-scroll-target="#a-useful-extension">A useful extension</a></li>
+  </ul></li>
+  <li><a href="#example-2-obtaining-the-hypergeometric-distribution-by-conditioning" id="toc-example-2-obtaining-the-hypergeometric-distribution-by-conditioning" class="nav-link" data-scroll-target="#example-2-obtaining-the-hypergeometric-distribution-by-conditioning">Example 2: Obtaining the hypergeometric distribution by conditioning</a>
+  <ul class="collapse">
+  <li><a href="#step-1-apply-conditional-probability" id="toc-step-1-apply-conditional-probability" class="nav-link" data-scroll-target="#step-1-apply-conditional-probability">Step 1: Apply conditional probability</a></li>
+  <li><a href="#step-2-evaluate-the-numerator" id="toc-step-2-evaluate-the-numerator" class="nav-link" data-scroll-target="#step-2-evaluate-the-numerator">Step 2: Evaluate the numerator</a></li>
+  <li><a href="#step-3-evaluate-the-denominator" id="toc-step-3-evaluate-the-denominator" class="nav-link" data-scroll-target="#step-3-evaluate-the-denominator">Step 3: Evaluate the denominator</a></li>
+  <li><a href="#step-4-simplify" id="toc-step-4-simplify" class="nav-link" data-scroll-target="#step-4-simplify">Step 4: Simplify</a></li>
+  <li><a href="#why-is-this-result-interesting" id="toc-why-is-this-result-interesting" class="nav-link" data-scroll-target="#why-is-this-result-interesting">Why is this result interesting?</a></li>
+  </ul></li>
+  <li><a href="#example-3-obtaining-a-binomial-distribution-by-conditioning-poisson-variables" id="toc-example-3-obtaining-a-binomial-distribution-by-conditioning-poisson-variables" class="nav-link" data-scroll-target="#example-3-obtaining-a-binomial-distribution-by-conditioning-poisson-variables">Example 3: Obtaining a binomial distribution by conditioning Poisson variables</a>
+  <ul class="collapse">
+  <li><a href="#step-1-write-the-conditional-probability" id="toc-step-1-write-the-conditional-probability" class="nav-link" data-scroll-target="#step-1-write-the-conditional-probability">Step 1: Write the conditional probability</a></li>
+  <li><a href="#step-2-evaluate-the-numerator-1" id="toc-step-2-evaluate-the-numerator-1" class="nav-link" data-scroll-target="#step-2-evaluate-the-numerator-1">Step 2: Evaluate the numerator</a></li>
+  <li><a href="#step-3-evaluate-the-denominator-1" id="toc-step-3-evaluate-the-denominator-1" class="nav-link" data-scroll-target="#step-3-evaluate-the-denominator-1">Step 3: Evaluate the denominator</a></li>
+  <li><a href="#step-4-simplify-1" id="toc-step-4-simplify-1" class="nav-link" data-scroll-target="#step-4-simplify-1">Step 4: Simplify</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">Interpretation</a></li>
+  </ul></li>
+  <li><a href="#example-4-conditional-expectation-in-a-multinomial-experiment" id="toc-example-4-conditional-expectation-in-a-multinomial-experiment" class="nav-link" data-scroll-target="#example-4-conditional-expectation-in-a-multinomial-experiment">Example 4: Conditional expectation in a multinomial experiment</a>
+  <ul class="collapse">
+  <li><a href="#step-1-identify-the-distribution" id="toc-step-1-identify-the-distribution" class="nav-link" data-scroll-target="#step-1-identify-the-distribution">Step 1: Identify the distribution</a></li>
+  <li><a href="#step-2-interpret-the-conditioning-event" id="toc-step-2-interpret-the-conditioning-event" class="nav-link" data-scroll-target="#step-2-interpret-the-conditioning-event">Step 2: Interpret the conditioning event</a></li>
+  <li><a href="#step-3-identify-the-conditional-distribution" id="toc-step-3-identify-the-conditional-distribution" class="nav-link" data-scroll-target="#step-3-identify-the-conditional-distribution">Step 3: Identify the conditional distribution</a></li>
+  <li><a href="#step-4-compute-the-expectation" id="toc-step-4-compute-the-expectation" class="nav-link" data-scroll-target="#step-4-compute-the-expectation">Step 4: Compute the expectation</a></li>
+  <li><a href="#an-important-conceptual-point" id="toc-an-important-conceptual-point" class="nav-link" data-scroll-target="#an-important-conceptual-point">An important conceptual point</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#the-continuous-case" id="toc-the-continuous-case" class="nav-link" data-scroll-target="#the-continuous-case">The Continuous Case</a></li>
+  <li><a href="#expectations-and-conditioning" id="toc-expectations-and-conditioning" class="nav-link" data-scroll-target="#expectations-and-conditioning">Expectations and Conditioning</a></li>
+  <li><a href="#variance-and-conditioning" id="toc-variance-and-conditioning" class="nav-link" data-scroll-target="#variance-and-conditioning">Variance and Conditioning</a></li>
+  <li><a href="#probabilities-and-conditioning" id="toc-probabilities-and-conditioning" class="nav-link" data-scroll-target="#probabilities-and-conditioning">Probabilities and Conditioning</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Conditional Probability Revisted</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Recall that for two events <span class="math inline">A</span> and <span class="math inline">B</span>, with <span class="math inline">P(A)&gt;0</span>, the conditional probability of <span class="math inline">A</span> given <span class="math inline">B</span> is</p>
+<p><span class="math display">P(A\mid B)=\frac{P(A\cap B)}{P(B)}</span></p>
+<p>Learning that <span class="math inline">B</span> has occurred can change the set of possible outcomes under consideration.</p>
+<p>We now extend this idea from events to random variables.</p>
+<section id="the-discrete-case" class="level1">
+<h1>The Discrete Case</h1>
+<p>Suppose <span class="math inline">X</span> and <span class="math inline">Y</span> are discrete random variables with joint probability mass function <span class="math display">
+p_{X,Y}(x,y)=P(X=x,Y=y)
+</span></p>
+<p>What we want is the probability that <span class="math inline">X=x</span>, given that we know <span class="math inline">Y=y</span>.</p>
+<p>By applying the definition of conditional probability we have:</p>
+<p><span class="math display">
+P(X=x\mid Y=y)
+=
+\frac{P(X=x,Y=y)}{P(Y=y)}.
+</span></p>
+<p>Therefore, the <strong>conditional probability mass function</strong> of <span class="math inline">X</span> given <span class="math inline">Y=y</span> is:</p>
+<p><span class="math display">
+p_{X\mid Y}(x\mid y)=\frac{p_{X,Y}(x,y)}{p_Y(y)}
+</span></p>
+<p>where</p>
+<p><span class="math display">
+p_Y(y)&gt;0
+</span></p>
+<p>and</p>
+<p><span class="math display">
+p_Y(y)=\sum_x p_{X,Y}(x,y)
+</span></p>
+<p><br>
+</p>
+<p>Note that if <span class="math inline">Y=y</span> is fixed, then we have just an ordinary PMF for <span class="math inline">X</span>.</p>
+<section id="conditional-cumulative-distribution-function" class="level3">
+<h3 class="anchored" data-anchor-id="conditional-cumulative-distribution-function">Conditional cumulative distribution function</h3>
+<p>Just as an ordinary PMF determines a CDF, the conditional PMF determines the conditional CDF:</p>
+<p>$$</p>
+<p>F_{XY}(xy) =P(XxY=y) =<em>{tx}p</em>{XY}(ty)</p>
+<p>$$</p>
+<p>The conditional CDF describes the distribution of <span class="math inline">X</span> after we have specified the value of <span class="math inline">Y</span>.</p>
+</section>
+<section id="conditional-expectation" class="level2">
+<h2 class="anchored" data-anchor-id="conditional-expectation">Conditional expectation</h2>
+<p>Recall that the expectation of a discrete random variable is:</p>
+<p><span class="math display">
+E[X]=\sum_x x\,p_X(x)
+</span></p>
+<p>If we know that <span class="math inline">Y=y</span>, we use the conditional distribution:</p>
+<p>$$</p>
+<p>E[XY=y] =<em>x x,p</em>{XY}(xy)</p>
+<p>$$</p>
+<p>Equivalently using the definition of conditional probability, we can write this as:</p>
+<p><span class="math display">
+E[X\mid Y=y]
+=
+\frac{\sum_x x\,p_{X,Y}(x,y)}{p_Y(y)}
+</span></p>
+<p>Note that now since we can condition on another random variable, we do not necessairly have a number as the result of the expectation. Instead, we can have a random variable as the result of the expectation.</p>
+<ul>
+<li><p><span class="math inline">E[X]</span> is a number representing the unconditional mean of <span class="math inline">X</span>.</p></li>
+<li><p><span class="math inline">E[X\mid Y=y]</span> is a number representing the mean of <span class="math inline">X</span> when <span class="math inline">Y</span> is fixed at a particular value <span class="math inline">y</span>.</p></li>
+<li><p><span class="math inline">E[X\mid Y]</span> is itself a random variable, obtained by evaluating the conditional mean at the observed value of <span class="math inline">Y</span>.</p></li>
+</ul>
+<p>For example, if <span class="math inline">g(y)=E[X\mid Y=y]</span>, then <span class="math inline">E[X\mid Y]=g(Y)</span>.</p>
+<hr>
+</section>
+<section id="example-1-conditional-expectation-from-a-joint-pmf" class="level2">
+<h2 class="anchored" data-anchor-id="example-1-conditional-expectation-from-a-joint-pmf">Example 1: Conditional expectation from a joint PMF</h2>
+<p>The first example in the outline provides the joint PMF</p>
+<p><span class="math display">
+\begin{aligned}
+P(X=1,Y=1)&amp;=0.5,\\
+P(X=1,Y=2)&amp;=0.1,\\
+P(X=2,Y=1)&amp;=0.1,\\
+P(X=2,Y=2)&amp;=0.3.
+\end{aligned}
+</span></p>
+<p>We are asked to calculate</p>
+<p><span class="math display">
+E[X\mid Y=1].
+</span></p>
+<section id="step-1-organize-the-joint-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-organize-the-joint-distribution">Step 1: Organize the joint distribution</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="math display"> &lt;br&gt; Y=1 &lt;br&gt; </span></th>
+<th><span class="math display"> &lt;br&gt; Y=2 &lt;br&gt; </span></th>
+<th><span class="math display"> &lt;br&gt; p_X(x) &lt;br&gt; </span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math display"> &lt;br&gt; X=1 &lt;br&gt; </span></td>
+<td>0.5</td>
+<td>0.1</td>
+<td>0.6</td>
+</tr>
+<tr class="even">
+<td><span class="math display"> &lt;br&gt; X=2 &lt;br&gt; </span></td>
+<td>0.1</td>
+<td>0.3</td>
+<td>0.4</td>
+</tr>
+<tr class="odd">
+<td><span class="math display"> &lt;br&gt; p_Y(y) &lt;br&gt; </span></td>
+<td>0.6</td>
+<td>0.4</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="step-2-determine-the-conditional-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-determine-the-conditional-distribution">Step 2: Determine the conditional distribution</h3>
+<p>Because we know</p>
+<p><span class="math display">
+Y=1
+</span></p>
+<p>, we restrict our attention to the first column.</p>
+<p><span class="math display">
+P(Y=1)=0.5+0.1=0.6.
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+P(X=1\mid Y=1)=\frac{0.5}{0.6}=\frac56
+</span></p>
+<p>and</p>
+<p><span class="math display">
+P(X=2\mid Y=1)=\frac{0.1}{0.6}=\frac16.
+</span></p>
+</section>
+<section id="step-3-calculate-the-conditional-expectation" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-calculate-the-conditional-expectation">Step 3: Calculate the conditional expectation</h3>
+<p><span class="math display">
+\begin{aligned}
+E[X\mid Y=1]
+&amp;=1\cdot P(X=1\mid Y=1)\\
+&amp;\quad+2\cdot P(X=2\mid Y=1)\\
+&amp;=1\cdot\frac56+2\cdot\frac16.
+\end{aligned}
+</span></p>
+<p>Thus,</p>
+<p><span class="math display">
+\boxed{E[X\mid Y=1]=\frac76}
+</span></p>
+</section>
+<section id="a-useful-extension" class="level3">
+<h3 class="anchored" data-anchor-id="a-useful-extension">A useful extension</h3>
+<p>Suppose instead we condition on</p>
+<p><span class="math display">
+Y=2
+</span></p>
+<p>.</p>
+<p>We obtain</p>
+<p><span class="math display">
+P(X=1\mid Y=2)=\frac{0.1}{0.4}=\frac14
+</span></p>
+<p>and</p>
+<p><span class="math display">
+P(X=2\mid Y=2)=\frac{0.3}{0.4}=\frac34.
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+E[X\mid Y=2]
+=1\cdot\frac14+2\cdot\frac34
+=\frac74.
+</span></p>
+<p>We now have the complete conditional expectation function</p>
+<p><span class="math display">
+g(y)=
+\begin{cases}
+7/6,&amp;y=1,\\
+7/4,&amp;y=2.
+\end{cases}
+</span></p>
+<p>Consequently,</p>
+<p><span class="math display">
+E[X\mid Y]
+</span></p>
+<p>is a random variable that takes these two values according to the value of</p>
+<p><span class="math display">
+Y
+</span></p>
+<p>.</p>
+<p>Notice that averaging the conditional expectations according to the probabilities of</p>
+<p><span class="math display">
+Y
+</span></p>
+<p>gives</p>
+<p><span class="math display">
+\begin{aligned}
+E[g(Y)]
+&amp;=\frac76(0.6)+\frac74(0.4)\\
+&amp;=1.4\\
+&amp;=E[X].
+\end{aligned}
+</span></p>
+<p>This is an instance of the <strong>law of total expectation</strong>, which we will formally develop in Section 4.3.</p>
+<hr>
+</section>
+</section>
+<section id="example-2-obtaining-the-hypergeometric-distribution-by-conditioning" class="level2">
+<h2 class="anchored" data-anchor-id="example-2-obtaining-the-hypergeometric-distribution-by-conditioning">Example 2: Obtaining the hypergeometric distribution by conditioning</h2>
+<p>The second example is more interesting because it demonstrates how conditioning can transform one family of probability distributions into another.</p>
+<p>Suppose</p>
+<p><span class="math display">
+X_1\sim\operatorname{Binomial}(n_1,p)
+</span></p>
+<p>and</p>
+<p><span class="math display">
+X_2\sim\operatorname{Binomial}(n_2,p),
+</span></p>
+<p>where</p>
+<p><span class="math display">
+X_1
+</span></p>
+<p>and</p>
+<p><span class="math display">
+X_2
+</span></p>
+<p>are independent.</p>
+<p>We want to determine</p>
+<p><span class="math display">
+P(X_1=k\mid X_1+X_2=m).
+</span></p>
+<section id="step-1-apply-conditional-probability" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-apply-conditional-probability">Step 1: Apply conditional probability</h3>
+<p>We have</p>
+<p><span class="math display">
+P(X_1=k\mid X_1+X_2=m)
+=
+\frac{P(X_1=k,X_1+X_2=m)}
+{P(X_1+X_2=m)}.
+</span></p>
+<p>Notice that</p>
+<p><span class="math display">
+X_1=k,\quad X_1+X_2=m
+</span></p>
+<p>is equivalent to</p>
+<p><span class="math display">
+X_1=k,\quad X_2=m-k.
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+P(X_1=k\mid X_1+X_2=m)
+=
+\frac{P(X_1=k,X_2=m-k)}
+{P(X_1+X_2=m)}.
+</span></p>
+</section>
+<section id="step-2-evaluate-the-numerator" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-evaluate-the-numerator">Step 2: Evaluate the numerator</h3>
+<p>Because</p>
+<p><span class="math display">
+X_1
+</span></p>
+<p>and</p>
+<p><span class="math display">
+X_2
+</span></p>
+<p>are independent,</p>
+<p><span class="math display">
+P(X_1=k,X_2=m-k)
+=P(X_1=k)P(X_2=m-k).
+</span></p>
+<p>Using their binomial PMFs,</p>
+<p><span class="math display">
+P(X_1=k)
+=\binom{n_1}{k}p^k(1-p)^{n_1-k}
+</span></p>
+<p>and</p>
+<p><span class="math display">
+P(X_2=m-k)
+=\binom{n_2}{m-k}p^{m-k}(1-p)^{n_2-m+k}.
+</span></p>
+<p>Multiplying,</p>
+<p><span class="math display">
+P(X_1=k,X_2=m-k)
+=
+\binom{n_1}{k}\binom{n_2}{m-k}
+p^m(1-p)^{n_1+n_2-m}.
+</span></p>
+</section>
+<section id="step-3-evaluate-the-denominator" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-evaluate-the-denominator">Step 3: Evaluate the denominator</h3>
+<p>An important property of independent binomial random variables with the same success probability is that their sum is also binomial.</p>
+<p>Therefore,</p>
+<p><span class="math display">
+X_1+X_2\sim\operatorname{Binomial}(n_1+n_2,p).
+</span></p>
+<p>It follows that</p>
+<p><span class="math display">
+P(X_1+X_2=m)
+=
+\binom{n_1+n_2}{m}
+p^m(1-p)^{n_1+n_2-m}.
+</span></p>
+</section>
+<section id="step-4-simplify" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-simplify">Step 4: Simplify</h3>
+<p>Substituting,</p>
+<p><span class="math display">
+\frac{
+\binom{n_1}{k}\binom{n_2}{m-k}
+p^m(1-p)^{n_1+n_2-m}
+}{
+\binom{n_1+n_2}{m}
+p^m(1-p)^{n_1+n_2-m}
+}.
+</span></p>
+<p>The probability terms cancel, leaving</p>
+<p><span class="math display">
+\boxed{
+P(X_1=k\mid X_1+X_2=m)
+=
+\frac{\binom{n_1}{k}\binom{n_2}{m-k}}
+{\binom{n_1+n_2}{m}}
+}
+</span></p>
+<p>for</p>
+<p><span class="math display">
+\max(0,m-n_2)\leq k\leq\min(n_1,m).
+</span></p>
+<p>We recognize this as the <strong>hypergeometric distribution</strong>.</p>
+</section>
+<section id="why-is-this-result-interesting" class="level3">
+<h3 class="anchored" data-anchor-id="why-is-this-result-interesting">Why is this result interesting?</h3>
+<p>Before conditioning, the number of successes in each group is binomial.</p>
+<p>After conditioning on the total number of successes, the problem becomes one of allocating a fixed number of successes across two groups.</p>
+<p>This is exactly analogous to the familiar sampling-without-replacement problem:</p>
+<p>We have</p>
+<p><span class="math display">
+n_1
+</span></p>
+<p>white balls and</p>
+<p><span class="math display">
+n_2
+</span></p>
+<p>black balls. If we select</p>
+<p><span class="math display">
+m
+</span></p>
+<p>balls uniformly without replacement, the probability of selecting exactly</p>
+<p><span class="math display">
+k
+</span></p>
+<p>white balls is</p>
+<p><span class="math display">
+P(X=k)
+=
+\frac{\binom{n_1}{k}\binom{n_2}{m-k}}
+{\binom{n_1+n_2}{m}}.
+</span></p>
+<p>A particularly important observation is that **the resulting conditional distribution does not depend on</p>
+<p><span class="math display">
+p
+</span></p>
+<p>**.</p>
+<p>This happens because knowing the total number of successes eliminates the information contributed by the common success probability, leaving only the combinatorial allocation of those successes.</p>
+<hr>
+</section>
+</section>
+<section id="example-3-obtaining-a-binomial-distribution-by-conditioning-poisson-variables" class="level2">
+<h2 class="anchored" data-anchor-id="example-3-obtaining-a-binomial-distribution-by-conditioning-poisson-variables">Example 3: Obtaining a binomial distribution by conditioning Poisson variables</h2>
+<p>Now suppose that</p>
+<p><span class="math display">
+X_1\sim\operatorname{Poisson}(\lambda_1)
+</span></p>
+<p>and</p>
+<p><span class="math display">
+X_2\sim\operatorname{Poisson}(\lambda_2),
+</span></p>
+<p>where the random variables are independent and</p>
+<p><span class="math display">
+\lambda_1,\lambda_2&gt;0
+</span></p>
+<p>.</p>
+<p>We want the conditional PMF of</p>
+<p><span class="math display">
+X_1
+</span></p>
+<p>given</p>
+<p><span class="math display">
+X_1+X_2=n.
+</span></p>
+<section id="step-1-write-the-conditional-probability" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-write-the-conditional-probability">Step 1: Write the conditional probability</h3>
+<p>For</p>
+<p><span class="math display">
+k=0,1,\ldots,n
+</span></p>
+<p>,</p>
+<p><span class="math display">
+P(X_1=k\mid X_1+X_2=n)
+=
+\frac{P(X_1=k,X_2=n-k)}
+{P(X_1+X_2=n)}.
+</span></p>
+</section>
+<section id="step-2-evaluate-the-numerator-1" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-evaluate-the-numerator-1">Step 2: Evaluate the numerator</h3>
+<p>Using independence and the Poisson PMF,</p>
+<p><span class="math display">
+\begin{aligned}
+P(X_1=k,X_2=n-k)
+&amp;=
+\frac{e^{-\lambda_1}\lambda_1^k}{k!}
+\frac{e^{-\lambda_2}\lambda_2^{n-k}}{(n-k)!}\\
+&amp;=
+\frac{e^{-(\lambda_1+\lambda_2)}
+\lambda_1^k\lambda_2^{n-k}}
+{k!(n-k)!}.
+\end{aligned}
+</span></p>
+</section>
+<section id="step-3-evaluate-the-denominator-1" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-evaluate-the-denominator-1">Step 3: Evaluate the denominator</h3>
+<p>The sum of independent Poisson random variables is Poisson, with parameter equal to the sum of the individual parameters.</p>
+<p>Thus,</p>
+<p><span class="math display">
+X_1+X_2\sim\operatorname{Poisson}(\lambda_1+\lambda_2)
+</span></p>
+<p>and</p>
+<p><span class="math display">
+P(X_1+X_2=n)
+=
+\frac{e^{-(\lambda_1+\lambda_2)}
+(\lambda_1+\lambda_2)^n}{n!}.
+</span></p>
+</section>
+<section id="step-4-simplify-1" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-simplify-1">Step 4: Simplify</h3>
+<p>Substituting and canceling,</p>
+<p><span class="math display">
+\begin{aligned}
+&amp;P(X_1=k\mid X_1+X_2=n)\\[2mm]
+&amp;\quad=
+\frac{n!}{k!(n-k)!}
+\frac{\lambda_1^k\lambda_2^{n-k}}
+{(\lambda_1+\lambda_2)^n}.
+\end{aligned}
+</span></p>
+<p>Recognizing the binomial coefficient,</p>
+<p><span class="math display">
+\boxed{
+P(X_1=k\mid X_1+X_2=n)
+=
+\binom nk
+\left(\frac{\lambda_1}{\lambda_1+\lambda_2}\right)^k
+\left(\frac{\lambda_2}{\lambda_1+\lambda_2}\right)^{n-k}
+}
+</span></p>
+<p>This is a binomial PMF with success probability</p>
+<p><span class="math display">
+q=\frac{\lambda_1}{\lambda_1+\lambda_2}.
+</span></p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{
+X_1\mid(X_1+X_2=n)
+\sim
+\operatorname{Binomial}
+\left(n,\frac{\lambda_1}{\lambda_1+\lambda_2}\right)
+}
+</span></p>
+</section>
+<section id="interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation">Interpretation</h3>
+<p>Imagine two independent sources generating events.</p>
+<p>Source 1 produces events at an average rate</p>
+<p><span class="math display">
+\lambda_1
+</span></p>
+<p>, while source 2 produces events at an average rate</p>
+<p><span class="math display">
+\lambda_2
+</span></p>
+<p>.</p>
+<p>Without additional information, the event counts from the two sources are independent Poisson random variables.</p>
+<p>But suppose we observe exactly</p>
+<p><span class="math display">
+n
+</span></p>
+<p>events in total.</p>
+<p>Conditioned on this information, each observed event can be attributed to source 1 with probability</p>
+<p><span class="math display">
+\frac{\lambda_1}{\lambda_1+\lambda_2}.
+</span></p>
+<p>Thus the number attributable to source 1 is binomially distributed.</p>
+<p>This is useful in applications involving arrivals, queueing systems, reliability, and event-count models.</p>
+<hr>
+</section>
+</section>
+<section id="example-4-conditional-expectation-in-a-multinomial-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="example-4-conditional-expectation-in-a-multinomial-experiment">Example 4: Conditional expectation in a multinomial experiment</h2>
+<p>The final example in Section 4.1 considers an experiment with three possible outcomes.</p>
+<p>Each trial produces outcome 1, 2, or 3, with respective probabilities</p>
+<p><span class="math display">
+p_1,\qquad p_2,\qquad p_3,
+</span></p>
+<p>where</p>
+<p><span class="math display">
+p_1+p_2+p_3=1.
+</span></p>
+<p>Suppose</p>
+<p><span class="math display">
+n
+</span></p>
+<p>independent trials are performed.</p>
+<p>Let</p>
+<p><span class="math display">
+X_i
+</span></p>
+<p>denote the number of trials producing outcome</p>
+<p><span class="math display">
+i
+</span></p>
+<p>.</p>
+<p>We want to determine</p>
+<p><span class="math display">
+E[X_1\mid X_2=m].
+</span></p>
+<section id="step-1-identify-the-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-identify-the-distribution">Step 1: Identify the distribution</h3>
+<p>The random vector</p>
+<p><span class="math display">
+(X_1,X_2,X_3)
+</span></p>
+<p>follows a multinomial distribution:</p>
+<p><span class="math display">
+(X_1,X_2,X_3)
+\sim\operatorname{Multinomial}(n;p_1,p_2,p_3).
+</span></p>
+<p>In particular,</p>
+<p><span class="math display">
+X_1+X_2+X_3=n.
+</span></p>
+</section>
+<section id="step-2-interpret-the-conditioning-event" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-interpret-the-conditioning-event">Step 2: Interpret the conditioning event</h3>
+<p>Knowing that</p>
+<p><span class="math display">
+X_2=m
+</span></p>
+<p>tells us that exactly</p>
+<p><span class="math display">
+m
+</span></p>
+<p>of the trials produced outcome 2.</p>
+<p>Consequently, the remaining</p>
+<p><span class="math display">
+n-m
+</span></p>
+<p>trials must have produced either outcome 1 or outcome 3.</p>
+<p>The critical observation is that the probabilities among these remaining outcomes must be renormalized.</p>
+<p>In a trial that does not produce outcome 2, the probability of outcome 1 is</p>
+<p><span class="math display">
+P(\text{outcome 1}\mid\text{not outcome 2})
+=
+\frac{p_1}{1-p_2}.
+</span></p>
+<p>Since</p>
+<p><span class="math display">
+1-p_2=p_1+p_3
+</span></p>
+<p>,</p>
+<p><span class="math display">
+P(\text{outcome 1}\mid\text{not outcome 2})
+=
+\frac{p_1}{p_1+p_3}.
+</span></p>
+</section>
+<section id="step-3-identify-the-conditional-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-identify-the-conditional-distribution">Step 3: Identify the conditional distribution</h3>
+<p>Among the</p>
+<p><span class="math display">
+n-m
+</span></p>
+<p>remaining trials, each produces outcome 1 with the conditional probability above.</p>
+<p>Therefore,</p>
+<p><span class="math display">
+X_1\mid X_2=m
+\sim
+\operatorname{Binomial}
+\left(n-m,\frac{p_1}{1-p_2}\right).
+</span></p>
+<p>This holds for</p>
+<p><span class="math display">
+p_2&lt;1
+</span></p>
+<p>, whenever the conditioning event has positive probability.</p>
+</section>
+<section id="step-4-compute-the-expectation" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-compute-the-expectation">Step 4: Compute the expectation</h3>
+<p>The expected value of a binomial random variable with parameters</p>
+<p><span class="math display">
+r
+</span></p>
+<p>and</p>
+<p><span class="math display">
+q
+</span></p>
+<p>is</p>
+<p><span class="math display">
+rq
+</span></p>
+<p>.</p>
+<p>Therefore,</p>
+<p><span class="math display">
+\boxed{
+E[X_1\mid X_2=m]
+=
+(n-m)\frac{p_1}{1-p_2}
+}
+</span></p>
+<p>or, equivalently,</p>
+<p><span class="math display">
+\boxed{
+E[X_1\mid X_2=m]
+=
+(n-m)\frac{p_1}{p_1+p_3}
+}
+</span></p>
+</section>
+<section id="an-important-conceptual-point" class="level3">
+<h3 class="anchored" data-anchor-id="an-important-conceptual-point">An important conceptual point</h3>
+<p>The expected count is not simply</p>
+<p><span class="math display">
+(n-m)p_1
+</span></p>
+<p>.</p>
+<p>Why?</p>
+<p>Because the original probability</p>
+<p><span class="math display">
+p_1
+</span></p>
+<p>describes the chance of outcome 1 before any restrictions are imposed.</p>
+<p>Once we know that a trial was not outcome 2, the relevant probability becomes</p>
+<p><span class="math display">
+\frac{p_1}{1-p_2}.
+</span></p>
+<p>Conditioning changes the distribution, not merely the number of trials.</p>
+</section>
+</section>
+</section>
+<section id="the-continuous-case" class="level1">
+<h1>The Continuous Case</h1>
+</section>
+<section id="expectations-and-conditioning" class="level1">
+<h1>Expectations and Conditioning</h1>
+</section>
+<section id="variance-and-conditioning" class="level1">
+<h1>Variance and Conditioning</h1>
+</section>
+<section id="probabilities-and-conditioning" class="level1">
+<h1>Probabilities and Conditioning</h1>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
