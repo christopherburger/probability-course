@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.10.20">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -39,10 +42,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-17888a1159294d3eb470f19f6f52f5a5.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-6388ad00bb6ecaefa25b9a98db1edf18.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-7f2fd26b669c19c010417720255ddf26.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -394,6 +397,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#an-alternative-formula" id="toc-an-alternative-formula" class="nav-link" data-scroll-target="#an-alternative-formula">An Alternative Formula</a></li>
   </ul></li>
+  <li><a href="#variances-of-common-distributions" id="toc-variances-of-common-distributions" class="nav-link" data-scroll-target="#variances-of-common-distributions">Variances of Common Distributions</a></li>
   </ul>
 </nav>
     </div>
@@ -421,18 +425,26 @@ window.Quarto = {
 
 <section id="moments" class="level1">
 <h1>Moments</h1>
-<p>n-th moment: This is the expected value of the random variable raised to the power of <span class="math inline">n</span>, denoted as <span class="math inline">E[X^{n}]</span>.</p>
-<p>The first moment (<span class="math inline">n=1</span>) is just the mean, <span class="math inline">E[X]</span>.</p>
-<p>n-th central moment: This calculates the expected value of the difference between the random variable and its mean, raised to the <span class="math inline">n</span>-th power: <span class="math inline">E[(X-E[X])^{n}]</span>.</p>
-<p>It measures how the distribution behaves around its center.</p>
+<ul>
+<li><p>n-th moment: This is the expected value of the random variable raised to the power of <span class="math inline">n</span>, denoted as <span class="math inline">E[X^{n}]</span>.</p>
+<ul>
+<li>The first moment (<span class="math inline">n=1</span>) is just the mean, <span class="math inline">E[X]</span>.</li>
+</ul></li>
+<li><p>n-th central moment: This calculates the expected value of the difference between the random variable and its mean, raised to the <span class="math inline">n</span>-th power: <span class="math inline">E[(X-E[X])^{n}]</span>.</p>
+<ul>
+<li>It measures how the distribution behaves around its center.</li>
+</ul></li>
+</ul>
 </section>
 <section id="the-variance" class="level1">
 <h1>The Variance</h1>
 <p>The variance, <span class="math inline">Var(X)</span>, is the second central moment, <span class="math inline">E[(X-E[X])^{2}]</span>.</p>
-<p>It measures the average squared distance from the mean, quantifying the spread of the distribution.</p>
+<p>It measures the average squared distance from the mean. A larger variance indicates that the data points are more spread out from the mean, while a smaller variance indicates that they are closer to the mean.</p>
 <section id="an-alternative-formula" class="level2">
 <h2 class="anchored" data-anchor-id="an-alternative-formula">An Alternative Formula</h2>
-<p><span class="math inline">Var(X)=E[X^{2}]-(E[X])^{2}</span></p>
+<p>The variance can also be calculated using the computational formula:</p>
+<p><span class="math display">Var(X)=E[X^{2}]-(E[X])^{2}</span></p>
+<p>which can be substantially easier to compute in practice.</p>
 <div class="example-box">
 <p>Show that <span class="math inline">Var(X)=E[X^{2}]-(E[X])^{2}</span>.</p>
 <p>Using the definition of variance:</p>
@@ -465,8 +477,12 @@ window.Quarto = {
 <div class="example-box">
 <p>Let <span class="math inline">X\sim\mathcal{N}(\mu,\sigma^{2})</span>.</p>
 <p>Find <span class="math inline">Var(X)</span></p>
+<p><br>
+</p>
 <p>This is essentially a definitional question. By standard notation for the Normal distribution, the first parameter (<span class="math inline">\mu</span>) is the mean, and the second parameter (<span class="math inline">\sigma^{2}</span>) is the variance. So, <span class="math inline">Var(X) = \sigma^{2}</span>.</p>
-<p>We can also prove this from scratch, by evaluating the integral:</p>
+<p><br>
+</p>
+<p>But, we will also prove this from scratch, by evaluating the integral:</p>
 <p><span class="math display">\int_{-\infty}^{\infty}(x-\mu)^2 \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}} dx</span></p>
 <p>To begin, let define <span class="math inline">z = x - \mu</span>.</p>
 <p>Then using <span class="math inline">z</span> as a substitution we have:</p>
@@ -496,14 +512,18 @@ window.Quarto = {
 </p>
 <p>For the second term:</p>
 <p><span class="math display">\frac{1}{\sqrt{2\pi}\sigma} \left[ \sigma^2 \int_{-\infty}^{\infty} e^{-\frac{z^2}{2\sigma^2}} dz \right]</span></p>
-<p>This integral is not easily solvable but is considered a standard integral (a Gaussian integral) which is known to evaluate to <span class="math inline">\sqrt{2\pi}\sigma</span>.</p>
+<p>This integral is not easily solvable without using advanced techniques, but is considered a standard integral (a Gaussian integral) which is known to evaluate to <span class="math inline">\sqrt{2\pi}\sigma</span>.</p>
 <p>Substituting this gives us:</p>
 <p><span class="math display">\frac{1}{\sqrt{2\pi}\sigma} \left[ \sigma^2 (\sqrt{2\pi}\sigma) \right] = \sigma^2</span></p>
 <p>Which is exactly the variance of <span class="math inline">X</span>.</p>
 </div>
-
-
 </section>
+</section>
+<section id="variances-of-common-distributions" class="level1">
+<h1>Variances of Common Distributions</h1>
+<p>Here is a table of the variances of some common distributions:</p>
+
+
 </section>
 
 </main> <!-- /main -->

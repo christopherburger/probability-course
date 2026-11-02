@@ -4,59 +4,109 @@ title: "10: Expected Value"
 
 # The Expected Value
 
-The expected value (commonly called the mean) is denoted as $E[X]$. This represents the **probability-weighted** average of all possible outcomes for a random variable. 
+The expected value (commonly called the mean) is denoted as $E[X]$. This represents the **probability-weighted** average of all possible outcomes for a random variable.
 
 ## Discrete Random Variables
 
-For Discrete RVs, the expectation is calculated by multiplying each possible value $x$ by its probability $p(x)$ and summing them all together: 
+For Discrete RVs, the expectation is calculated by multiplying each possible value $x$ by its probability $p(x)$ and summing them all together:
 
 $$E[X]=\sum_{x:p(x)>0}xp(x)$$
 
+- $Binomial(n, p)$: $E[X]=np$
+  - If we think about what a binomial random variable represents this is intuitive: if you flip a coin 10 times ($n=10$) with a 50% chance of heads ($p=0.5$), you expect 5 heads.
 
-- $Binomial(n, p)$: $E[X]=np$. 
+:::example-box
+Let $X ~ Binomial(n, p)$. We will calculate the expected value of $X$ using the definition of expectation.
+:::
 
-- -If we think about what a binomal random variable represents this is intuitive: if you flip a coin 10 times ($n=10$) with a 50% chance of heads ($p=0.5$), you expect 5 heads.   
 
-- $Geometric(p)$: $E[X]=\frac{1}{p}$. 
+- $Geometric(p)$: $E[X]=\frac{1}{p}$
 
-- - Like the binomial, this is easy to reason our way towards. If you have a 1 in 4 chance of success ($p=0.25$), you would expect it to take 4 trials to get your first success.  
+  - Like the binomial, this is easy to reason our way towards. If you have a 1 in 4 chance of success ($p=0.25$), you would expect it to take 4 trials to get your first success.
 
-- $Poisson(\lambda)$: $E[X]=\lambda$. 
+:::example-box
+Let $X ~ Geometric(p)$. We will calculate the expected value of $X$ using the definition of expectation.
+:::
 
-- - This follows directly from the definition of the Poisson distribution, where $\lambda$ represents the average rate of occurrence. 
+- $Poisson(\lambda)$: $E[X]=\lambda$
+
+  - This follows directly from the definition of the Poisson distribution, where $\lambda$ represents the average rate of occurrence.
+
+:::example-box
+Let $X ~ Poisson(\lambda)$. We will calculate the expected value of $X$ using the definition of expectation.
+:::
+
+- $Negative Binomial(r, p)$: $E[X]=\frac{r}{p}$
+
+  - This is a generalization of the geometric distribution. If you have a 1 in 4 chance of success ($p=0.25$), you would expect it to take 8 trials to get your first two successes.  
+
+:::example-box
+Let $X ~ NegativeBinomial(r, p)$. We will calculate the expected value of $X$ using the definition of expectation.
+:::
+
+- $Hypergeometric(N, K, n)$: $E[X]=\frac{nK}{N}$
+
+  - This is a generalization of the binomial distribution. If you have a population of 100 items ($N=100$) with 20 successes ($K=20$), and you sample 10 items ($n=10$), you would expect to get 2 successes.
+
+:::example-box
+Let $X ~ Hypergeometric(N, K, n)$. We will calculate the expected value of $X$ using the definition of expectation.
+:::
 
 ## Continuous Random Variables
 
-Now since the variable can take on an uncountably infinite number possible values, the summation must be replaced replaced by an integral over the entire real line: $$E[X]=\int_{-\infty}^{\infty}xf(x)dx$$
+Now since the variable can take on an unaccountably infinite number possible values, the summation must be replaced replaced by an integral over the entire real line: $$E[X]=\int_{-\infty}^{\infty}xf(x)dx$$
 
-Like for Discrete RVs we have product of the value $x$ and its probability density $f(x)$ but now our operation is integration. 
+Like for Discrete RVs we have product of the value $x$ and its probability density $f(x)$ but now our operation is integration.
 
-- Uniform(a,b): $E[X]=\frac{a+b}{2}$. 
-- - This calculates the exact midpoint of the interval between $a$ and $b$.  
+- Uniform(a,b): $E[X]=\frac{a+b}{2}$
 
-- Exponential(λ): $E[X]=\frac{1}{\lambda}$. 
-- - The expected time between events is the inverse of the rate parameter.   
- 
-- Normal($\mu,\sigma^{2}$): $E[X]=\mu$. 
+  - This calculates the exact midpoint of the interval between $a$ and $b$.
 
-- - The expected value is simply the mean parameter $\mu$, which sits at the exact center of the bell curve. 
+  :::example-box
+Let $X ~ Uniform(a,b)$. We will calculate the expected value of $X$ using the definition of expectation.
+:::
 
-## Calculating Expectations
+- Exponential(λ): $E[X]=\frac{1}{\lambda}$
 
-We will now consider the question of how to calculate the expection if we have some function applied to our random variable, denoted as $Y = g(X)$.
+  - The expected time between events is the inverse of the rate parameter.
+
+:::example-box
+Let $X ~ Exponential(\lambda)$. We will calculate the expected value of $X$ using the definition of expectation.
+:::
+
+- Normal($\mu,\sigma^{2}$): $E[X]=\mu$
+
+  - The expected value is simply the mean parameter $\mu$, which sits at the exact center of the bell curve.
+
+:::example-box
+Let $X ~ Normal(\mu, \sigma^2)$. We will calculate the expected value of $X$ using the definition of expectation.
+:::
+
+## Calculating Expectations of Functions of Random Variables
+
+We will now consider the question of how to calculate the expectation if we have some function applied to our random variable, denoted as $Y = g(X)$.
 
 The good news is that we do not need to find the new probability distribution for $Y$ and instead can calculate the expectation using the original distribution of $X$.
 
+### Continuous RVs:
 
-- Continuous RVs: You can evaluate the expectation by integrating the function $g(x)$ multiplied by the original probability density function $f_{X}(x)$: $E[Y]=\int_{-\infty}^{\infty}yf_{Y}(y)dy=E[g(X)]=\int_{-\infty}^{\infty}g(x)f_{X}(x)dx$.   
+You can evaluate the expectation by integrating the function $g(x)$ multiplied by the original probability density function $f_{X}(x)$: 
 
-- Discrete RVs: Similarly, you sum the function $g(x)$ multiplied by the original probability mass function $p(x)$: $E[Y]=\sum_{x:p(x)>0}g(x)p(x)$. 
+$$E[Y]=\int_{-\infty}^{\infty}yf_{Y}(y)dy=E[g(X)]=\int_{-\infty}^{\infty}g(x)f_{X}(x)dx$$
+
+### Discrete RVs: 
+
+Similarly, you sum the function $g(x)$ multiplied by the original probability mass function $p(x)$: 
+
+$$E[Y]=\sum_{x:p(x)>0}g(x)p(x)$$
 
 ::: example-box
+Let $X\sim Uniform(0,1),Y=X^{3}$, find $E[Y]$.
 
-Let $X\sim Uniform(0,1),Y=X^{3}$, find $E[Y]$   
+\
 
-First, we need to think about what is meant by the PDF for a $Uniform(0,1)$ distribution. 
+
+First, we need to think about what is meant by the PDF for a $Uniform(0,1)$ distribution.
 
 Because the interval length is 1, the constant density $f_X(x)$ is just $1$ for $0 < x < 1$, and $0$ elsewhere.
 
@@ -65,14 +115,14 @@ Applying the continuous formula for $g(x) = x^3$:$$E[Y] = \int_{0}^{1} x^{3} (1)
 $$E[Y] = \left[ \frac{x^{4}}{4} \right]_{0}^{1}$$
 
 $$E[Y] = \frac{1^{4}}{4} - \frac{0^{4}}{4} = \frac{1}{4}$$
-
 :::
 
 ::: example-box
+Let $X$ be an arbitrary random variable, and let $a, b$ be real-valued constants. What is $E[aX+b]$?
 
-Let $X$ be an arbitrary random variable, and let $a, b$ be real-valued constants. What is $E[aX+b]$?   
+\
 
-This is known as the "linearity of expectation." 
+
 
 We will use the continuous formula here (though the proof is functionally the same for discrete variables replacing the integral with a summation):
 
@@ -86,19 +136,25 @@ Factoring the constants out of the integrals:
 
 $$E[aX+b] = a \int_{-\infty}^{\infty} xf_{X}(x)dx + b \int_{-\infty}^{\infty} f_{X}(x)dx$$
 
-We know that $\int xf_{X}(x)dx$ is the definition of $E[X]$, and $\int f_{X}(x)dx$ is the total probability which always equals $1$. 
+We know that $\int xf_{X}(x)dx$ is the definition of $E[X]$, and $\int f_{X}(x)dx$ is the total probability which always equals $1$.
 
 Therefore, this simplifies to:
 
 $$E[aX+b] = aE[X] + b$$
 
-This linearity property gives us some substantial advantages when it comes to simplification.
+This is known as the "linearity of expectation."
+
+This linearity property gives us some advantages when it comes to simplification of certain expressions.
 
 - We can split up sums of random variables in an expectation into the sum of the expectations.
 
 - We can pull through constant multiplicative values through the expectation.
 
 - We also get that the expected value of a constant is the constant itself.
-
 :::
+
+
+# Expectations of Common Distributions
+
+Here is a table of the expected values of some common distributions:
 

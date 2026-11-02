@@ -1,0 +1,854 @@
+---
+title: "Conditional Probability Revisted"
+---
+Recall that for two events $A$ and $B$, with $P(A)>0$, the conditional probability of $A$ given $B$ is
+
+$$P(A\mid B)=\frac{P(A\cap B)}{P(B)}$$
+
+
+Learning that $B$ has occurred can change the set of possible outcomes under consideration. 
+
+We now extend this idea from events to random variables.
+
+# The Discrete Case
+
+Suppose $X$ and $Y$ are discrete random variables with joint probability mass function
+$$
+p_{X,Y}(x,y)=P(X=x,Y=y)
+$$
+
+What we want is the probability that $X=x$, given that we know $Y=y$.
+
+By applying the definition of conditional probability we have:
+
+$$
+P(X=x\mid Y=y)
+=
+\frac{P(X=x,Y=y)}{P(Y=y)}.
+$$
+
+Therefore, the **conditional probability mass function** of $X$ given $Y=y$ is:
+
+$$
+p_{X\mid Y}(x\mid y)=\frac{p_{X,Y}(x,y)}{p_Y(y)}
+$$
+
+where 
+
+$$
+p_Y(y)>0
+$$
+
+ and
+
+$$
+p_Y(y)=\sum_x p_{X,Y}(x,y)
+$$
+
+\
+
+Note that if $Y=y$ is fixed, then we have just an ordinary PMF for $X$.
+
+
+### Conditional cumulative distribution function
+
+Just as an ordinary PMF determines a CDF, the conditional PMF determines the conditional CDF:
+
+$$
+
+F_{X\mid Y}(x\mid y)
+=P(X\leq x\mid Y=y)
+=\sum_{t\leq x}p_{X\mid Y}(t\mid y)
+
+$$
+
+The conditional CDF describes the distribution of $X$ after we have specified the value of $Y$.
+
+## Conditional expectation
+
+Recall that the expectation of a discrete random variable is:
+
+$$
+E[X]=\sum_x x\,p_X(x)
+$$
+
+If we know that $Y=y$, we use the conditional distribution:
+
+$$
+
+E[X\mid Y=y]
+=\sum_x x\,p_{X\mid Y}(x\mid y)
+
+$$
+
+Equivalently using the definition of conditional probability, we can write this as:
+
+$$
+E[X\mid Y=y]
+=
+\frac{\sum_x x\,p_{X,Y}(x,y)}{p_Y(y)}
+$$
+
+Note that now since we can condition on another random variable, we do not necessairly have a number as the result of the expectation. Instead, we can have a random variable as the result of the expectation.
+
+- 
+  $E[X]$ is a number representing the unconditional mean of $X$.
+
+- $E[X\mid Y=y]$ is a number representing the mean of $X$ when $Y$ is fixed at a particular value $y$. 
+ 
+- $E[X\mid Y]$ is itself a random variable, obtained by evaluating the conditional mean at the observed value of $Y$. 
+
+For example, if $g(y)=E[X\mid Y=y]$, then $E[X\mid Y]=g(Y)$.
+
+
+---
+
+## Example 1: Conditional expectation from a joint PMF
+
+The first example in the outline provides the joint PMF
+
+$$
+\begin{aligned}
+P(X=1,Y=1)&=0.5,\\
+P(X=1,Y=2)&=0.1,\\
+P(X=2,Y=1)&=0.1,\\
+P(X=2,Y=2)&=0.3.
+\end{aligned}
+$$
+
+We are asked to calculate
+
+$$
+E[X\mid Y=1].
+$$
+
+### Step 1: Organize the joint distribution
+
+|  | $$ <br> Y=1 <br> $$ | $$ <br> Y=2 <br> $$ | $$ <br> p_X(x) <br> $$ |
+| --- | --- | --- | --- |
+| $$ <br> X=1 <br> $$ | 0.5 | 0.1 | 0.6 |
+| $$ <br> X=2 <br> $$ | 0.1 | 0.3 | 0.4 |
+| $$ <br> p_Y(y) <br> $$ | 0.6 | 0.4 | 1.0 |
+
+### Step 2: Determine the conditional distribution
+
+Because we know 
+
+$$
+Y=1
+$$
+
+, we restrict our attention to the first column.
+
+$$
+P(Y=1)=0.5+0.1=0.6.
+$$
+
+Therefore,
+
+$$
+P(X=1\mid Y=1)=\frac{0.5}{0.6}=\frac56
+$$
+
+and
+
+$$
+P(X=2\mid Y=1)=\frac{0.1}{0.6}=\frac16.
+$$
+
+### Step 3: Calculate the conditional expectation
+
+$$
+\begin{aligned}
+E[X\mid Y=1]
+&=1\cdot P(X=1\mid Y=1)\\
+&\quad+2\cdot P(X=2\mid Y=1)\\
+&=1\cdot\frac56+2\cdot\frac16.
+\end{aligned}
+$$
+
+Thus,
+
+$$
+\boxed{E[X\mid Y=1]=\frac76}
+$$
+
+### A useful extension
+
+Suppose instead we condition on 
+
+$$
+Y=2
+$$
+
+.
+
+We obtain
+
+$$
+P(X=1\mid Y=2)=\frac{0.1}{0.4}=\frac14
+$$
+
+and
+
+$$
+P(X=2\mid Y=2)=\frac{0.3}{0.4}=\frac34.
+$$
+
+Therefore,
+
+$$
+E[X\mid Y=2]
+=1\cdot\frac14+2\cdot\frac34
+=\frac74.
+$$
+
+We now have the complete conditional expectation function
+
+$$
+g(y)=
+\begin{cases}
+7/6,&y=1,\\
+7/4,&y=2.
+\end{cases}
+$$
+
+Consequently, 
+
+$$
+E[X\mid Y]
+$$
+
+ is a random variable that takes these two values according to the value of 
+
+$$
+Y
+$$
+
+.
+
+Notice that averaging the conditional expectations according to the probabilities of 
+
+$$
+Y
+$$
+
+ gives
+
+$$
+\begin{aligned}
+E[g(Y)]
+&=\frac76(0.6)+\frac74(0.4)\\
+&=1.4\\
+&=E[X].
+\end{aligned}
+$$
+
+This is an instance of the **law of total expectation**, which we will formally develop in Section 4.3.
+
+---
+
+## Example 2: Obtaining the hypergeometric distribution by conditioning
+
+The second example is more interesting because it demonstrates how conditioning can transform one family of probability distributions into another.
+
+Suppose
+
+$$
+X_1\sim\operatorname{Binomial}(n_1,p)
+$$
+
+and
+
+$$
+X_2\sim\operatorname{Binomial}(n_2,p),
+$$
+
+where 
+
+$$
+X_1
+$$
+
+ and 
+
+$$
+X_2
+$$
+
+ are independent.
+
+We want to determine
+
+$$
+P(X_1=k\mid X_1+X_2=m).
+$$
+
+### Step 1: Apply conditional probability
+
+We have
+
+$$
+P(X_1=k\mid X_1+X_2=m)
+=
+\frac{P(X_1=k,X_1+X_2=m)}
+{P(X_1+X_2=m)}.
+$$
+
+Notice that
+
+$$
+X_1=k,\quad X_1+X_2=m
+$$
+
+is equivalent to
+
+$$
+X_1=k,\quad X_2=m-k.
+$$
+
+Therefore,
+
+$$
+P(X_1=k\mid X_1+X_2=m)
+=
+\frac{P(X_1=k,X_2=m-k)}
+{P(X_1+X_2=m)}.
+$$
+
+### Step 2: Evaluate the numerator
+
+Because 
+
+$$
+X_1
+$$
+
+ and 
+
+$$
+X_2
+$$
+
+ are independent,
+
+$$
+P(X_1=k,X_2=m-k)
+=P(X_1=k)P(X_2=m-k).
+$$
+
+Using their binomial PMFs,
+
+$$
+P(X_1=k)
+=\binom{n_1}{k}p^k(1-p)^{n_1-k}
+$$
+
+and
+
+$$
+P(X_2=m-k)
+=\binom{n_2}{m-k}p^{m-k}(1-p)^{n_2-m+k}.
+$$
+
+Multiplying,
+
+$$
+P(X_1=k,X_2=m-k)
+=
+\binom{n_1}{k}\binom{n_2}{m-k}
+p^m(1-p)^{n_1+n_2-m}.
+$$
+
+### Step 3: Evaluate the denominator
+
+An important property of independent binomial random variables with the same success probability is that their sum is also binomial.
+
+Therefore,
+
+$$
+X_1+X_2\sim\operatorname{Binomial}(n_1+n_2,p).
+$$
+
+It follows that
+
+$$
+P(X_1+X_2=m)
+=
+\binom{n_1+n_2}{m}
+p^m(1-p)^{n_1+n_2-m}.
+$$
+
+### Step 4: Simplify
+
+Substituting,
+
+$$
+\frac{
+\binom{n_1}{k}\binom{n_2}{m-k}
+p^m(1-p)^{n_1+n_2-m}
+}{
+\binom{n_1+n_2}{m}
+p^m(1-p)^{n_1+n_2-m}
+}.
+$$
+
+The probability terms cancel, leaving
+
+$$
+\boxed{
+P(X_1=k\mid X_1+X_2=m)
+=
+\frac{\binom{n_1}{k}\binom{n_2}{m-k}}
+{\binom{n_1+n_2}{m}}
+}
+$$
+
+for
+
+$$
+\max(0,m-n_2)\leq k\leq\min(n_1,m).
+$$
+
+We recognize this as the **hypergeometric distribution**.
+
+### Why is this result interesting?
+
+Before conditioning, the number of successes in each group is binomial.
+
+After conditioning on the total number of successes, the problem becomes one of allocating a fixed number of successes across two groups.
+
+This is exactly analogous to the familiar sampling-without-replacement problem:
+
+We have 
+
+$$
+n_1
+$$
+
+ white balls and 
+
+$$
+n_2
+$$
+
+ black balls. If we select 
+
+$$
+m
+$$
+
+ balls uniformly without replacement, the probability of selecting exactly 
+
+$$
+k
+$$
+
+ white balls is
+
+$$
+P(X=k)
+=
+\frac{\binom{n_1}{k}\binom{n_2}{m-k}}
+{\binom{n_1+n_2}{m}}.
+$$
+
+A particularly important observation is that **the resulting conditional distribution does not depend on 
+
+$$
+p
+$$
+
+**.
+
+This happens because knowing the total number of successes eliminates the information contributed by the common success probability, leaving only the combinatorial allocation of those successes.
+
+---
+
+## Example 3: Obtaining a binomial distribution by conditioning Poisson variables
+
+Now suppose that
+
+$$
+X_1\sim\operatorname{Poisson}(\lambda_1)
+$$
+
+and
+
+$$
+X_2\sim\operatorname{Poisson}(\lambda_2),
+$$
+
+where the random variables are independent and 
+
+$$
+\lambda_1,\lambda_2>0
+$$
+
+.
+
+We want the conditional PMF of 
+
+$$
+X_1
+$$
+
+ given
+
+$$
+X_1+X_2=n.
+$$
+
+### Step 1: Write the conditional probability
+
+For 
+
+$$
+k=0,1,\ldots,n
+$$
+
+,
+
+$$
+P(X_1=k\mid X_1+X_2=n)
+=
+\frac{P(X_1=k,X_2=n-k)}
+{P(X_1+X_2=n)}.
+$$
+
+### Step 2: Evaluate the numerator
+
+Using independence and the Poisson PMF,
+
+$$
+\begin{aligned}
+P(X_1=k,X_2=n-k)
+&=
+\frac{e^{-\lambda_1}\lambda_1^k}{k!}
+\frac{e^{-\lambda_2}\lambda_2^{n-k}}{(n-k)!}\\
+&=
+\frac{e^{-(\lambda_1+\lambda_2)}
+\lambda_1^k\lambda_2^{n-k}}
+{k!(n-k)!}.
+\end{aligned}
+$$
+
+### Step 3: Evaluate the denominator
+
+The sum of independent Poisson random variables is Poisson, with parameter equal to the sum of the individual parameters.
+
+Thus,
+
+$$
+X_1+X_2\sim\operatorname{Poisson}(\lambda_1+\lambda_2)
+$$
+
+and
+
+$$
+P(X_1+X_2=n)
+=
+\frac{e^{-(\lambda_1+\lambda_2)}
+(\lambda_1+\lambda_2)^n}{n!}.
+$$
+
+### Step 4: Simplify
+
+Substituting and canceling,
+
+$$
+\begin{aligned}
+&P(X_1=k\mid X_1+X_2=n)\\[2mm]
+&\quad=
+\frac{n!}{k!(n-k)!}
+\frac{\lambda_1^k\lambda_2^{n-k}}
+{(\lambda_1+\lambda_2)^n}.
+\end{aligned}
+$$
+
+Recognizing the binomial coefficient,
+
+$$
+\boxed{
+P(X_1=k\mid X_1+X_2=n)
+=
+\binom nk
+\left(\frac{\lambda_1}{\lambda_1+\lambda_2}\right)^k
+\left(\frac{\lambda_2}{\lambda_1+\lambda_2}\right)^{n-k}
+}
+$$
+
+This is a binomial PMF with success probability
+
+$$
+q=\frac{\lambda_1}{\lambda_1+\lambda_2}.
+$$
+
+Therefore,
+
+$$
+\boxed{
+X_1\mid(X_1+X_2=n)
+\sim
+\operatorname{Binomial}
+\left(n,\frac{\lambda_1}{\lambda_1+\lambda_2}\right)
+}
+$$
+
+### Interpretation
+
+Imagine two independent sources generating events.
+
+Source 1 produces events at an average rate 
+
+$$
+\lambda_1
+$$
+
+, while source 2 produces events at an average rate 
+
+$$
+\lambda_2
+$$
+
+.
+
+Without additional information, the event counts from the two sources are independent Poisson random variables.
+
+But suppose we observe exactly 
+
+$$
+n
+$$
+
+ events in total.
+
+Conditioned on this information, each observed event can be attributed to source 1 with probability
+
+$$
+\frac{\lambda_1}{\lambda_1+\lambda_2}.
+$$
+
+Thus the number attributable to source 1 is binomially distributed.
+
+This is useful in applications involving arrivals, queueing systems, reliability, and event-count models.
+
+---
+
+## Example 4: Conditional expectation in a multinomial experiment
+
+The final example in Section 4.1 considers an experiment with three possible outcomes.
+
+Each trial produces outcome 1, 2, or 3, with respective probabilities
+
+$$
+p_1,\qquad p_2,\qquad p_3,
+$$
+
+where
+
+$$
+p_1+p_2+p_3=1.
+$$
+
+Suppose 
+
+$$
+n
+$$
+
+ independent trials are performed.
+
+Let 
+
+$$
+X_i
+$$
+
+ denote the number of trials producing outcome 
+
+$$
+i
+$$
+
+.
+
+We want to determine
+
+$$
+E[X_1\mid X_2=m].
+$$
+
+### Step 1: Identify the distribution
+
+The random vector
+
+$$
+(X_1,X_2,X_3)
+$$
+
+follows a multinomial distribution:
+
+$$
+(X_1,X_2,X_3)
+\sim\operatorname{Multinomial}(n;p_1,p_2,p_3).
+$$
+
+In particular,
+
+$$
+X_1+X_2+X_3=n.
+$$
+
+### Step 2: Interpret the conditioning event
+
+Knowing that
+
+$$
+X_2=m
+$$
+
+tells us that exactly 
+
+$$
+m
+$$
+
+ of the trials produced outcome 2.
+
+Consequently, the remaining
+
+$$
+n-m
+$$
+
+trials must have produced either outcome 1 or outcome 3.
+
+The critical observation is that the probabilities among these remaining outcomes must be renormalized.
+
+In a trial that does not produce outcome 2, the probability of outcome 1 is
+
+$$
+P(\text{outcome 1}\mid\text{not outcome 2})
+=
+\frac{p_1}{1-p_2}.
+$$
+
+Since 
+
+$$
+1-p_2=p_1+p_3
+$$
+
+,
+
+$$
+P(\text{outcome 1}\mid\text{not outcome 2})
+=
+\frac{p_1}{p_1+p_3}.
+$$
+
+### Step 3: Identify the conditional distribution
+
+Among the 
+
+$$
+n-m
+$$
+
+ remaining trials, each produces outcome 1 with the conditional probability above.
+
+Therefore,
+
+$$
+X_1\mid X_2=m
+\sim
+\operatorname{Binomial}
+\left(n-m,\frac{p_1}{1-p_2}\right).
+$$
+
+This holds for 
+
+$$
+p_2<1
+$$
+
+, whenever the conditioning event has positive probability.
+
+### Step 4: Compute the expectation
+
+The expected value of a binomial random variable with parameters 
+
+$$
+r
+$$
+
+ and 
+
+$$
+q
+$$
+
+ is 
+
+$$
+rq
+$$
+
+.
+
+Therefore,
+
+$$
+\boxed{
+E[X_1\mid X_2=m]
+=
+(n-m)\frac{p_1}{1-p_2}
+}
+$$
+
+or, equivalently,
+
+$$
+\boxed{
+E[X_1\mid X_2=m]
+=
+(n-m)\frac{p_1}{p_1+p_3}
+}
+$$
+
+### An important conceptual point
+
+The expected count is not simply 
+
+$$
+(n-m)p_1
+$$
+
+.
+
+Why?
+
+Because the original probability 
+
+$$
+p_1
+$$
+
+ describes the chance of outcome 1 before any restrictions are imposed.
+
+Once we know that a trial was not outcome 2, the relevant probability becomes
+
+$$
+\frac{p_1}{1-p_2}.
+$$
+
+Conditioning changes the distribution, not merely the number of trials.
+
+# The Continuous Case
+
+# Expectations and Conditioning
+
+# Variance and Conditioning
+
+# Probabilities and Conditioning

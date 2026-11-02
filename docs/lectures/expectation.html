@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.10.20">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -39,10 +42,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-17888a1159294d3eb470f19f6f52f5a5.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-6388ad00bb6ecaefa25b9a98db1edf18.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-7f2fd26b669c19c010417720255ddf26.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -393,7 +396,11 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#discrete-random-variables" id="toc-discrete-random-variables" class="nav-link" data-scroll-target="#discrete-random-variables">Discrete Random Variables</a></li>
   <li><a href="#continuous-random-variables" id="toc-continuous-random-variables" class="nav-link" data-scroll-target="#continuous-random-variables">Continuous Random Variables</a></li>
-  <li><a href="#calculating-expectations" id="toc-calculating-expectations" class="nav-link" data-scroll-target="#calculating-expectations">Calculating Expectations</a></li>
+  <li><a href="#calculating-expectations-of-functions-of-random-variables" id="toc-calculating-expectations-of-functions-of-random-variables" class="nav-link" data-scroll-target="#calculating-expectations-of-functions-of-random-variables">Calculating Expectations of Functions of Random Variables</a>
+  <ul class="collapse">
+  <li><a href="#continuous-rvs" id="toc-continuous-rvs" class="nav-link" data-scroll-target="#continuous-rvs">Continuous RVs</a></li>
+  <li><a href="#discrete-rvs" id="toc-discrete-rvs" class="nav-link" data-scroll-target="#discrete-rvs">Discrete RVs:</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -428,47 +435,98 @@ window.Quarto = {
 <p>For Discrete RVs, the expectation is calculated by multiplying each possible value <span class="math inline">x</span> by its probability <span class="math inline">p(x)</span> and summing them all together:</p>
 <p><span class="math display">E[X]=\sum_{x:p(x)&gt;0}xp(x)</span></p>
 <ul>
-<li><p><span class="math inline">Binomial(n, p)</span>: <span class="math inline">E[X]=np</span>.</p></li>
-<li><p>-If we think about what a binomal random variable represents this is intuitive: if you flip a coin 10 times (<span class="math inline">n=10</span>) with a 50% chance of heads (<span class="math inline">p=0.5</span>), you expect 5 heads.</p></li>
-<li><p><span class="math inline">Geometric(p)</span>: <span class="math inline">E[X]=\frac{1}{p}</span>.</p></li>
-<li><ul>
+<li><span class="math inline">Binomial(n, p)</span>: <span class="math inline">E[X]=np</span>
+<ul>
+<li>If we think about what a binomial random variable represents this is intuitive: if you flip a coin 10 times (<span class="math inline">n=10</span>) with a 50% chance of heads (<span class="math inline">p=0.5</span>), you expect 5 heads.</li>
+</ul></li>
+</ul>
+<div class="example-box">
+<p>Let <span class="math inline">X ~ Binomial(n, p)</span>. We will calculate the expected value of <span class="math inline">X</span> using the definition of expectation.</p>
+</div>
+<ul>
+<li><p><span class="math inline">Geometric(p)</span>: <span class="math inline">E[X]=\frac{1}{p}</span></p>
+<ul>
 <li>Like the binomial, this is easy to reason our way towards. If you have a 1 in 4 chance of success (<span class="math inline">p=0.25</span>), you would expect it to take 4 trials to get your first success.</li>
 </ul></li>
-<li><p><span class="math inline">Poisson(\lambda)</span>: <span class="math inline">E[X]=\lambda</span>.</p></li>
-<li><ul>
+</ul>
+<div class="example-box">
+<p>Let <span class="math inline">X ~ Geometric(p)</span>. We will calculate the expected value of <span class="math inline">X</span> using the definition of expectation.</p>
+</div>
+<ul>
+<li><p><span class="math inline">Poisson(\lambda)</span>: <span class="math inline">E[X]=\lambda</span></p>
+<ul>
 <li>This follows directly from the definition of the Poisson distribution, where <span class="math inline">\lambda</span> represents the average rate of occurrence.</li>
 </ul></li>
 </ul>
+<div class="example-box">
+<p>Let <span class="math inline">X ~ Poisson(\lambda)</span>. We will calculate the expected value of <span class="math inline">X</span> using the definition of expectation.</p>
+</div>
+<ul>
+<li><p><span class="math inline">Negative Binomial(r, p)</span>: <span class="math inline">E[X]=\frac{r}{p}</span></p>
+<ul>
+<li>This is a generalization of the geometric distribution. If you have a 1 in 4 chance of success (<span class="math inline">p=0.25</span>), you would expect it to take 8 trials to get your first two successes.</li>
+</ul></li>
+</ul>
+<div class="example-box">
+<p>Let <span class="math inline">X ~ NegativeBinomial(r, p)</span>. We will calculate the expected value of <span class="math inline">X</span> using the definition of expectation.</p>
+</div>
+<ul>
+<li><p><span class="math inline">Hypergeometric(N, K, n)</span>: <span class="math inline">E[X]=\frac{nK}{N}</span></p>
+<ul>
+<li>This is a generalization of the binomial distribution. If you have a population of 100 items (<span class="math inline">N=100</span>) with 20 successes (<span class="math inline">K=20</span>), and you sample 10 items (<span class="math inline">n=10</span>), you would expect to get 2 successes.</li>
+</ul></li>
+</ul>
+<div class="example-box">
+<p>Let <span class="math inline">X ~ Hypergeometric(N, K, n)</span>. We will calculate the expected value of <span class="math inline">X</span> using the definition of expectation.</p>
+</div>
 </section>
 <section id="continuous-random-variables" class="level2">
 <h2 class="anchored" data-anchor-id="continuous-random-variables">Continuous Random Variables</h2>
-<p>Now since the variable can take on an uncountably infinite number possible values, the summation must be replaced replaced by an integral over the entire real line: <span class="math display">E[X]=\int_{-\infty}^{\infty}xf(x)dx</span></p>
+<p>Now since the variable can take on an unaccountably infinite number possible values, the summation must be replaced replaced by an integral over the entire real line: <span class="math display">E[X]=\int_{-\infty}^{\infty}xf(x)dx</span></p>
 <p>Like for Discrete RVs we have product of the value <span class="math inline">x</span> and its probability density <span class="math inline">f(x)</span> but now our operation is integration.</p>
 <ul>
-<li><p>Uniform(a,b): <span class="math inline">E[X]=\frac{a+b}{2}</span>.</p></li>
-<li><ul>
+<li><p>Uniform(a,b): <span class="math inline">E[X]=\frac{a+b}{2}</span></p>
+<ul>
 <li>This calculates the exact midpoint of the interval between <span class="math inline">a</span> and <span class="math inline">b</span>.</li>
-</ul></li>
-<li><p>Exponential(λ): <span class="math inline">E[X]=\frac{1}{\lambda}</span>.</p></li>
-<li><ul>
+</ul>
+<div class="example-box">
+<p>Let <span class="math inline">X ~ Uniform(a,b)</span>. We will calculate the expected value of <span class="math inline">X</span> using the definition of expectation.</p>
+</div></li>
+<li><p>Exponential(λ): <span class="math inline">E[X]=\frac{1}{\lambda}</span></p>
+<ul>
 <li>The expected time between events is the inverse of the rate parameter.</li>
 </ul></li>
-<li><p>Normal(<span class="math inline">\mu,\sigma^{2}</span>): <span class="math inline">E[X]=\mu</span>.</p></li>
-<li><ul>
+</ul>
+<div class="example-box">
+<p>Let <span class="math inline">X ~ Exponential(\lambda)</span>. We will calculate the expected value of <span class="math inline">X</span> using the definition of expectation.</p>
+</div>
+<ul>
+<li><p>Normal(<span class="math inline">\mu,\sigma^{2}</span>): <span class="math inline">E[X]=\mu</span></p>
+<ul>
 <li>The expected value is simply the mean parameter <span class="math inline">\mu</span>, which sits at the exact center of the bell curve.</li>
 </ul></li>
 </ul>
-</section>
-<section id="calculating-expectations" class="level2">
-<h2 class="anchored" data-anchor-id="calculating-expectations">Calculating Expectations</h2>
-<p>We will now consider the question of how to calculate the expection if we have some function applied to our random variable, denoted as <span class="math inline">Y = g(X)</span>.</p>
-<p>The good news is that we do not need to find the new probability distribution for <span class="math inline">Y</span> and instead can calculate the expectation using the original distribution of <span class="math inline">X</span>.</p>
-<ul>
-<li><p>Continuous RVs: You can evaluate the expectation by integrating the function <span class="math inline">g(x)</span> multiplied by the original probability density function <span class="math inline">f_{X}(x)</span>: <span class="math inline">E[Y]=\int_{-\infty}^{\infty}yf_{Y}(y)dy=E[g(X)]=\int_{-\infty}^{\infty}g(x)f_{X}(x)dx</span>.</p></li>
-<li><p>Discrete RVs: Similarly, you sum the function <span class="math inline">g(x)</span> multiplied by the original probability mass function <span class="math inline">p(x)</span>: <span class="math inline">E[Y]=\sum_{x:p(x)&gt;0}g(x)p(x)</span>.</p></li>
-</ul>
 <div class="example-box">
-<p>Let <span class="math inline">X\sim Uniform(0,1),Y=X^{3}</span>, find <span class="math inline">E[Y]</span></p>
+<p>Let <span class="math inline">X ~ Normal(\mu, \sigma^2)</span>. We will calculate the expected value of <span class="math inline">X</span> using the definition of expectation.</p>
+</div>
+</section>
+<section id="calculating-expectations-of-functions-of-random-variables" class="level2">
+<h2 class="anchored" data-anchor-id="calculating-expectations-of-functions-of-random-variables">Calculating Expectations of Functions of Random Variables</h2>
+<p>We will now consider the question of how to calculate the expectation if we have some function applied to our random variable, denoted as <span class="math inline">Y = g(X)</span>.</p>
+<p>The good news is that we do not need to find the new probability distribution for <span class="math inline">Y</span> and instead can calculate the expectation using the original distribution of <span class="math inline">X</span>.</p>
+<section id="continuous-rvs" class="level3">
+<h3 class="anchored" data-anchor-id="continuous-rvs">Continuous RVs</h3>
+<p>You can evaluate the expectation by integrating the function <span class="math inline">g(x)</span> multiplied by the original probability density function <span class="math inline">f_{X}(x)</span>:</p>
+<p><span class="math display">E[Y]=\int_{-\infty}^{\infty}yf_{Y}(y)dy=E[g(X)]=\int_{-\infty}^{\infty}g(x)f_{X}(x)dx</span></p>
+</section>
+<section id="discrete-rvs" class="level3">
+<h3 class="anchored" data-anchor-id="discrete-rvs">Discrete RVs:</h3>
+<p>Similarly, you sum the function <span class="math inline">g(x)</span> multiplied by the original probability mass function <span class="math inline">p(x)</span>:</p>
+<p><span class="math display">E[Y]=\sum_{x:p(x)&gt;0}g(x)p(x)</span></p>
+<div class="example-box">
+<p>Let <span class="math inline">X\sim Uniform(0,1),Y=X^{3}</span>, find <span class="math inline">E[Y]</span>.</p>
+<p><br>
+</p>
 <p>First, we need to think about what is meant by the PDF for a <span class="math inline">Uniform(0,1)</span> distribution.</p>
 <p>Because the interval length is 1, the constant density <span class="math inline">f_X(x)</span> is just <span class="math inline">1</span> for <span class="math inline">0 &lt; x &lt; 1</span>, and <span class="math inline">0</span> elsewhere.</p>
 <p>Applying the continuous formula for <span class="math inline">g(x) = x^3</span>:<span class="math display">E[Y] = \int_{0}^{1} x^{3} (1) dx</span></p>
@@ -477,7 +535,8 @@ window.Quarto = {
 </div>
 <div class="example-box">
 <p>Let <span class="math inline">X</span> be an arbitrary random variable, and let <span class="math inline">a, b</span> be real-valued constants. What is <span class="math inline">E[aX+b]</span>?</p>
-<p>This is known as the “linearity of expectation.”</p>
+<p><br>
+</p>
 <p>We will use the continuous formula here (though the proof is functionally the same for discrete variables replacing the integral with a summation):</p>
 <p><span class="math display">E[aX+b] = \int_{-\infty}^{\infty} (ax+b)f_{X}(x)dx</span></p>
 <p>Distributing the integral yields:</p>
@@ -487,7 +546,8 @@ window.Quarto = {
 <p>We know that <span class="math inline">\int xf_{X}(x)dx</span> is the definition of <span class="math inline">E[X]</span>, and <span class="math inline">\int f_{X}(x)dx</span> is the total probability which always equals <span class="math inline">1</span>.</p>
 <p>Therefore, this simplifies to:</p>
 <p><span class="math display">E[aX+b] = aE[X] + b</span></p>
-<p>This linearity property gives us some substantial advantages when it comes to simplification.</p>
+<p>This is known as the “linearity of expectation.”</p>
+<p>This linearity property gives us some advantages when it comes to simplification of certain expressions.</p>
 <ul>
 <li><p>We can split up sums of random variables in an expectation into the sum of the expectations.</p></li>
 <li><p>We can pull through constant multiplicative values through the expectation.</p></li>
@@ -496,6 +556,7 @@ window.Quarto = {
 </div>
 
 
+</section>
 </section>
 </section>
 

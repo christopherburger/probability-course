@@ -2,3 +2,7 @@
 title: "Statistical Rethinking"
 
 ---
+
+This section is a companion to the book *Statistical Rethinking* by Richard McElreath. 
+
+It contains a collection of notes, solved exercises and code examples from the book translated into Python.
