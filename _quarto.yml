@@ -41,6 +41,8 @@ website:
         - lectures/chapter5.qmd
         - lectures/chapter6.qmd
       - section: "Stochastic Processes"
+        contents:
+          -lectures/markov_chains.qmd
       - section: "Appendix"
         contents: 
         - lectures/sets.qmd
