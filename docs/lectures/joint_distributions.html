@@ -500,7 +500,32 @@ window.Quarto = {
 <section id="discrete-variables" class="level2">
 <h2 class="anchored" data-anchor-id="discrete-variables">Discrete Variables</h2>
 <p>Let <span class="math inline">X</span> and <span class="math inline">Y</span> be discrete random variables with a joint Probability Mass Function (PMF) given by the following table:</p>
-<p>Y=1Y=2Y=3<span class="math inline">X=0</span><span class="math inline">0.1</span><span class="math inline">0.2</span><span class="math inline">0.1</span><span class="math inline">X=1</span><span class="math inline">0.3</span><span class="math inline">0.1</span><span class="math inline">0.2</span></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="math inline">Y=1</span></th>
+<th><span class="math inline">Y=2</span></th>
+<th><span class="math inline">Y=3</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">X=0</span></td>
+<td><span class="math inline">0.1</span></td>
+<td><span class="math inline">0.2</span></td>
+<td><span class="math inline">0.1</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">X=1</span></td>
+<td><span class="math inline">0.3</span></td>
+<td><span class="math inline">0.1</span></td>
+<td><span class="math inline">0.2</span></td>
+</tr>
+</tbody>
+</table>
+<p><br>
+</p>
 <p>To find the marginal distribution of <span class="math inline">X</span>, denoted <span class="math inline">P(X=x)</span>, sum the probabilities across all possible values of <span class="math inline">Y</span> (summing across the rows):</p>
 <p><span class="math display">P(X=x) = \sum_{y} P(X=x, Y=y)</span></p>
 <p><span class="math inline">P(X=0) = 0.1 + 0.2 + 0.1 = \mathbf{0.4}</span></p>
@@ -509,19 +534,22 @@ window.Quarto = {
 <p><span class="math display">P(Y=y) = \sum_{x} P(X=x, Y=y)</span></p>
 <p><span class="math inline">P(Y=1) = 0.1 + 0.3 = \mathbf{0.4}</span></p>
 <p><span class="math inline">P(Y=2) = 0.2 + 0.1 = \mathbf{0.3}</span></p>
-<p><span class="math inline">P(Y=3) = 0.1 + 0.2 = \mathbf{0.3}</span>(Note that both marginal distributions sum to 1.0, confirming they are valid probability distributions).</p>
+<p><span class="math inline">P(Y=3) = 0.1 + 0.2 = \mathbf{0.3}</span></p>
+<p>Note that both marginal distributions sum to 1.0, confirming they are valid probability distributions.</p>
 </section>
 <section id="continuous-variables" class="level2">
 <h2 class="anchored" data-anchor-id="continuous-variables">Continuous Variables</h2>
 <p>Let <span class="math inline">X</span> and <span class="math inline">Y</span> be continuous random variables with the following joint Probability Density Function (PDF):</p>
-<p><span class="math display">f(x,y) = x + y \quad \text{for } 0 \le x \le 1 \text{ and } 0 \le y \le 1</span></p>
+<p><span class="math display">f(x,y) = x + y \quad \text{for } 0 \le x \le 1 \text{ and } 0 \le y \le 1</span><br>
+</p>
 <p>To find the marginal PDF of <span class="math inline">X</span>, denoted <span class="math inline">f_X(x)</span>, integrate the joint PDF over all possible values of <span class="math inline">Y</span>. Since the function is only defined from <span class="math inline">0</span> to <span class="math inline">1</span> for <span class="math inline">Y</span>:</p>
 <p><span class="math display">f_X(x) = \int_{-\infty}^{\infty} f(x,y) \, dy</span></p>
 <p><span class="math display">f_X(x) = \int_{0}^{1} (x + y) \, dy</span></p>
 <p>Evaluate the integral with respect to <span class="math inline">y</span>, treating <span class="math inline">x</span> as a constant:</p>
 <p><span class="math display">f_X(x) = \left[ xy + \frac{y^2}{2} \right]_{y=0}^{y=1}</span></p>
 <p><span class="math display">f_X(x) = \left( x(1) + \frac{1^2}{2} \right) - (0 + 0)</span></p>
-<p><span class="math display">f_X(x) = x + \frac{1}{2} \quad \text{for } 0 \le x \le 1</span></p>
+<p><span class="math display">f_X(x) = x + \frac{1}{2} \quad \text{for } 0 \le x \le 1</span><br>
+</p>
 <p>To find the marginal PDF of <span class="math inline">Y</span>, denoted <span class="math inline">f_Y(y)</span>, perform the exact same process, but integrate over all possible values of <span class="math inline">X</span>:<span class="math display">f_Y(y) = \int_{-\infty}^{\infty} f(x,y) \, dx</span></p>
 <p><span class="math display">f_Y(y) = \int_{0}^{1} (x + y) \, dx</span></p>
 <p><span class="math display">f_Y(y) = \left[ \frac{x^2}{2} + xy \right]_{x=0}^{x=1}</span></p>
