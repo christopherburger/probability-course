@@ -27,7 +27,7 @@ website:
           - lectures/continuous_rv.qmd
           - lectures/expectation.qmd
           - lectures/variance.qmd
-          - lectures/joint_distributions.qmd
+          #- lectures/joint_distributions.qmd
           - lectures/mgfs.qmd
           - lectures/sample_statistics.qmd
           - lectures/bounds.qmd
@@ -43,7 +43,7 @@ website:
         - lectures/chapter6.qmd
       - section: "Stochastic Processes"
         contents:
-          -lectures/markov_chains.qmd
+          #-lectures/markov_chains.qmd
       - section: "Appendix"
         contents: 
         - lectures/sets.qmd
