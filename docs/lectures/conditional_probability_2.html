@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Conditional Probability Revisted – Applied Probability</title>
+<title>17: Conditional Probability Revisted – Applied Probability</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -393,31 +393,17 @@ window.Quarto = {
   <ul>
   <li><a href="#the-discrete-case" id="toc-the-discrete-case" class="nav-link active" data-scroll-target="#the-discrete-case">The Discrete Case</a>
   <ul class="collapse">
-  <li><a href="#conditional-cumulative-distribution-function" id="toc-conditional-cumulative-distribution-function" class="nav-link" data-scroll-target="#conditional-cumulative-distribution-function">Conditional cumulative distribution function</a></li>
-  <li><a href="#conditional-expectation" id="toc-conditional-expectation" class="nav-link" data-scroll-target="#conditional-expectation">Conditional expectation</a></li>
-  <li><a href="#example-1-conditional-expectation-from-a-joint-pmf" id="toc-example-1-conditional-expectation-from-a-joint-pmf" class="nav-link" data-scroll-target="#example-1-conditional-expectation-from-a-joint-pmf">Example 1: Conditional expectation from a joint PMF</a>
-  <ul class="collapse">
-  <li><a href="#step-1-organize-the-joint-distribution" id="toc-step-1-organize-the-joint-distribution" class="nav-link" data-scroll-target="#step-1-organize-the-joint-distribution">Step 1: Organize the joint distribution</a></li>
-  <li><a href="#step-2-determine-the-conditional-distribution" id="toc-step-2-determine-the-conditional-distribution" class="nav-link" data-scroll-target="#step-2-determine-the-conditional-distribution">Step 2: Determine the conditional distribution</a></li>
-  <li><a href="#step-3-calculate-the-conditional-expectation" id="toc-step-3-calculate-the-conditional-expectation" class="nav-link" data-scroll-target="#step-3-calculate-the-conditional-expectation">Step 3: Calculate the conditional expectation</a></li>
-  <li><a href="#a-useful-extension" id="toc-a-useful-extension" class="nav-link" data-scroll-target="#a-useful-extension">A useful extension</a></li>
-  </ul></li>
-  <li><a href="#example-2-obtaining-the-hypergeometric-distribution-by-conditioning" id="toc-example-2-obtaining-the-hypergeometric-distribution-by-conditioning" class="nav-link" data-scroll-target="#example-2-obtaining-the-hypergeometric-distribution-by-conditioning">Example 2: Obtaining the hypergeometric distribution by conditioning</a>
-  <ul class="collapse">
-  <li><a href="#step-1-apply-conditional-probability" id="toc-step-1-apply-conditional-probability" class="nav-link" data-scroll-target="#step-1-apply-conditional-probability">Step 1: Apply conditional probability</a></li>
-  <li><a href="#step-2-evaluate-the-numerator" id="toc-step-2-evaluate-the-numerator" class="nav-link" data-scroll-target="#step-2-evaluate-the-numerator">Step 2: Evaluate the numerator</a></li>
-  <li><a href="#step-3-evaluate-the-denominator" id="toc-step-3-evaluate-the-denominator" class="nav-link" data-scroll-target="#step-3-evaluate-the-denominator">Step 3: Evaluate the denominator</a></li>
-  <li><a href="#step-4-simplify" id="toc-step-4-simplify" class="nav-link" data-scroll-target="#step-4-simplify">Step 4: Simplify</a></li>
-  <li><a href="#why-is-this-result-interesting" id="toc-why-is-this-result-interesting" class="nav-link" data-scroll-target="#why-is-this-result-interesting">Why is this result interesting?</a></li>
-  </ul></li>
+  <li><a href="#conditional-cumulative-distribution-function" id="toc-conditional-cumulative-distribution-function" class="nav-link" data-scroll-target="#conditional-cumulative-distribution-function">Conditional Cumulative Distribution Function</a></li>
+  <li><a href="#conditional-expectation" id="toc-conditional-expectation" class="nav-link" data-scroll-target="#conditional-expectation">Conditional Expectation</a></li>
+  <li><a href="#obtaining-the-hypergeometric-distribution-by-conditioning" id="toc-obtaining-the-hypergeometric-distribution-by-conditioning" class="nav-link" data-scroll-target="#obtaining-the-hypergeometric-distribution-by-conditioning">Obtaining the Hypergeometric Distribution by Conditioning</a></li>
   <li><a href="#example-3-obtaining-a-binomial-distribution-by-conditioning-poisson-variables" id="toc-example-3-obtaining-a-binomial-distribution-by-conditioning-poisson-variables" class="nav-link" data-scroll-target="#example-3-obtaining-a-binomial-distribution-by-conditioning-poisson-variables">Example 3: Obtaining a binomial distribution by conditioning Poisson variables</a>
   <ul class="collapse">
   <li><a href="#step-1-write-the-conditional-probability" id="toc-step-1-write-the-conditional-probability" class="nav-link" data-scroll-target="#step-1-write-the-conditional-probability">Step 1: Write the conditional probability</a></li>
-  <li><a href="#step-2-evaluate-the-numerator-1" id="toc-step-2-evaluate-the-numerator-1" class="nav-link" data-scroll-target="#step-2-evaluate-the-numerator-1">Step 2: Evaluate the numerator</a></li>
-  <li><a href="#step-3-evaluate-the-denominator-1" id="toc-step-3-evaluate-the-denominator-1" class="nav-link" data-scroll-target="#step-3-evaluate-the-denominator-1">Step 3: Evaluate the denominator</a></li>
-  <li><a href="#step-4-simplify-1" id="toc-step-4-simplify-1" class="nav-link" data-scroll-target="#step-4-simplify-1">Step 4: Simplify</a></li>
-  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">Interpretation</a></li>
+  <li><a href="#step-2-evaluate-the-numerator" id="toc-step-2-evaluate-the-numerator" class="nav-link" data-scroll-target="#step-2-evaluate-the-numerator">Step 2: Evaluate the numerator</a></li>
+  <li><a href="#step-3-evaluate-the-denominator" id="toc-step-3-evaluate-the-denominator" class="nav-link" data-scroll-target="#step-3-evaluate-the-denominator">Step 3: Evaluate the denominator</a></li>
+  <li><a href="#step-4-simplify" id="toc-step-4-simplify" class="nav-link" data-scroll-target="#step-4-simplify">Step 4: Simplify</a></li>
   </ul></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">Interpretation</a></li>
   <li><a href="#example-4-conditional-expectation-in-a-multinomial-experiment" id="toc-example-4-conditional-expectation-in-a-multinomial-experiment" class="nav-link" data-scroll-target="#example-4-conditional-expectation-in-a-multinomial-experiment">Example 4: Conditional expectation in a multinomial experiment</a>
   <ul class="collapse">
   <li><a href="#step-1-identify-the-distribution" id="toc-step-1-identify-the-distribution" class="nav-link" data-scroll-target="#step-1-identify-the-distribution">Step 1: Identify the distribution</a></li>
@@ -439,7 +425,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Conditional Probability Revisted</h1>
+<h1 class="title">17: Conditional Probability Revisted</h1>
 </div>
 
 
@@ -488,23 +474,19 @@ p_Y(y)=\sum_x p_{X,Y}(x,y)
 </p>
 <p>Note that if <span class="math inline">Y=y</span> is fixed, then we have just an ordinary PMF for <span class="math inline">X</span>.</p>
 <section id="conditional-cumulative-distribution-function" class="level3">
-<h3 class="anchored" data-anchor-id="conditional-cumulative-distribution-function">Conditional cumulative distribution function</h3>
+<h3 class="anchored" data-anchor-id="conditional-cumulative-distribution-function">Conditional Cumulative Distribution Function</h3>
 <p>Just as an ordinary PMF determines a CDF, the conditional PMF determines the conditional CDF:</p>
-<p>$$</p>
-<p>F_{XY}(xy) =P(XxY=y) =<em>{tx}p</em>{XY}(ty)</p>
-<p>$$</p>
+<p><span class="math display">F_{X\mid Y}(x\mid y) = P(X\leq x\mid Y=y) = \sum_{t\leq x}p_{X\mid Y}(t\mid y)</span></p>
 <p>The conditional CDF describes the distribution of <span class="math inline">X</span> after we have specified the value of <span class="math inline">Y</span>.</p>
 </section>
 <section id="conditional-expectation" class="level2">
-<h2 class="anchored" data-anchor-id="conditional-expectation">Conditional expectation</h2>
+<h2 class="anchored" data-anchor-id="conditional-expectation">Conditional Expectation</h2>
 <p>Recall that the expectation of a discrete random variable is:</p>
 <p><span class="math display">
 E[X]=\sum_x x\,p_X(x)
 </span></p>
 <p>If we know that <span class="math inline">Y=y</span>, we use the conditional distribution:</p>
-<p>$$</p>
-<p>E[XY=y] =<em>x x,p</em>{XY}(xy)</p>
-<p>$$</p>
+<p><span class="math display">E[X\mid Y=y]=\sum_x x\,p_{X\mid Y}(x\mid y)</span></p>
 <p>Equivalently using the definition of conditional probability, we can write this as:</p>
 <p><span class="math display">
 E[X\mid Y=y]
@@ -519,72 +501,57 @@ E[X\mid Y=y]
 </ul>
 <p>For example, if <span class="math inline">g(y)=E[X\mid Y=y]</span>, then <span class="math inline">E[X\mid Y]=g(Y)</span>.</p>
 <hr>
-</section>
-<section id="example-1-conditional-expectation-from-a-joint-pmf" class="level2">
-<h2 class="anchored" data-anchor-id="example-1-conditional-expectation-from-a-joint-pmf">Example 1: Conditional expectation from a joint PMF</h2>
-<p>The first example in the outline provides the joint PMF</p>
+<div class="example-box">
+<p>Consider the joint PMF</p>
 <p><span class="math display">
 \begin{aligned}
-P(X=1,Y=1)&amp;=0.5,\\
-P(X=1,Y=2)&amp;=0.1,\\
-P(X=2,Y=1)&amp;=0.1,\\
-P(X=2,Y=2)&amp;=0.3.
+P(X=1,Y=1)&amp;=0.5\\
+P(X=1,Y=2)&amp;=0.1\\
+P(X=2,Y=1)&amp;=0.1\\
+P(X=2,Y=2)&amp;=0.3
 \end{aligned}
 </span></p>
-<p>We are asked to calculate</p>
-<p><span class="math display">
-E[X\mid Y=1].
-</span></p>
-<section id="step-1-organize-the-joint-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="step-1-organize-the-joint-distribution">Step 1: Organize the joint distribution</h3>
+<p>We want to calculate <span class="math inline">E[X\mid Y=1]</span>.</p>
+<p><br>
+</p>
+<p>It is often easier to view the joint PMF as a table:</p>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
 <thead>
 <tr class="header">
 <th></th>
-<th><span class="math display"> &lt;br&gt; Y=1 &lt;br&gt; </span></th>
-<th><span class="math display"> &lt;br&gt; Y=2 &lt;br&gt; </span></th>
-<th><span class="math display"> &lt;br&gt; p_X(x) &lt;br&gt; </span></th>
+<th><span class="math inline">Y=1</span></th>
+<th><span class="math inline">Y=2</span></th>
+<th><span class="math inline">p_X(x)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><span class="math display"> &lt;br&gt; X=1 &lt;br&gt; </span></td>
+<td><span class="math inline">X=1</span></td>
 <td>0.5</td>
 <td>0.1</td>
 <td>0.6</td>
 </tr>
 <tr class="even">
-<td><span class="math display"> &lt;br&gt; X=2 &lt;br&gt; </span></td>
+<td><span class="math inline">X=2</span></td>
 <td>0.1</td>
 <td>0.3</td>
 <td>0.4</td>
 </tr>
 <tr class="odd">
-<td><span class="math display"> &lt;br&gt; p_Y(y) &lt;br&gt; </span></td>
+<td><span class="math inline">p_Y(y)</span></td>
 <td>0.6</td>
 <td>0.4</td>
 <td>1.0</td>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="step-2-determine-the-conditional-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="step-2-determine-the-conditional-distribution">Step 2: Determine the conditional distribution</h3>
-<p>Because we know</p>
-<p><span class="math display">
-Y=1
-</span></p>
-<p>, we restrict our attention to the first column.</p>
+<p><br>
+</p>
+<p>We now need to determine the conditional distribution. We know that <span class="math inline">Y</span> is restricted to <span class="math inline">1</span>, so we need only to concern ourselves with the first column of our table.</p>
 <p><span class="math display">
 P(Y=1)=0.5+0.1=0.6.
 </span></p>
-<p>Therefore,</p>
+<p>We then have,</p>
 <p><span class="math display">
 P(X=1\mid Y=1)=\frac{0.5}{0.6}=\frac56
 </span></p>
@@ -592,30 +559,22 @@ P(X=1\mid Y=1)=\frac{0.5}{0.6}=\frac56
 <p><span class="math display">
 P(X=2\mid Y=1)=\frac{0.1}{0.6}=\frac16.
 </span></p>
-</section>
-<section id="step-3-calculate-the-conditional-expectation" class="level3">
-<h3 class="anchored" data-anchor-id="step-3-calculate-the-conditional-expectation">Step 3: Calculate the conditional expectation</h3>
+<p>Now we can calculate the conditional expectation:</p>
 <p><span class="math display">
 \begin{aligned}
 E[X\mid Y=1]
-&amp;=1\cdot P(X=1\mid Y=1)\\
-&amp;\quad+2\cdot P(X=2\mid Y=1)\\
+&amp;=1\cdot P(X=1\mid Y=1)\quad+2\cdot P(X=2\mid Y=1)\\
 &amp;=1\cdot\frac56+2\cdot\frac16.
 \end{aligned}
 </span></p>
 <p>Thus,</p>
 <p><span class="math display">
-\boxed{E[X\mid Y=1]=\frac76}
+E[X\mid Y=1]=\frac{7}{6}
 </span></p>
-</section>
-<section id="a-useful-extension" class="level3">
-<h3 class="anchored" data-anchor-id="a-useful-extension">A useful extension</h3>
-<p>Suppose instead we condition on</p>
-<p><span class="math display">
-Y=2
-</span></p>
-<p>.</p>
-<p>We obtain</p>
+</div>
+<div class="example-box">
+<p>Assuming the same joint PMF from the above example, what if we instead condition on <span class="math inline">Y=2</span>?</p>
+<p>Similarly as to before, we obtain:</p>
 <p><span class="math display">
 P(X=1\mid Y=2)=\frac{0.1}{0.4}=\frac14
 </span></p>
@@ -628,29 +587,18 @@ P(X=2\mid Y=2)=\frac{0.3}{0.4}=\frac34.
 E[X\mid Y=2]
 =1\cdot\frac14+2\cdot\frac34
 =\frac74.
-</span></p>
-<p>We now have the complete conditional expectation function</p>
+</span><br>
+</p>
+<p>After this, we now have the complete conditional expectation function</p>
 <p><span class="math display">
 g(y)=
 \begin{cases}
-7/6,&amp;y=1,\\
-7/4,&amp;y=2.
+\frac{7}{6},&amp;y=1,\\
+\frac{7}{4},&amp;y=2.
 \end{cases}
 </span></p>
-<p>Consequently,</p>
-<p><span class="math display">
-E[X\mid Y]
-</span></p>
-<p>is a random variable that takes these two values according to the value of</p>
-<p><span class="math display">
-Y
-</span></p>
-<p>.</p>
-<p>Notice that averaging the conditional expectations according to the probabilities of</p>
-<p><span class="math display">
-Y
-</span></p>
-<p>gives</p>
+<p>And so, <span class="math inline">E[X\mid Y]</span> is a random variable that takes these two values according to the value of <span class="math inline">Y</span>.</p>
+<p>Note that averaging the conditional expectations according to the probabilities of <span class="math inline">Y</span> gives</p>
 <p><span class="math display">
 \begin{aligned}
 E[g(Y)]
@@ -659,75 +607,40 @@ E[g(Y)]
 &amp;=E[X].
 \end{aligned}
 </span></p>
-<p>This is an instance of the <strong>law of total expectation</strong>, which we will formally develop in Section 4.3.</p>
+<p>First, you should verifiy that <span class="math inline">E[X] = 1.4</span>.</p>
+<p>Seeing this, we have that averaging the conditional expectations over all the probabilities of <span class="math inline">Y</span> gives us the expectation of <span class="math inline">X</span> itself. This is an instance of the <strong>law of total expectation</strong>, which we will cover as a general principle further on.</p>
+</div>
 <hr>
 </section>
-</section>
-<section id="example-2-obtaining-the-hypergeometric-distribution-by-conditioning" class="level2">
-<h2 class="anchored" data-anchor-id="example-2-obtaining-the-hypergeometric-distribution-by-conditioning">Example 2: Obtaining the hypergeometric distribution by conditioning</h2>
-<p>The second example is more interesting because it demonstrates how conditioning can transform one family of probability distributions into another.</p>
-<p>Suppose</p>
-<p><span class="math display">
-X_1\sim\operatorname{Binomial}(n_1,p)
-</span></p>
-<p>and</p>
-<p><span class="math display">
-X_2\sim\operatorname{Binomial}(n_2,p),
-</span></p>
-<p>where</p>
-<p><span class="math display">
-X_1
-</span></p>
-<p>and</p>
-<p><span class="math display">
-X_2
-</span></p>
-<p>are independent.</p>
-<p>We want to determine</p>
-<p><span class="math display">
-P(X_1=k\mid X_1+X_2=m).
-</span></p>
-<section id="step-1-apply-conditional-probability" class="level3">
-<h3 class="anchored" data-anchor-id="step-1-apply-conditional-probability">Step 1: Apply conditional probability</h3>
-<p>We have</p>
+<section id="obtaining-the-hypergeometric-distribution-by-conditioning" class="level2">
+<h2 class="anchored" data-anchor-id="obtaining-the-hypergeometric-distribution-by-conditioning">Obtaining the Hypergeometric Distribution by Conditioning</h2>
+<p>Conditioning can transform one probability distribution into another.</p>
+<div class="example-box">
+<p>Suppose <span class="math inline">X_1\sim\operatorname{Binomial}(n_1,p)</span> and <span class="math inline">X_2\sim\operatorname{Binomial}(n_2,p)</span> with <span class="math inline">X_1</span> and <span class="math inline">X_2</span> independent.</p>
+<p>We want to determine <span class="math inline">P(X_1=k\mid X_1+X_2=m)</span>.</p>
+<p>&nbsp;</p>
+<p>We first apply our definition of conditional probability:</p>
 <p><span class="math display">
 P(X_1=k\mid X_1+X_2=m)
 =
 \frac{P(X_1=k,X_1+X_2=m)}
 {P(X_1+X_2=m)}.
 </span></p>
-<p>Notice that</p>
-<p><span class="math display">
-X_1=k,\quad X_1+X_2=m
-</span></p>
-<p>is equivalent to</p>
-<p><span class="math display">
-X_1=k,\quad X_2=m-k.
-</span></p>
-<p>Therefore,</p>
+<p>We can then do some rearrangment from <span class="math inline">X_1=k,\quad X_1+X_2=m</span> to <span class="math inline">X_1=k,\quad X_2=m-k</span>. We then have:</p>
 <p><span class="math display">
 P(X_1=k\mid X_1+X_2=m)
 =
 \frac{P(X_1=k,X_2=m-k)}
 {P(X_1+X_2=m)}.
 </span></p>
-</section>
-<section id="step-2-evaluate-the-numerator" class="level3">
-<h3 class="anchored" data-anchor-id="step-2-evaluate-the-numerator">Step 2: Evaluate the numerator</h3>
-<p>Because</p>
-<p><span class="math display">
-X_1
-</span></p>
-<p>and</p>
-<p><span class="math display">
-X_2
-</span></p>
-<p>are independent,</p>
+<p><br>
+</p>
+<p>We will now rewrite the numerator. Because we know that <span class="math inline">X_1</span> and <span class="math inline">X_2</span> are independent we have that:</p>
 <p><span class="math display">
 P(X_1=k,X_2=m-k)
 =P(X_1=k)P(X_2=m-k).
 </span></p>
-<p>Using their binomial PMFs,</p>
+<p>Then using their binomial PMFs,</p>
 <p><span class="math display">
 P(X_1=k)
 =\binom{n_1}{k}p^k(1-p)^{n_1-k}
@@ -737,32 +650,29 @@ P(X_1=k)
 P(X_2=m-k)
 =\binom{n_2}{m-k}p^{m-k}(1-p)^{n_2-m+k}.
 </span></p>
-<p>Multiplying,</p>
+<p>Our resulting numerator is then:</p>
 <p><span class="math display">
 P(X_1=k,X_2=m-k)
 =
 \binom{n_1}{k}\binom{n_2}{m-k}
 p^m(1-p)^{n_1+n_2-m}.
 </span></p>
-</section>
-<section id="step-3-evaluate-the-denominator" class="level3">
-<h3 class="anchored" data-anchor-id="step-3-evaluate-the-denominator">Step 3: Evaluate the denominator</h3>
-<p>An important property of independent binomial random variables with the same success probability is that their sum is also binomial.</p>
-<p>Therefore,</p>
+<p><br>
+</p>
+<p>Now we rewrite the denominator. We will use a useful property of independent binomial random variables where if they have the same success probability then their sum is also a binomial random variable that has the form:</p>
 <p><span class="math display">
 X_1+X_2\sim\operatorname{Binomial}(n_1+n_2,p).
 </span></p>
-<p>It follows that</p>
+<p>Our demoninator is then:</p>
 <p><span class="math display">
 P(X_1+X_2=m)
 =
 \binom{n_1+n_2}{m}
 p^m(1-p)^{n_1+n_2-m}.
 </span></p>
-</section>
-<section id="step-4-simplify" class="level3">
-<h3 class="anchored" data-anchor-id="step-4-simplify">Step 4: Simplify</h3>
-<p>Substituting,</p>
+<p><br>
+</p>
+<p>After our rewrites, we now have:</p>
 <p><span class="math display">
 \frac{
 \binom{n_1}{k}\binom{n_2}{m-k}
@@ -772,59 +682,32 @@ p^m(1-p)^{n_1+n_2-m}
 p^m(1-p)^{n_1+n_2-m}
 }.
 </span></p>
-<p>The probability terms cancel, leaving</p>
+<p>Note that the probability terms cancel, giving us</p>
 <p><span class="math display">
-\boxed{
 P(X_1=k\mid X_1+X_2=m)
 =
 \frac{\binom{n_1}{k}\binom{n_2}{m-k}}
 {\binom{n_1+n_2}{m}}
-}
 </span></p>
 <p>for</p>
 <p><span class="math display">
 \max(0,m-n_2)\leq k\leq\min(n_1,m).
 </span></p>
-<p>We recognize this as the <strong>hypergeometric distribution</strong>.</p>
-</section>
-<section id="why-is-this-result-interesting" class="level3">
-<h3 class="anchored" data-anchor-id="why-is-this-result-interesting">Why is this result interesting?</h3>
-<p>Before conditioning, the number of successes in each group is binomial.</p>
-<p>After conditioning on the total number of successes, the problem becomes one of allocating a fixed number of successes across two groups.</p>
-<p>This is exactly analogous to the familiar sampling-without-replacement problem:</p>
-<p>We have</p>
-<p><span class="math display">
-n_1
-</span></p>
-<p>white balls and</p>
-<p><span class="math display">
-n_2
-</span></p>
-<p>black balls. If we select</p>
-<p><span class="math display">
-m
-</span></p>
-<p>balls uniformly without replacement, the probability of selecting exactly</p>
-<p><span class="math display">
-k
-</span></p>
-<p>white balls is</p>
+<p>This is the <strong>hypergeometric distribution</strong>.</p>
+</div>
+<p>The process of conditioning in this example converted our problem into a fundamentally different one than what is represented by the binomial distribution.</p>
+<p>Before conditioning, the number of successes in each group is binomial. But after conditioning on the total number of successes, the problem becomes one of allocating a fixed number of successes across two groups. This is the same as the sampling-without-replacement problem represented by the hypergeometric distribution.</p>
+<p>Where if have <span class="math inline">n_1</span> red balls and <span class="math inline">n_2</span> green balls. If we select <span class="math inline">m</span> balls uniformly <strong>without replacement</strong>, the probability of selecting exactly <span class="math inline">k</span> red balls is</p>
 <p><span class="math display">
 P(X=k)
 =
 \frac{\binom{n_1}{k}\binom{n_2}{m-k}}
 {\binom{n_1+n_2}{m}}.
 </span></p>
-<p>A particularly important observation is that **the resulting conditional distribution does not depend on</p>
-<p><span class="math display">
-p
-</span></p>
-<p>**.</p>
-<p>This happens because knowing the total number of successes eliminates the information contributed by the common success probability, leaving only the combinatorial allocation of those successes.</p>
+<p>Something important in the above expression is that <strong>the resulting conditional distribution does not depend on <span class="math inline">p</span></strong>. This happens because knowing the total number of successes eliminates the information contributed by the common success probability, leaving only the combinatorial allocation of those successes.</p>
 <hr>
 </section>
-</section>
-<section id="example-3-obtaining-a-binomial-distribution-by-conditioning-poisson-variables" class="level2">
+<section id="example-3-obtaining-a-binomial-distribution-by-conditioning-poisson-variables" class="level2 example-box">
 <h2 class="anchored" data-anchor-id="example-3-obtaining-a-binomial-distribution-by-conditioning-poisson-variables">Example 3: Obtaining a binomial distribution by conditioning Poisson variables</h2>
 <p>Now suppose that</p>
 <p><span class="math display">
@@ -861,8 +744,8 @@ P(X_1=k\mid X_1+X_2=n)
 {P(X_1+X_2=n)}.
 </span></p>
 </section>
-<section id="step-2-evaluate-the-numerator-1" class="level3">
-<h3 class="anchored" data-anchor-id="step-2-evaluate-the-numerator-1">Step 2: Evaluate the numerator</h3>
+<section id="step-2-evaluate-the-numerator" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-evaluate-the-numerator">Step 2: Evaluate the numerator</h3>
 <p>Using independence and the Poisson PMF,</p>
 <p><span class="math display">
 \begin{aligned}
@@ -877,8 +760,8 @@ P(X_1=k,X_2=n-k)
 \end{aligned}
 </span></p>
 </section>
-<section id="step-3-evaluate-the-denominator-1" class="level3">
-<h3 class="anchored" data-anchor-id="step-3-evaluate-the-denominator-1">Step 3: Evaluate the denominator</h3>
+<section id="step-3-evaluate-the-denominator" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-evaluate-the-denominator">Step 3: Evaluate the denominator</h3>
 <p>The sum of independent Poisson random variables is Poisson, with parameter equal to the sum of the individual parameters.</p>
 <p>Thus,</p>
 <p><span class="math display">
@@ -892,8 +775,8 @@ P(X_1+X_2=n)
 (\lambda_1+\lambda_2)^n}{n!}.
 </span></p>
 </section>
-<section id="step-4-simplify-1" class="level3">
-<h3 class="anchored" data-anchor-id="step-4-simplify-1">Step 4: Simplify</h3>
+<section id="step-4-simplify" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-simplify">Step 4: Simplify</h3>
 <p>Substituting and canceling,</p>
 <p><span class="math display">
 \begin{aligned}
@@ -928,6 +811,7 @@ X_1\mid(X_1+X_2=n)
 }
 </span></p>
 </section>
+</section>
 <section id="interpretation" class="level3">
 <h3 class="anchored" data-anchor-id="interpretation">Interpretation</h3>
 <p>Imagine two independent sources generating events.</p>
@@ -953,7 +837,6 @@ n
 <p>Thus the number attributable to source 1 is binomially distributed.</p>
 <p>This is useful in applications involving arrivals, queueing systems, reliability, and event-count models.</p>
 <hr>
-</section>
 </section>
 <section id="example-4-conditional-expectation-in-a-multinomial-experiment" class="level2">
 <h2 class="anchored" data-anchor-id="example-4-conditional-expectation-in-a-multinomial-experiment">Example 4: Conditional expectation in a multinomial experiment</h2>

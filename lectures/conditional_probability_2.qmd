@@ -1,5 +1,5 @@
 ---
-title: "Conditional Probability Revisted"
+title: "17: Conditional Probability Revisted"
 ---
 Recall that for two events $A$ and $B$, with $P(A)>0$, the conditional probability of $A$ given $B$ is
 
@@ -50,21 +50,15 @@ $$
 Note that if $Y=y$ is fixed, then we have just an ordinary PMF for $X$.
 
 
-### Conditional cumulative distribution function
+### Conditional Cumulative Distribution Function
 
 Just as an ordinary PMF determines a CDF, the conditional PMF determines the conditional CDF:
 
-$$
-
-F_{X\mid Y}(x\mid y)
-=P(X\leq x\mid Y=y)
-=\sum_{t\leq x}p_{X\mid Y}(t\mid y)
-
-$$
+$$F_{X\mid Y}(x\mid y) = P(X\leq x\mid Y=y) = \sum_{t\leq x}p_{X\mid Y}(t\mid y)$$
 
 The conditional CDF describes the distribution of $X$ after we have specified the value of $Y$.
 
-## Conditional expectation
+## Conditional Expectation
 
 Recall that the expectation of a discrete random variable is:
 
@@ -74,12 +68,7 @@ $$
 
 If we know that $Y=y$, we use the conditional distribution:
 
-$$
-
-E[X\mid Y=y]
-=\sum_x x\,p_{X\mid Y}(x\mid y)
-
-$$
+$$E[X\mid Y=y]=\sum_x x\,p_{X\mid Y}(x\mid y)$$
 
 Equivalently using the definition of conditional probability, we can write this as:
 
@@ -103,48 +92,40 @@ For example, if $g(y)=E[X\mid Y=y]$, then $E[X\mid Y]=g(Y)$.
 
 ---
 
-## Example 1: Conditional expectation from a joint PMF
-
-The first example in the outline provides the joint PMF
+::: example-box
+Consider the joint PMF
 
 $$
 \begin{aligned}
-P(X=1,Y=1)&=0.5,\\
-P(X=1,Y=2)&=0.1,\\
-P(X=2,Y=1)&=0.1,\\
-P(X=2,Y=2)&=0.3.
+P(X=1,Y=1)&=0.5\\
+P(X=1,Y=2)&=0.1\\
+P(X=2,Y=1)&=0.1\\
+P(X=2,Y=2)&=0.3
 \end{aligned}
 $$
 
-We are asked to calculate
+We want to calculate $E[X\mid Y=1]$.
 
-$$
-E[X\mid Y=1].
-$$
+\
 
-### Step 1: Organize the joint distribution
+It is often easier to view the joint PMF as a table:
 
-|  | $$ <br> Y=1 <br> $$ | $$ <br> Y=2 <br> $$ | $$ <br> p_X(x) <br> $$ |
+|  | $Y=1$ | $Y=2$ | $p_X(x)$ |
 | --- | --- | --- | --- |
-| $$ <br> X=1 <br> $$ | 0.5 | 0.1 | 0.6 |
-| $$ <br> X=2 <br> $$ | 0.1 | 0.3 | 0.4 |
-| $$ <br> p_Y(y) <br> $$ | 0.6 | 0.4 | 1.0 |
+| $X=1$ | 0.5 | 0.1 | 0.6 |
+| $X=2$ | 0.1 | 0.3 | 0.4 |
+| $p_Y(y)$ | 0.6 | 0.4 | 1.0 |
 
-### Step 2: Determine the conditional distribution
+\
 
-Because we know 
+We now need to determine the conditional distribution. We know that $Y$ is restricted to $1$, so we need only to concern ourselves with the first column of  our table. 
 
-$$
-Y=1
-$$
-
-, we restrict our attention to the first column.
 
 $$
 P(Y=1)=0.5+0.1=0.6.
 $$
 
-Therefore,
+We then have,
 
 $$
 P(X=1\mid Y=1)=\frac{0.5}{0.6}=\frac56
@@ -156,13 +137,12 @@ $$
 P(X=2\mid Y=1)=\frac{0.1}{0.6}=\frac16.
 $$
 
-### Step 3: Calculate the conditional expectation
+Now we can calculate the conditional expectation:
 
 $$
 \begin{aligned}
 E[X\mid Y=1]
-&=1\cdot P(X=1\mid Y=1)\\
-&\quad+2\cdot P(X=2\mid Y=1)\\
+&=1\cdot P(X=1\mid Y=1)\quad+2\cdot P(X=2\mid Y=1)\\
 &=1\cdot\frac56+2\cdot\frac16.
 \end{aligned}
 $$
@@ -170,20 +150,17 @@ $$
 Thus,
 
 $$
-\boxed{E[X\mid Y=1]=\frac76}
+E[X\mid Y=1]=\frac{7}{6}
 $$
 
-### A useful extension
+:::
 
-Suppose instead we condition on 
+::: example-box
 
-$$
-Y=2
-$$
+Assuming the same joint PMF from the above example, what if we instead condition on $Y=2$?
 
-.
 
-We obtain
+Similarly as to before, we obtain:
 
 $$
 P(X=1\mid Y=2)=\frac{0.1}{0.4}=\frac14
@@ -202,38 +179,21 @@ E[X\mid Y=2]
 =1\cdot\frac14+2\cdot\frac34
 =\frac74.
 $$
+\
 
-We now have the complete conditional expectation function
+After this, we now have the complete conditional expectation function
 
 $$
 g(y)=
 \begin{cases}
-7/6,&y=1,\\
-7/4,&y=2.
+\frac{7}{6},&y=1,\\
+\frac{7}{4},&y=2.
 \end{cases}
 $$
 
-Consequently, 
+And so, $E[X\mid Y]$ is a random variable that takes these two values according to the value of $Y$.
 
-$$
-E[X\mid Y]
-$$
-
- is a random variable that takes these two values according to the value of 
-
-$$
-Y
-$$
-
-.
-
-Notice that averaging the conditional expectations according to the probabilities of 
-
-$$
-Y
-$$
-
- gives
+Note that averaging the conditional expectations according to the probabilities of $Y$ gives
 
 $$
 \begin{aligned}
@@ -244,49 +204,26 @@ E[g(Y)]
 \end{aligned}
 $$
 
-This is an instance of the **law of total expectation**, which we will formally develop in Section 4.3.
+First, you should verifiy that $E[X] = 1.4$. 
 
+Seeing this, we have that averaging the conditional expectations over all the probabilities of $Y$ gives us the expectation of $X$ itself. This is an instance of the **law of total expectation**, which we will cover as a general principle further on.
+
+:::
 ---
 
-## Example 2: Obtaining the hypergeometric distribution by conditioning
+## Obtaining the Hypergeometric Distribution by Conditioning
 
-The second example is more interesting because it demonstrates how conditioning can transform one family of probability distributions into another.
+Conditioning can transform one probability distribution into another.
 
-Suppose
+::: example-box
 
-$$
-X_1\sim\operatorname{Binomial}(n_1,p)
-$$
+Suppose $X_1\sim\operatorname{Binomial}(n_1,p)$ and $X_2\sim\operatorname{Binomial}(n_2,p)$ with $X_1$ and $X_2$ independent.
 
-and
+We want to determine $P(X_1=k\mid X_1+X_2=m)$.
 
-$$
-X_2\sim\operatorname{Binomial}(n_2,p),
-$$
+\ 
 
-where 
-
-$$
-X_1
-$$
-
- and 
-
-$$
-X_2
-$$
-
- are independent.
-
-We want to determine
-
-$$
-P(X_1=k\mid X_1+X_2=m).
-$$
-
-### Step 1: Apply conditional probability
-
-We have
+We first apply our definition of conditional probability:
 
 $$
 P(X_1=k\mid X_1+X_2=m)
@@ -295,19 +232,7 @@ P(X_1=k\mid X_1+X_2=m)
 {P(X_1+X_2=m)}.
 $$
 
-Notice that
-
-$$
-X_1=k,\quad X_1+X_2=m
-$$
-
-is equivalent to
-
-$$
-X_1=k,\quad X_2=m-k.
-$$
-
-Therefore,
+We can then do some rearrangment from $X_1=k,\quad X_1+X_2=m$ to $X_1=k,\quad X_2=m-k$. We then have:
 
 $$
 P(X_1=k\mid X_1+X_2=m)
@@ -316,28 +241,17 @@ P(X_1=k\mid X_1+X_2=m)
 {P(X_1+X_2=m)}.
 $$
 
-### Step 2: Evaluate the numerator
+\
 
-Because 
+We will now rewrite the numerator. Because we know that $X_1$ and $X_2$ are independent we have that:
 
-$$
-X_1
-$$
-
- and 
-
-$$
-X_2
-$$
-
- are independent,
 
 $$
 P(X_1=k,X_2=m-k)
 =P(X_1=k)P(X_2=m-k).
 $$
 
-Using their binomial PMFs,
+Then using their binomial PMFs,
 
 $$
 P(X_1=k)
@@ -351,7 +265,7 @@ P(X_2=m-k)
 =\binom{n_2}{m-k}p^{m-k}(1-p)^{n_2-m+k}.
 $$
 
-Multiplying,
+Our resulting numerator is then:
 
 $$
 P(X_1=k,X_2=m-k)
@@ -360,17 +274,15 @@ P(X_1=k,X_2=m-k)
 p^m(1-p)^{n_1+n_2-m}.
 $$
 
-### Step 3: Evaluate the denominator
+\
 
-An important property of independent binomial random variables with the same success probability is that their sum is also binomial.
-
-Therefore,
+Now we rewrite the denominator. We will use a useful property of independent binomial random variables where if they have the same success probability then their sum is also a binomial random variable that has the form:
 
 $$
 X_1+X_2\sim\operatorname{Binomial}(n_1+n_2,p).
 $$
 
-It follows that
+Our demoninator is then:
 
 $$
 P(X_1+X_2=m)
@@ -379,9 +291,10 @@ P(X_1+X_2=m)
 p^m(1-p)^{n_1+n_2-m}.
 $$
 
-### Step 4: Simplify
+\
 
-Substituting,
+After our rewrites, we now have:
+
 
 $$
 \frac{
@@ -393,15 +306,13 @@ p^m(1-p)^{n_1+n_2-m}
 }.
 $$
 
-The probability terms cancel, leaving
+Note that the probability terms cancel, giving us
 
 $$
-\boxed{
 P(X_1=k\mid X_1+X_2=m)
 =
 \frac{\binom{n_1}{k}\binom{n_2}{m-k}}
 {\binom{n_1+n_2}{m}}
-}
 $$
 
 for
@@ -410,41 +321,15 @@ $$
 \max(0,m-n_2)\leq k\leq\min(n_1,m).
 $$
 
-We recognize this as the **hypergeometric distribution**.
+This is the **hypergeometric distribution**.
 
-### Why is this result interesting?
+:::
 
-Before conditioning, the number of successes in each group is binomial.
+The process of conditioning in this example converted our problem into a fundamentally different one than what is represented by the binomial distribution.
 
-After conditioning on the total number of successes, the problem becomes one of allocating a fixed number of successes across two groups.
+Before conditioning, the number of successes in each group is binomial. But after conditioning on the total number of successes, the problem becomes one of allocating a fixed number of successes across two groups. This is the same as the sampling-without-replacement problem represented by the hypergeometric distribution.
 
-This is exactly analogous to the familiar sampling-without-replacement problem:
-
-We have 
-
-$$
-n_1
-$$
-
- white balls and 
-
-$$
-n_2
-$$
-
- black balls. If we select 
-
-$$
-m
-$$
-
- balls uniformly without replacement, the probability of selecting exactly 
-
-$$
-k
-$$
-
- white balls is
+Where if have $n_1$ red balls and $n_2$ green balls. If we select $m$ balls uniformly **without replacement**, the probability of selecting exactly $k$ red balls is
 
 $$
 P(X=k)
@@ -453,17 +338,11 @@ P(X=k)
 {\binom{n_1+n_2}{m}}.
 $$
 
-A particularly important observation is that **the resulting conditional distribution does not depend on 
-
-$$
-p
-$$
-
-**.
-
-This happens because knowing the total number of successes eliminates the information contributed by the common success probability, leaving only the combinatorial allocation of those successes.
+Something important in the above expression is that **the resulting conditional distribution does not depend on $p$**. This happens because knowing the total number of successes eliminates the information contributed by the common success probability, leaving only the combinatorial allocation of those successes.
 
 ---
+
+::: example-box
 
 ## Example 3: Obtaining a binomial distribution by conditioning Poisson variables
 
@@ -594,6 +473,8 @@ X_1\mid(X_1+X_2=n)
 \left(n,\frac{\lambda_1}{\lambda_1+\lambda_2}\right)
 }
 $$
+
+:::
 
 ### Interpretation
 

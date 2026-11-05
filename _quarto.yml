@@ -32,6 +32,7 @@ website:
           - lectures/sample_statistics.qmd
           - lectures/bounds.qmd
           - lectures/clt.qmd
+          #- lectures/conditional_probability_2.qmd
       - section: "Inference"
         contents:
         - lectures/chapter0.qmd
