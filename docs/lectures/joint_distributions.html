@@ -390,7 +390,7 @@ window.Quarto = {
    
   <ul>
   <li><a href="#joint-distributions" id="toc-joint-distributions" class="nav-link active" data-scroll-target="#joint-distributions">Joint Distributions</a></li>
-  <li><a href="#joint-pmf-pdf" id="toc-joint-pmf-pdf" class="nav-link" data-scroll-target="#joint-pmf-pdf">Joint PMF / PDF:</a></li>
+  <li><a href="#joint-pmf-pdf" id="toc-joint-pmf-pdf" class="nav-link" data-scroll-target="#joint-pmf-pdf">Joint PMF / PDF</a></li>
   <li><a href="#joint-cdf" id="toc-joint-cdf" class="nav-link" data-scroll-target="#joint-cdf">Joint CDF</a></li>
   <li><a href="#expectations" id="toc-expectations" class="nav-link" data-scroll-target="#expectations">Expectations</a>
   <ul class="collapse">
@@ -428,10 +428,10 @@ window.Quarto = {
 
 <section id="joint-distributions" class="level1">
 <h1>Joint Distributions</h1>
-<p>Jointly distributed random variables are for the scenarios where we are working with multiple random variables simultaneously rather than just one in isolation.</p>
+<p>Jointly distributed random variables are for the scenarios where we are working with multiple random variables simultaneously rather than just one in isolation. For simplicity, we will generally use two random variables in the definitions and examples below.</p>
 </section>
 <section id="joint-pmf-pdf" class="level1">
-<h1>Joint PMF / PDF:</h1>
+<h1>Joint PMF / PDF</h1>
 <p>For discrete variables, the joint Probability Mass Function is</p>
 <p><span class="math display">p_{X,Y}(x,y) = P(X=x, Y=y)</span></p>
 <p>It gives the probability that <span class="math inline">X</span> takes the value <span class="math inline">x</span> and <span class="math inline">Y</span> takes the value <span class="math inline">y</span> at the same time.</p>
@@ -445,9 +445,11 @@ window.Quarto = {
 </section>
 <section id="expectations" class="level1">
 <h1>Expectations</h1>
-<p><span class="math inline">E[g(X,Y)]=</span> is the extension of calculating the expectation of a function, now with two variables.</p>
-<p>Discrete: <span class="math inline">E[g(X,Y)] = \sum_{x}\sum_{y} g(x,y)p_{X,Y}(x,y)</span></p>
-<p>Continuous: <span class="math inline">E[g(X,Y)] = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} g(x,y)f_{X,Y}(x,y)dxdy</span></p>
+<p><span class="math inline">E[g(X,Y)]</span> is the extension of calculating the expectation of a function, now with two variables.</p>
+<ul>
+<li><p><strong>Discrete</strong>: <span class="math inline">E[g(X,Y)] = \sum_{x}\sum_{y} g(x,y)p_{X,Y}(x,y)</span></p></li>
+<li><p><strong>Continuous</strong>: <span class="math inline">E[g(X,Y)] = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} g(x,y)f_{X,Y}(x,y)dxdy</span></p></li>
+</ul>
 <section id="the-linearity-of-expectation" class="level2">
 <h2 class="anchored" data-anchor-id="the-linearity-of-expectation">The Linearity of Expectation</h2>
 <p>The expectation of a sum is always equal to the sum of the expectations:: <span class="math display">E\left[\sum_{i=1}^{N}a_{i}X_{i}\right] = \sum_{i=1}^{N}a_{i}E[X_{i}]</span></p>
@@ -458,6 +460,8 @@ window.Quarto = {
 <p>Note that this property holds true whether the random variables are independent or not.</p>
 <div class="example-box">
 <p>What is the expected value of the sum obtained when 10 fair dice are rolled?</p>
+<p><br>
+</p>
 <p>Trying to find the probability distribution for the sum of 10 dice (which ranges from 10 to 60) is very complicated. Instead, we define the total sum <span class="math inline">X</span> as the addition of 10 individual random variables: <span class="math display">X = X_1 + X_2 + \dots + X_{10}</span></p>
 <p>Here, <span class="math inline">X_i</span> represents the outcome of the <span class="math inline">i</span>-th die roll.</p>
 <p>Recall that the expected value of a single die roll is <span class="math inline">3.5</span>.</p>
@@ -467,6 +471,8 @@ window.Quarto = {
 </div>
 <div class="example-box">
 <p>At a party, <span class="math inline">N</span> men throw their hats into the center of a room. The hats are mixed up, each man randomly selects one. What is the expected number of men who select their own hat?</p>
+<p><br>
+</p>
 <p>Trying to calculate the exact probability of 0, 1, 2, or <span class="math inline">N</span> men getting their hats requires complex combinatorics (derangements).</p>
 <p>Instead, we use an idea called an <strong>Indicator Random Variable</strong>. Indicators (sometimes called dummy variables) are a special type of variable that takes on <span class="math inline">1</span> if some condition is met and <span class="math inline">0</span> otherwise.</p>
 <p>Let <span class="math inline">I_i</span> be an indicator for the <span class="math inline">i</span>-th man:</p>
@@ -478,7 +484,7 @@ window.Quarto = {
 <p><span class="math display">X = I_1 + I_2 + \dots + I_N</span></p>
 <p>To find the expected value of an indicator variable, we only need to find the probability of the event occurring.</p>
 <p>Since the hats are assumed to be random (that is, uniformly and arbitrarily selected), the chance that man <span class="math inline">i</span> grabs his specific hat out of the pile of <span class="math inline">N</span> hats is <span class="math inline">1/N</span>.</p>
-<p>Therefore, <span class="math inline">E[I_i] = 1/N</span>.</p>
+<p>Therefore, <span class="math inline">E[I_i] = \frac{1}{N}</span>.</p>
 <p>Now we apply linearity of expectation.</p>
 <p>Despite that the variables are not independent (if man 1 grabs man 2’s hat, man 2’s probability is affected), the linearity of expectation is not affected by this.</p>
 <p><span class="math display">E[X] = E[I_1] + E[I_2] + \dots + E[I_N]</span></p>
@@ -522,15 +528,21 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
+<p><br>
+</p>
 <p>To find the marginal distribution of <span class="math inline">X</span>, denoted <span class="math inline">P(X=x)</span>, sum the probabilities across all possible values of <span class="math inline">Y</span> (summing across the rows):</p>
 <p><span class="math display">P(X=x) = \sum_{y} P(X=x, Y=y)</span></p>
 <p><span class="math inline">P(X=0) = 0.1 + 0.2 + 0.1 = \mathbf{0.4}</span></p>
 <p><span class="math inline">P(X=1) = 0.3 + 0.1 + 0.2 = \mathbf{0.6}</span></p>
+<p><br>
+</p>
 <p>To find the marginal distribution of <span class="math inline">Y</span>, denoted <span class="math inline">P(Y=y)</span>, sum the probabilities across all possible values of <span class="math inline">X</span> (summing down the columns):</p>
 <p><span class="math display">P(Y=y) = \sum_{x} P(X=x, Y=y)</span></p>
 <p><span class="math inline">P(Y=1) = 0.1 + 0.3 = \mathbf{0.4}</span></p>
 <p><span class="math inline">P(Y=2) = 0.2 + 0.1 = \mathbf{0.3}</span></p>
 <p><span class="math inline">P(Y=3) = 0.1 + 0.2 = \mathbf{0.3}</span></p>
+<p><br>
+</p>
 <p>Note that both marginal distributions sum to 1.0, confirming they are valid probability distributions.</p>
 </section>
 <section id="continuous-variables" class="level2">

@@ -4,9 +4,9 @@ title: "12: Joint Distributions"
 
 # Joint Distributions
 
-Jointly distributed random variables are for the scenarios where we are working with multiple random variables simultaneously rather than just one in isolation.
+Jointly distributed random variables are for the scenarios where we are working with multiple random variables simultaneously rather than just one in isolation. For simplicity, we will generally use two random variables in the definitions and examples below.
 
-# Joint PMF / PDF:
+# Joint PMF / PDF
 
 For discrete variables, the joint Probability Mass Function is
 
@@ -26,11 +26,12 @@ It applies to both discrete and continuous variables: $F_{X,Y}(x,y) = P(X \le x,
 
 # Expectations
 
-$E[g(X,Y)]=$ is the extension of calculating the expectation of a function, now with two variables.
+$E[g(X,Y)]$ is the extension of calculating the expectation of a function, now with two variables.
 
-Discrete: $E[g(X,Y)] = \sum_{x}\sum_{y} g(x,y)p_{X,Y}(x,y)$
 
-Continuous: $E[g(X,Y)] = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} g(x,y)f_{X,Y}(x,y)dxdy$
+- **Discrete**: $E[g(X,Y)] = \sum_{x}\sum_{y} g(x,y)p_{X,Y}(x,y)$
+
+- **Continuous**: $E[g(X,Y)] = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} g(x,y)f_{X,Y}(x,y)dxdy$
 
 ## The Linearity of Expectation
 
@@ -47,7 +48,7 @@ Note that this property holds true whether the random variables are independent 
 ::: example-box
 What is the expected value of the sum obtained when 10 fair dice are rolled?
 
-
+\
 
 Trying to find the probability distribution for the sum of 10 dice (which ranges from 10 to 60) is very complicated. Instead, we define the total sum $X$ as the addition of 10 individual random variables: $$X = X_1 + X_2 + \dots + X_{10}$$
 
@@ -65,7 +66,7 @@ And so the expected sum is 35.
 ::: example-box
 At a party, $N$ men throw their hats into the center of a room. The hats are mixed up, each man randomly selects one. What is the expected number of men who select their own hat?
 
-
+\
 
 Trying to calculate the exact probability of 0, 1, 2, or $N$ men getting their hats requires complex combinatorics (derangements).
 
@@ -122,6 +123,7 @@ Let $X$ and $Y$ be discrete random variables with a joint Probability Mass Funct
 | $X=1$ | $0.3$ | $0.1$ | $0.2$ |
 
 
+\
 
 To find the marginal distribution of $X$, denoted $P(X=x)$, sum the probabilities across all possible values of $Y$ (summing across the rows):
 
@@ -130,6 +132,8 @@ $$P(X=x) = \sum_{y} P(X=x, Y=y)$$
 $P(X=0) = 0.1 + 0.2 + 0.1 = \mathbf{0.4}$
 
 $P(X=1) = 0.3 + 0.1 + 0.2 = \mathbf{0.6}$
+
+\
 
 To find the marginal distribution of $Y$, denoted $P(Y=y)$, sum the probabilities across all possible values of $X$ (summing down the columns):
 
@@ -140,6 +144,8 @@ $P(Y=1) = 0.1 + 0.3 = \mathbf{0.4}$
 $P(Y=2) = 0.2 + 0.1 = \mathbf{0.3}$
 
 $P(Y=3) = 0.1 + 0.2 = \mathbf{0.3}$
+
+\
 
 Note that both marginal distributions sum to 1.0, confirming they are valid probability distributions.
 
