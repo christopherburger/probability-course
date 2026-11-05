@@ -27,7 +27,7 @@ website:
           - lectures/continuous_rv.qmd
           - lectures/expectation.qmd
           - lectures/variance.qmd
-          #- lectures/joint_distributions.qmd
+          - lectures/joint_distributions.qmd
           - lectures/mgfs.qmd
           - lectures/sample_statistics.qmd
           - lectures/bounds.qmd

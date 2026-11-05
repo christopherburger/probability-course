@@ -47,7 +47,7 @@ Note that this property holds true whether the random variables are independent 
 ::: example-box
 What is the expected value of the sum obtained when 10 fair dice are rolled?
 
-\
+
 
 Trying to find the probability distribution for the sum of 10 dice (which ranges from 10 to 60) is very complicated. Instead, we define the total sum $X$ as the addition of 10 individual random variables: $$X = X_1 + X_2 + \dots + X_{10}$$
 
@@ -65,7 +65,7 @@ And so the expected sum is 35.
 ::: example-box
 At a party, $N$ men throw their hats into the center of a room. The hats are mixed up, each man randomly selects one. What is the expected number of men who select their own hat?
 
-\
+
 
 Trying to calculate the exact probability of 0, 1, 2, or $N$ men getting their hats requires complex combinatorics (derangements).
 
@@ -85,7 +85,7 @@ To find the expected value of an indicator variable, we only need to find the pr
 
 Since the hats are assumed to be random (that is, uniformly and arbitrarily selected), the chance that man $i$ grabs his specific hat out of the pile of $N$ hats is $1/N$.
 
-Therefore, $E[I_i] = 1/N$.
+Therefore, $E[I_i] = \frac{1}{N}$.
 
 Now we apply linearity of expectation.
 
@@ -121,7 +121,7 @@ Let $X$ and $Y$ be discrete random variables with a joint Probability Mass Funct
 | $X=0$ | $0.1$ | $0.2$ | $0.1$ |
 | $X=1$ | $0.3$ | $0.1$ | $0.2$ |
 
-\
+
 
 To find the marginal distribution of $X$, denoted $P(X=x)$, sum the probabilities across all possible values of $Y$ (summing across the rows):
 

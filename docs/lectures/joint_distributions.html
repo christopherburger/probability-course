@@ -127,9 +127,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      Applied Probability
-      </li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/random_variables.html">Random Variables</a></li><li class="breadcrumb-item"><a href="../lectures/joint_distributions.html">12: Joint Distributions</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -261,6 +259,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../lectures/variance.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">11: Variance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/joint_distributions.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">12: Joint Distributions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -403,7 +407,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/random_variables.html">Random Variables</a></li><li class="breadcrumb-item"><a href="../lectures/joint_distributions.html">12: Joint Distributions</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">12: Joint Distributions</h1>
 </div>
@@ -454,8 +458,6 @@ window.Quarto = {
 <p>Note that this property holds true whether the random variables are independent or not.</p>
 <div class="example-box">
 <p>What is the expected value of the sum obtained when 10 fair dice are rolled?</p>
-<p><br>
-</p>
 <p>Trying to find the probability distribution for the sum of 10 dice (which ranges from 10 to 60) is very complicated. Instead, we define the total sum <span class="math inline">X</span> as the addition of 10 individual random variables: <span class="math display">X = X_1 + X_2 + \dots + X_{10}</span></p>
 <p>Here, <span class="math inline">X_i</span> represents the outcome of the <span class="math inline">i</span>-th die roll.</p>
 <p>Recall that the expected value of a single die roll is <span class="math inline">3.5</span>.</p>
@@ -465,8 +467,6 @@ window.Quarto = {
 </div>
 <div class="example-box">
 <p>At a party, <span class="math inline">N</span> men throw their hats into the center of a room. The hats are mixed up, each man randomly selects one. What is the expected number of men who select their own hat?</p>
-<p><br>
-</p>
 <p>Trying to calculate the exact probability of 0, 1, 2, or <span class="math inline">N</span> men getting their hats requires complex combinatorics (derangements).</p>
 <p>Instead, we use an idea called an <strong>Indicator Random Variable</strong>. Indicators (sometimes called dummy variables) are a special type of variable that takes on <span class="math inline">1</span> if some condition is met and <span class="math inline">0</span> otherwise.</p>
 <p>Let <span class="math inline">I_i</span> be an indicator for the <span class="math inline">i</span>-th man:</p>
@@ -522,8 +522,6 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<p><br>
-</p>
 <p>To find the marginal distribution of <span class="math inline">X</span>, denoted <span class="math inline">P(X=x)</span>, sum the probabilities across all possible values of <span class="math inline">Y</span> (summing across the rows):</p>
 <p><span class="math display">P(X=x) = \sum_{y} P(X=x, Y=y)</span></p>
 <p><span class="math inline">P(X=0) = 0.1 + 0.2 + 0.1 = \mathbf{0.4}</span></p>
