@@ -92,6 +92,223 @@ plt.show()
 
 ## Easy
 
+A Python version of the code in the text is:
+
+```{python}
+import numpy as np
+from scipy.stats import binom
+
+# Construct a grid of 1000 possible values for p
+p_grid = np.linspace(0, 1, 1000)
+
+# Uniform prior
+prior = np.ones(1000)
+
+# Binomial likelihood: 6 successes in 9 trials
+likelihood = binom.pmf(6, n=9, p=p_grid)
+
+# Calculate and normalize the posterior
+posterior = likelihood * prior
+posterior = posterior / posterior.sum()
+
+# Draw 10,000 samples from the posterior
+rng = np.random.default_rng(100)
+
+samples = rng.choice(
+    p_grid,
+    size=10_000,
+    replace=True,
+    p=posterior
+)
+```
+\
+
+With two helper functions to make calculating the questions involving intervals easier:
+
+```{python}
+
+def percentile_interval(samples, probability):
+    """
+    Return an equal-tailed posterior interval
+    containing the specified probability.
+    """
+    tail = (1 - probability) / 2
+
+    return tuple(
+        np.quantile(samples, [tail, 1 - tail])
+    )
+
+
+def hdi(samples, probability):
+    """
+    Return the narrowest interval containing
+    at least the specified fraction of samples.
+
+    This is a sample-based approximation of
+    the highest density interval (HDI).
+    """
+    ordered = np.sort(np.asarray(samples))
+
+    n = len(ordered)
+    k = int(np.ceil(probability * n))
+
+    # All candidate intervals containing k samples
+    lower = ordered[:n - k + 1]
+    upper = ordered[k - 1:]
+
+    # Find the narrowest
+    widths = upper - lower
+    i = np.argmin(widths)
+
+    return (lower[i], upper[i])
+
+```
+\
+
+An overview of the functions / methods we can use is:
+
+
+| Operation	| Purpose |
+|-------|-------|-------|-------|
+| ```np.mean(...)``` |	Calculate the proportion of samples satisfying a condition |
+| ```np.quantile(samples, q)```	| Find a posterior quantile |
+| ```hdi(samples, 0.50)``` |	Find the narrowest 50% interval |
+| ```percentile_interval(samples, 0.50)``` |	Find the equal-tailed 50% interval |
+
+### 3E1
+
+<details>
+
+<summary>Click to show answer</summary>
+
+What we want is $P(p<0.2\mid W=6)$.
+
+Since our samples are drawn from the posterior, we can estimate this probability by calculating the fraction of samples satisfying $p<0.2$:
+
+```{python}
+print(np.mean(samples < 0.2))
+```
+
+The code above computes
+$$
+\widehat{P}(p<0.2\mid W=6)
+=\frac{1}{10000}
+\sum_{i=1}^{10000}\mathbf{1}(p_i<0.2)
+$$
+
+where $\mathbf{1}$ is the indicator function.
+
+Note that we never needed to derive or integrate the posterior density. We estimate the desired probability just by counting samples.
+
+</details>
+
+### 3E2
+
+<details>
+
+<summary>Click to show answer</summary>
+
+```{python}
+print(np.mean(samples > 0.8))
+```
+
+</details>
+
+### 3E3
+
+<details>
+
+<summary>Click to show answer</summary>
+
+We have a few ways to approach this problem. Two solutions are using complements:
+
+```{python}
+print(1 - np.mean(samples > 0.8) - np.mean(samples < 0.2))
+```
+
+Or using a compound expression:
+
+```{python}
+print(np.mean((0.2 <= samples) & (samples <= 0.8)))
+```
+
+</details>
+
+### 3E4
+
+<details>
+
+<summary>Click to show answer</summary>
+
+```{python}
+print(np.quantile(samples, .20))
+```
+
+</details>
+
+### 3E5
+
+<details>
+
+<summary>Click to show answer</summary>
+
+```{python}
+print(np.quantile(samples, (1-0.2)))
+```
+
+
+</details>
+
+### 3E6
+
+<details>
+
+<summary>Click to show answer</summary>
+
+Since this is the **narrowest** interval, it has the **highest density**.
+
+```{python}
+print(hdi(samples, 0.66))
+```
+
+
+</details>
+
+### 3E7
+
+<details>
+
+<summary>Click to show answer</summary>
+
+```{python}
+print(percentile_interval(samples, 0.66))
+
+```
+
+Note that the intervals for questions 6 and 7 have different widths with the HDI width being slightly narrower (as expected). 
+
+As the posterior distribution is fairly symmetric, there is not a large difference between the two. We can plot the posterior to see this:
+
+```{python}
+import matplotlib.pyplot as plt
+
+plt.plot(p_grid, (posterior / (p_grid[1] - p_grid[0])), label="Grid posterior")
+
+plt.hist(
+    samples,
+    bins=50,
+    density=True,
+    alpha=0.35,
+    label="Posterior samples"
+)
+
+plt.xlabel("p")
+plt.ylabel("Posterior probability / density")
+plt.legend()
+plt.show()
+```
+
+</details>
 ---
 
 ## Medium

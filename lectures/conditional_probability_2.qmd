@@ -211,7 +211,7 @@ Seeing this, we have that averaging the conditional expectations over all the pr
 :::
 ---
 
-## Obtaining the Hypergeometric Distribution by Conditioning
+## Obtaining Distributions by Conditioning
 
 Conditioning can transform one probability distribution into another.
 
@@ -344,49 +344,13 @@ Something important in the above expression is that **the resulting conditional 
 
 ::: example-box
 
-## Example 3: Obtaining a binomial distribution by conditioning Poisson variables
 
-Now suppose that
+Suppose that $X_1\sim\operatorname{Poisson}(\lambda_1)$ and $X_2\sim\operatorname{Poisson}(\lambda_2)$ where the random variables are independent and $\lambda_1,\lambda_2>0$.
 
-$$
-X_1\sim\operatorname{Poisson}(\lambda_1)
-$$
+We will determine the conditional PMF of $X_1$ given $X_1+X_2=n$.
 
-and
+First, we will write the conditional probability. For $k=0,1,\ldots,n$
 
-$$
-X_2\sim\operatorname{Poisson}(\lambda_2),
-$$
-
-where the random variables are independent and 
-
-$$
-\lambda_1,\lambda_2>0
-$$
-
-.
-
-We want the conditional PMF of 
-
-$$
-X_1
-$$
-
- given
-
-$$
-X_1+X_2=n.
-$$
-
-### Step 1: Write the conditional probability
-
-For 
-
-$$
-k=0,1,\ldots,n
-$$
-
-,
 
 $$
 P(X_1=k\mid X_1+X_2=n)
@@ -395,7 +359,9 @@ P(X_1=k\mid X_1+X_2=n)
 {P(X_1+X_2=n)}.
 $$
 
-### Step 2: Evaluate the numerator
+\
+
+Next, we will evaluate the numerator.
 
 Using independence and the Poisson PMF,
 
@@ -412,11 +378,11 @@ P(X_1=k,X_2=n-k)
 \end{aligned}
 $$
 
-### Step 3: Evaluate the denominator
+\
 
-The sum of independent Poisson random variables is Poisson, with parameter equal to the sum of the individual parameters.
+Finally, we will evaluate the denominator.
 
-Thus,
+Using the property that the sum of independent Poisson random variables is Poisson, with parameter equal to the sum of the individual parameters, we have:
 
 $$
 X_1+X_2\sim\operatorname{Poisson}(\lambda_1+\lambda_2)
@@ -431,9 +397,8 @@ P(X_1+X_2=n)
 (\lambda_1+\lambda_2)^n}{n!}.
 $$
 
-### Step 4: Simplify
 
-Substituting and canceling,
+Substituting and canceling gives us:
 
 $$
 \begin{aligned}
@@ -445,19 +410,17 @@ $$
 \end{aligned}
 $$
 
-Recognizing the binomial coefficient,
+Recognizing the binomial coefficient lets us rewrite the above as:
 
 $$
-\boxed{
 P(X_1=k\mid X_1+X_2=n)
 =
 \binom nk
 \left(\frac{\lambda_1}{\lambda_1+\lambda_2}\right)^k
 \left(\frac{\lambda_2}{\lambda_1+\lambda_2}\right)^{n-k}
-}
 $$
 
-This is a binomial PMF with success probability
+This is a **binomial PMF **with success probability
 
 $$
 q=\frac{\lambda_1}{\lambda_1+\lambda_2}.
@@ -466,146 +429,54 @@ $$
 Therefore,
 
 $$
-\boxed{
 X_1\mid(X_1+X_2=n)
 \sim
 \operatorname{Binomial}
 \left(n,\frac{\lambda_1}{\lambda_1+\lambda_2}\right)
-}
 $$
 
 :::
 
-### Interpretation
+Considering our above example, imagine two independent sources generating events.
 
-Imagine two independent sources generating events.
-
-Source 1 produces events at an average rate 
-
-$$
-\lambda_1
-$$
-
-, while source 2 produces events at an average rate 
-
-$$
-\lambda_2
-$$
-
-.
+Source 1 produces events at an average rate $\lambda_1$ while source 2 produces events at an average rate $\lambda_2$.
 
 Without additional information, the event counts from the two sources are independent Poisson random variables.
 
-But suppose we observe exactly 
-
-$$
-n
-$$
-
- events in total.
-
-Conditioned on this information, each observed event can be attributed to source 1 with probability
+If we observe exactly $n$ events in total, then conditioned on this information, each observed event can be attributed to source 1 with probability
 
 $$
 \frac{\lambda_1}{\lambda_1+\lambda_2}.
 $$
 
-Thus the number attributable to source 1 is binomially distributed.
+Thus the number attributable to source 1 is **binomially distributed**.
 
 This is useful in applications involving arrivals, queueing systems, reliability, and event-count models.
 
 ---
 
-## Example 4: Conditional expectation in a multinomial experiment
+::: example-box
 
-The final example in Section 4.1 considers an experiment with three possible outcomes.
+Consider an experiment with three possible outcomes where each trial produces outcome 1, 2, or 3, with respective probabilities $p_1,\qquad p_2,\qquad p_3$, where $p_1+p_2+p_3=1$.
 
-Each trial produces outcome 1, 2, or 3, with respective probabilities
+Suppose $n$ independent trials are performed and let $X_i$ denote the number of trials producing outcome $i$.
 
-$$
-p_1,\qquad p_2,\qquad p_3,
-$$
+We will to determine $E[X_1\mid X_2=m]$.
 
-where
+\
 
-$$
-p_1+p_2+p_3=1.
-$$
-
-Suppose 
-
-$$
-n
-$$
-
- independent trials are performed.
-
-Let 
-
-$$
-X_i
-$$
-
- denote the number of trials producing outcome 
-
-$$
-i
-$$
-
-.
-
-We want to determine
-
-$$
-E[X_1\mid X_2=m].
-$$
-
-### Step 1: Identify the distribution
-
-The random vector
-
-$$
-(X_1,X_2,X_3)
-$$
-
-follows a multinomial distribution:
+First, we note that the random vector $(X_1,X_2,X_3)$ follows a multinomial distribution:
 
 $$
 (X_1,X_2,X_3)
 \sim\operatorname{Multinomial}(n;p_1,p_2,p_3).
 $$
 
-In particular,
+Where $X_1+X_2+X_3=n$.
 
-$$
-X_1+X_2+X_3=n.
-$$
+\
 
-### Step 2: Interpret the conditioning event
-
-Knowing that
-
-$$
-X_2=m
-$$
-
-tells us that exactly 
-
-$$
-m
-$$
-
- of the trials produced outcome 2.
-
-Consequently, the remaining
-
-$$
-n-m
-$$
-
-trials must have produced either outcome 1 or outcome 3.
-
-The critical observation is that the probabilities among these remaining outcomes must be renormalized.
+Now, knowing that $X_2=m$ tells us that exactly $m$ of the trials produced outcome 2. Then, the remaining $n-m$ trials must have produced outcome 1 or outcome 3. Understanding this, we know that we now need to renormalize the probabilities of these remaining outcomes.
 
 In a trial that does not produce outcome 2, the probability of outcome 1 is
 
@@ -615,13 +486,7 @@ P(\text{outcome 1}\mid\text{not outcome 2})
 \frac{p_1}{1-p_2}.
 $$
 
-Since 
-
-$$
-1-p_2=p_1+p_3
-$$
-
-,
+Since $1-p_2=p_1+p_3$ we have
 
 $$
 P(\text{outcome 1}\mid\text{not outcome 2})
@@ -629,15 +494,9 @@ P(\text{outcome 1}\mid\text{not outcome 2})
 \frac{p_1}{p_1+p_3}.
 $$
 
-### Step 3: Identify the conditional distribution
+\
 
-Among the 
-
-$$
-n-m
-$$
-
- remaining trials, each produces outcome 1 with the conditional probability above.
+Among the $n-m$ remaining trials, each produces outcome 1 with the conditional probability we just found above.
 
 Therefore,
 
@@ -648,83 +507,34 @@ X_1\mid X_2=m
 \left(n-m,\frac{p_1}{1-p_2}\right).
 $$
 
-This holds for 
+This holds for $p_2<1$ whenever the conditioning event has positive probability.
+
+
+
+We can now finally compute the expectation. The expected value of a binomial random variable with parameters $r$ and $q$ is $rq$ and so the expectation is:
+
+
 
 $$
-p_2<1
-$$
-
-, whenever the conditioning event has positive probability.
-
-### Step 4: Compute the expectation
-
-The expected value of a binomial random variable with parameters 
-
-$$
-r
-$$
-
- and 
-
-$$
-q
-$$
-
- is 
-
-$$
-rq
-$$
-
-.
-
-Therefore,
-
-$$
-\boxed{
 E[X_1\mid X_2=m]
 =
 (n-m)\frac{p_1}{1-p_2}
-}
-$$
-
-or, equivalently,
-
-$$
-\boxed{
-E[X_1\mid X_2=m]
 =
 (n-m)\frac{p_1}{p_1+p_3}
-}
 $$
 
-### An important conceptual point
+:::
 
-The expected count is not simply 
 
-$$
-(n-m)p_1
-$$
+Note that the expected count is not simply $(n-m)p_1$.
 
-.
-
-Why?
-
-Because the original probability 
-
-$$
-p_1
-$$
-
- describes the chance of outcome 1 before any restrictions are imposed.
-
-Once we know that a trial was not outcome 2, the relevant probability becomes
+This is because the original probability $p_1$ describes the chance of outcome 1 before any restrictions are imposed. Once we know that a trial was not outcome 2, the relevant probability becomes
 
 $$
 \frac{p_1}{1-p_2}.
 $$
 
-Conditioning changes the distribution, not merely the number of trials.
+Conditioning changes the entire distribution, not only the number of trials.
 
 # The Continuous Case
 

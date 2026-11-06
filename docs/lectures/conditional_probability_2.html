@@ -395,23 +395,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#conditional-cumulative-distribution-function" id="toc-conditional-cumulative-distribution-function" class="nav-link" data-scroll-target="#conditional-cumulative-distribution-function">Conditional Cumulative Distribution Function</a></li>
   <li><a href="#conditional-expectation" id="toc-conditional-expectation" class="nav-link" data-scroll-target="#conditional-expectation">Conditional Expectation</a></li>
-  <li><a href="#obtaining-the-hypergeometric-distribution-by-conditioning" id="toc-obtaining-the-hypergeometric-distribution-by-conditioning" class="nav-link" data-scroll-target="#obtaining-the-hypergeometric-distribution-by-conditioning">Obtaining the Hypergeometric Distribution by Conditioning</a></li>
-  <li><a href="#example-3-obtaining-a-binomial-distribution-by-conditioning-poisson-variables" id="toc-example-3-obtaining-a-binomial-distribution-by-conditioning-poisson-variables" class="nav-link" data-scroll-target="#example-3-obtaining-a-binomial-distribution-by-conditioning-poisson-variables">Example 3: Obtaining a binomial distribution by conditioning Poisson variables</a>
-  <ul class="collapse">
-  <li><a href="#step-1-write-the-conditional-probability" id="toc-step-1-write-the-conditional-probability" class="nav-link" data-scroll-target="#step-1-write-the-conditional-probability">Step 1: Write the conditional probability</a></li>
-  <li><a href="#step-2-evaluate-the-numerator" id="toc-step-2-evaluate-the-numerator" class="nav-link" data-scroll-target="#step-2-evaluate-the-numerator">Step 2: Evaluate the numerator</a></li>
-  <li><a href="#step-3-evaluate-the-denominator" id="toc-step-3-evaluate-the-denominator" class="nav-link" data-scroll-target="#step-3-evaluate-the-denominator">Step 3: Evaluate the denominator</a></li>
-  <li><a href="#step-4-simplify" id="toc-step-4-simplify" class="nav-link" data-scroll-target="#step-4-simplify">Step 4: Simplify</a></li>
-  </ul></li>
-  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">Interpretation</a></li>
-  <li><a href="#example-4-conditional-expectation-in-a-multinomial-experiment" id="toc-example-4-conditional-expectation-in-a-multinomial-experiment" class="nav-link" data-scroll-target="#example-4-conditional-expectation-in-a-multinomial-experiment">Example 4: Conditional expectation in a multinomial experiment</a>
-  <ul class="collapse">
-  <li><a href="#step-1-identify-the-distribution" id="toc-step-1-identify-the-distribution" class="nav-link" data-scroll-target="#step-1-identify-the-distribution">Step 1: Identify the distribution</a></li>
-  <li><a href="#step-2-interpret-the-conditioning-event" id="toc-step-2-interpret-the-conditioning-event" class="nav-link" data-scroll-target="#step-2-interpret-the-conditioning-event">Step 2: Interpret the conditioning event</a></li>
-  <li><a href="#step-3-identify-the-conditional-distribution" id="toc-step-3-identify-the-conditional-distribution" class="nav-link" data-scroll-target="#step-3-identify-the-conditional-distribution">Step 3: Identify the conditional distribution</a></li>
-  <li><a href="#step-4-compute-the-expectation" id="toc-step-4-compute-the-expectation" class="nav-link" data-scroll-target="#step-4-compute-the-expectation">Step 4: Compute the expectation</a></li>
-  <li><a href="#an-important-conceptual-point" id="toc-an-important-conceptual-point" class="nav-link" data-scroll-target="#an-important-conceptual-point">An important conceptual point</a></li>
-  </ul></li>
+  <li><a href="#obtaining-distributions-by-conditioning" id="toc-obtaining-distributions-by-conditioning" class="nav-link" data-scroll-target="#obtaining-distributions-by-conditioning">Obtaining Distributions by Conditioning</a></li>
   </ul></li>
   <li><a href="#the-continuous-case" id="toc-the-continuous-case" class="nav-link" data-scroll-target="#the-continuous-case">The Continuous Case</a></li>
   <li><a href="#expectations-and-conditioning" id="toc-expectations-and-conditioning" class="nav-link" data-scroll-target="#expectations-and-conditioning">Expectations and Conditioning</a></li>
@@ -612,8 +596,8 @@ E[g(Y)]
 </div>
 <hr>
 </section>
-<section id="obtaining-the-hypergeometric-distribution-by-conditioning" class="level2">
-<h2 class="anchored" data-anchor-id="obtaining-the-hypergeometric-distribution-by-conditioning">Obtaining the Hypergeometric Distribution by Conditioning</h2>
+<section id="obtaining-distributions-by-conditioning" class="level2">
+<h2 class="anchored" data-anchor-id="obtaining-distributions-by-conditioning">Obtaining Distributions by Conditioning</h2>
 <p>Conditioning can transform one probability distribution into another.</p>
 <div class="example-box">
 <p>Suppose <span class="math inline">X_1\sim\operatorname{Binomial}(n_1,p)</span> and <span class="math inline">X_2\sim\operatorname{Binomial}(n_2,p)</span> with <span class="math inline">X_1</span> and <span class="math inline">X_2</span> independent.</p>
@@ -706,46 +690,19 @@ P(X=k)
 </span></p>
 <p>Something important in the above expression is that <strong>the resulting conditional distribution does not depend on <span class="math inline">p</span></strong>. This happens because knowing the total number of successes eliminates the information contributed by the common success probability, leaving only the combinatorial allocation of those successes.</p>
 <hr>
-</section>
-<section id="example-3-obtaining-a-binomial-distribution-by-conditioning-poisson-variables" class="level2 example-box">
-<h2 class="anchored" data-anchor-id="example-3-obtaining-a-binomial-distribution-by-conditioning-poisson-variables">Example 3: Obtaining a binomial distribution by conditioning Poisson variables</h2>
-<p>Now suppose that</p>
-<p><span class="math display">
-X_1\sim\operatorname{Poisson}(\lambda_1)
-</span></p>
-<p>and</p>
-<p><span class="math display">
-X_2\sim\operatorname{Poisson}(\lambda_2),
-</span></p>
-<p>where the random variables are independent and</p>
-<p><span class="math display">
-\lambda_1,\lambda_2&gt;0
-</span></p>
-<p>.</p>
-<p>We want the conditional PMF of</p>
-<p><span class="math display">
-X_1
-</span></p>
-<p>given</p>
-<p><span class="math display">
-X_1+X_2=n.
-</span></p>
-<section id="step-1-write-the-conditional-probability" class="level3">
-<h3 class="anchored" data-anchor-id="step-1-write-the-conditional-probability">Step 1: Write the conditional probability</h3>
-<p>For</p>
-<p><span class="math display">
-k=0,1,\ldots,n
-</span></p>
-<p>,</p>
+<div class="example-box">
+<p>Suppose that <span class="math inline">X_1\sim\operatorname{Poisson}(\lambda_1)</span> and <span class="math inline">X_2\sim\operatorname{Poisson}(\lambda_2)</span> where the random variables are independent and <span class="math inline">\lambda_1,\lambda_2&gt;0</span>.</p>
+<p>We will determine the conditional PMF of <span class="math inline">X_1</span> given <span class="math inline">X_1+X_2=n</span>.</p>
+<p>First, we will write the conditional probability. For <span class="math inline">k=0,1,\ldots,n</span></p>
 <p><span class="math display">
 P(X_1=k\mid X_1+X_2=n)
 =
 \frac{P(X_1=k,X_2=n-k)}
 {P(X_1+X_2=n)}.
 </span></p>
-</section>
-<section id="step-2-evaluate-the-numerator" class="level3">
-<h3 class="anchored" data-anchor-id="step-2-evaluate-the-numerator">Step 2: Evaluate the numerator</h3>
+<p><br>
+</p>
+<p>Next, we will evaluate the numerator.</p>
 <p>Using independence and the Poisson PMF,</p>
 <p><span class="math display">
 \begin{aligned}
@@ -759,11 +716,10 @@ P(X_1=k,X_2=n-k)
 {k!(n-k)!}.
 \end{aligned}
 </span></p>
-</section>
-<section id="step-3-evaluate-the-denominator" class="level3">
-<h3 class="anchored" data-anchor-id="step-3-evaluate-the-denominator">Step 3: Evaluate the denominator</h3>
-<p>The sum of independent Poisson random variables is Poisson, with parameter equal to the sum of the individual parameters.</p>
-<p>Thus,</p>
+<p><br>
+</p>
+<p>Finally, we will evaluate the denominator.</p>
+<p>Using the property that the sum of independent Poisson random variables is Poisson, with parameter equal to the sum of the individual parameters, we have:</p>
 <p><span class="math display">
 X_1+X_2\sim\operatorname{Poisson}(\lambda_1+\lambda_2)
 </span></p>
@@ -774,10 +730,7 @@ P(X_1+X_2=n)
 \frac{e^{-(\lambda_1+\lambda_2)}
 (\lambda_1+\lambda_2)^n}{n!}.
 </span></p>
-</section>
-<section id="step-4-simplify" class="level3">
-<h3 class="anchored" data-anchor-id="step-4-simplify">Step 4: Simplify</h3>
-<p>Substituting and canceling,</p>
+<p>Substituting and canceling gives us:</p>
 <p><span class="math display">
 \begin{aligned}
 &amp;P(X_1=k\mid X_1+X_2=n)\\[2mm]
@@ -787,143 +740,66 @@ P(X_1+X_2=n)
 {(\lambda_1+\lambda_2)^n}.
 \end{aligned}
 </span></p>
-<p>Recognizing the binomial coefficient,</p>
+<p>Recognizing the binomial coefficient lets us rewrite the above as:</p>
 <p><span class="math display">
-\boxed{
 P(X_1=k\mid X_1+X_2=n)
 =
 \binom nk
 \left(\frac{\lambda_1}{\lambda_1+\lambda_2}\right)^k
 \left(\frac{\lambda_2}{\lambda_1+\lambda_2}\right)^{n-k}
-}
 </span></p>
-<p>This is a binomial PMF with success probability</p>
+<p>This is a <strong>binomial PMF </strong>with success probability</p>
 <p><span class="math display">
 q=\frac{\lambda_1}{\lambda_1+\lambda_2}.
 </span></p>
 <p>Therefore,</p>
 <p><span class="math display">
-\boxed{
 X_1\mid(X_1+X_2=n)
 \sim
 \operatorname{Binomial}
 \left(n,\frac{\lambda_1}{\lambda_1+\lambda_2}\right)
-}
 </span></p>
-</section>
-</section>
-<section id="interpretation" class="level3">
-<h3 class="anchored" data-anchor-id="interpretation">Interpretation</h3>
-<p>Imagine two independent sources generating events.</p>
-<p>Source 1 produces events at an average rate</p>
-<p><span class="math display">
-\lambda_1
-</span></p>
-<p>, while source 2 produces events at an average rate</p>
-<p><span class="math display">
-\lambda_2
-</span></p>
-<p>.</p>
+</div>
+<p>Considering our above example, imagine two independent sources generating events.</p>
+<p>Source 1 produces events at an average rate <span class="math inline">\lambda_1</span> while source 2 produces events at an average rate <span class="math inline">\lambda_2</span>.</p>
 <p>Without additional information, the event counts from the two sources are independent Poisson random variables.</p>
-<p>But suppose we observe exactly</p>
-<p><span class="math display">
-n
-</span></p>
-<p>events in total.</p>
-<p>Conditioned on this information, each observed event can be attributed to source 1 with probability</p>
+<p>If we observe exactly <span class="math inline">n</span> events in total, then conditioned on this information, each observed event can be attributed to source 1 with probability</p>
 <p><span class="math display">
 \frac{\lambda_1}{\lambda_1+\lambda_2}.
 </span></p>
-<p>Thus the number attributable to source 1 is binomially distributed.</p>
+<p>Thus the number attributable to source 1 is <strong>binomially distributed</strong>.</p>
 <p>This is useful in applications involving arrivals, queueing systems, reliability, and event-count models.</p>
 <hr>
-</section>
-<section id="example-4-conditional-expectation-in-a-multinomial-experiment" class="level2">
-<h2 class="anchored" data-anchor-id="example-4-conditional-expectation-in-a-multinomial-experiment">Example 4: Conditional expectation in a multinomial experiment</h2>
-<p>The final example in Section 4.1 considers an experiment with three possible outcomes.</p>
-<p>Each trial produces outcome 1, 2, or 3, with respective probabilities</p>
-<p><span class="math display">
-p_1,\qquad p_2,\qquad p_3,
-</span></p>
-<p>where</p>
-<p><span class="math display">
-p_1+p_2+p_3=1.
-</span></p>
-<p>Suppose</p>
-<p><span class="math display">
-n
-</span></p>
-<p>independent trials are performed.</p>
-<p>Let</p>
-<p><span class="math display">
-X_i
-</span></p>
-<p>denote the number of trials producing outcome</p>
-<p><span class="math display">
-i
-</span></p>
-<p>.</p>
-<p>We want to determine</p>
-<p><span class="math display">
-E[X_1\mid X_2=m].
-</span></p>
-<section id="step-1-identify-the-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="step-1-identify-the-distribution">Step 1: Identify the distribution</h3>
-<p>The random vector</p>
-<p><span class="math display">
-(X_1,X_2,X_3)
-</span></p>
-<p>follows a multinomial distribution:</p>
+<div class="example-box">
+<p>Consider an experiment with three possible outcomes where each trial produces outcome 1, 2, or 3, with respective probabilities <span class="math inline">p_1,\qquad p_2,\qquad p_3</span>, where <span class="math inline">p_1+p_2+p_3=1</span>.</p>
+<p>Suppose <span class="math inline">n</span> independent trials are performed and let <span class="math inline">X_i</span> denote the number of trials producing outcome <span class="math inline">i</span>.</p>
+<p>We will to determine <span class="math inline">E[X_1\mid X_2=m]</span>.</p>
+<p><br>
+</p>
+<p>First, we note that the random vector <span class="math inline">(X_1,X_2,X_3)</span> follows a multinomial distribution:</p>
 <p><span class="math display">
 (X_1,X_2,X_3)
 \sim\operatorname{Multinomial}(n;p_1,p_2,p_3).
 </span></p>
-<p>In particular,</p>
-<p><span class="math display">
-X_1+X_2+X_3=n.
-</span></p>
-</section>
-<section id="step-2-interpret-the-conditioning-event" class="level3">
-<h3 class="anchored" data-anchor-id="step-2-interpret-the-conditioning-event">Step 2: Interpret the conditioning event</h3>
-<p>Knowing that</p>
-<p><span class="math display">
-X_2=m
-</span></p>
-<p>tells us that exactly</p>
-<p><span class="math display">
-m
-</span></p>
-<p>of the trials produced outcome 2.</p>
-<p>Consequently, the remaining</p>
-<p><span class="math display">
-n-m
-</span></p>
-<p>trials must have produced either outcome 1 or outcome 3.</p>
-<p>The critical observation is that the probabilities among these remaining outcomes must be renormalized.</p>
+<p>Where <span class="math inline">X_1+X_2+X_3=n</span>.</p>
+<p><br>
+</p>
+<p>Now, knowing that <span class="math inline">X_2=m</span> tells us that exactly <span class="math inline">m</span> of the trials produced outcome 2. Then, the remaining <span class="math inline">n-m</span> trials must have produced outcome 1 or outcome 3. Understanding this, we know that we now need to renormalize the probabilities of these remaining outcomes.</p>
 <p>In a trial that does not produce outcome 2, the probability of outcome 1 is</p>
 <p><span class="math display">
 P(\text{outcome 1}\mid\text{not outcome 2})
 =
 \frac{p_1}{1-p_2}.
 </span></p>
-<p>Since</p>
-<p><span class="math display">
-1-p_2=p_1+p_3
-</span></p>
-<p>,</p>
+<p>Since <span class="math inline">1-p_2=p_1+p_3</span> we have</p>
 <p><span class="math display">
 P(\text{outcome 1}\mid\text{not outcome 2})
 =
 \frac{p_1}{p_1+p_3}.
 </span></p>
-</section>
-<section id="step-3-identify-the-conditional-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="step-3-identify-the-conditional-distribution">Step 3: Identify the conditional distribution</h3>
-<p>Among the</p>
-<p><span class="math display">
-n-m
-</span></p>
-<p>remaining trials, each produces outcome 1 with the conditional probability above.</p>
+<p><br>
+</p>
+<p>Among the <span class="math inline">n-m</span> remaining trials, each produces outcome 1 with the conditional probability we just found above.</p>
 <p>Therefore,</p>
 <p><span class="math display">
 X_1\mid X_2=m
@@ -931,63 +807,22 @@ X_1\mid X_2=m
 \operatorname{Binomial}
 \left(n-m,\frac{p_1}{1-p_2}\right).
 </span></p>
-<p>This holds for</p>
+<p>This holds for <span class="math inline">p_2&lt;1</span> whenever the conditioning event has positive probability.</p>
+<p>We can now finally compute the expectation. The expected value of a binomial random variable with parameters <span class="math inline">r</span> and <span class="math inline">q</span> is <span class="math inline">rq</span> and so the expectation is:</p>
 <p><span class="math display">
-p_2&lt;1
-</span></p>
-<p>, whenever the conditioning event has positive probability.</p>
-</section>
-<section id="step-4-compute-the-expectation" class="level3">
-<h3 class="anchored" data-anchor-id="step-4-compute-the-expectation">Step 4: Compute the expectation</h3>
-<p>The expected value of a binomial random variable with parameters</p>
-<p><span class="math display">
-r
-</span></p>
-<p>and</p>
-<p><span class="math display">
-q
-</span></p>
-<p>is</p>
-<p><span class="math display">
-rq
-</span></p>
-<p>.</p>
-<p>Therefore,</p>
-<p><span class="math display">
-\boxed{
 E[X_1\mid X_2=m]
 =
 (n-m)\frac{p_1}{1-p_2}
-}
-</span></p>
-<p>or, equivalently,</p>
-<p><span class="math display">
-\boxed{
-E[X_1\mid X_2=m]
 =
 (n-m)\frac{p_1}{p_1+p_3}
-}
 </span></p>
-</section>
-<section id="an-important-conceptual-point" class="level3">
-<h3 class="anchored" data-anchor-id="an-important-conceptual-point">An important conceptual point</h3>
-<p>The expected count is not simply</p>
-<p><span class="math display">
-(n-m)p_1
-</span></p>
-<p>.</p>
-<p>Why?</p>
-<p>Because the original probability</p>
-<p><span class="math display">
-p_1
-</span></p>
-<p>describes the chance of outcome 1 before any restrictions are imposed.</p>
-<p>Once we know that a trial was not outcome 2, the relevant probability becomes</p>
+</div>
+<p>Note that the expected count is not simply <span class="math inline">(n-m)p_1</span>.</p>
+<p>This is because the original probability <span class="math inline">p_1</span> describes the chance of outcome 1 before any restrictions are imposed. Once we know that a trial was not outcome 2, the relevant probability becomes</p>
 <p><span class="math display">
 \frac{p_1}{1-p_2}.
 </span></p>
-<p>Conditioning changes the distribution, not merely the number of trials.</p>
-</section>
+<p>Conditioning changes the entire distribution, not only the number of trials.</p>
 </section>
 </section>
 <section id="the-continuous-case" class="level1">
