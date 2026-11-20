@@ -708,7 +708,7 @@
     "href": "index.html",
     "title": "Course Overview",
     "section": "",
-    "text": "This is the central repository for the lecture notes for CSCI 4999. These notes provide an overview of the content covered during lecture.\nMore in-depth information can be found in the course section available on Blackboard.",
+    "text": "This is the central repository for the lecture notes for CSCI 4999 (Applied Probability) and CSCI 3030 (Reasoning Under Uncertainty). These notes provide an overview of the content covered during lecture.\nMore in-depth information can be found in the course section available on Blackboard.",
     "crumbs": [
       "Course Info",
       "Course Overview"
@@ -719,7 +719,40 @@
     "href": "conventions.html",
     "title": "Content Conventions",
     "section": "",
-    "text": "The information in these course notes is categorized into visual tiers.\n\n1. Core Material\n\nThese blocks contain the core content of the course. You are expected to be able to reproduce this information, derive the formulas, or perform the calculations from memory during examinations.\n\n\n\n\n2. Reference Concepts (Functional Familiarity)\n\nThese blocks contain tools, syntax, or concepts that you should recognize and understand when you see them. You do not need to memorize these “cold,” but you should know they exist and where to find them.\n\n\n\n\n3. Extended Information\n\nThese blocks are for students looking to further explore related content. This material is not testable but provides may prove useful for mastery of the core material in the course.\n\n\n\n\n4. Notes\n\nThese blocks are for context, especially for definitions that are used in the course that may be defined differently elsewhere.\n\n\n\n\n5. Practice\n\nThese blocks contain practice problems associated with their related section(s).",
+    "text": "These labels indicate how to use the material in the course notes. They distinguish what you should study independently, what you may consult as a reference, and where you can explore or practice further.\nThe labels are a guide, not a substitute for the course learning objectives or instructions for a particular assessment.",
+    "crumbs": [
+      "Course Info",
+      "Content Conventions"
+    ]
+  },
+  {
+    "objectID": "conventions.html#learning-expectations",
+    "href": "conventions.html#learning-expectations",
+    "title": "Content Conventions",
+    "section": "Learning expectations",
+    "text": "Learning expectations\n\nThe central concepts, definitions, and methods of the course. You should be able to explain and apply this material independently, including the reasoning behind a result rather than just its final form. Unless an assessment specifies otherwise, prepare to work with these ideas without consulting the notes.\n\n\nSupporting tools, formulas, syntax, and concepts that you should recognize, interpret, and know when to use. You are not generally expected to recall every detail from memory, but you should be able to find and use the relevant reference when needed.",
+    "crumbs": [
+      "Course Info",
+      "Content Conventions"
+    ]
+  },
+  {
+    "objectID": "conventions.html#context-and-additional-depth",
+    "href": "conventions.html#context-and-additional-depth",
+    "title": "Content Conventions",
+    "section": "Context and additional depth",
+    "text": "Context and additional depth\n\nShort explanations of assumptions, terminology, exceptions, or common sources of confusion. A note may clarify core material, so do not assume that a note is optional simply because it appears in a separate box.\n\n\nOptional connections, deeper explanations, and applications beyond the course’s required scope. These sections are not assessed directly, but they may help you build intuition or explore a subject in greater depth.",
+    "crumbs": [
+      "Course Info",
+      "Content Conventions"
+    ]
+  },
+  {
+    "objectID": "conventions.html#applying-what-you-learn",
+    "href": "conventions.html#applying-what-you-learn",
+    "title": "Content Conventions",
+    "section": "Applying what you learn",
+    "text": "Applying what you learn\n\nQuestions and small tasks that let you check your understanding and apply the ideas from nearby sections. Some ask for calculations; others ask you to explain a choice, interpret a result, or examine an assumption.",
     "crumbs": [
       "Course Info",
       "Content Conventions"

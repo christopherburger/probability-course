@@ -1,6 +1,6 @@
 ---
 title: "Course Overview"
-subtitle: "Applied Probability"
+subtitle: "Probability, Uncertainty and Inference."
 author: "Christopher Burger"
 institute: "University of Mississippi | School of Engineering"
 format: 
@@ -12,6 +12,6 @@ format:
     css: styles.css
 ---
 
-This is the central repository for the lecture notes for CSCI 4999. These notes provide an overview of the content covered during lecture.
+This is the central repository for the lecture notes for CSCI 4999 (Applied Probability) and CSCI 3030 (Reasoning Under Uncertainty). These notes provide an overview of the content covered during lecture.
 
 More in-depth information can be found in the course section available on Blackboard.
