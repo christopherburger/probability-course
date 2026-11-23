@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Information Theory – Applied Probability</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6388ad00bb6ecaefa25b9a98db1edf18.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../custom.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/sets.html">Appendix</a></li><li class="breadcrumb-item"><a href="../lectures/information.html">Information Theory</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Applied Probability</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Course Info</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../conventions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Content Conventions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/state_space.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1: Experiments, Spaces and the Multiplication Principle</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/permutations_combinations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2: Permutations and Combinations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/inclusion_exclusion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3: The Principle of Inclusion-Exclusion</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/axioms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4: Axioms of Probability</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/conditional_probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5: Conditional Probability</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/bayes_theorem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6: Bayes’ Theorem</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Random Variables</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/random_variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7: Random Variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/discrete_rv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">8: Discrete Random Variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/continuous_rv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">9: Continuous Random Variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/expectation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">10: Expected Value</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/variance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11: Variance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/joint_distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">12: Joint Distributions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/mgfs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">13: Moment Generating Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/sample_statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">14: Sample Statistics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/bounds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">15: Bounds and Inequalities</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/clt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">16: The Central Limit Therorem</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/conditional_probability_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">17: Conditional Probability Revisted</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Inference</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/chapter0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical Rethinking</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/chapter2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Chapter 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/chapter3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Chapter 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/chapter4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Chapter 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/chapter5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Chapter 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/chapter6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Chapter 6</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Stochastic Processes</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendix</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/sets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/complex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Complex Numbers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/convolution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Convolution</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/transforms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Transforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lectures/information.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Information Theory</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#why-study-information-theory" id="toc-why-study-information-theory" class="nav-link active" data-scroll-target="#why-study-information-theory"><span class="header-section-number">1</span> Why study information theory?</a>
+  <ul class="collapse">
+  <li><a href="#conventions" id="toc-conventions" class="nav-link" data-scroll-target="#conventions"><span class="header-section-number">1.1</span> Conventions</a></li>
+  </ul></li>
+  <li><a href="#information-and-surprise" id="toc-information-and-surprise" class="nav-link" data-scroll-target="#information-and-surprise"><span class="header-section-number">2</span> Information and surprise</a>
+  <ul class="collapse">
+  <li><a href="#why-probability-determines-surprise" id="toc-why-probability-determines-surprise" class="nav-link" data-scroll-target="#why-probability-determines-surprise"><span class="header-section-number">2.1</span> Why probability determines surprise</a></li>
+  <li><a href="#the-units-of-information" id="toc-the-units-of-information" class="nav-link" data-scroll-target="#the-units-of-information"><span class="header-section-number">2.2</span> The units of information</a></li>
+  </ul></li>
+  <li><a href="#expected-surprise-and-entropy" id="toc-expected-surprise-and-entropy" class="nav-link" data-scroll-target="#expected-surprise-and-entropy"><span class="header-section-number">3</span> Expected surprise and entropy</a>
+  <ul class="collapse">
+  <li><a href="#from-one-outcome-to-a-distribution" id="toc-from-one-outcome-to-a-distribution" class="nav-link" data-scroll-target="#from-one-outcome-to-a-distribution"><span class="header-section-number">3.1</span> From one outcome to a distribution</a></li>
+  <li><a href="#the-bernoulli-distribution" id="toc-the-bernoulli-distribution" class="nav-link" data-scroll-target="#the-bernoulli-distribution"><span class="header-section-number">3.2</span> The Bernoulli Distribution</a></li>
+  <li><a href="#entropy-depends-on-the-question" id="toc-entropy-depends-on-the-question" class="nav-link" data-scroll-target="#entropy-depends-on-the-question"><span class="header-section-number">3.3</span> Entropy depends on the question</a></li>
+  </ul></li>
+  <li><a href="#predictive-distributions-and-cross-entropy" id="toc-predictive-distributions-and-cross-entropy" class="nav-link" data-scroll-target="#predictive-distributions-and-cross-entropy"><span class="header-section-number">4</span> Predictive distributions and cross-entropy</a>
+  <ul class="collapse">
+  <li><a href="#evaluating-a-probability-forecast" id="toc-evaluating-a-probability-forecast" class="nav-link" data-scroll-target="#evaluating-a-probability-forecast"><span class="header-section-number">4.1</span> Evaluating a probability forecast</a></li>
+  <li><a href="#expected-loss-under-the-generating-distribution" id="toc-expected-loss-under-the-generating-distribution" class="nav-link" data-scroll-target="#expected-loss-under-the-generating-distribution"><span class="header-section-number">4.2</span> Expected loss under the generating distribution</a></li>
+  </ul></li>
+  <li><a href="#kullbackleibler-divergence" id="toc-kullbackleibler-divergence" class="nav-link" data-scroll-target="#kullbackleibler-divergence"><span class="header-section-number">5</span> Kullback–Leibler divergence</a>
+  <ul class="collapse">
+  <li><a href="#excess-expected-predictive-loss" id="toc-excess-expected-predictive-loss" class="nav-link" data-scroll-target="#excess-expected-predictive-loss"><span class="header-section-number">5.1</span> Excess expected predictive loss</a></li>
+  <li><a href="#properties-that-follow-from-the-interpretation" id="toc-properties-that-follow-from-the-interpretation" class="nav-link" data-scroll-target="#properties-that-follow-from-the-interpretation"><span class="header-section-number">5.2</span> Properties that follow from the interpretation</a></li>
+  <li><a href="#direction-matters-a-visualization" id="toc-direction-matters-a-visualization" class="nav-link" data-scroll-target="#direction-matters-a-visualization"><span class="header-section-number">5.3</span> Direction matters: a visualization</a></li>
+  <li><a href="#what-kl-divergence-cannot-tell-us" id="toc-what-kl-divergence-cannot-tell-us" class="nav-link" data-scroll-target="#what-kl-divergence-cannot-tell-us"><span class="header-section-number">5.4</span> What KL divergence cannot tell us</a></li>
+  </ul></li>
+  <li><a href="#from-theoretical-divergence-to-statistical-model-evaluation" id="toc-from-theoretical-divergence-to-statistical-model-evaluation" class="nav-link" data-scroll-target="#from-theoretical-divergence-to-statistical-model-evaluation"><span class="header-section-number">6</span> From theoretical divergence to statistical model evaluation</a>
+  <ul class="collapse">
+  <li><a href="#the-central-difficulty-we-do-not-know-p" id="toc-the-central-difficulty-we-do-not-know-p" class="nav-link" data-scroll-target="#the-central-difficulty-we-do-not-know-p"><span class="header-section-number">6.1</span> The central difficulty: we do not know <span class="math inline">p</span></a></li>
+  <li><a href="#why-evaluating-on-training-data-can-mislead" id="toc-why-evaluating-on-training-data-can-mislead" class="nav-link" data-scroll-target="#why-evaluating-on-training-data-can-mislead"><span class="header-section-number">6.2</span> Why evaluating on training data can mislead</a></li>
+  <li><a href="#bayesian-prediction-average-probabilities-before-taking-logs" id="toc-bayesian-prediction-average-probabilities-before-taking-logs" class="nav-link" data-scroll-target="#bayesian-prediction-average-probabilities-before-taking-logs"><span class="header-section-number">6.3</span> Bayesian prediction: average probabilities before taking logs</a></li>
+  <li><a href="#where-information-criteria-fit" id="toc-where-information-criteria-fit" class="nav-link" data-scroll-target="#where-information-criteria-fit"><span class="header-section-number">6.4</span> Where information criteria fit</a></li>
+  </ul></li>
+  <li><a href="#what-information-theory-doesand-does-nottell-us" id="toc-what-information-theory-doesand-does-nottell-us" class="nav-link" data-scroll-target="#what-information-theory-doesand-does-nottell-us"><span class="header-section-number">7</span> What information theory does—and does not—tell us</a>
+  <ul class="collapse">
+  <li><a href="#a-warning-about-continuous-variables" id="toc-a-warning-about-continuous-variables" class="nav-link" data-scroll-target="#a-warning-about-continuous-variables"><span class="header-section-number">7.1</span> A warning about continuous variables</a></li>
+  <li><a href="#a-warning-about-information-gained" id="toc-a-warning-about-information-gained" class="nav-link" data-scroll-target="#a-warning-about-information-gained"><span class="header-section-number">7.2</span> A warning about “information gained”</a></li>
+  <li><a href="#the-central-thread" id="toc-the-central-thread" class="nav-link" data-scroll-target="#the-central-thread"><span class="header-section-number">7.3</span> The central thread</a></li>
+  </ul></li>
+  <li><a href="#problems-and-investigations" id="toc-problems-and-investigations" class="nav-link" data-scroll-target="#problems-and-investigations"><span class="header-section-number">8</span> Problems and investigations</a></li>
+  <li><a href="#quick-reference" id="toc-quick-reference" class="nav-link" data-scroll-target="#quick-reference"><span class="header-section-number">9</span> Quick reference</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">10</span> Further reading</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lectures/sets.html">Appendix</a></li><li class="breadcrumb-item"><a href="../lectures/information.html">Information Theory</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Information Theory</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="why-study-information-theory" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="why-study-information-theory"><span class="header-section-number">1</span> Why study information theory?</h2>
+<p>Imagine that two engineers are trying to predict whether a machine will fail during a particular operating interval. Both produce probabilities, not just labels. The first assigns a probability of failure of 0.10; the second assigns a probability of 0.80. When the machine fails, the second researcher has made the less surprising prediction. But if the machine <em>does not</em> fail, the first researcher has made the less surprising prediction.</p>
+<p>How should we judge these predictions over many observations? What distinguishes uncertainty <em>before</em> an observation from the quality of a prediction <em>after</em> an observation? And what can we say when we are ignorant about the probabilities associated with the process?</p>
+<p>Information theory gives us a precise language for these questions. In this chapter, we use a small part of that theory to build toward the evaluation of statistical models. Our purpose is not to study data compression or communication channels. We instead want to understand why logarithmic probabilities appear in statistical inference and what quantities such as entropy and Kullback–Leibler (KL) divergence do, and do not, tell us.</p>
+<p>In this brief overview, our goals are:</p>
+<ol type="1">
+<li>Explain why low-probability observations are assigned greater <em>surprisal</em>.</li>
+<li>Interpret Shannon entropy as <strong>expected surprisal</strong> under a specified probability distribution.</li>
+<li>Distinguish entropy from cross-entropy and explain why lower model entropy need not imply better predictions.</li>
+<li>Interpret KL divergence as <strong>excess expected predictive log loss</strong>, rather than as an ordinary distance.</li>
+<li>Explain why predictive performance must be estimated when the generating distribution is unknown, and why using the same observations to fit and evaluate a model can mislead us.</li>
+<li>Identify what predictive evaluation cannot establish about causal mechanisms or scientific explanations.</li>
+</ol>
+<section id="conventions" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="conventions"><span class="header-section-number">1.1</span> Conventions</h3>
+<p>We will work mainly with discrete outcomes so that the important ideas are not hidden by calculus. Throughout the chapter:</p>
+<ul>
+<li><span class="math inline">p(x)</span> denotes the <strong>generating distribution</strong>: the probabilities under which observations arise in our thought experiments.</li>
+<li><span class="math inline">q(x)</span> denotes a <strong>predictive distribution</strong> supplied by a model.</li>
+<li><span class="math inline">x</span> denotes a possible outcome; <span class="math inline">X</span> is a random variable.</li>
+<li><span class="math inline">\log</span> means the natural logarithm, so information quantities are measured in <strong>nats</strong>, unless we explicitly write <span class="math inline">\log_2</span> for <strong>bits</strong>.</li>
+</ul>
+<p>In real applications, <span class="math inline">p</span> is generally unknown. We give it a name here to make the theoretical comparisons precise.</p>
+<div id="code-setup" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Common imports for the executable examples in this chapter.</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>plt.rcParams.update({</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"figure.figsize"</span>: (<span class="dv">7</span>, <span class="dv">4</span>),</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"axes.spines.top"</span>: <span class="va">False</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"axes.spines.right"</span>: <span class="va">False</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="information-and-surprise" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="information-and-surprise"><span class="header-section-number">2</span> Information and surprise</h2>
+<section id="why-probability-determines-surprise" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="why-probability-determines-surprise"><span class="header-section-number">2.1</span> Why probability determines surprise</h3>
+<p>Suppose a fair coin is tossed once (with all the usual assumptions to goes into what a ‘fair’ coin is). We know that the probability of heads is <span class="math inline">1/2</span>. Now suppose a fair, six-sided die is rolled. The probability of a six is <span class="math inline">1/6</span>. We are more surprised by the specified die result than by the specified coin result, because it was less probable <em>before</em> the experiment.</p>
+<p>This suggests defining the surprisal associated with an outcome <span class="math inline">x</span> as a decreasing function of its assigned probability <span class="math inline">p(x)</span>. A useful choice should also satisfy another requirement: for independent events, the information associated with the joint occurrence should equal the sum of the information associated with each event.</p>
+<p>If <span class="math inline">X</span> and <span class="math inline">Y</span> are independent, then</p>
+<p><span class="math display">p(x,y)=p(x)p(y).</span></p>
+<p>We therefore want a function <span class="math inline">I</span> for which</p>
+<p><span class="math display">I(x,y)=I(x)+I(y).</span></p>
+<p>Recall that logarithms transform products into sums. This motivates the definition</p>
+<p><span class="math display">I_p(x)=-\log p(x)</span></p>
+<p>The subscript emphasizes that the surprisal depends on <strong>which probability distribution assigned the probability</strong>. There is no surprisal value for an outcome in isolation from a probability assignment.</p>
+<p>For independent observations,</p>
+<p><span class="math display">-\log[p(x)p(y)]=-\log p(x)-\log p(y)</span></p>
+<p>This additive property is also one reason that log probabilities appear so frequently in likelihood-based statistical inference.</p>
+<div class="note-box" title="The word 'information'">
+<p>In casual speech, information can mean a meaningful fact, a useful discovery, or a message that changes a decision. In information theory, the quantity <span class="math inline">-\log p(x)</span> does <strong>not</strong> directly measure any of those things. It quantifies how surprising an outcome is relative to an assigned distribution. A rare observation is not automatically important, scientifically revealing, or useful.</p>
+</div>
+</section>
+<section id="the-units-of-information" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="the-units-of-information"><span class="header-section-number">2.2</span> The units of information</h3>
+<p>For a fair coin outcome,</p>
+<p><span class="math display">I(\text{heads})=-\log_2(1/2)=1\text{ bit}</span></p>
+<p>For the same event using natural logarithms,</p>
+<p><span class="math display">I(\text{heads})=-\log(1/2)=\log 2\approx 0.693\text{ nats}</span></p>
+<p>Changing the logarithm base changes only the units. For example,</p>
+<p><span class="math display">1\text{ nat}=\frac{1}{\log 2}\text{ bits}</span></p>
+<p>In what follows, we use natural logarithms because statistical likelihoods and log scores are normally expressed that way.</p>
+<p>The next figure illustrates the relationship between assigned probability and surprisal.</p>
+<div id="cell-fig-surprisal" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>probabilities <span class="op">=</span> np.linspace(<span class="fl">0.005</span>, <span class="fl">1.0</span>, <span class="dv">500</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>surprisal <span class="op">=</span> <span class="op">-</span>np.log(probabilities)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>ax.plot(probabilities, surprisal, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Assigned probability of an outcome"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>       ylabel<span class="op">=</span><span class="st">"Surprisal (nats)"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>       title<span class="op">=</span><span class="st">"How surprising is an outcome?"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>ax.grid(alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-surprisal" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-surprisal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="information_files/figure-html/fig-surprisal-output-1.png" width="577" height="377" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-surprisal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Surprisal increases sharply as the assigned probability of an outcome approaches zero.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The two limiting cases should be understood before continuing on:</p>
+<ul>
+<li>If <span class="math inline">p(x)=1</span>, then <span class="math inline">I_p(x)=0</span>. An outcome that is certain under the distribution carries no surprise.</li>
+<li>If <span class="math inline">p(x)=0</span> and the outcome nevertheless occurs, the log loss is infinite. A probability assignment of zero rules the outcome out entirely.</li>
+</ul>
+<p>The second case will become important when we evaluate models.</p>
+<div class="practice-box">
+<p>If a model assigns a probability of 0.01 to an event, and another model assigns 0.10 to the same event, which model experiences greater surprisal when the event occurs?</p>
+<p>Would your answer change if the event did not occur? What probabilities you would need to evaluate the alternative outcome.</p>
+</div>
+</section>
+</section>
+<section id="expected-surprise-and-entropy" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="expected-surprise-and-entropy"><span class="header-section-number">3</span> Expected surprise and entropy</h2>
+<section id="from-one-outcome-to-a-distribution" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="from-one-outcome-to-a-distribution"><span class="header-section-number">3.1</span> From one outcome to a distribution</h3>
+<p>Surprisal describes a <strong>realized outcome</strong>. Before observing a random variable, however, we do not know which outcome will occur. We can instead ask for the <em>expected</em> surprisal under a specified distribution.</p>
+<p>For a discrete random variable with probabilities <span class="math inline">p(x)</span>, take the ordinary expected value:</p>
+<p><span class="math display">\begin{aligned}
+H(p)
+&amp;=\mathbb{E}_{X\sim p}[I_p(X)]\\
+&amp;=\sum_x p(x)[-\log p(x)]\\
+&amp;=\boxed{-\sum_x p(x)\log p(x).}
+\end{aligned}</span></p>
+<p>This is the <strong>Shannon entropy</strong>.</p>
+<p>Note that this is just the expected value of the function <span class="math inline">-\log p(X)</span>.</p>
+<p>We use the standard convention <span class="math inline">0\log 0=0</span> in this sum. The convention is justified by the limit <span class="math inline">\lim_{u\to0^+}u\log u=0</span>. A zero-probability outcome contributes nothing to an expectation taken under <span class="math inline">p</span>.</p>
+<div class="note-box" title="Keep the levels of description separate">
+<p><span class="math inline">-\log p(x)</span> is the surprisal of <strong>one outcome</strong>. <span class="math inline">H(p)</span> is the average surprisal <strong>over possible outcomes</strong> under <span class="math inline">p</span>. An individual observation does not itself have an entropy.</p>
+</div>
+</section>
+<section id="the-bernoulli-distribution" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="the-bernoulli-distribution"><span class="header-section-number">3.2</span> The Bernoulli Distribution</h3>
+<p>Let <span class="math inline">X</span> be Bernoulli with <span class="math inline">P(X=1)=\theta</span>. It has only two possible outcomes:</p>
+<p><span class="math display">p(1)=\theta,\qquad p(0)=1-\theta.</span></p>
+<p>Its entropy is</p>
+<p><span class="math display">H(\theta)=-\theta\log\theta-(1-\theta)\log(1-\theta)</span></p>
+<p>When <span class="math inline">\theta=0</span> or <span class="math inline">\theta=1</span>, the outcome is certain and entropy is zero. When <span class="math inline">\theta=1/2</span>, the two outcomes are equally probable and entropy reaches its maximum, <span class="math inline">\log 2</span> nats, or 1 bit.</p>
+<div id="cell-fig-bernoulli-entropy" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>theta <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">501</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> np.zeros_like(theta)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>interior <span class="op">=</span> (theta <span class="op">&gt;</span> <span class="dv">0</span>) <span class="op">&amp;</span> (theta <span class="op">&lt;</span> <span class="dv">1</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>h[interior] <span class="op">=</span> <span class="op">-</span>(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    theta[interior] <span class="op">*</span> np.log(theta[interior])</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> theta[interior]) <span class="op">*</span> np.log1p(<span class="op">-</span>theta[interior])</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>ax.plot(theta, h, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>ax.axvline(<span class="fl">0.5</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>ax.scatter([<span class="fl">0.5</span>], [np.log(<span class="dv">2</span>)], zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="ch">\t</span><span class="vs">heta=P</span><span class="kw">(</span><span class="vs">X=1</span><span class="kw">)</span><span class="dv">$</span><span class="vs">"</span>, ylabel<span class="op">=</span><span class="st">"Entropy (nats)"</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>       title<span class="op">=</span><span class="st">"Uncertainty in a Bernoulli distribution"</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>ax.grid(alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-bernoulli-entropy" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bernoulli-entropy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="information_files/figure-html/fig-bernoulli-entropy-output-1.png" width="590" height="377" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bernoulli-entropy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Entropy of a Bernoulli distribution. With two possible outcomes, uncertainty is greatest when they are equally likely.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We must be careful to avoid saying that a high-entropy distribution is a “bad” distribution or that low entropy is always preferable. Entropy does not evaluate how well a probability distribution agrees with reality, it only quantifies uncertainty <em>within that distribution</em>.</p>
+<p>For a fixed collection of <span class="math inline">k</span> possible outcomes, entropy is maximized by the uniform distribution, for which <span class="math inline">p(x)=1/k</span> and <span class="math inline">H(p)=\log k</span>. The phrase <em>fixed collection of outcomes</em> is important here as changing what we count as an outcome can change the entropy. Seeing as how the uniform distribution maximizes entropy in the above case, our caution against saying a high-entropy distribution is “bad” is better understood. We know from earlier material that when we have no understanding about a process, the assignment of a uniform prior is the most reasonable action.</p>
+</section>
+<section id="entropy-depends-on-the-question" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="entropy-depends-on-the-question"><span class="header-section-number">3.3</span> Entropy depends on the question</h3>
+<p>Consider the roll of a fair die. If <span class="math inline">X</span> records the exact face, it has six equally likely outcomes and</p>
+<p><span class="math display">H(X)=\log 6</span></p>
+<p>Now define a new variable <span class="math inline">Y</span> that records only whether the die result is even or odd. Then <span class="math inline">Y</span> has two equally likely outcomes and</p>
+<p><span class="math display">H(Y)=\log 2</span></p>
+<p>Both variables describe the same physical roll. They answer different questions. Information quantities depend on how we define the random variable and its possible outcomes.</p>
+<p>This is one reason to be cautious when comparing numerical entropy values across different measurements or descriptions of a system.</p>
+<div class="practice-box">
+<p>A researcher reports that their fitted model has low entropy. Does this alone tell us whether the model will predict new observations well?</p>
+<p>Construct a situation where a low-entropy model makes poor predictions.</p>
+</div>
+</section>
+</section>
+<section id="predictive-distributions-and-cross-entropy" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="predictive-distributions-and-cross-entropy"><span class="header-section-number">4</span> Predictive distributions and cross-entropy</h2>
+<section id="evaluating-a-probability-forecast" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="evaluating-a-probability-forecast"><span class="header-section-number">4.1</span> Evaluating a probability forecast</h3>
+<p>Entropy asks how surprising observations are expected to be <strong>under the same distribution that generates them</strong>. In statistical inference, we usually face a different problem: a model assigns probabilities, and the observations may be better estimated by using another distribution.</p>
+<p>Let <span class="math inline">p(x)</span> be the generating distribution and <span class="math inline">q(x)</span> the probabilities assigned by a predictive model.</p>
+<p>When <span class="math inline">x</span> occurs, the model receives the <strong>log loss</strong></p>
+<p><span class="math display">L(q,x)=-\log q(x).</span></p>
+<p>Notice that the <em>model’s</em> probability <span class="math inline">q(x)</span> appears inside the logarithm, not the unknown generating probability <span class="math inline">p(x)</span>.</p>
+<p>A model incurs a small loss if it assigns high probability to an observation that occurs and a large loss if it assigns low probability to that observation.</p>
+<p>For a collection of observations <span class="math inline">x_1,\ldots,x_n</span>, the average log loss is</p>
+<p><span class="math display">\widehat L(q)=-\frac{1}{n}\sum_{i=1}^n\log q(x_i).</span></p>
+<p>The <strong>negative sum</strong> of log probabilities is the negative log likelihood when the model supplies the relevant joint distribution through a product <span class="math inline">\prod_i q(x_i)</span>, as it does for independent observations under a fixed predictive distribution.</p>
+<p>If observations are dependent or when predictions change with earlier observations we will need to be more careful with the violation of the independence assumption.</p>
+</section>
+<section id="expected-loss-under-the-generating-distribution" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="expected-loss-under-the-generating-distribution"><span class="header-section-number">4.2</span> Expected loss under the generating distribution</h3>
+<p>If the observations arise according to <span class="math inline">p</span>, the expected log loss of predictions made using <span class="math inline">q</span> is</p>
+<p><span class="math display">\begin{aligned}
+H(p,q)
+&amp;=\mathbb{E}_{X\sim p}[-\log q(X)]\\
+&amp;=-\sum_x p(x)\log q(x)
+\end{aligned}</span></p>
+<p>This quantity is called <strong>cross-entropy</strong>.</p>
+<p>Compare the definitions:</p>
+<p><span class="math display">\underbrace{H(p)}_{\text{entropy}}=-\sum_x p(x)\log p(x),
+\qquad
+\underbrace{H(p,q)}_{\text{cross-entropy}}=-\sum_x p(x)\log q(x).</span></p>
+<p>Both expectations use <span class="math inline">p</span> to weight the outcomes, because <span class="math inline">p</span> is the distribution that generates them. They differ in the probability used to <em>score</em> those outcomes.</p>
+<p>This is a very important distinction: <strong>entropy is a property of a distribution; cross-entropy evaluates one distribution’s predictions against outcomes generated by another.</strong></p>
+<div class="example-box">
+<p>Suppose a process produces a success with probability <span class="math inline">p(1)=0.8</span> and a failure with probability <span class="math inline">p(0)=0.2</span>.</p>
+<p>Three models make these predictions:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Model</th>
+<th style="text-align: right;"><span class="math inline">q(1)</span></th>
+<th style="text-align: right;"><span class="math inline">q(0)</span></th>
+<th style="text-align: right;">Expected log loss <span class="math inline">H(p,q)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td style="text-align: right;">0.80</td>
+<td style="text-align: right;">0.20</td>
+<td style="text-align: right;">0.500 nats</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0.693 nats</td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td style="text-align: right;">0.99</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.929 nats</td>
+</tr>
+</tbody>
+</table>
+<p>For example, Model C incurs expected loss</p>
+<p><span class="math display">\begin{aligned}
+H(p,q_C)
+&amp;=-0.8\log(0.99)-0.2\log(0.01)\\
+&amp;\approx 0.929.
+\end{aligned}</span></p>
+<p>Model C is highly confident that a success will occur. It is therefore rewarded when a success happens, but receives a very large penalty on the failures that occur 20% of the time. It has <em>lower entropy</em> than Model A, yet its <em>expected predictive loss</em> is higher.</p>
+<p>The following code verifies the table.</p>
+<div id="code-forecast-table" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>p_success <span class="op">=</span> <span class="fl">0.8</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>forecasts <span class="op">=</span> {<span class="st">"A (calibrated)"</span>: <span class="fl">0.8</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>             <span class="st">"B (uninformative)"</span>: <span class="fl">0.5</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>             <span class="st">"C (overconfident)"</span>: <span class="fl">0.99</span>}</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, q_success <span class="kw">in</span> forecasts.items():</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    expected_loss <span class="op">=</span> <span class="op">-</span>(</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        p_success <span class="op">*</span> np.log(q_success)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> p_success) <span class="op">*</span> np.log1p(<span class="op">-</span>q_success)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>name<span class="sc">:20s}</span><span class="ss">: </span><span class="sc">{</span>expected_loss<span class="sc">:.3f}</span><span class="ss"> nats"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>A (calibrated)      : 0.500 nats
+B (uninformative)   : 0.693 nats
+C (overconfident)   : 0.929 nats</code></pre>
+</div>
+</div>
+<p>For any Bernoulli prediction <span class="math inline">q</span>, a realized success has loss <span class="math inline">-\log q</span>, a realized failure has loss <span class="math inline">-\log(1-q)</span>, and their expectation under <span class="math inline">p(1)=0.8</span> is</p>
+<p><span class="math display">H(p,q)=-0.8\log q-0.2\log(1-q).</span></p>
+<div id="cell-fig-forecast-loss" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>q_grid <span class="op">=</span> np.linspace(<span class="fl">0.01</span>, <span class="fl">0.99</span>, <span class="dv">500</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>loss_success <span class="op">=</span> <span class="op">-</span>np.log(q_grid)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>loss_failure <span class="op">=</span> <span class="op">-</span>np.log1p(<span class="op">-</span>q_grid)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>expected_loss <span class="op">=</span> <span class="fl">0.8</span> <span class="op">*</span> loss_success <span class="op">+</span> <span class="fl">0.2</span> <span class="op">*</span> loss_failure</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>ax.plot(q_grid, loss_success, label<span class="op">=</span><span class="st">"If success occurs"</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>ax.plot(q_grid, loss_failure, label<span class="op">=</span><span class="st">"If failure occurs"</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>ax.plot(q_grid, expected_loss, linewidth<span class="op">=</span><span class="dv">3</span>, label<span class="op">=</span><span class="st">"Expected loss, p = 0.80"</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>ax.axvline(<span class="fl">0.8</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Predicted probability of success, q"</span>,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>       ylabel<span class="op">=</span><span class="st">"Log loss (nats)"</span>,</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>       title<span class="op">=</span><span class="st">"Confident predictions carry risks"</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>ax.grid(alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-forecast-loss" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-forecast-loss-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="information_files/figure-html/fig-forecast-loss-output-1.png" width="577" height="377" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-forecast-loss-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Loss for each possible outcome and expected loss for a process with an 80% success rate. The expected loss is minimized at a forecast of 0.80.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>This example illustrates a reason for using logarithmic scoring: <strong>in expectation, a model minimizes its log loss by reporting the generating probabilities</strong>. Such a scoring rule is called <em>strictly proper</em>. It rewards well-calibrated probability assignments, not merely confident ones.</p>
+<p>Now, when <span class="math inline">p</span> is unknown, we cannot directly evaluate these expected losses. We will return to address this problem soon.</p>
+</section>
+</section>
+<section id="kullbackleibler-divergence" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="kullbackleibler-divergence"><span class="header-section-number">5</span> Kullback–Leibler divergence</h2>
+<section id="excess-expected-predictive-loss" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="excess-expected-predictive-loss"><span class="header-section-number">5.1</span> Excess expected predictive loss</h3>
+<p>We now have two quantities:</p>
+<ul>
+<li><span class="math inline">H(p)</span>: the expected log loss if predictions use the generating distribution itself.</li>
+<li><span class="math inline">H(p,q)</span>: the expected log loss if predictions use a different distribution <span class="math inline">q</span>.</li>
+</ul>
+<p>Subtracting them gives the <em>additional</em> expected loss incurred by predicting with <span class="math inline">q</span> instead of <span class="math inline">p</span>:</p>
+<p><span class="math display">\begin{aligned}
+D_{\mathrm{KL}}(p\|q)
+&amp;=H(p,q)-H(p)\\
+&amp;=-\sum_x p(x)\log q(x)+\sum_x p(x)\log p(x)\\
+&amp;=\boxed{\sum_x p(x)\log\frac{p(x)}{q(x)}.}
+\end{aligned}</span></p>
+<p>This is the <strong>Kullback–Leibler divergence</strong> from <span class="math inline">q</span> to <span class="math inline">p</span>, conventionally written <span class="math inline">D_{\mathrm{KL}}(p\|q)</span>.</p>
+<p>The order matters. In this expression, observations are weighted according to <span class="math inline">p</span>, while <span class="math inline">q</span> provides the predictive probabilities being evaluated.</p>
+<blockquote class="blockquote">
+<p>KL divergence is the excess expected log loss associated with using <span class="math inline">q</span> to predict observations generated according to <span class="math inline">p</span>.</p>
+</blockquote>
+</section>
+<section id="properties-that-follow-from-the-interpretation" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="properties-that-follow-from-the-interpretation"><span class="header-section-number">5.2</span> Properties that follow from the interpretation</h3>
+<p><strong>Nonnegativity.</strong> For distributions with the same outcome space,</p>
+<p><span class="math display">D_{\mathrm{KL}}(p\|q)\geq 0,</span></p>
+<p>with equality if <span class="math inline">p=q</span> on the support of <span class="math inline">p</span> (for normalized discrete distributions, this means the distributions are equal). This is consistent with the fact that the true probabilities minimize expected log loss.</p>
+<p>To see a short argument, use <span class="math inline">\log u\leq u-1</span> for <span class="math inline">u&gt;0</span>. If <span class="math inline">q(x)&gt;0</span> wherever <span class="math inline">p(x)&gt;0</span>, then</p>
+<p><span class="math display">\begin{aligned}
+D_{\mathrm{KL}}(p\|q)
+&amp;=-\sum_{x:p(x)&gt;0}p(x)\log\frac{q(x)}{p(x)}\\
+&amp;\geq \sum_{x:p(x)&gt;0}\bigl[p(x)-q(x)\bigr]\\
+&amp;\geq 0.
+\end{aligned}</span></p>
+<p>The last inequality holds because the <span class="math inline">q</span>-probabilities over the support of <span class="math inline">p</span> sum to at most one.</p>
+<p><strong>Asymmetry.</strong> In general,</p>
+<p><span class="math display">D_{\mathrm{KL}}(p\|q)\ne D_{\mathrm{KL}}(q\|p).</span></p>
+<p>Reversing the arguments changes which distribution generates the observations and which one is being evaluated. Those are different prediction problems.</p>
+<p><strong>Not a metric.</strong> Because it is asymmetric (and does not generally satisfy the triangle inequality), KL divergence is not an ordinary geometric distance.</p>
+<p><strong>Zero-probability predictions.</strong> If <span class="math inline">p(x)&gt;0</span> but <span class="math inline">q(x)=0</span> for some outcome, then <span class="math inline">D_{\mathrm{KL}}(p\|q)=\infty</span>. The predictive model regards an actually possible outcome as impossible.</p>
+<p>For the Bernoulli example, the KL divergence from Model B’s predictions to the actual process is</p>
+<p><span class="math display">\begin{aligned}
+D_{\mathrm{KL}}(p\|q_B)
+&amp;=0.8\log\frac{0.8}{0.5}
++0.2\log\frac{0.2}{0.5}\\
+&amp;\approx 0.193\text{ nats}.
+\end{aligned}</span></p>
+<p>As a check, <span class="math inline">0.693-0.500\approx 0.193</span>.</p>
+</section>
+<section id="direction-matters-a-visualization" class="level3" data-number="5.3">
+<h3 data-number="5.3" class="anchored" data-anchor-id="direction-matters-a-visualization"><span class="header-section-number">5.3</span> Direction matters: a visualization</h3>
+<div id="cell-fig-kl-direction" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="fl">0.8</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> np.linspace(<span class="fl">0.02</span>, <span class="fl">0.98</span>, <span class="dv">500</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>kl_pq <span class="op">=</span> p <span class="op">*</span> np.log(p <span class="op">/</span> q) <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> p) <span class="op">*</span> np.log((<span class="dv">1</span> <span class="op">-</span> p) <span class="op">/</span> (<span class="dv">1</span> <span class="op">-</span> q))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>kl_qp <span class="op">=</span> q <span class="op">*</span> np.log(q <span class="op">/</span> p) <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> q) <span class="op">*</span> np.log((<span class="dv">1</span> <span class="op">-</span> q) <span class="op">/</span> (<span class="dv">1</span> <span class="op">-</span> p))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>ax.plot(q, kl_pq, label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="vs">D_{KL}</span><span class="kw">(</span><span class="vs">p</span><span class="er">\</span><span class="vs">Vert q</span><span class="kw">)</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>ax.plot(q, kl_qp, label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="vs">D_{KL}</span><span class="kw">(</span><span class="vs">q</span><span class="er">\</span><span class="vs">Vert p</span><span class="kw">)</span><span class="dv">$</span><span class="vs">"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>ax.axvline(p, color<span class="op">=</span><span class="st">"gray"</span>, linestyle<span class="op">=</span><span class="st">":"</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Success probability assigned by q"</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>       ylabel<span class="op">=</span><span class="st">"KL divergence (nats)"</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>       title<span class="op">=</span><span class="st">"KL divergence has a direction"</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>ax.grid(alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-kl-direction" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-kl-direction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="information_files/figure-html/fig-kl-direction-output-1.png" width="590" height="377" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-kl-direction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: The two directions of KL divergence are generally different. Here p is Bernoulli(0.80) and q ranges across Bernoulli distributions.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="what-kl-divergence-cannot-tell-us" class="level3" data-number="5.4">
+<h3 data-number="5.4" class="anchored" data-anchor-id="what-kl-divergence-cannot-tell-us"><span class="header-section-number">5.4</span> What KL divergence cannot tell us</h3>
+<p>Knowing that <span class="math inline">D_{\mathrm{KL}}(p\|q_1)&lt;D_{\mathrm{KL}}(p\|q_2)</span> tells us that <span class="math inline">q_1</span> has lower expected log loss than <span class="math inline">q_2</span> for observations generated from <span class="math inline">p</span>. It does <strong>not</strong> establish that <span class="math inline">q_1</span> represents the correct causal mechanism or contains a better scientific explanation.</p>
+<p>Two very different causal stories may generate nearly identical predictive distributions for the observations being evaluated. Their predictive scores can therefore be nearly identical.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Do not confuse these differences">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Do not confuse these differences
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>KL divergence is <strong>not</strong> <span class="math inline">H(q)-H(p)</span>. It is <span class="math inline">H(p,q)-H(p)</span>. The first difference compares the uncertainties <em>inside two distributions</em>; the second compares predictive loss against the same generating distribution.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="from-theoretical-divergence-to-statistical-model-evaluation" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="from-theoretical-divergence-to-statistical-model-evaluation"><span class="header-section-number">6</span> From theoretical divergence to statistical model evaluation</h2>
+<section id="the-central-difficulty-we-do-not-know-p" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="the-central-difficulty-we-do-not-know-p"><span class="header-section-number">6.1</span> The central difficulty: we do not know <span class="math inline">p</span></h3>
+<p>Our worked examples gave us the generating distribution <span class="math inline">p</span>, so we could calculate entropy, cross-entropy, and KL divergence exactly. In statistical practice, this distribution is usually the object of investigation.</p>
+<p>What we observe is a dataset</p>
+<p><span class="math display">\mathcal D=\{x_1,\ldots,x_n\}.</span></p>
+<p>We fit models to these observations and ask how well their predictions might work on <em>new</em> observations drawn from the relevant population or process.</p>
+<p>For a fixed predictive distribution <span class="math inline">q</span>, we can estimate its expected log loss using held-out observations <span class="math inline">x_1^*,\ldots,x_m^*</span>:</p>
+<p><span class="math display">\widehat L_{\mathrm{test}}(q)
+=-\frac{1}{m}\sum_{j=1}^{m}\log q(x_j^*).</span></p>
+<p>This estimates cross-entropy under the conditions represented by the test set. It does not require us to know <span class="math inline">p</span>. We also cannot usually recover the absolute KL divergence because <span class="math inline">H(p)</span> remains unknown. But <strong>differences in expected log loss between predictive distributions</strong> can still be estimated using the same evaluation observations, since the common <span class="math inline">H(p)</span> term cancels.</p>
+</section>
+<section id="why-evaluating-on-training-data-can-mislead" class="level3" data-number="6.2">
+<h3 data-number="6.2" class="anchored" data-anchor-id="why-evaluating-on-training-data-can-mislead"><span class="header-section-number">6.2</span> Why evaluating on training data can mislead</h3>
+<p>A flexible model can adapt to the accidental patterns in its training observations. That can lower its <em>training</em> loss without improving its predictions of new outcomes.</p>
+<p>Here is a simple experiment. We have 12 groups of machines. Unknown to the model, each group has the <strong>same</strong> true probability of failure, 0.70. We collect only six training observations from each group.</p>
+<p>We compare two models:</p>
+<ul>
+<li>A <strong>pooled model</strong> estimates one common failure probability for all groups.</li>
+<li>A <strong>separate-groups model</strong> estimates a different failure probability for each group.</li>
+</ul>
+<p>Both models use the smoothed estimate <span class="math inline">(k+1)/(n+2)</span>, where <span class="math inline">k</span> is the number of failures in <span class="math inline">n</span> observations. The smoothing avoids assigning probabilities of exactly zero or one in very small samples. It can also be interpreted as the posterior predictive failure probability under a uniform Beta prior and a Bernoulli likelihood.</p>
+<p>The following code generates both training observations and a much larger, independent evaluation set. The random seed makes the example reproducible.</p>
+<div id="code-overfitting-setup" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">2026</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>true_probability <span class="op">=</span> <span class="fl">0.70</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>n_groups <span class="op">=</span> <span class="dv">12</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>train_per_group <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>test_per_group <span class="op">=</span> <span class="dv">300</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> rng.binomial(<span class="dv">1</span>, true_probability, (n_groups, train_per_group))</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> rng.binomial(<span class="dv">1</span>, true_probability, (n_groups, test_per_group))</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># A shared estimate, using all training observations.</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>q_pooled <span class="op">=</span> (train.<span class="bu">sum</span>() <span class="op">+</span> <span class="dv">1</span>) <span class="op">/</span> (train.size <span class="op">+</span> <span class="dv">2</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># An estimate for each group, using only that group's training observations.</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>q_by_group <span class="op">=</span> (train.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>) <span class="op">+</span> <span class="dv">1</span>) <span class="op">/</span> (train_per_group <span class="op">+</span> <span class="dv">2</span>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Expand predictions to match each observation in its group.</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>q_pooled_train <span class="op">=</span> np.full(train.shape, q_pooled)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>q_pooled_test <span class="op">=</span> np.full(test.shape, q_pooled)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>q_group_train <span class="op">=</span> np.broadcast_to(q_by_group[:, <span class="va">None</span>], train.shape)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>q_group_test <span class="op">=</span> np.broadcast_to(q_by_group[:, <span class="va">None</span>], test.shape)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mean_log_loss(observations, predictions):</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Mean Bernoulli negative log predictive probability."""</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">float</span>(np.mean(<span class="op">-</span>(</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>        observations <span class="op">*</span> np.log(predictions)</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> observations) <span class="op">*</span> np.log1p(<span class="op">-</span>predictions)</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    )))</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> {</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Pooled"</span>: [mean_log_loss(train, q_pooled_train),</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>               mean_log_loss(test, q_pooled_test)],</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Separate groups"</span>: [mean_log_loss(train, q_group_train),</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>                        mean_log_loss(test, q_group_test)],</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, (training, testing) <span class="kw">in</span> scores.items():</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>name<span class="sc">:16s}</span><span class="ss"> | training: </span><span class="sc">{</span>training<span class="sc">:.3f}</span><span class="ss"> | held out: </span><span class="sc">{</span>testing<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Pooled           | training: 0.530 | held out: 0.627
+Separate groups  | training: 0.480 | held out: 0.647</code></pre>
+</div>
+</div>
+<div id="cell-fig-overfitting" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> <span class="bu">list</span>(scores)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="bu">len</span>(labels))</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>width <span class="op">=</span> <span class="fl">0.34</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>ax.bar(x <span class="op">-</span> width <span class="op">/</span> <span class="dv">2</span>, [scores[name][<span class="dv">0</span>] <span class="cf">for</span> name <span class="kw">in</span> labels], width,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>       label<span class="op">=</span><span class="st">"Training"</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>ax.bar(x <span class="op">+</span> width <span class="op">/</span> <span class="dv">2</span>, [scores[name][<span class="dv">1</span>] <span class="cf">for</span> name <span class="kw">in</span> labels], width,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>       label<span class="op">=</span><span class="st">"Held out"</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>ax.set_xticks(x, labels)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(ylabel<span class="op">=</span><span class="st">"Mean log loss (nats)"</span>,</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>       title<span class="op">=</span><span class="st">"Fitting the data is not the same as predicting new data"</span>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>ax.grid(axis<span class="op">=</span><span class="st">"y"</span>, alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-overfitting" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-overfitting-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="information_files/figure-html/fig-overfitting-output-1.png" width="590" height="358" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-overfitting-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Training and held-out mean log loss for the pooled and separate-groups models. Small training samples can favor unnecessary group-specific variation.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The separate-groups model has more opportunities to adapt to differences between groups in the training sample. Yet we generated the groups from the same probability. Differences among their observed training rates are sampling variation, not evidence of genuine group differences built into this experiment.</p>
+<p>The point is not that pooling is always the correct modeling decision. Real groups can differ. Rather, <strong>a decrease in training loss is not sufficient evidence of improved predictive performance</strong>. Held-out evaluation asks a different question.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Try changing the experiment">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Try changing the experiment
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Change <code>train_per_group</code>, <code>n_groups</code>, and <code>true_probability</code>, or rerun with different random seeds. Under what conditions does the separate-groups model tend to perform worse on held-out observations? What changes if you give each group a different true probability?</p>
+</div>
+</div>
+</section>
+<section id="bayesian-prediction-average-probabilities-before-taking-logs" class="level3" data-number="6.3">
+<h3 data-number="6.3" class="anchored" data-anchor-id="bayesian-prediction-average-probabilities-before-taking-logs"><span class="header-section-number">6.3</span> Bayesian prediction: average probabilities before taking logs</h3>
+<p>For a Bayesian model with parameters <span class="math inline">\theta</span> and training data <span class="math inline">\mathcal D</span>, prediction accounts for posterior uncertainty in <span class="math inline">\theta</span>:</p>
+<p><span class="math display">q(x_{\mathrm{new}}\mid\mathcal D)
+=\int p(x_{\mathrm{new}}\mid\theta)\,
+  p(\theta\mid\mathcal D)\,d\theta.</span></p>
+<p>The log loss of the Bayesian predictive distribution is then</p>
+<p><span class="math display">-\log q(x_{\mathrm{new}}\mid\mathcal D)
+=-\log\int p(x_{\mathrm{new}}\mid\theta)
+  p(\theta\mid\mathcal D)\,d\theta.</span></p>
+<p>This is generally <strong>not</strong> the same as taking the posterior average of the parameter-wise negative log likelihoods:</p>
+<p><span class="math display">-\log\mathbb E_{\theta\mid\mathcal D}
+   [p(x_{\mathrm{new}}\mid\theta)]
+\ne
+\mathbb E_{\theta\mid\mathcal D}
+   [-\log p(x_{\mathrm{new}}\mid\theta)].</span></p>
+<p>This distinction is worth remembering when we later calculate log predictive densities from posterior samples: we average the predictive probabilities (or densities) before applying the logarithm.</p>
+</section>
+<section id="where-information-criteria-fit" class="level3" data-number="6.4">
+<h3 data-number="6.4" class="anchored" data-anchor-id="where-information-criteria-fit"><span class="header-section-number">6.4</span> Where information criteria fit</h3>
+<p>Once we have predictive log scores, the question becomes how to estimate performance on new data <strong>without continually reserving large independent test sets</strong>. Cross-validation and information criteria address versions of this problem.</p>
+<p>At this stage, we need only the conceptual picture:</p>
+<ul>
+<li><strong>Held-out validation</strong> evaluates models on observations not used to fit them.</li>
+<li><strong>Leave-one-out cross-validation (LOO-CV)</strong> repeatedly evaluates the predictive density of an observation using a model trained without that observation. Methods such as PSIS-LOO approximate this efficiently for many Bayesian models.</li>
+<li><strong>WAIC</strong> uses the pointwise log predictive densities and a correction for effective model complexity to estimate out-of-sample predictive performance.</li>
+</ul>
+<p>In <em>Statistical Rethinking</em>, these ideas eventually appear with quantities such as the expected log pointwise predictive density (ELPD) and deviance-style scores. Their sign conventions differ: <strong>higher ELPD is better</strong>, while <strong>lower negative-log-loss or deviance-style criteria are better</strong> when evaluated comparably.</p>
+<p>For example, the deviance-style conversion often takes the form</p>
+<p><span class="math display">\text{deviance-scale score}=-2\,\text{log predictive score}.</span></p>
+<p>Multiplying by <span class="math inline">-2</span> changes the scale and reverses which direction is preferable; it does not change which model has the stronger predictive score, provided the comparison is otherwise valid.</p>
+<p>Information criteria are not a shortcut to discovering the true distribution, and their uncertainty and assumptions matter. Model comparisons should use the same observations, the same predictive target, and compatible likelihood definitions and evaluation units.</p>
+</section>
+</section>
+<section id="what-information-theory-doesand-does-nottell-us" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="what-information-theory-doesand-does-nottell-us"><span class="header-section-number">7</span> What information theory does—and does not—tell us</h2>
+<p>The mathematics is precise, but familiar terminology can encourage interpretations that go further than the mathematics permits.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tempting interpretation</th>
+<th>More precise statement</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>“A surprising event must be informative in a useful sense.”</td>
+<td>Surprisal is relative to an assigned probability, not to the scientific importance of the event.</td>
+</tr>
+<tr class="even">
+<td>“Entropy is what we learned from the observation.”</td>
+<td>Entropy is expected surprisal under a distribution. Learning can be examined by comparing probability assignments before and after data.</td>
+</tr>
+<tr class="odd">
+<td>“A low-entropy model is accurate.”</td>
+<td>A low-entropy model may be confidently wrong.</td>
+</tr>
+<tr class="even">
+<td>“KL divergence is the distance between distributions.”</td>
+<td>KL divergence is directional excess expected log loss, not a metric.</td>
+</tr>
+<tr class="odd">
+<td>“KL divergence is <span class="math inline">H(q)-H(p)</span>.”</td>
+<td>KL divergence is <span class="math inline">H(p,q)-H(p)</span>.</td>
+</tr>
+<tr class="even">
+<td>“The smallest information criterion identifies the true model.”</td>
+<td>The criterion estimates a particular aspect of predictive performance, subject to assumptions and uncertainty.</td>
+</tr>
+<tr class="odd">
+<td>“Good predictions prove the causal explanation.”</td>
+<td>Different causal explanations can imply similar predictions for the observations under consideration.</td>
+</tr>
+</tbody>
+</table>
+<section id="a-warning-about-continuous-variables" class="level3" data-number="7.1">
+<h3 data-number="7.1" class="anchored" data-anchor-id="a-warning-about-continuous-variables"><span class="header-section-number">7.1</span> A warning about continuous variables</h3>
+<p>We have deliberately used <strong>discrete</strong> distributions, where <span class="math inline">p(x)</span> is the probability of an outcome. With a continuous variable, we generally work with a <strong>density</strong> <span class="math inline">f(x)</span>, not a probability assigned to the exact point <span class="math inline">x</span>.</p>
+<p>An exact point in a continuous distribution has probability zero, even when its density is positive. A density can also exceed one. Accordingly, the quantity</p>
+<p><span class="math display">h(f)=-\int f(x)\log f(x)\,dx</span></p>
+<p>is called <strong>differential entropy</strong>, and it does not inherit every intuitive interpretation of discrete Shannon entropy. It can be negative and changes when we rescale a measured variable. That does not prevent predictive log <em>densities</em> and KL divergence between suitable continuous distributions from being useful. It simply means we must not treat a density as a probability mass or interpret differential entropy as a direct count of bits needed to name an exact real number.</p>
+<p>For our immediate goal—understanding model prediction and evaluation—the discrete setting contains the essential logic.</p>
+</section>
+<section id="a-warning-about-information-gained" class="level3" data-number="7.2">
+<h3 data-number="7.2" class="anchored" data-anchor-id="a-warning-about-information-gained"><span class="header-section-number">7.2</span> A warning about “information gained”</h3>
+<p>Suppose observing data changes our prior beliefs about a parameter <span class="math inline">\theta</span> into a posterior distribution. One possible measure of the change is</p>
+<p><span class="math display">D_{\mathrm{KL}}\bigl(p(\theta\mid\mathcal D)\|p(\theta)\bigr).</span></p>
+<p>This describes how different the posterior is from the prior in the KL sense. It is related to Bayesian information gain, but it is <strong>not</strong> the same quantity as the surprisal of the data, <span class="math inline">-\log p(\mathcal D)</span>. An observation can be surprising while changing our beliefs about a particular parameter very little.</p>
+<p>We will return to this distinction when considering prior distributions, posterior inference, and maximum-entropy arguments.</p>
+</section>
+<section id="the-central-thread" class="level3" data-number="7.3">
+<h3 data-number="7.3" class="anchored" data-anchor-id="the-central-thread"><span class="header-section-number">7.3</span> The central thread</h3>
+<p>We began with a single outcome and ended with comparing predictions from statistical models:</p>
+<p><span class="math display">\underbrace{-\log p(x)}_{\text{surprisal}}
+\quad\longrightarrow\quad
+\underbrace{H(p)}_{\text{expected surprisal}}
+\quad\longrightarrow\quad
+\underbrace{H(p,q)}_{\text{expected predictive loss}}
+\quad\longrightarrow\quad
+\underbrace{D_{\mathrm{KL}}(p\|q)}_{\text{excess expected loss}}.</span></p>
+<p>In applied statistics, we do not normally know <span class="math inline">p</span>, so we cannot evaluate these theoretical expectations directly. Instead, we use observed data and predictive checks to estimate how models may perform on new observations. This is the conceptual foundation for information criteria and cross-validation.</p>
+</section>
+</section>
+<section id="problems-and-investigations" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="problems-and-investigations"><span class="header-section-number">8</span> Problems and investigations</h2>
+<p>These exercises emphasize interpretation and the choice of method. Numerical answers should be accompanied by a short explanation of what the computed quantity means.</p>
+<p><strong>1. A surprise is relative to a model.</strong> Two analysts consider the same event. Analyst A assigns probability 0.20; Analyst B assigns probability 0.02. Calculate each analyst’s surprisal if the event occurs, in nats. Why is it incorrect to say that the event has a unique surprisal independent of the analysts?</p>
+<p><strong>2. Expected surprise.</strong> Let <span class="math inline">X</span> take the values <span class="math inline">a,b,c</span> with probabilities <span class="math inline">(0.5,0.3,0.2)</span>. Calculate <span class="math inline">H(X)</span> in nats. Identify which outcome has the greatest surprisal and explain why that does <em>not</em> imply it makes the largest contribution to entropy.</p>
+<p><strong>3. Coarsening an outcome.</strong> A fair eight-sided die is rolled. First define <span class="math inline">X</span> as the exact result; then define <span class="math inline">Y</span> as whether the result is odd or even. Compute <span class="math inline">H(X)</span> and <span class="math inline">H(Y)</span> in bits. Explain why different entropies can describe the same underlying physical experiment.</p>
+<p><strong>4. A confident but poor forecast.</strong> A binary process has generating success probability 0.70. Compare predictions <span class="math inline">q(1)=0.70</span>, <span class="math inline">q(1)=0.50</span>, and <span class="math inline">q(1)=0.99</span>. Compute their expected log losses and rank them. Which predictive model has the smallest <em>entropy</em>? Does this answer the same question as ranking by expected log loss?</p>
+<p><strong>5. Derive the KL identity.</strong> Starting from the definitions of entropy and cross-entropy, show that <span class="math inline">D_{\mathrm{KL}}(p\|q)=H(p,q)-H(p)</span>. Explain what remains fixed when we compare two candidate predictions <span class="math inline">q_1</span> and <span class="math inline">q_2</span> against the same <span class="math inline">p</span>.</p>
+<p><strong>6. Direction matters.</strong> Using Bernoulli distributions with <span class="math inline">p(1)=0.8</span> and <span class="math inline">q(1)=0.5</span>, calculate both <span class="math inline">D_{\mathrm{KL}}(p\|q)</span> and <span class="math inline">D_{\mathrm{KL}}(q\|p)</span>. Explain their differing interpretations without calling either quantity a geometric distance.</p>
+<p><strong>7. Model comparison without knowing</strong> <span class="math inline">p</span>. You receive 100 new outcomes and predictive probabilities from two models that were fit without using those outcomes. Write Python code to compute their mean held-out log losses. Explain why the difference in observed mean log loss can be useful even though you do not know the entropy of the generating distribution.</p>
+<p><strong>8. Simulated overfitting.</strong> Extend the grouped Bernoulli experiment in Section 5. Run at least 100 independent repetitions and report the mean training and held-out log loss for the pooled and separate-groups models. Repeat with 6, 30, and 100 training observations per group. Describe what changes and why. <em>(Avoid selecting only runs that support your preferred conclusion.)</em></p>
+<p><strong>9. Two scientific explanations.</strong> Construct two different plausible causal stories that produce the same probability distribution for the observations being evaluated. Explain why predictive log scores alone cannot choose between the stories.</p>
+<p><strong>10. Reflection.</strong> Consider the claim: “This model has a lower KL divergence, so it has learned more information about the world.” Identify which parts of the claim are justified, which are ambiguous, and what additional context would be required.</p>
+</section>
+<section id="quick-reference" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="quick-reference"><span class="header-section-number">9</span> Quick reference</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Quantity</th>
+<th>Definition (discrete case)</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Surprisal</td>
+<td><span class="math inline">I_p(x)=-\log p(x)</span></td>
+<td>How surprising one outcome is according to <span class="math inline">p</span></td>
+</tr>
+<tr class="even">
+<td>Entropy</td>
+<td><span class="math inline">H(p)=-\sum_xp(x)\log p(x)</span></td>
+<td>Expected surprisal under <span class="math inline">p</span></td>
+</tr>
+<tr class="odd">
+<td>Log loss</td>
+<td><span class="math inline">L(q,x)=-\log q(x)</span></td>
+<td>Penalty for one prediction from <span class="math inline">q</span></td>
+</tr>
+<tr class="even">
+<td>Cross-entropy</td>
+<td><span class="math inline">H(p,q)=-\sum_xp(x)\log q(x)</span></td>
+<td>Expected log loss of <span class="math inline">q</span> when <span class="math inline">p</span> generates outcomes</td>
+</tr>
+<tr class="odd">
+<td>KL divergence</td>
+<td><span class="math inline">D_{\mathrm{KL}}(p\|q)=H(p,q)-H(p)</span></td>
+<td>Excess expected log loss of <span class="math inline">q</span> relative to <span class="math inline">p</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="further-reading" class="level2" data-number="10">
+<h2 data-number="10" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">10</span> Further reading</h2>
+<ul>
+<li>Shannon, C. E. (1948). <a href="https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf"><em>A Mathematical Theory of Communication</em></a>. A foundational account of information theory, including entropy and its relationship to communication.</li>
+<li>McElreath, R. (2020). <em>Statistical Rethinking</em>, 2nd ed.&nbsp;In particular, Chapter 7 connects entropy, divergence, and the evaluation of statistical models.</li>
+<li><a href="https://mc-stan.org/loo/reference/loo-package.html">Stan / loo documentation</a>. A practical reference for Bayesian leave-one-out cross-validation and WAIC when we reach those methods later in the course.</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

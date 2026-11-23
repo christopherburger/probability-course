@@ -8,7 +8,7 @@
  */
 
 /* Shared layout: no shadows, oversized corner radii, or emoji labels. */
-:is(.core-box, .reference-box, .note-box, .extended-box, .practice-box) {
+:is(.core-box, .reference-box, .note-box, .extended-box, .practice-box, .example-box) {
   box-sizing: border-box;
   margin: 1.25rem 0;
   padding: 1rem 1.25rem;
@@ -21,7 +21,7 @@
   overflow-wrap: break-word;
 }
 
-:is(.core-box, .reference-box, .note-box, .extended-box, .practice-box)::before {
+:is(.core-box, .reference-box, .note-box, .extended-box, .practice-box, .example-box)::before {
   display: block;
   margin: 0 0 0.65rem;
   padding: 0 0 0.5rem;
@@ -34,7 +34,7 @@
 }
 
 /* Avoid extra space after the final paragraph, list, or code block. */
-:is(.core-box, .reference-box, .note-box, .extended-box, .practice-box) > :last-child {
+:is(.core-box, .reference-box, .note-box, .extended-box, .practice-box, .example-box) > :last-child {
   margin-bottom: 0;
 }
 
@@ -79,6 +79,14 @@
 }
 .practice-box::before { content: "Practice"; }
 
+.example-box {
+  --box-accent: #d43636;
+  --box-background: #f4e5e5;
+  --box-border: #d3c4c4;
+  border-left-width: 5px;
+}
+.example-box::before { content: "Example"; }
+
 /*
  * Dark palette. The media query supports ordinary dark-mode pages;
  * Quarto's .quarto-light/.quarto-dark classes take precedence when the
@@ -110,6 +118,12 @@
     --box-background: #21392c;
     --box-border: #41634a;
   }
+    body:not(.quarto-light) .example-box {
+   --box-accent: #d43636;
+  --box-background: #f4e5e5;
+  --box-border: #d3c4c4;
+
+  }
 }
 
 /* Quarto can be switched to dark mode even with a light system theme. */
@@ -138,9 +152,14 @@ body.quarto-dark .practice-box {
   --box-background: #21392c;
   --box-border: #41634a;
 }
+body.quarto-dark .example-box {
+   --box-accent: #d43636;
+  --box-background: #f4e5e5;
+  --box-border: #d3c4c4;
+}
 
 @media print {
-  :is(.core-box, .reference-box, .note-box, .extended-box, .practice-box) {
+  :is(.core-box, .reference-box, .note-box, .extended-box, .example-box, .practice-box) {
     break-inside: avoid;
     box-shadow: none;
     -webkit-print-color-adjust: exact;

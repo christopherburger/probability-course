@@ -50,6 +50,7 @@ website:
         - lectures/complex.qmd
         - lectures/convolution.qmd
         - lectures/transforms.qmd
+        - lectures/information.qmd
 
 
 format:

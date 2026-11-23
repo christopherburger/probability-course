@@ -583,135 +583,201 @@
     ]
   },
   {
-    "objectID": "lectures/chapter4.html#easy",
-    "href": "lectures/chapter4.html#easy",
-    "title": "Chapter 4",
+    "objectID": "lectures/information.html",
+    "href": "lectures/information.html",
+    "title": "Information Theory",
+    "section": "",
+    "text": "Imagine that two engineers are trying to predict whether a machine will fail during a particular operating interval. Both produce probabilities, not just labels. The first assigns a probability of failure of 0.10; the second assigns a probability of 0.80. When the machine fails, the second researcher has made the less surprising prediction. But if the machine does not fail, the first researcher has made the less surprising prediction.\nHow should we judge these predictions over many observations? What distinguishes uncertainty before an observation from the quality of a prediction after an observation? And what can we say when we are ignorant about the probabilities associated with the process?\nInformation theory gives us a precise language for these questions. In this chapter, we use a small part of that theory to build toward the evaluation of statistical models. Our purpose is not to study data compression or communication channels. We instead want to understand why logarithmic probabilities appear in statistical inference and what quantities such as entropy and Kullback–Leibler (KL) divergence do, and do not, tell us.\nIn this brief overview, our goals are:\n\nExplain why low-probability observations are assigned greater surprisal.\nInterpret Shannon entropy as expected surprisal under a specified probability distribution.\nDistinguish entropy from cross-entropy and explain why lower model entropy need not imply better predictions.\nInterpret KL divergence as excess expected predictive log loss, rather than as an ordinary distance.\nExplain why predictive performance must be estimated when the generating distribution is unknown, and why using the same observations to fit and evaluate a model can mislead us.\nIdentify what predictive evaluation cannot establish about causal mechanisms or scientific explanations.\n\n\n\nWe will work mainly with discrete outcomes so that the important ideas are not hidden by calculus. Throughout the chapter:\n\np(x) denotes the generating distribution: the probabilities under which observations arise in our thought experiments.\nq(x) denotes a predictive distribution supplied by a model.\nx denotes a possible outcome; X is a random variable.\n\\log means the natural logarithm, so information quantities are measured in nats, unless we explicitly write \\log_2 for bits.\n\nIn real applications, p is generally unknown. We give it a name here to make the theoretical comparisons precise.\n\n# Common imports for the executable examples in this chapter.\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nplt.rcParams.update({\n    \"figure.figsize\": (7, 4),\n    \"axes.spines.top\": False,\n    \"axes.spines.right\": False,\n})",
+    "crumbs": [
+      "Appendix",
+      "Information Theory"
+    ]
+  },
+  {
+    "objectID": "lectures/information.html#why-study-information-theory",
+    "href": "lectures/information.html#why-study-information-theory",
+    "title": "Information Theory",
+    "section": "",
+    "text": "Imagine that two engineers are trying to predict whether a machine will fail during a particular operating interval. Both produce probabilities, not just labels. The first assigns a probability of failure of 0.10; the second assigns a probability of 0.80. When the machine fails, the second researcher has made the less surprising prediction. But if the machine does not fail, the first researcher has made the less surprising prediction.\nHow should we judge these predictions over many observations? What distinguishes uncertainty before an observation from the quality of a prediction after an observation? And what can we say when we are ignorant about the probabilities associated with the process?\nInformation theory gives us a precise language for these questions. In this chapter, we use a small part of that theory to build toward the evaluation of statistical models. Our purpose is not to study data compression or communication channels. We instead want to understand why logarithmic probabilities appear in statistical inference and what quantities such as entropy and Kullback–Leibler (KL) divergence do, and do not, tell us.\nIn this brief overview, our goals are:\n\nExplain why low-probability observations are assigned greater surprisal.\nInterpret Shannon entropy as expected surprisal under a specified probability distribution.\nDistinguish entropy from cross-entropy and explain why lower model entropy need not imply better predictions.\nInterpret KL divergence as excess expected predictive log loss, rather than as an ordinary distance.\nExplain why predictive performance must be estimated when the generating distribution is unknown, and why using the same observations to fit and evaluate a model can mislead us.\nIdentify what predictive evaluation cannot establish about causal mechanisms or scientific explanations.\n\n\n\nWe will work mainly with discrete outcomes so that the important ideas are not hidden by calculus. Throughout the chapter:\n\np(x) denotes the generating distribution: the probabilities under which observations arise in our thought experiments.\nq(x) denotes a predictive distribution supplied by a model.\nx denotes a possible outcome; X is a random variable.\n\\log means the natural logarithm, so information quantities are measured in nats, unless we explicitly write \\log_2 for bits.\n\nIn real applications, p is generally unknown. We give it a name here to make the theoretical comparisons precise.\n\n# Common imports for the executable examples in this chapter.\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nplt.rcParams.update({\n    \"figure.figsize\": (7, 4),\n    \"axes.spines.top\": False,\n    \"axes.spines.right\": False,\n})",
+    "crumbs": [
+      "Appendix",
+      "Information Theory"
+    ]
+  },
+  {
+    "objectID": "lectures/information.html#information-and-surprise",
+    "href": "lectures/information.html#information-and-surprise",
+    "title": "Information Theory",
+    "section": "2 Information and surprise",
+    "text": "2 Information and surprise\n\n2.1 Why probability determines surprise\nSuppose a fair coin is tossed once (with all the usual assumptions to goes into what a ‘fair’ coin is). We know that the probability of heads is 1/2. Now suppose a fair, six-sided die is rolled. The probability of a six is 1/6. We are more surprised by the specified die result than by the specified coin result, because it was less probable before the experiment.\nThis suggests defining the surprisal associated with an outcome x as a decreasing function of its assigned probability p(x). A useful choice should also satisfy another requirement: for independent events, the information associated with the joint occurrence should equal the sum of the information associated with each event.\nIf X and Y are independent, then\np(x,y)=p(x)p(y).\nWe therefore want a function I for which\nI(x,y)=I(x)+I(y).\nRecall that logarithms transform products into sums. This motivates the definition\nI_p(x)=-\\log p(x)\nThe subscript emphasizes that the surprisal depends on which probability distribution assigned the probability. There is no surprisal value for an outcome in isolation from a probability assignment.\nFor independent observations,\n-\\log[p(x)p(y)]=-\\log p(x)-\\log p(y)\nThis additive property is also one reason that log probabilities appear so frequently in likelihood-based statistical inference.\n\nIn casual speech, information can mean a meaningful fact, a useful discovery, or a message that changes a decision. In information theory, the quantity -\\log p(x) does not directly measure any of those things. It quantifies how surprising an outcome is relative to an assigned distribution. A rare observation is not automatically important, scientifically revealing, or useful.\n\n\n\n2.2 The units of information\nFor a fair coin outcome,\nI(\\text{heads})=-\\log_2(1/2)=1\\text{ bit}\nFor the same event using natural logarithms,\nI(\\text{heads})=-\\log(1/2)=\\log 2\\approx 0.693\\text{ nats}\nChanging the logarithm base changes only the units. For example,\n1\\text{ nat}=\\frac{1}{\\log 2}\\text{ bits}\nIn what follows, we use natural logarithms because statistical likelihoods and log scores are normally expressed that way.\nThe next figure illustrates the relationship between assigned probability and surprisal.\n\nprobabilities = np.linspace(0.005, 1.0, 500)\nsurprisal = -np.log(probabilities)\n\nfig, ax = plt.subplots()\nax.plot(probabilities, surprisal, linewidth=2)\nax.set(xlabel=\"Assigned probability of an outcome\",\n       ylabel=\"Surprisal (nats)\",\n       title=\"How surprising is an outcome?\")\nax.grid(alpha=0.2)\nplt.show()\n\n\n\n\n\n\n\nFigure 1: Surprisal increases sharply as the assigned probability of an outcome approaches zero.\n\n\n\n\n\nThe two limiting cases should be understood before continuing on:\n\nIf p(x)=1, then I_p(x)=0. An outcome that is certain under the distribution carries no surprise.\nIf p(x)=0 and the outcome nevertheless occurs, the log loss is infinite. A probability assignment of zero rules the outcome out entirely.\n\nThe second case will become important when we evaluate models.\n\nIf a model assigns a probability of 0.01 to an event, and another model assigns 0.10 to the same event, which model experiences greater surprisal when the event occurs?\nWould your answer change if the event did not occur? What probabilities you would need to evaluate the alternative outcome.",
+    "crumbs": [
+      "Appendix",
+      "Information Theory"
+    ]
+  },
+  {
+    "objectID": "lectures/information.html#expected-surprise-and-entropy",
+    "href": "lectures/information.html#expected-surprise-and-entropy",
+    "title": "Information Theory",
+    "section": "3 Expected surprise and entropy",
+    "text": "3 Expected surprise and entropy\n\n3.1 From one outcome to a distribution\nSurprisal describes a realized outcome. Before observing a random variable, however, we do not know which outcome will occur. We can instead ask for the expected surprisal under a specified distribution.\nFor a discrete random variable with probabilities p(x), take the ordinary expected value:\n\\begin{aligned}\nH(p)\n&=\\mathbb{E}_{X\\sim p}[I_p(X)]\\\\\n&=\\sum_x p(x)[-\\log p(x)]\\\\\n&=\\boxed{-\\sum_x p(x)\\log p(x).}\n\\end{aligned}\nThis is the Shannon entropy.\nNote that this is just the expected value of the function -\\log p(X).\nWe use the standard convention 0\\log 0=0 in this sum. The convention is justified by the limit \\lim_{u\\to0^+}u\\log u=0. A zero-probability outcome contributes nothing to an expectation taken under p.\n\n-\\log p(x) is the surprisal of one outcome. H(p) is the average surprisal over possible outcomes under p. An individual observation does not itself have an entropy.\n\n\n\n3.2 The Bernoulli Distribution\nLet X be Bernoulli with P(X=1)=\\theta. It has only two possible outcomes:\np(1)=\\theta,\\qquad p(0)=1-\\theta.\nIts entropy is\nH(\\theta)=-\\theta\\log\\theta-(1-\\theta)\\log(1-\\theta)\nWhen \\theta=0 or \\theta=1, the outcome is certain and entropy is zero. When \\theta=1/2, the two outcomes are equally probable and entropy reaches its maximum, \\log 2 nats, or 1 bit.\n\ntheta = np.linspace(0, 1, 501)\nh = np.zeros_like(theta)\ninterior = (theta &gt; 0) & (theta &lt; 1)\nh[interior] = -(\n    theta[interior] * np.log(theta[interior])\n    + (1 - theta[interior]) * np.log1p(-theta[interior])\n)\n\nfig, ax = plt.subplots()\nax.plot(theta, h, linewidth=2)\nax.axvline(0.5, linestyle=\"--\", alpha=0.6)\nax.scatter([0.5], [np.log(2)], zorder=3)\nax.set(xlabel=r\"$\\theta=P(X=1)$\", ylabel=\"Entropy (nats)\",\n       title=\"Uncertainty in a Bernoulli distribution\")\nax.grid(alpha=0.2)\nplt.show()\n\n\n\n\n\n\n\nFigure 2: Entropy of a Bernoulli distribution. With two possible outcomes, uncertainty is greatest when they are equally likely.\n\n\n\n\n\nWe must be careful to avoid saying that a high-entropy distribution is a “bad” distribution or that low entropy is always preferable. Entropy does not evaluate how well a probability distribution agrees with reality, it only quantifies uncertainty within that distribution.\nFor a fixed collection of k possible outcomes, entropy is maximized by the uniform distribution, for which p(x)=1/k and H(p)=\\log k. The phrase fixed collection of outcomes is important here as changing what we count as an outcome can change the entropy. Seeing as how the uniform distribution maximizes entropy in the above case, our caution against saying a high-entropy distribution is “bad” is better understood. We know from earlier material that when we have no understanding about a process, the assignment of a uniform prior is the most reasonable action.\n\n\n3.3 Entropy depends on the question\nConsider the roll of a fair die. If X records the exact face, it has six equally likely outcomes and\nH(X)=\\log 6\nNow define a new variable Y that records only whether the die result is even or odd. Then Y has two equally likely outcomes and\nH(Y)=\\log 2\nBoth variables describe the same physical roll. They answer different questions. Information quantities depend on how we define the random variable and its possible outcomes.\nThis is one reason to be cautious when comparing numerical entropy values across different measurements or descriptions of a system.\n\nA researcher reports that their fitted model has low entropy. Does this alone tell us whether the model will predict new observations well?\nConstruct a situation where a low-entropy model makes poor predictions.",
+    "crumbs": [
+      "Appendix",
+      "Information Theory"
+    ]
+  },
+  {
+    "objectID": "lectures/information.html#predictive-distributions-and-cross-entropy",
+    "href": "lectures/information.html#predictive-distributions-and-cross-entropy",
+    "title": "Information Theory",
+    "section": "4 Predictive distributions and cross-entropy",
+    "text": "4 Predictive distributions and cross-entropy\n\n4.1 Evaluating a probability forecast\nEntropy asks how surprising observations are expected to be under the same distribution that generates them. In statistical inference, we usually face a different problem: a model assigns probabilities, and the observations may be better estimated by using another distribution.\nLet p(x) be the generating distribution and q(x) the probabilities assigned by a predictive model.\nWhen x occurs, the model receives the log loss\nL(q,x)=-\\log q(x).\nNotice that the model’s probability q(x) appears inside the logarithm, not the unknown generating probability p(x).\nA model incurs a small loss if it assigns high probability to an observation that occurs and a large loss if it assigns low probability to that observation.\nFor a collection of observations x_1,\\ldots,x_n, the average log loss is\n\\widehat L(q)=-\\frac{1}{n}\\sum_{i=1}^n\\log q(x_i).\nThe negative sum of log probabilities is the negative log likelihood when the model supplies the relevant joint distribution through a product \\prod_i q(x_i), as it does for independent observations under a fixed predictive distribution.\nIf observations are dependent or when predictions change with earlier observations we will need to be more careful with the violation of the independence assumption.\n\n\n4.2 Expected loss under the generating distribution\nIf the observations arise according to p, the expected log loss of predictions made using q is\n\\begin{aligned}\nH(p,q)\n&=\\mathbb{E}_{X\\sim p}[-\\log q(X)]\\\\\n&=-\\sum_x p(x)\\log q(x)\n\\end{aligned}\nThis quantity is called cross-entropy.\nCompare the definitions:\n\\underbrace{H(p)}_{\\text{entropy}}=-\\sum_x p(x)\\log p(x),\n\\qquad\n\\underbrace{H(p,q)}_{\\text{cross-entropy}}=-\\sum_x p(x)\\log q(x).\nBoth expectations use p to weight the outcomes, because p is the distribution that generates them. They differ in the probability used to score those outcomes.\nThis is a very important distinction: entropy is a property of a distribution; cross-entropy evaluates one distribution’s predictions against outcomes generated by another.\n\nSuppose a process produces a success with probability p(1)=0.8 and a failure with probability p(0)=0.2.\nThree models make these predictions:\n\n\n\nModel\nq(1)\nq(0)\nExpected log loss H(p,q)\n\n\n\n\nA\n0.80\n0.20\n0.500 nats\n\n\nB\n0.50\n0.50\n0.693 nats\n\n\nC\n0.99\n0.01\n0.929 nats\n\n\n\nFor example, Model C incurs expected loss\n\\begin{aligned}\nH(p,q_C)\n&=-0.8\\log(0.99)-0.2\\log(0.01)\\\\\n&\\approx 0.929.\n\\end{aligned}\nModel C is highly confident that a success will occur. It is therefore rewarded when a success happens, but receives a very large penalty on the failures that occur 20% of the time. It has lower entropy than Model A, yet its expected predictive loss is higher.\nThe following code verifies the table.\n\np_success = 0.8\nforecasts = {\"A (calibrated)\": 0.8,\n             \"B (uninformative)\": 0.5,\n             \"C (overconfident)\": 0.99}\n\nfor name, q_success in forecasts.items():\n    expected_loss = -(\n        p_success * np.log(q_success)\n        + (1 - p_success) * np.log1p(-q_success)\n    )\n    print(f\"{name:20s}: {expected_loss:.3f} nats\")\n\nA (calibrated)      : 0.500 nats\nB (uninformative)   : 0.693 nats\nC (overconfident)   : 0.929 nats\n\n\nFor any Bernoulli prediction q, a realized success has loss -\\log q, a realized failure has loss -\\log(1-q), and their expectation under p(1)=0.8 is\nH(p,q)=-0.8\\log q-0.2\\log(1-q).\n\nq_grid = np.linspace(0.01, 0.99, 500)\nloss_success = -np.log(q_grid)\nloss_failure = -np.log1p(-q_grid)\nexpected_loss = 0.8 * loss_success + 0.2 * loss_failure\n\nfig, ax = plt.subplots()\nax.plot(q_grid, loss_success, label=\"If success occurs\", alpha=0.7)\nax.plot(q_grid, loss_failure, label=\"If failure occurs\", alpha=0.7)\nax.plot(q_grid, expected_loss, linewidth=3, label=\"Expected loss, p = 0.80\")\nax.axvline(0.8, linestyle=\"--\", alpha=0.6)\nax.set(xlabel=\"Predicted probability of success, q\",\n       ylabel=\"Log loss (nats)\",\n       title=\"Confident predictions carry risks\")\nax.legend()\nax.grid(alpha=0.2)\nplt.show()\n\n\n\n\n\n\n\nFigure 3: Loss for each possible outcome and expected loss for a process with an 80% success rate. The expected loss is minimized at a forecast of 0.80.\n\n\n\n\n\n\nThis example illustrates a reason for using logarithmic scoring: in expectation, a model minimizes its log loss by reporting the generating probabilities. Such a scoring rule is called strictly proper. It rewards well-calibrated probability assignments, not merely confident ones.\nNow, when p is unknown, we cannot directly evaluate these expected losses. We will return to address this problem soon.",
+    "crumbs": [
+      "Appendix",
+      "Information Theory"
+    ]
+  },
+  {
+    "objectID": "lectures/information.html#kullbackleibler-divergence",
+    "href": "lectures/information.html#kullbackleibler-divergence",
+    "title": "Information Theory",
+    "section": "5 Kullback–Leibler divergence",
+    "text": "5 Kullback–Leibler divergence\n\n5.1 Excess expected predictive loss\nWe now have two quantities:\n\nH(p): the expected log loss if predictions use the generating distribution itself.\nH(p,q): the expected log loss if predictions use a different distribution q.\n\nSubtracting them gives the additional expected loss incurred by predicting with q instead of p:\n\\begin{aligned}\nD_{\\mathrm{KL}}(p\\|q)\n&=H(p,q)-H(p)\\\\\n&=-\\sum_x p(x)\\log q(x)+\\sum_x p(x)\\log p(x)\\\\\n&=\\boxed{\\sum_x p(x)\\log\\frac{p(x)}{q(x)}.}\n\\end{aligned}\nThis is the Kullback–Leibler divergence from q to p, conventionally written D_{\\mathrm{KL}}(p\\|q).\nThe order matters. In this expression, observations are weighted according to p, while q provides the predictive probabilities being evaluated.\n\nKL divergence is the excess expected log loss associated with using q to predict observations generated according to p.\n\n\n\n5.2 Properties that follow from the interpretation\nNonnegativity. For distributions with the same outcome space,\nD_{\\mathrm{KL}}(p\\|q)\\geq 0,\nwith equality if p=q on the support of p (for normalized discrete distributions, this means the distributions are equal). This is consistent with the fact that the true probabilities minimize expected log loss.\nTo see a short argument, use \\log u\\leq u-1 for u&gt;0. If q(x)&gt;0 wherever p(x)&gt;0, then\n\\begin{aligned}\nD_{\\mathrm{KL}}(p\\|q)\n&=-\\sum_{x:p(x)&gt;0}p(x)\\log\\frac{q(x)}{p(x)}\\\\\n&\\geq \\sum_{x:p(x)&gt;0}\\bigl[p(x)-q(x)\\bigr]\\\\\n&\\geq 0.\n\\end{aligned}\nThe last inequality holds because the q-probabilities over the support of p sum to at most one.\nAsymmetry. In general,\nD_{\\mathrm{KL}}(p\\|q)\\ne D_{\\mathrm{KL}}(q\\|p).\nReversing the arguments changes which distribution generates the observations and which one is being evaluated. Those are different prediction problems.\nNot a metric. Because it is asymmetric (and does not generally satisfy the triangle inequality), KL divergence is not an ordinary geometric distance.\nZero-probability predictions. If p(x)&gt;0 but q(x)=0 for some outcome, then D_{\\mathrm{KL}}(p\\|q)=\\infty. The predictive model regards an actually possible outcome as impossible.\nFor the Bernoulli example, the KL divergence from Model B’s predictions to the actual process is\n\\begin{aligned}\nD_{\\mathrm{KL}}(p\\|q_B)\n&=0.8\\log\\frac{0.8}{0.5}\n+0.2\\log\\frac{0.2}{0.5}\\\\\n&\\approx 0.193\\text{ nats}.\n\\end{aligned}\nAs a check, 0.693-0.500\\approx 0.193.\n\n\n5.3 Direction matters: a visualization\n\np = 0.8\nq = np.linspace(0.02, 0.98, 500)\nkl_pq = p * np.log(p / q) + (1 - p) * np.log((1 - p) / (1 - q))\nkl_qp = q * np.log(q / p) + (1 - q) * np.log((1 - q) / (1 - p))\n\nfig, ax = plt.subplots()\nax.plot(q, kl_pq, label=r\"$D_{KL}(p\\Vert q)$\")\nax.plot(q, kl_qp, label=r\"$D_{KL}(q\\Vert p)$\", linestyle=\"--\")\nax.axvline(p, color=\"gray\", linestyle=\":\", alpha=0.7)\nax.set(xlabel=\"Success probability assigned by q\",\n       ylabel=\"KL divergence (nats)\",\n       title=\"KL divergence has a direction\")\nax.legend()\nax.grid(alpha=0.2)\nplt.show()\n\n\n\n\n\n\n\nFigure 4: The two directions of KL divergence are generally different. Here p is Bernoulli(0.80) and q ranges across Bernoulli distributions.\n\n\n\n\n\n\n\n5.4 What KL divergence cannot tell us\nKnowing that D_{\\mathrm{KL}}(p\\|q_1)&lt;D_{\\mathrm{KL}}(p\\|q_2) tells us that q_1 has lower expected log loss than q_2 for observations generated from p. It does not establish that q_1 represents the correct causal mechanism or contains a better scientific explanation.\nTwo very different causal stories may generate nearly identical predictive distributions for the observations being evaluated. Their predictive scores can therefore be nearly identical.\n\n\n\n\n\n\nNoteDo not confuse these differences\n\n\n\nKL divergence is not H(q)-H(p). It is H(p,q)-H(p). The first difference compares the uncertainties inside two distributions; the second compares predictive loss against the same generating distribution.",
+    "crumbs": [
+      "Appendix",
+      "Information Theory"
+    ]
+  },
+  {
+    "objectID": "lectures/information.html#from-theoretical-divergence-to-statistical-model-evaluation",
+    "href": "lectures/information.html#from-theoretical-divergence-to-statistical-model-evaluation",
+    "title": "Information Theory",
+    "section": "6 From theoretical divergence to statistical model evaluation",
+    "text": "6 From theoretical divergence to statistical model evaluation\n\n6.1 The central difficulty: we do not know p\nOur worked examples gave us the generating distribution p, so we could calculate entropy, cross-entropy, and KL divergence exactly. In statistical practice, this distribution is usually the object of investigation.\nWhat we observe is a dataset\n\\mathcal D=\\{x_1,\\ldots,x_n\\}.\nWe fit models to these observations and ask how well their predictions might work on new observations drawn from the relevant population or process.\nFor a fixed predictive distribution q, we can estimate its expected log loss using held-out observations x_1^*,\\ldots,x_m^*:\n\\widehat L_{\\mathrm{test}}(q)\n=-\\frac{1}{m}\\sum_{j=1}^{m}\\log q(x_j^*).\nThis estimates cross-entropy under the conditions represented by the test set. It does not require us to know p. We also cannot usually recover the absolute KL divergence because H(p) remains unknown. But differences in expected log loss between predictive distributions can still be estimated using the same evaluation observations, since the common H(p) term cancels.\n\n\n6.2 Why evaluating on training data can mislead\nA flexible model can adapt to the accidental patterns in its training observations. That can lower its training loss without improving its predictions of new outcomes.\nHere is a simple experiment. We have 12 groups of machines. Unknown to the model, each group has the same true probability of failure, 0.70. We collect only six training observations from each group.\nWe compare two models:\n\nA pooled model estimates one common failure probability for all groups.\nA separate-groups model estimates a different failure probability for each group.\n\nBoth models use the smoothed estimate (k+1)/(n+2), where k is the number of failures in n observations. The smoothing avoids assigning probabilities of exactly zero or one in very small samples. It can also be interpreted as the posterior predictive failure probability under a uniform Beta prior and a Bernoulli likelihood.\nThe following code generates both training observations and a much larger, independent evaluation set. The random seed makes the example reproducible.\n\nrng = np.random.default_rng(2026)\ntrue_probability = 0.70\nn_groups = 12\ntrain_per_group = 6\ntest_per_group = 300\n\ntrain = rng.binomial(1, true_probability, (n_groups, train_per_group))\ntest = rng.binomial(1, true_probability, (n_groups, test_per_group))\n\n# A shared estimate, using all training observations.\nq_pooled = (train.sum() + 1) / (train.size + 2)\n\n# An estimate for each group, using only that group's training observations.\nq_by_group = (train.sum(axis=1) + 1) / (train_per_group + 2)\n\n# Expand predictions to match each observation in its group.\nq_pooled_train = np.full(train.shape, q_pooled)\nq_pooled_test = np.full(test.shape, q_pooled)\nq_group_train = np.broadcast_to(q_by_group[:, None], train.shape)\nq_group_test = np.broadcast_to(q_by_group[:, None], test.shape)\n\ndef mean_log_loss(observations, predictions):\n    \"\"\"Mean Bernoulli negative log predictive probability.\"\"\"\n    return float(np.mean(-(\n        observations * np.log(predictions)\n        + (1 - observations) * np.log1p(-predictions)\n    )))\n\nscores = {\n    \"Pooled\": [mean_log_loss(train, q_pooled_train),\n               mean_log_loss(test, q_pooled_test)],\n    \"Separate groups\": [mean_log_loss(train, q_group_train),\n                        mean_log_loss(test, q_group_test)],\n}\n\nfor name, (training, testing) in scores.items():\n    print(f\"{name:16s} | training: {training:.3f} | held out: {testing:.3f}\")\n\nPooled           | training: 0.530 | held out: 0.627\nSeparate groups  | training: 0.480 | held out: 0.647\n\n\n\nlabels = list(scores)\nx = np.arange(len(labels))\nwidth = 0.34\n\nfig, ax = plt.subplots()\nax.bar(x - width / 2, [scores[name][0] for name in labels], width,\n       label=\"Training\")\nax.bar(x + width / 2, [scores[name][1] for name in labels], width,\n       label=\"Held out\")\nax.set_xticks(x, labels)\nax.set(ylabel=\"Mean log loss (nats)\",\n       title=\"Fitting the data is not the same as predicting new data\")\nax.legend()\nax.grid(axis=\"y\", alpha=0.2)\nplt.show()\n\n\n\n\n\n\n\nFigure 5: Training and held-out mean log loss for the pooled and separate-groups models. Small training samples can favor unnecessary group-specific variation.\n\n\n\n\n\nThe separate-groups model has more opportunities to adapt to differences between groups in the training sample. Yet we generated the groups from the same probability. Differences among their observed training rates are sampling variation, not evidence of genuine group differences built into this experiment.\nThe point is not that pooling is always the correct modeling decision. Real groups can differ. Rather, a decrease in training loss is not sufficient evidence of improved predictive performance. Held-out evaluation asks a different question.\n\n\n\n\n\n\nTipTry changing the experiment\n\n\n\nChange train_per_group, n_groups, and true_probability, or rerun with different random seeds. Under what conditions does the separate-groups model tend to perform worse on held-out observations? What changes if you give each group a different true probability?\n\n\n\n\n6.3 Bayesian prediction: average probabilities before taking logs\nFor a Bayesian model with parameters \\theta and training data \\mathcal D, prediction accounts for posterior uncertainty in \\theta:\nq(x_{\\mathrm{new}}\\mid\\mathcal D)\n=\\int p(x_{\\mathrm{new}}\\mid\\theta)\\,\n  p(\\theta\\mid\\mathcal D)\\,d\\theta.\nThe log loss of the Bayesian predictive distribution is then\n-\\log q(x_{\\mathrm{new}}\\mid\\mathcal D)\n=-\\log\\int p(x_{\\mathrm{new}}\\mid\\theta)\n  p(\\theta\\mid\\mathcal D)\\,d\\theta.\nThis is generally not the same as taking the posterior average of the parameter-wise negative log likelihoods:\n-\\log\\mathbb E_{\\theta\\mid\\mathcal D}\n   [p(x_{\\mathrm{new}}\\mid\\theta)]\n\\ne\n\\mathbb E_{\\theta\\mid\\mathcal D}\n   [-\\log p(x_{\\mathrm{new}}\\mid\\theta)].\nThis distinction is worth remembering when we later calculate log predictive densities from posterior samples: we average the predictive probabilities (or densities) before applying the logarithm.\n\n\n6.4 Where information criteria fit\nOnce we have predictive log scores, the question becomes how to estimate performance on new data without continually reserving large independent test sets. Cross-validation and information criteria address versions of this problem.\nAt this stage, we need only the conceptual picture:\n\nHeld-out validation evaluates models on observations not used to fit them.\nLeave-one-out cross-validation (LOO-CV) repeatedly evaluates the predictive density of an observation using a model trained without that observation. Methods such as PSIS-LOO approximate this efficiently for many Bayesian models.\nWAIC uses the pointwise log predictive densities and a correction for effective model complexity to estimate out-of-sample predictive performance.\n\nIn Statistical Rethinking, these ideas eventually appear with quantities such as the expected log pointwise predictive density (ELPD) and deviance-style scores. Their sign conventions differ: higher ELPD is better, while lower negative-log-loss or deviance-style criteria are better when evaluated comparably.\nFor example, the deviance-style conversion often takes the form\n\\text{deviance-scale score}=-2\\,\\text{log predictive score}.\nMultiplying by -2 changes the scale and reverses which direction is preferable; it does not change which model has the stronger predictive score, provided the comparison is otherwise valid.\nInformation criteria are not a shortcut to discovering the true distribution, and their uncertainty and assumptions matter. Model comparisons should use the same observations, the same predictive target, and compatible likelihood definitions and evaluation units.",
+    "crumbs": [
+      "Appendix",
+      "Information Theory"
+    ]
+  },
+  {
+    "objectID": "lectures/information.html#what-information-theory-doesand-does-nottell-us",
+    "href": "lectures/information.html#what-information-theory-doesand-does-nottell-us",
+    "title": "Information Theory",
+    "section": "7 What information theory does—and does not—tell us",
+    "text": "7 What information theory does—and does not—tell us\nThe mathematics is precise, but familiar terminology can encourage interpretations that go further than the mathematics permits.\n\n\n\n\n\n\n\nTempting interpretation\nMore precise statement\n\n\n\n\n“A surprising event must be informative in a useful sense.”\nSurprisal is relative to an assigned probability, not to the scientific importance of the event.\n\n\n“Entropy is what we learned from the observation.”\nEntropy is expected surprisal under a distribution. Learning can be examined by comparing probability assignments before and after data.\n\n\n“A low-entropy model is accurate.”\nA low-entropy model may be confidently wrong.\n\n\n“KL divergence is the distance between distributions.”\nKL divergence is directional excess expected log loss, not a metric.\n\n\n“KL divergence is H(q)-H(p).”\nKL divergence is H(p,q)-H(p).\n\n\n“The smallest information criterion identifies the true model.”\nThe criterion estimates a particular aspect of predictive performance, subject to assumptions and uncertainty.\n\n\n“Good predictions prove the causal explanation.”\nDifferent causal explanations can imply similar predictions for the observations under consideration.\n\n\n\n\n7.1 A warning about continuous variables\nWe have deliberately used discrete distributions, where p(x) is the probability of an outcome. With a continuous variable, we generally work with a density f(x), not a probability assigned to the exact point x.\nAn exact point in a continuous distribution has probability zero, even when its density is positive. A density can also exceed one. Accordingly, the quantity\nh(f)=-\\int f(x)\\log f(x)\\,dx\nis called differential entropy, and it does not inherit every intuitive interpretation of discrete Shannon entropy. It can be negative and changes when we rescale a measured variable. That does not prevent predictive log densities and KL divergence between suitable continuous distributions from being useful. It simply means we must not treat a density as a probability mass or interpret differential entropy as a direct count of bits needed to name an exact real number.\nFor our immediate goal—understanding model prediction and evaluation—the discrete setting contains the essential logic.\n\n\n7.2 A warning about “information gained”\nSuppose observing data changes our prior beliefs about a parameter \\theta into a posterior distribution. One possible measure of the change is\nD_{\\mathrm{KL}}\\bigl(p(\\theta\\mid\\mathcal D)\\|p(\\theta)\\bigr).\nThis describes how different the posterior is from the prior in the KL sense. It is related to Bayesian information gain, but it is not the same quantity as the surprisal of the data, -\\log p(\\mathcal D). An observation can be surprising while changing our beliefs about a particular parameter very little.\nWe will return to this distinction when considering prior distributions, posterior inference, and maximum-entropy arguments.\n\n\n7.3 The central thread\nWe began with a single outcome and ended with comparing predictions from statistical models:\n\\underbrace{-\\log p(x)}_{\\text{surprisal}}\n\\quad\\longrightarrow\\quad\n\\underbrace{H(p)}_{\\text{expected surprisal}}\n\\quad\\longrightarrow\\quad\n\\underbrace{H(p,q)}_{\\text{expected predictive loss}}\n\\quad\\longrightarrow\\quad\n\\underbrace{D_{\\mathrm{KL}}(p\\|q)}_{\\text{excess expected loss}}.\nIn applied statistics, we do not normally know p, so we cannot evaluate these theoretical expectations directly. Instead, we use observed data and predictive checks to estimate how models may perform on new observations. This is the conceptual foundation for information criteria and cross-validation.",
+    "crumbs": [
+      "Appendix",
+      "Information Theory"
+    ]
+  },
+  {
+    "objectID": "lectures/information.html#problems-and-investigations",
+    "href": "lectures/information.html#problems-and-investigations",
+    "title": "Information Theory",
+    "section": "8 Problems and investigations",
+    "text": "8 Problems and investigations\nThese exercises emphasize interpretation and the choice of method. Numerical answers should be accompanied by a short explanation of what the computed quantity means.\n1. A surprise is relative to a model. Two analysts consider the same event. Analyst A assigns probability 0.20; Analyst B assigns probability 0.02. Calculate each analyst’s surprisal if the event occurs, in nats. Why is it incorrect to say that the event has a unique surprisal independent of the analysts?\n2. Expected surprise. Let X take the values a,b,c with probabilities (0.5,0.3,0.2). Calculate H(X) in nats. Identify which outcome has the greatest surprisal and explain why that does not imply it makes the largest contribution to entropy.\n3. Coarsening an outcome. A fair eight-sided die is rolled. First define X as the exact result; then define Y as whether the result is odd or even. Compute H(X) and H(Y) in bits. Explain why different entropies can describe the same underlying physical experiment.\n4. A confident but poor forecast. A binary process has generating success probability 0.70. Compare predictions q(1)=0.70, q(1)=0.50, and q(1)=0.99. Compute their expected log losses and rank them. Which predictive model has the smallest entropy? Does this answer the same question as ranking by expected log loss?\n5. Derive the KL identity. Starting from the definitions of entropy and cross-entropy, show that D_{\\mathrm{KL}}(p\\|q)=H(p,q)-H(p). Explain what remains fixed when we compare two candidate predictions q_1 and q_2 against the same p.\n6. Direction matters. Using Bernoulli distributions with p(1)=0.8 and q(1)=0.5, calculate both D_{\\mathrm{KL}}(p\\|q) and D_{\\mathrm{KL}}(q\\|p). Explain their differing interpretations without calling either quantity a geometric distance.\n7. Model comparison without knowing p. You receive 100 new outcomes and predictive probabilities from two models that were fit without using those outcomes. Write Python code to compute their mean held-out log losses. Explain why the difference in observed mean log loss can be useful even though you do not know the entropy of the generating distribution.\n8. Simulated overfitting. Extend the grouped Bernoulli experiment in Section 5. Run at least 100 independent repetitions and report the mean training and held-out log loss for the pooled and separate-groups models. Repeat with 6, 30, and 100 training observations per group. Describe what changes and why. (Avoid selecting only runs that support your preferred conclusion.)\n9. Two scientific explanations. Construct two different plausible causal stories that produce the same probability distribution for the observations being evaluated. Explain why predictive log scores alone cannot choose between the stories.\n10. Reflection. Consider the claim: “This model has a lower KL divergence, so it has learned more information about the world.” Identify which parts of the claim are justified, which are ambiguous, and what additional context would be required.",
+    "crumbs": [
+      "Appendix",
+      "Information Theory"
+    ]
+  },
+  {
+    "objectID": "lectures/information.html#quick-reference",
+    "href": "lectures/information.html#quick-reference",
+    "title": "Information Theory",
+    "section": "9 Quick reference",
+    "text": "9 Quick reference\n\n\n\n\n\n\n\n\nQuantity\nDefinition (discrete case)\nInterpretation\n\n\n\n\nSurprisal\nI_p(x)=-\\log p(x)\nHow surprising one outcome is according to p\n\n\nEntropy\nH(p)=-\\sum_xp(x)\\log p(x)\nExpected surprisal under p\n\n\nLog loss\nL(q,x)=-\\log q(x)\nPenalty for one prediction from q\n\n\nCross-entropy\nH(p,q)=-\\sum_xp(x)\\log q(x)\nExpected log loss of q when p generates outcomes\n\n\nKL divergence\nD_{\\mathrm{KL}}(p\\|q)=H(p,q)-H(p)\nExcess expected log loss of q relative to p",
+    "crumbs": [
+      "Appendix",
+      "Information Theory"
+    ]
+  },
+  {
+    "objectID": "lectures/information.html#further-reading",
+    "href": "lectures/information.html#further-reading",
+    "title": "Information Theory",
+    "section": "10 Further reading",
+    "text": "10 Further reading\n\nShannon, C. E. (1948). A Mathematical Theory of Communication. A foundational account of information theory, including entropy and its relationship to communication.\nMcElreath, R. (2020). Statistical Rethinking, 2nd ed. In particular, Chapter 7 connects entropy, divergence, and the evaluation of statistical models.\nStan / loo documentation. A practical reference for Bayesian leave-one-out cross-validation and WAIC when we reach those methods later in the course.",
+    "crumbs": [
+      "Appendix",
+      "Information Theory"
+    ]
+  },
+  {
+    "objectID": "lectures/chapter5.html#easy",
+    "href": "lectures/chapter5.html#easy",
+    "title": "Chapter 5",
     "section": "Easy",
     "text": "Easy",
     "crumbs": [
       "Inference",
-      "Chapter 4"
+      "Chapter 5"
     ]
   },
   {
-    "objectID": "lectures/chapter4.html#medium",
-    "href": "lectures/chapter4.html#medium",
-    "title": "Chapter 4",
+    "objectID": "lectures/chapter5.html#medium",
+    "href": "lectures/chapter5.html#medium",
+    "title": "Chapter 5",
     "section": "Medium",
     "text": "Medium",
     "crumbs": [
       "Inference",
-      "Chapter 4"
+      "Chapter 5"
     ]
   },
   {
-    "objectID": "lectures/chapter4.html#hard",
-    "href": "lectures/chapter4.html#hard",
-    "title": "Chapter 4",
+    "objectID": "lectures/chapter5.html#hard",
+    "href": "lectures/chapter5.html#hard",
+    "title": "Chapter 5",
     "section": "Hard",
     "text": "Hard",
     "crumbs": [
       "Inference",
-      "Chapter 4"
+      "Chapter 5"
     ]
   },
   {
-    "objectID": "lectures/conditional_probability_2.html",
-    "href": "lectures/conditional_probability_2.html",
-    "title": "17: Conditional Probability Revisted",
+    "objectID": "lectures/chapter0.html",
+    "href": "lectures/chapter0.html",
+    "title": "Statistical Rethinking",
     "section": "",
-    "text": "Recall that for two events A and B, with P(A)&gt;0, the conditional probability of A given B is\nP(A\\mid B)=\\frac{P(A\\cap B)}{P(B)}\nLearning that B has occurred can change the set of possible outcomes under consideration.\nWe now extend this idea from events to random variables.",
-    "crumbs": [
-      "Random Variables",
-      "17: Conditional Probability Revisted"
-    ]
-  },
-  {
-    "objectID": "lectures/conditional_probability_2.html#conditional-expectation",
-    "href": "lectures/conditional_probability_2.html#conditional-expectation",
-    "title": "17: Conditional Probability Revisted",
-    "section": "Conditional Expectation",
-    "text": "Conditional Expectation\nRecall that the expectation of a discrete random variable is:\n\nE[X]=\\sum_x x\\,p_X(x)\n\nIf we know that Y=y, we use the conditional distribution:\nE[X\\mid Y=y]=\\sum_x x\\,p_{X\\mid Y}(x\\mid y)\nEquivalently using the definition of conditional probability, we can write this as:\n\nE[X\\mid Y=y]\n=\n\\frac{\\sum_x x\\,p_{X,Y}(x,y)}{p_Y(y)}\n\nNote that now since we can condition on another random variable, we do not necessairly have a number as the result of the expectation. Instead, we can have a random variable as the result of the expectation.\n\nE[X] is a number representing the unconditional mean of X.\nE[X\\mid Y=y] is a number representing the mean of X when Y is fixed at a particular value y.\nE[X\\mid Y] is itself a random variable, obtained by evaluating the conditional mean at the observed value of Y.\n\nFor example, if g(y)=E[X\\mid Y=y], then E[X\\mid Y]=g(Y).\n\n\nConsider the joint PMF\n\n\\begin{aligned}\nP(X=1,Y=1)&=0.5\\\\\nP(X=1,Y=2)&=0.1\\\\\nP(X=2,Y=1)&=0.1\\\\\nP(X=2,Y=2)&=0.3\n\\end{aligned}\n\nWe want to calculate E[X\\mid Y=1].\n\n\nIt is often easier to view the joint PMF as a table:\n\n\n\n\nY=1\nY=2\np_X(x)\n\n\n\n\nX=1\n0.5\n0.1\n0.6\n\n\nX=2\n0.1\n0.3\n0.4\n\n\np_Y(y)\n0.6\n0.4\n1.0\n\n\n\n\n\nWe now need to determine the conditional distribution. We know that Y is restricted to 1, so we need only to concern ourselves with the first column of our table.\n\nP(Y=1)=0.5+0.1=0.6.\n\nWe then have,\n\nP(X=1\\mid Y=1)=\\frac{0.5}{0.6}=\\frac56\n\nand\n\nP(X=2\\mid Y=1)=\\frac{0.1}{0.6}=\\frac16.\n\nNow we can calculate the conditional expectation:\n\n\\begin{aligned}\nE[X\\mid Y=1]\n&=1\\cdot P(X=1\\mid Y=1)\\quad+2\\cdot P(X=2\\mid Y=1)\\\\\n&=1\\cdot\\frac56+2\\cdot\\frac16.\n\\end{aligned}\n\nThus,\n\nE[X\\mid Y=1]=\\frac{7}{6}\n\n\n\nAssuming the same joint PMF from the above example, what if we instead condition on Y=2?\nSimilarly as to before, we obtain:\n\nP(X=1\\mid Y=2)=\\frac{0.1}{0.4}=\\frac14\n\nand\n\nP(X=2\\mid Y=2)=\\frac{0.3}{0.4}=\\frac34.\n\nTherefore,\n\nE[X\\mid Y=2]\n=1\\cdot\\frac14+2\\cdot\\frac34\n=\\frac74.\n\n\nAfter this, we now have the complete conditional expectation function\n\ng(y)=\n\\begin{cases}\n\\frac{7}{6},&y=1,\\\\\n\\frac{7}{4},&y=2.\n\\end{cases}\n\nAnd so, E[X\\mid Y] is a random variable that takes these two values according to the value of Y.\nNote that averaging the conditional expectations according to the probabilities of Y gives\n\n\\begin{aligned}\nE[g(Y)]\n&=\\frac76(0.6)+\\frac74(0.4)\\\\\n&=1.4\\\\\n&=E[X].\n\\end{aligned}\n\nFirst, you should verifiy that E[X] = 1.4.\nSeeing this, we have that averaging the conditional expectations over all the probabilities of Y gives us the expectation of X itself. This is an instance of the law of total expectation, which we will cover as a general principle further on.",
-    "crumbs": [
-      "Random Variables",
-      "17: Conditional Probability Revisted"
-    ]
-  },
-  {
-    "objectID": "lectures/conditional_probability_2.html#obtaining-distributions-by-conditioning",
-    "href": "lectures/conditional_probability_2.html#obtaining-distributions-by-conditioning",
-    "title": "17: Conditional Probability Revisted",
-    "section": "Obtaining Distributions by Conditioning",
-    "text": "Obtaining Distributions by Conditioning\nConditioning can transform one probability distribution into another.\n\nSuppose X_1\\sim\\operatorname{Binomial}(n_1,p) and X_2\\sim\\operatorname{Binomial}(n_2,p) with X_1 and X_2 independent.\nWe want to determine P(X_1=k\\mid X_1+X_2=m).\n \nWe first apply our definition of conditional probability:\n\nP(X_1=k\\mid X_1+X_2=m)\n=\n\\frac{P(X_1=k,X_1+X_2=m)}\n{P(X_1+X_2=m)}.\n\nWe can then do some rearrangment from X_1=k,\\quad X_1+X_2=m to X_1=k,\\quad X_2=m-k. We then have:\n\nP(X_1=k\\mid X_1+X_2=m)\n=\n\\frac{P(X_1=k,X_2=m-k)}\n{P(X_1+X_2=m)}.\n\n\n\nWe will now rewrite the numerator. Because we know that X_1 and X_2 are independent we have that:\n\nP(X_1=k,X_2=m-k)\n=P(X_1=k)P(X_2=m-k).\n\nThen using their binomial PMFs,\n\nP(X_1=k)\n=\\binom{n_1}{k}p^k(1-p)^{n_1-k}\n\nand\n\nP(X_2=m-k)\n=\\binom{n_2}{m-k}p^{m-k}(1-p)^{n_2-m+k}.\n\nOur resulting numerator is then:\n\nP(X_1=k,X_2=m-k)\n=\n\\binom{n_1}{k}\\binom{n_2}{m-k}\np^m(1-p)^{n_1+n_2-m}.\n\n\n\nNow we rewrite the denominator. We will use a useful property of independent binomial random variables where if they have the same success probability then their sum is also a binomial random variable that has the form:\n\nX_1+X_2\\sim\\operatorname{Binomial}(n_1+n_2,p).\n\nOur demoninator is then:\n\nP(X_1+X_2=m)\n=\n\\binom{n_1+n_2}{m}\np^m(1-p)^{n_1+n_2-m}.\n\n\n\nAfter our rewrites, we now have:\n\n\\frac{\n\\binom{n_1}{k}\\binom{n_2}{m-k}\np^m(1-p)^{n_1+n_2-m}\n}{\n\\binom{n_1+n_2}{m}\np^m(1-p)^{n_1+n_2-m}\n}.\n\nNote that the probability terms cancel, giving us\n\nP(X_1=k\\mid X_1+X_2=m)\n=\n\\frac{\\binom{n_1}{k}\\binom{n_2}{m-k}}\n{\\binom{n_1+n_2}{m}}\n\nfor\n\n\\max(0,m-n_2)\\leq k\\leq\\min(n_1,m).\n\nThis is the hypergeometric distribution.\n\nThe process of conditioning in this example converted our problem into a fundamentally different one than what is represented by the binomial distribution.\nBefore conditioning, the number of successes in each group is binomial. But after conditioning on the total number of successes, the problem becomes one of allocating a fixed number of successes across two groups. This is the same as the sampling-without-replacement problem represented by the hypergeometric distribution.\nWhere if have n_1 red balls and n_2 green balls. If we select m balls uniformly without replacement, the probability of selecting exactly k red balls is\n\nP(X=k)\n=\n\\frac{\\binom{n_1}{k}\\binom{n_2}{m-k}}\n{\\binom{n_1+n_2}{m}}.\n\nSomething important in the above expression is that the resulting conditional distribution does not depend on p. This happens because knowing the total number of successes eliminates the information contributed by the common success probability, leaving only the combinatorial allocation of those successes.\n\n\nSuppose that X_1\\sim\\operatorname{Poisson}(\\lambda_1) and X_2\\sim\\operatorname{Poisson}(\\lambda_2) where the random variables are independent and \\lambda_1,\\lambda_2&gt;0.\nWe will determine the conditional PMF of X_1 given X_1+X_2=n.\nFirst, we will write the conditional probability. For k=0,1,\\ldots,n\n\nP(X_1=k\\mid X_1+X_2=n)\n=\n\\frac{P(X_1=k,X_2=n-k)}\n{P(X_1+X_2=n)}.\n\n\n\nNext, we will evaluate the numerator.\nUsing independence and the Poisson PMF,\n\n\\begin{aligned}\nP(X_1=k,X_2=n-k)\n&=\n\\frac{e^{-\\lambda_1}\\lambda_1^k}{k!}\n\\frac{e^{-\\lambda_2}\\lambda_2^{n-k}}{(n-k)!}\\\\\n&=\n\\frac{e^{-(\\lambda_1+\\lambda_2)}\n\\lambda_1^k\\lambda_2^{n-k}}\n{k!(n-k)!}.\n\\end{aligned}\n\n\n\nFinally, we will evaluate the denominator.\nUsing the property that the sum of independent Poisson random variables is Poisson, with parameter equal to the sum of the individual parameters, we have:\n\nX_1+X_2\\sim\\operatorname{Poisson}(\\lambda_1+\\lambda_2)\n\nand\n\nP(X_1+X_2=n)\n=\n\\frac{e^{-(\\lambda_1+\\lambda_2)}\n(\\lambda_1+\\lambda_2)^n}{n!}.\n\nSubstituting and canceling gives us:\n\n\\begin{aligned}\n&P(X_1=k\\mid X_1+X_2=n)\\\\[2mm]\n&\\quad=\n\\frac{n!}{k!(n-k)!}\n\\frac{\\lambda_1^k\\lambda_2^{n-k}}\n{(\\lambda_1+\\lambda_2)^n}.\n\\end{aligned}\n\nRecognizing the binomial coefficient lets us rewrite the above as:\n\nP(X_1=k\\mid X_1+X_2=n)\n=\n\\binom nk\n\\left(\\frac{\\lambda_1}{\\lambda_1+\\lambda_2}\\right)^k\n\\left(\\frac{\\lambda_2}{\\lambda_1+\\lambda_2}\\right)^{n-k}\n\nThis is a binomial PMF with success probability\n\nq=\\frac{\\lambda_1}{\\lambda_1+\\lambda_2}.\n\nTherefore,\n\nX_1\\mid(X_1+X_2=n)\n\\sim\n\\operatorname{Binomial}\n\\left(n,\\frac{\\lambda_1}{\\lambda_1+\\lambda_2}\\right)\n\n\nConsidering our above example, imagine two independent sources generating events.\nSource 1 produces events at an average rate \\lambda_1 while source 2 produces events at an average rate \\lambda_2.\nWithout additional information, the event counts from the two sources are independent Poisson random variables.\nIf we observe exactly n events in total, then conditioned on this information, each observed event can be attributed to source 1 with probability\n\n\\frac{\\lambda_1}{\\lambda_1+\\lambda_2}.\n\nThus the number attributable to source 1 is binomially distributed.\nThis is useful in applications involving arrivals, queueing systems, reliability, and event-count models.\n\n\nConsider an experiment with three possible outcomes where each trial produces outcome 1, 2, or 3, with respective probabilities p_1,\\qquad p_2,\\qquad p_3, where p_1+p_2+p_3=1.\nSuppose n independent trials are performed and let X_i denote the number of trials producing outcome i.\nWe will to determine E[X_1\\mid X_2=m].\n\n\nFirst, we note that the random vector (X_1,X_2,X_3) follows a multinomial distribution:\n\n(X_1,X_2,X_3)\n\\sim\\operatorname{Multinomial}(n;p_1,p_2,p_3).\n\nWhere X_1+X_2+X_3=n.\n\n\nNow, knowing that X_2=m tells us that exactly m of the trials produced outcome 2. Then, the remaining n-m trials must have produced outcome 1 or outcome 3. Understanding this, we know that we now need to renormalize the probabilities of these remaining outcomes.\nIn a trial that does not produce outcome 2, the probability of outcome 1 is\n\nP(\\text{outcome 1}\\mid\\text{not outcome 2})\n=\n\\frac{p_1}{1-p_2}.\n\nSince 1-p_2=p_1+p_3 we have\n\nP(\\text{outcome 1}\\mid\\text{not outcome 2})\n=\n\\frac{p_1}{p_1+p_3}.\n\n\n\nAmong the n-m remaining trials, each produces outcome 1 with the conditional probability we just found above.\nTherefore,\n\nX_1\\mid X_2=m\n\\sim\n\\operatorname{Binomial}\n\\left(n-m,\\frac{p_1}{1-p_2}\\right).\n\nThis holds for p_2&lt;1 whenever the conditioning event has positive probability.\nWe can now finally compute the expectation. The expected value of a binomial random variable with parameters r and q is rq and so the expectation is:\n\nE[X_1\\mid X_2=m]\n=\n(n-m)\\frac{p_1}{1-p_2}\n=\n(n-m)\\frac{p_1}{p_1+p_3}\n\n\nNote that the expected count is not simply (n-m)p_1.\nThis is because the original probability p_1 describes the chance of outcome 1 before any restrictions are imposed. Once we know that a trial was not outcome 2, the relevant probability becomes\n\n\\frac{p_1}{1-p_2}.\n\nConditioning changes the entire distribution, not only the number of trials.",
-    "crumbs": [
-      "Random Variables",
-      "17: Conditional Probability Revisted"
-    ]
-  },
-  {
-    "objectID": "lectures/complex.html",
-    "href": "lectures/complex.html",
-    "title": "Complex Numbers",
-    "section": "",
-    "text": "Complex Numbers",
-    "crumbs": [
-      "Appendix",
-      "Complex Numbers"
-    ]
-  },
-  {
-    "objectID": "lectures/chapter3.html",
-    "href": "lectures/chapter3.html",
-    "title": "Chapter 3",
-    "section": "",
-    "text": "Chapter 3 is focused on sampling as vehicle for using the posterior distribution to make inferences about the parameters of a model. The posterior distribution is a probability distribution that represents our beliefs about the parameters of a model after observing data. Remember that we generate the posterior by combining the prior distribution and the likelihood of the observed data.\nAs stated in the book, working with samples allows us to both side-step the need for integral calculus (assuming we can calculate an analytical solution at all) and that much of the modern methods used for computing the posterior distribution only produce samples themselves.",
+    "text": "This section is a companion to the book Statistical Rethinking by Richard McElreath.\nIt contains a collection of notes, solved exercises and code examples from the book translated into Python.",
     "crumbs": [
       "Inference",
-      "Chapter 3"
+      "Statistical Rethinking"
     ]
   },
   {
-    "objectID": "lectures/chapter3.html#easy",
-    "href": "lectures/chapter3.html#easy",
-    "title": "Chapter 3",
+    "objectID": "lectures/chapter2.html#easy",
+    "href": "lectures/chapter2.html#easy",
+    "title": "Chapter 2",
     "section": "Easy",
-    "text": "Easy\nA Python version of the code in the text is:\n\nimport numpy as np\nfrom scipy.stats import binom\n\n# Construct a grid of 1000 possible values for p\np_grid = np.linspace(0, 1, 1000)\n\n# Uniform prior\nprior = np.ones(1000)\n\n# Binomial likelihood: 6 successes in 9 trials\nlikelihood = binom.pmf(6, n=9, p=p_grid)\n\n# Calculate and normalize the posterior\nposterior = likelihood * prior\nposterior = posterior / posterior.sum()\n\n# Draw 10,000 samples from the posterior\nrng = np.random.default_rng(100)\n\nsamples = rng.choice(\n    p_grid,\n    size=10_000,\n    replace=True,\n    p=posterior\n)\n\n\n\nWith two helper functions to make calculating the questions involving intervals easier:\n\ndef percentile_interval(samples, probability):\n    \"\"\"\n    Return an equal-tailed posterior interval\n    containing the specified probability.\n    \"\"\"\n    tail = (1 - probability) / 2\n\n    return tuple(\n        np.quantile(samples, [tail, 1 - tail])\n    )\n\n\ndef hdi(samples, probability):\n    \"\"\"\n    Return the narrowest interval containing\n    at least the specified fraction of samples.\n\n    This is a sample-based approximation of\n    the highest density interval (HDI).\n    \"\"\"\n    ordered = np.sort(np.asarray(samples))\n\n    n = len(ordered)\n    k = int(np.ceil(probability * n))\n\n    # All candidate intervals containing k samples\n    lower = ordered[:n - k + 1]\n    upper = ordered[k - 1:]\n\n    # Find the narrowest\n    widths = upper - lower\n    i = np.argmin(widths)\n\n    return (lower[i], upper[i])\n\n\n\nAn overview of the functions / methods we can use is:\n\n\n\n\n\n\n\n\n\nOperation\nPurpose\n\n\n\n\n\n\nnp.mean(...)\nCalculate the proportion of samples satisfying a condition\n\n\n\n\nnp.quantile(samples, q)\nFind a posterior quantile\n\n\n\n\nhdi(samples, 0.50)\nFind the narrowest 50% interval\n\n\n\n\npercentile_interval(samples, 0.50)\nFind the equal-tailed 50% interval\n\n\n\n\n\n\n3E1\n\n\nClick to show answer\n\nWhat we want is P(p&lt;0.2\\mid W=6).\nSince our samples are drawn from the posterior, we can estimate this probability by calculating the fraction of samples satisfying p&lt;0.2:\n\nprint(np.mean(samples &lt; 0.2))\n\n0.0013\n\n\nThe code above computes \n\\widehat{P}(p&lt;0.2\\mid W=6)\n=\\frac{1}{10000}\n\\sum_{i=1}^{10000}\\mathbf{1}(p_i&lt;0.2)\n\nwhere \\mathbf{1} is the indicator function.\nNote that we never needed to derive or integrate the posterior density. We estimate the desired probability just by counting samples.\n\n\n\n3E2\n\n\nClick to show answer\n\n\nprint(np.mean(samples &gt; 0.8))\n\n0.1155\n\n\n\n\n\n3E3\n\n\nClick to show answer\n\nWe have a few ways to approach this problem. Two solutions are using complements:\n\nprint(1 - np.mean(samples &gt; 0.8) - np.mean(samples &lt; 0.2))\n\n0.8832\n\n\nOr using a compound expression:\n\nprint(np.mean((0.2 &lt;= samples) & (samples &lt;= 0.8)))\n\n0.8832\n\n\n\n\n\n3E4\n\n\nClick to show answer\n\n\nprint(np.quantile(samples, .20))\n\n0.5175175175175175\n\n\n\n\n\n3E5\n\n\nClick to show answer\n\n\nprint(np.quantile(samples, (1-0.2)))\n\n0.7577577577577578\n\n\n\n\n\n3E6\n\n\nClick to show answer\n\nSince this is the narrowest interval, it has the highest density.\n\nprint(hdi(samples, 0.66))\n\n(np.float64(0.5225225225225225), np.float64(0.7907907907907907))\n\n\n\n\n\n3E7\n\n\nClick to show answer\n\n\nprint(percentile_interval(samples, 0.66))\n\n(np.float64(0.4994994994994995), np.float64(0.7717717717717718))\n\n\nNote that the intervals for questions 6 and 7 have different widths with the HDI width being slightly narrower (as expected).\nAs the posterior distribution is fairly symmetric, there is not a large difference between the two. We can plot the posterior to see this:\n\nimport matplotlib.pyplot as plt\n\nplt.plot(p_grid, (posterior / (p_grid[1] - p_grid[0])), label=\"Grid posterior\")\n\nplt.hist(\n    samples,\n    bins=50,\n    density=True,\n    alpha=0.35,\n    label=\"Posterior samples\"\n)\n\nplt.xlabel(\"p\")\nplt.ylabel(\"Posterior probability / density\")\nplt.legend()\nplt.show()",
+    "text": "Easy",
     "crumbs": [
       "Inference",
-      "Chapter 3"
+      "Chapter 2"
     ]
   },
   {
-    "objectID": "lectures/chapter3.html#medium",
-    "href": "lectures/chapter3.html#medium",
-    "title": "Chapter 3",
+    "objectID": "lectures/chapter2.html#medium",
+    "href": "lectures/chapter2.html#medium",
+    "title": "Chapter 2",
     "section": "Medium",
     "text": "Medium",
     "crumbs": [
       "Inference",
-      "Chapter 3"
+      "Chapter 2"
     ]
   },
   {
-    "objectID": "lectures/chapter3.html#hard",
-    "href": "lectures/chapter3.html#hard",
-    "title": "Chapter 3",
+    "objectID": "lectures/chapter2.html#hard",
+    "href": "lectures/chapter2.html#hard",
+    "title": "Chapter 2",
     "section": "Hard",
-    "text": "Hard",
+    "text": "Hard\n\n2H1\n\n\n\n\nClick to show answer\n\nWe have two hypotheses:\n\nA: The panda belongs to species A.\nB: The panda belongs to species B.\n\nThe problem gives us the following information:\n\n\n\n\nSpecies A\nSpecies B\n\n\n\n\nPrior probability\n0.50\n0.50\n\n\nProbability of twins\n0.10\n0.20\n\n\nProbability of singleton\n0.90\n0.80\n\n\n\nWe will use T for a twin birth, S for a single birth. We will also make explicit the assumption that the birth outcomes are independent conditional on the mother’s species (that is, once we know the mother’s species then there is no other information available that could be used to change the probability of the outcome of a future birth).\nWe know the mother has already given birth to twins. We want:\n\nP(T_2\\mid T_1)\n\nwhere T_1 represents twins on the first birth and T_2 twins on the second.\nNote that the first twin birth changes our beliefs about the mother’s species.\nBefore observing the first birth, we had:\n\nP(A)=P(B)=0.5\n\nAfter observing twins, we apply Bayes’ theorem:\n\nP(A\\mid T_1)\n=\\frac{P(T_1\\mid A)P(A)}{P(T_1)}\n\nThe denominator is calculated using the law of total probability:\n\nP(T_1)=P(T_1\\mid A)P(A)+P(T_1\\mid B)P(B)\n\nSubstituting:\n\nP(T_1)=(0.1)(0.5)+(0.2)(0.5)=0.15\n\nTherefore:\n\nP(A\\mid T_1)=\\frac{0.1(0.5)}{0.15}=\\frac13\n\nSimilarly:\n\nP(B\\mid T_1)=\\frac23\n\nWe now have updated beliefs about the species. The second birth can be twins under either hypothesis, so:\n\nP(T_2\\mid T_1)\n=P(T_2\\mid A)P(A\\mid T_1)+P(T_2\\mid B)P(B\\mid T_1)\n\nSubstituting:\n\n=\\left(\\frac{1}{10}\\right)\\left(\\frac13\\right)\n+\\left(\\frac15\\right)\\left(\\frac23\\right)\n\n\nP(T_2\\mid T_1)=\\frac16\\approx16.67\\%\n\nThe probability we calculated is greater than the original probability of 15%. Since observing twins makes species B more plausible, and species B has a higher twin-birth rate, we would expect some increase in our resulting probability.\n\n\n\n2H2\n\n\n\n\nClick to show answer\n\nThis is actually the intermediate calculated we performed in the earlier question.\nUsing our notation from part 1:\nWe want:\n\nP(A\\mid T)\n\nUsing Bayes’ theorem:\n\nP(A\\mid T)=\n\\frac{P(T\\mid A)P(A)}\n{P(T\\mid A)P(A)+P(T\\mid B)P(B)}\n\n\n=\\frac{(0.1)(0.5)}\n{(0.1)(0.5)+(0.2)(0.5)}\n\n\nP(A\\mid T)=\\frac13\\approx33.33\\%\n\nWe were originally given P(T|A) which is a description of how likely the observation of twins is under our hypothesis that the panda is species A. What we just calculated is how plausible our hypothesis of species A is given that we have observed the event that twins were born.\n\n\n\n2H3\n\n\n\n\nClick to show answer\n\nNow we have a second birth, this time a single.\nWe now want:\n\nP(A\\mid T_1,S_2)\n\nFrom the second part, our updated probabilities are:\n\nP(A\\mid T_1)=\\frac13,\\qquad P(B\\mid T_1)=\\frac23\n\nWe can treat these as the priors for our next update.\n\nP(A\\mid T_1,S_2)=\n\\frac{P(S_2\\mid A)P(A\\mid T_1)}\n{P(S_2\\mid A)P(A\\mid T_1)+P(S_2\\mid B)P(B\\mid T_1)}\n\nSubstituting:\n\n=\\frac{0.9(\\frac13)}\n{0.9(\\frac13)+0.8(\\frac23)}\n\n\n=\\frac{0.3}{0.3+0.53333}\n\n\nP(A\\mid T_1,S_2)=0.36\n\nThis problem is a useful demonstration of sequential Bayesian inference. Note that the evidence does not necessarily push us consistently toward one hypothesis, we now consider species A to be slightly more plausible.\n\n\n\n2H4\n\n\n\n\nClick to show answer\n\nWe now have an updated collection of information.\n\n\n\n\nSpecies A\nSpecies B\n\n\n\n\nPrior probability\n0.50\n0.50\n\n\nProbability of twins\n0.10\n0.20\n\n\nProbability of singleton\n0.90\n0.80\n\n\nProbability test says A\n0.80\n0.35\n\n\n\nWith our new addition, we will use + for a genetic test reporting species A.\nWe now have a new observation: the genetic test reports species A.\nThe test has:\n\nP(+\\mid A)=0.8\n\n\nP(+\\mid B)=1-0.65=0.35\n\nNote that the second probability is the false-positive rate: a species B panda has a 35% chance of being identified as species A.\n\nPart 1\nUsing equal prior probabilities:\n\nP(A\\mid +)=\n\\frac{P(+\\mid A)P(A)}\n{P(+\\mid A)P(A)+P(+\\mid B)P(B)}\n\n\n=\\frac{(0.8)(0.5)}\n{(0.8)(0.5)+(0.35)(0.5)}\n\n\n=\\frac{0.4}{0.575}\n\n\nP(A\\mid +)=\\frac{16}{23}\\approx69.57\\%\n\nThe positive genetic test favors species A, but because the test is imperfect, we do not have an extreme-valued probability.\n\n\nPart 2\nWe already calculated:\n\nP(A\\mid T_1,S_2)=0.36\n\n\nP(B\\mid T_1,S_2)=0.64\n\nWe can use these as our new priors when incorporating the test:\n\nP(A\\mid T_1,S_2,+)\n=\\frac{P(+\\mid A)P(A\\mid T_1,S_2)}\n{P(+\\mid A)P(A\\mid T_1,S_2)+P(+\\mid B)P(B\\mid T_1,S_2)}\n\nSubstituting:\n\n=\\frac{(0.8)(0.36)}\n{(0.8)(0.36)+(0.35)(0.64)}\n\n\n=\\frac{0.288}{0.288+0.224}\n\n\nP(A\\mid T_1,S_2,+)=0.5625",
     "crumbs": [
       "Inference",
-      "Chapter 3"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Course Overview",
-    "section": "",
-    "text": "This is the central repository for the lecture notes for CSCI 4999 (Applied Probability) and CSCI 3030 (Reasoning Under Uncertainty). These notes provide an overview of the content covered during lecture.\nMore in-depth information can be found in the course section available on Blackboard.",
-    "crumbs": [
-      "Course Info",
-      "Course Overview"
+      "Chapter 2"
     ]
   },
   {
@@ -759,80 +825,135 @@
     ]
   },
   {
-    "objectID": "lectures/chapter2.html#easy",
-    "href": "lectures/chapter2.html#easy",
-    "title": "Chapter 2",
-    "section": "Easy",
-    "text": "Easy",
-    "crumbs": [
-      "Inference",
-      "Chapter 2"
-    ]
-  },
-  {
-    "objectID": "lectures/chapter2.html#medium",
-    "href": "lectures/chapter2.html#medium",
-    "title": "Chapter 2",
-    "section": "Medium",
-    "text": "Medium",
-    "crumbs": [
-      "Inference",
-      "Chapter 2"
-    ]
-  },
-  {
-    "objectID": "lectures/chapter2.html#hard",
-    "href": "lectures/chapter2.html#hard",
-    "title": "Chapter 2",
-    "section": "Hard",
-    "text": "Hard\n\n2H1\n\n\n\n\nClick to show answer\n\nWe have two hypotheses:\n\nA: The panda belongs to species A.\nB: The panda belongs to species B.\n\nThe problem gives us the following information:\n\n\n\n\nSpecies A\nSpecies B\n\n\n\n\nPrior probability\n0.50\n0.50\n\n\nProbability of twins\n0.10\n0.20\n\n\nProbability of singleton\n0.90\n0.80\n\n\n\nWe will use T for a twin birth, S for a single birth. We will also make explicit the assumption that the birth outcomes are independent conditional on the mother’s species (that is, once we know the mother’s species then there is no other information available that could be used to change the probability of the outcome of a future birth).\nWe know the mother has already given birth to twins. We want:\n\nP(T_2\\mid T_1)\n\nwhere T_1 represents twins on the first birth and T_2 twins on the second.\nNote that the first twin birth changes our beliefs about the mother’s species.\nBefore observing the first birth, we had:\n\nP(A)=P(B)=0.5\n\nAfter observing twins, we apply Bayes’ theorem:\n\nP(A\\mid T_1)\n=\\frac{P(T_1\\mid A)P(A)}{P(T_1)}\n\nThe denominator is calculated using the law of total probability:\n\nP(T_1)=P(T_1\\mid A)P(A)+P(T_1\\mid B)P(B)\n\nSubstituting:\n\nP(T_1)=(0.1)(0.5)+(0.2)(0.5)=0.15\n\nTherefore:\n\nP(A\\mid T_1)=\\frac{0.1(0.5)}{0.15}=\\frac13\n\nSimilarly:\n\nP(B\\mid T_1)=\\frac23\n\nWe now have updated beliefs about the species. The second birth can be twins under either hypothesis, so:\n\nP(T_2\\mid T_1)\n=P(T_2\\mid A)P(A\\mid T_1)+P(T_2\\mid B)P(B\\mid T_1)\n\nSubstituting:\n\n=\\left(\\frac{1}{10}\\right)\\left(\\frac13\\right)\n+\\left(\\frac15\\right)\\left(\\frac23\\right)\n\n\nP(T_2\\mid T_1)=\\frac16\\approx16.67\\%\n\nThe probability we calculated is greater than the original probability of 15%. Since observing twins makes species B more plausible, and species B has a higher twin-birth rate, we would expect some increase in our resulting probability.\n\n\n\n2H2\n\n\n\n\nClick to show answer\n\nThis is actually the intermediate calculated we performed in the earlier question.\nUsing our notation from part 1:\nWe want:\n\nP(A\\mid T)\n\nUsing Bayes’ theorem:\n\nP(A\\mid T)=\n\\frac{P(T\\mid A)P(A)}\n{P(T\\mid A)P(A)+P(T\\mid B)P(B)}\n\n\n=\\frac{(0.1)(0.5)}\n{(0.1)(0.5)+(0.2)(0.5)}\n\n\nP(A\\mid T)=\\frac13\\approx33.33\\%\n\nWe were originally given P(T|A) which is a description of how likely the observation of twins is under our hypothesis that the panda is species A. What we just calculated is how plausible our hypothesis of species A is given that we have observed the event that twins were born.\n\n\n\n2H3\n\n\n\n\nClick to show answer\n\nNow we have a second birth, this time a single.\nWe now want:\n\nP(A\\mid T_1,S_2)\n\nFrom the second part, our updated probabilities are:\n\nP(A\\mid T_1)=\\frac13,\\qquad P(B\\mid T_1)=\\frac23\n\nWe can treat these as the priors for our next update.\n\nP(A\\mid T_1,S_2)=\n\\frac{P(S_2\\mid A)P(A\\mid T_1)}\n{P(S_2\\mid A)P(A\\mid T_1)+P(S_2\\mid B)P(B\\mid T_1)}\n\nSubstituting:\n\n=\\frac{0.9(\\frac13)}\n{0.9(\\frac13)+0.8(\\frac23)}\n\n\n=\\frac{0.3}{0.3+0.53333}\n\n\nP(A\\mid T_1,S_2)=0.36\n\nThis problem is a useful demonstration of sequential Bayesian inference. Note that the evidence does not necessarily push us consistently toward one hypothesis, we now consider species A to be slightly more plausible.\n\n\n\n2H4\n\n\n\n\nClick to show answer\n\nWe now have an updated collection of information.\n\n\n\n\nSpecies A\nSpecies B\n\n\n\n\nPrior probability\n0.50\n0.50\n\n\nProbability of twins\n0.10\n0.20\n\n\nProbability of singleton\n0.90\n0.80\n\n\nProbability test says A\n0.80\n0.35\n\n\n\nWith our new addition, we will use + for a genetic test reporting species A.\nWe now have a new observation: the genetic test reports species A.\nThe test has:\n\nP(+\\mid A)=0.8\n\n\nP(+\\mid B)=1-0.65=0.35\n\nNote that the second probability is the false-positive rate: a species B panda has a 35% chance of being identified as species A.\n\nPart 1\nUsing equal prior probabilities:\n\nP(A\\mid +)=\n\\frac{P(+\\mid A)P(A)}\n{P(+\\mid A)P(A)+P(+\\mid B)P(B)}\n\n\n=\\frac{(0.8)(0.5)}\n{(0.8)(0.5)+(0.35)(0.5)}\n\n\n=\\frac{0.4}{0.575}\n\n\nP(A\\mid +)=\\frac{16}{23}\\approx69.57\\%\n\nThe positive genetic test favors species A, but because the test is imperfect, we do not have an extreme-valued probability.\n\n\nPart 2\nWe already calculated:\n\nP(A\\mid T_1,S_2)=0.36\n\n\nP(B\\mid T_1,S_2)=0.64\n\nWe can use these as our new priors when incorporating the test:\n\nP(A\\mid T_1,S_2,+)\n=\\frac{P(+\\mid A)P(A\\mid T_1,S_2)}\n{P(+\\mid A)P(A\\mid T_1,S_2)+P(+\\mid B)P(B\\mid T_1,S_2)}\n\nSubstituting:\n\n=\\frac{(0.8)(0.36)}\n{(0.8)(0.36)+(0.35)(0.64)}\n\n\n=\\frac{0.288}{0.288+0.224}\n\n\nP(A\\mid T_1,S_2,+)=0.5625",
-    "crumbs": [
-      "Inference",
-      "Chapter 2"
-    ]
-  },
-  {
-    "objectID": "lectures/chapter0.html",
-    "href": "lectures/chapter0.html",
-    "title": "Statistical Rethinking",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Course Overview",
     "section": "",
-    "text": "This section is a companion to the book Statistical Rethinking by Richard McElreath.\nIt contains a collection of notes, solved exercises and code examples from the book translated into Python.",
+    "text": "This is the central repository for the lecture notes for CSCI 4999 (Applied Probability) and CSCI 3030 (Reasoning Under Uncertainty). These notes provide an overview of the content covered during lecture.\nMore in-depth information can be found in the course section available on Blackboard.",
     "crumbs": [
-      "Inference",
-      "Statistical Rethinking"
+      "Course Info",
+      "Course Overview"
     ]
   },
   {
-    "objectID": "lectures/chapter5.html#easy",
-    "href": "lectures/chapter5.html#easy",
-    "title": "Chapter 5",
+    "objectID": "lectures/chapter3.html",
+    "href": "lectures/chapter3.html",
+    "title": "Chapter 3",
+    "section": "",
+    "text": "Chapter 3 is focused on sampling as vehicle for using the posterior distribution to make inferences about the parameters of a model. The posterior distribution is a probability distribution that represents our beliefs about the parameters of a model after observing data. Remember that we generate the posterior by combining the prior distribution and the likelihood of the observed data.\nAs stated in the book, working with samples allows us to both side-step the need for integral calculus (assuming we can calculate an analytical solution at all) and that much of the modern methods used for computing the posterior distribution only produce samples themselves.",
+    "crumbs": [
+      "Inference",
+      "Chapter 3"
+    ]
+  },
+  {
+    "objectID": "lectures/chapter3.html#easy",
+    "href": "lectures/chapter3.html#easy",
+    "title": "Chapter 3",
     "section": "Easy",
-    "text": "Easy",
+    "text": "Easy\nA Python version of the code in the text is:\n\nimport numpy as np\nfrom scipy.stats import binom\n\n# Construct a grid of 1000 possible values for p\np_grid = np.linspace(0, 1, 1000)\n\n# Uniform prior\nprior = np.ones(1000)\n\n# Binomial likelihood: 6 successes in 9 trials\nlikelihood = binom.pmf(6, n=9, p=p_grid)\n\n# Calculate and normalize the posterior\nposterior = likelihood * prior\nposterior = posterior / posterior.sum()\n\n# Draw 10,000 samples from the posterior\nrng = np.random.default_rng(100)\n\nsamples = rng.choice(\n    p_grid,\n    size=10_000,\n    replace=True,\n    p=posterior\n)\n\n\n\nWith two helper functions to make calculating the questions involving intervals easier:\n\ndef percentile_interval(samples, probability):\n    \"\"\"\n    Return an equal-tailed posterior interval\n    containing the specified probability.\n    \"\"\"\n    tail = (1 - probability) / 2\n\n    return tuple(\n        np.quantile(samples, [tail, 1 - tail])\n    )\n\n\ndef hdi(samples, probability):\n    \"\"\"\n    Return the narrowest interval containing\n    at least the specified fraction of samples.\n\n    This is a sample-based approximation of\n    the highest density interval (HDI).\n    \"\"\"\n    ordered = np.sort(np.asarray(samples))\n\n    n = len(ordered)\n    k = int(np.ceil(probability * n))\n\n    # All candidate intervals containing k samples\n    lower = ordered[:n - k + 1]\n    upper = ordered[k - 1:]\n\n    # Find the narrowest\n    widths = upper - lower\n    i = np.argmin(widths)\n\n    return (lower[i], upper[i])\n\n\n\nAn overview of the functions / methods we can use is:\n\n\n\n\n\n\n\n\n\nOperation\nPurpose\n\n\n\n\n\n\nnp.mean(...)\nCalculate the proportion of samples satisfying a condition\n\n\n\n\nnp.quantile(samples, q)\nFind a posterior quantile\n\n\n\n\nhdi(samples, 0.50)\nFind the narrowest 50% interval\n\n\n\n\npercentile_interval(samples, 0.50)\nFind the equal-tailed 50% interval\n\n\n\n\n\n\n3E1\n\n\nClick to show answer\n\nWhat we want is P(p&lt;0.2\\mid W=6).\nSince our samples are drawn from the posterior, we can estimate this probability by calculating the fraction of samples satisfying p&lt;0.2:\n\nprint(np.mean(samples &lt; 0.2))\n\n0.0013\n\n\nThe code above computes \n\\widehat{P}(p&lt;0.2\\mid W=6)\n=\\frac{1}{10000}\n\\sum_{i=1}^{10000}\\mathbf{1}(p_i&lt;0.2)\n\nwhere \\mathbf{1} is the indicator function.\nNote that we never needed to derive or integrate the posterior density. We estimate the desired probability just by counting samples.\n\n\n\n3E2\n\n\nClick to show answer\n\n\nprint(np.mean(samples &gt; 0.8))\n\n0.1155\n\n\n\n\n\n3E3\n\n\nClick to show answer\n\nWe have a few ways to approach this problem. Two solutions are using complements:\n\nprint(1 - np.mean(samples &gt; 0.8) - np.mean(samples &lt; 0.2))\n\n0.8832\n\n\nOr using a compound expression:\n\nprint(np.mean((0.2 &lt;= samples) & (samples &lt;= 0.8)))\n\n0.8832\n\n\n\n\n\n3E4\n\n\nClick to show answer\n\n\nprint(np.quantile(samples, .20))\n\n0.5175175175175175\n\n\n\n\n\n3E5\n\n\nClick to show answer\n\n\nprint(np.quantile(samples, (1-0.2)))\n\n0.7577577577577578\n\n\n\n\n\n3E6\n\n\nClick to show answer\n\nSince this is the narrowest interval, it has the highest density.\n\nprint(hdi(samples, 0.66))\n\n(np.float64(0.5225225225225225), np.float64(0.7907907907907907))\n\n\n\n\n\n3E7\n\n\nClick to show answer\n\n\nprint(percentile_interval(samples, 0.66))\n\n(np.float64(0.4994994994994995), np.float64(0.7717717717717718))\n\n\nNote that the intervals for questions 6 and 7 have different widths with the HDI width being slightly narrower (as expected).\nAs the posterior distribution is fairly symmetric, there is not a large difference between the two. We can plot the posterior to see this:\n\nimport matplotlib.pyplot as plt\n\nplt.plot(p_grid, (posterior / (p_grid[1] - p_grid[0])), label=\"Grid posterior\")\n\nplt.hist(\n    samples,\n    bins=50,\n    density=True,\n    alpha=0.35,\n    label=\"Posterior samples\"\n)\n\nplt.xlabel(\"p\")\nplt.ylabel(\"Posterior probability / density\")\nplt.legend()\nplt.show()",
     "crumbs": [
       "Inference",
-      "Chapter 5"
+      "Chapter 3"
     ]
   },
   {
-    "objectID": "lectures/chapter5.html#medium",
-    "href": "lectures/chapter5.html#medium",
-    "title": "Chapter 5",
+    "objectID": "lectures/chapter3.html#medium",
+    "href": "lectures/chapter3.html#medium",
+    "title": "Chapter 3",
     "section": "Medium",
     "text": "Medium",
     "crumbs": [
       "Inference",
-      "Chapter 5"
+      "Chapter 3"
     ]
   },
   {
-    "objectID": "lectures/chapter5.html#hard",
-    "href": "lectures/chapter5.html#hard",
-    "title": "Chapter 5",
+    "objectID": "lectures/chapter3.html#hard",
+    "href": "lectures/chapter3.html#hard",
+    "title": "Chapter 3",
     "section": "Hard",
     "text": "Hard",
     "crumbs": [
       "Inference",
-      "Chapter 5"
+      "Chapter 3"
+    ]
+  },
+  {
+    "objectID": "lectures/complex.html",
+    "href": "lectures/complex.html",
+    "title": "Complex Numbers",
+    "section": "",
+    "text": "Complex Numbers",
+    "crumbs": [
+      "Appendix",
+      "Complex Numbers"
+    ]
+  },
+  {
+    "objectID": "lectures/conditional_probability_2.html",
+    "href": "lectures/conditional_probability_2.html",
+    "title": "17: Conditional Probability Revisted",
+    "section": "",
+    "text": "Recall that for two events A and B, with P(A)&gt;0, the conditional probability of A given B is\nP(A\\mid B)=\\frac{P(A\\cap B)}{P(B)}\nLearning that B has occurred can change the set of possible outcomes under consideration.\nWe now extend this idea from events to random variables.",
+    "crumbs": [
+      "Random Variables",
+      "17: Conditional Probability Revisted"
+    ]
+  },
+  {
+    "objectID": "lectures/conditional_probability_2.html#conditional-expectation",
+    "href": "lectures/conditional_probability_2.html#conditional-expectation",
+    "title": "17: Conditional Probability Revisted",
+    "section": "Conditional Expectation",
+    "text": "Conditional Expectation\nRecall that the expectation of a discrete random variable is:\n\nE[X]=\\sum_x x\\,p_X(x)\n\nIf we know that Y=y, we use the conditional distribution:\nE[X\\mid Y=y]=\\sum_x x\\,p_{X\\mid Y}(x\\mid y)\nEquivalently using the definition of conditional probability, we can write this as:\n\nE[X\\mid Y=y]\n=\n\\frac{\\sum_x x\\,p_{X,Y}(x,y)}{p_Y(y)}\n\nNote that now since we can condition on another random variable, we do not necessairly have a number as the result of the expectation. Instead, we can have a random variable as the result of the expectation.\n\nE[X] is a number representing the unconditional mean of X.\nE[X\\mid Y=y] is a number representing the mean of X when Y is fixed at a particular value y.\nE[X\\mid Y] is itself a random variable, obtained by evaluating the conditional mean at the observed value of Y.\n\nFor example, if g(y)=E[X\\mid Y=y], then E[X\\mid Y]=g(Y).\n\n\nConsider the joint PMF\n\n\\begin{aligned}\nP(X=1,Y=1)&=0.5\\\\\nP(X=1,Y=2)&=0.1\\\\\nP(X=2,Y=1)&=0.1\\\\\nP(X=2,Y=2)&=0.3\n\\end{aligned}\n\nWe want to calculate E[X\\mid Y=1].\n\n\nIt is often easier to view the joint PMF as a table:\n\n\n\n\nY=1\nY=2\np_X(x)\n\n\n\n\nX=1\n0.5\n0.1\n0.6\n\n\nX=2\n0.1\n0.3\n0.4\n\n\np_Y(y)\n0.6\n0.4\n1.0\n\n\n\n\n\nWe now need to determine the conditional distribution. We know that Y is restricted to 1, so we need only to concern ourselves with the first column of our table.\n\nP(Y=1)=0.5+0.1=0.6.\n\nWe then have,\n\nP(X=1\\mid Y=1)=\\frac{0.5}{0.6}=\\frac56\n\nand\n\nP(X=2\\mid Y=1)=\\frac{0.1}{0.6}=\\frac16.\n\nNow we can calculate the conditional expectation:\n\n\\begin{aligned}\nE[X\\mid Y=1]\n&=1\\cdot P(X=1\\mid Y=1)\\quad+2\\cdot P(X=2\\mid Y=1)\\\\\n&=1\\cdot\\frac56+2\\cdot\\frac16.\n\\end{aligned}\n\nThus,\n\nE[X\\mid Y=1]=\\frac{7}{6}\n\n\n\nAssuming the same joint PMF from the above example, what if we instead condition on Y=2?\nSimilarly as to before, we obtain:\n\nP(X=1\\mid Y=2)=\\frac{0.1}{0.4}=\\frac14\n\nand\n\nP(X=2\\mid Y=2)=\\frac{0.3}{0.4}=\\frac34.\n\nTherefore,\n\nE[X\\mid Y=2]\n=1\\cdot\\frac14+2\\cdot\\frac34\n=\\frac74.\n\n\nAfter this, we now have the complete conditional expectation function\n\ng(y)=\n\\begin{cases}\n\\frac{7}{6},&y=1,\\\\\n\\frac{7}{4},&y=2.\n\\end{cases}\n\nAnd so, E[X\\mid Y] is a random variable that takes these two values according to the value of Y.\nNote that averaging the conditional expectations according to the probabilities of Y gives\n\n\\begin{aligned}\nE[g(Y)]\n&=\\frac76(0.6)+\\frac74(0.4)\\\\\n&=1.4\\\\\n&=E[X].\n\\end{aligned}\n\nFirst, you should verifiy that E[X] = 1.4.\nSeeing this, we have that averaging the conditional expectations over all the probabilities of Y gives us the expectation of X itself. This is an instance of the law of total expectation, which we will cover as a general principle further on.",
+    "crumbs": [
+      "Random Variables",
+      "17: Conditional Probability Revisted"
+    ]
+  },
+  {
+    "objectID": "lectures/conditional_probability_2.html#obtaining-distributions-by-conditioning",
+    "href": "lectures/conditional_probability_2.html#obtaining-distributions-by-conditioning",
+    "title": "17: Conditional Probability Revisted",
+    "section": "Obtaining Distributions by Conditioning",
+    "text": "Obtaining Distributions by Conditioning\nConditioning can transform one probability distribution into another.\n\nSuppose X_1\\sim\\operatorname{Binomial}(n_1,p) and X_2\\sim\\operatorname{Binomial}(n_2,p) with X_1 and X_2 independent.\nWe want to determine P(X_1=k\\mid X_1+X_2=m).\n \nWe first apply our definition of conditional probability:\n\nP(X_1=k\\mid X_1+X_2=m)\n=\n\\frac{P(X_1=k,X_1+X_2=m)}\n{P(X_1+X_2=m)}.\n\nWe can then do some rearrangment from X_1=k,\\quad X_1+X_2=m to X_1=k,\\quad X_2=m-k. We then have:\n\nP(X_1=k\\mid X_1+X_2=m)\n=\n\\frac{P(X_1=k,X_2=m-k)}\n{P(X_1+X_2=m)}.\n\n\n\nWe will now rewrite the numerator. Because we know that X_1 and X_2 are independent we have that:\n\nP(X_1=k,X_2=m-k)\n=P(X_1=k)P(X_2=m-k).\n\nThen using their binomial PMFs,\n\nP(X_1=k)\n=\\binom{n_1}{k}p^k(1-p)^{n_1-k}\n\nand\n\nP(X_2=m-k)\n=\\binom{n_2}{m-k}p^{m-k}(1-p)^{n_2-m+k}.\n\nOur resulting numerator is then:\n\nP(X_1=k,X_2=m-k)\n=\n\\binom{n_1}{k}\\binom{n_2}{m-k}\np^m(1-p)^{n_1+n_2-m}.\n\n\n\nNow we rewrite the denominator. We will use a useful property of independent binomial random variables where if they have the same success probability then their sum is also a binomial random variable that has the form:\n\nX_1+X_2\\sim\\operatorname{Binomial}(n_1+n_2,p).\n\nOur demoninator is then:\n\nP(X_1+X_2=m)\n=\n\\binom{n_1+n_2}{m}\np^m(1-p)^{n_1+n_2-m}.\n\n\n\nAfter our rewrites, we now have:\n\n\\frac{\n\\binom{n_1}{k}\\binom{n_2}{m-k}\np^m(1-p)^{n_1+n_2-m}\n}{\n\\binom{n_1+n_2}{m}\np^m(1-p)^{n_1+n_2-m}\n}.\n\nNote that the probability terms cancel, giving us\n\nP(X_1=k\\mid X_1+X_2=m)\n=\n\\frac{\\binom{n_1}{k}\\binom{n_2}{m-k}}\n{\\binom{n_1+n_2}{m}}\n\nfor\n\n\\max(0,m-n_2)\\leq k\\leq\\min(n_1,m).\n\nThis is the hypergeometric distribution.\n\nThe process of conditioning in this example converted our problem into a fundamentally different one than what is represented by the binomial distribution.\nBefore conditioning, the number of successes in each group is binomial. But after conditioning on the total number of successes, the problem becomes one of allocating a fixed number of successes across two groups. This is the same as the sampling-without-replacement problem represented by the hypergeometric distribution.\nWhere if have n_1 red balls and n_2 green balls. If we select m balls uniformly without replacement, the probability of selecting exactly k red balls is\n\nP(X=k)\n=\n\\frac{\\binom{n_1}{k}\\binom{n_2}{m-k}}\n{\\binom{n_1+n_2}{m}}.\n\nSomething important in the above expression is that the resulting conditional distribution does not depend on p. This happens because knowing the total number of successes eliminates the information contributed by the common success probability, leaving only the combinatorial allocation of those successes.\n\n\nSuppose that X_1\\sim\\operatorname{Poisson}(\\lambda_1) and X_2\\sim\\operatorname{Poisson}(\\lambda_2) where the random variables are independent and \\lambda_1,\\lambda_2&gt;0.\nWe will determine the conditional PMF of X_1 given X_1+X_2=n.\nFirst, we will write the conditional probability. For k=0,1,\\ldots,n\n\nP(X_1=k\\mid X_1+X_2=n)\n=\n\\frac{P(X_1=k,X_2=n-k)}\n{P(X_1+X_2=n)}.\n\n\n\nNext, we will evaluate the numerator.\nUsing independence and the Poisson PMF,\n\n\\begin{aligned}\nP(X_1=k,X_2=n-k)\n&=\n\\frac{e^{-\\lambda_1}\\lambda_1^k}{k!}\n\\frac{e^{-\\lambda_2}\\lambda_2^{n-k}}{(n-k)!}\\\\\n&=\n\\frac{e^{-(\\lambda_1+\\lambda_2)}\n\\lambda_1^k\\lambda_2^{n-k}}\n{k!(n-k)!}.\n\\end{aligned}\n\n\n\nFinally, we will evaluate the denominator.\nUsing the property that the sum of independent Poisson random variables is Poisson, with parameter equal to the sum of the individual parameters, we have:\n\nX_1+X_2\\sim\\operatorname{Poisson}(\\lambda_1+\\lambda_2)\n\nand\n\nP(X_1+X_2=n)\n=\n\\frac{e^{-(\\lambda_1+\\lambda_2)}\n(\\lambda_1+\\lambda_2)^n}{n!}.\n\nSubstituting and canceling gives us:\n\n\\begin{aligned}\n&P(X_1=k\\mid X_1+X_2=n)\\\\[2mm]\n&\\quad=\n\\frac{n!}{k!(n-k)!}\n\\frac{\\lambda_1^k\\lambda_2^{n-k}}\n{(\\lambda_1+\\lambda_2)^n}.\n\\end{aligned}\n\nRecognizing the binomial coefficient lets us rewrite the above as:\n\nP(X_1=k\\mid X_1+X_2=n)\n=\n\\binom nk\n\\left(\\frac{\\lambda_1}{\\lambda_1+\\lambda_2}\\right)^k\n\\left(\\frac{\\lambda_2}{\\lambda_1+\\lambda_2}\\right)^{n-k}\n\nThis is a binomial PMF with success probability\n\nq=\\frac{\\lambda_1}{\\lambda_1+\\lambda_2}.\n\nTherefore,\n\nX_1\\mid(X_1+X_2=n)\n\\sim\n\\operatorname{Binomial}\n\\left(n,\\frac{\\lambda_1}{\\lambda_1+\\lambda_2}\\right)\n\n\nConsidering our above example, imagine two independent sources generating events.\nSource 1 produces events at an average rate \\lambda_1 while source 2 produces events at an average rate \\lambda_2.\nWithout additional information, the event counts from the two sources are independent Poisson random variables.\nIf we observe exactly n events in total, then conditioned on this information, each observed event can be attributed to source 1 with probability\n\n\\frac{\\lambda_1}{\\lambda_1+\\lambda_2}.\n\nThus the number attributable to source 1 is binomially distributed.\nThis is useful in applications involving arrivals, queueing systems, reliability, and event-count models.\n\n\nConsider an experiment with three possible outcomes where each trial produces outcome 1, 2, or 3, with respective probabilities p_1,\\qquad p_2,\\qquad p_3, where p_1+p_2+p_3=1.\nSuppose n independent trials are performed and let X_i denote the number of trials producing outcome i.\nWe will to determine E[X_1\\mid X_2=m].\n\n\nFirst, we note that the random vector (X_1,X_2,X_3) follows a multinomial distribution:\n\n(X_1,X_2,X_3)\n\\sim\\operatorname{Multinomial}(n;p_1,p_2,p_3).\n\nWhere X_1+X_2+X_3=n.\n\n\nNow, knowing that X_2=m tells us that exactly m of the trials produced outcome 2. Then, the remaining n-m trials must have produced outcome 1 or outcome 3. Understanding this, we know that we now need to renormalize the probabilities of these remaining outcomes.\nIn a trial that does not produce outcome 2, the probability of outcome 1 is\n\nP(\\text{outcome 1}\\mid\\text{not outcome 2})\n=\n\\frac{p_1}{1-p_2}.\n\nSince 1-p_2=p_1+p_3 we have\n\nP(\\text{outcome 1}\\mid\\text{not outcome 2})\n=\n\\frac{p_1}{p_1+p_3}.\n\n\n\nAmong the n-m remaining trials, each produces outcome 1 with the conditional probability we just found above.\nTherefore,\n\nX_1\\mid X_2=m\n\\sim\n\\operatorname{Binomial}\n\\left(n-m,\\frac{p_1}{1-p_2}\\right).\n\nThis holds for p_2&lt;1 whenever the conditioning event has positive probability.\nWe can now finally compute the expectation. The expected value of a binomial random variable with parameters r and q is rq and so the expectation is:\n\nE[X_1\\mid X_2=m]\n=\n(n-m)\\frac{p_1}{1-p_2}\n=\n(n-m)\\frac{p_1}{p_1+p_3}\n\n\nNote that the expected count is not simply (n-m)p_1.\nThis is because the original probability p_1 describes the chance of outcome 1 before any restrictions are imposed. Once we know that a trial was not outcome 2, the relevant probability becomes\n\n\\frac{p_1}{1-p_2}.\n\nConditioning changes the entire distribution, not only the number of trials.",
+    "crumbs": [
+      "Random Variables",
+      "17: Conditional Probability Revisted"
+    ]
+  },
+  {
+    "objectID": "lectures/chapter4.html#easy",
+    "href": "lectures/chapter4.html#easy",
+    "title": "Chapter 4",
+    "section": "Easy",
+    "text": "Easy",
+    "crumbs": [
+      "Inference",
+      "Chapter 4"
+    ]
+  },
+  {
+    "objectID": "lectures/chapter4.html#medium",
+    "href": "lectures/chapter4.html#medium",
+    "title": "Chapter 4",
+    "section": "Medium",
+    "text": "Medium",
+    "crumbs": [
+      "Inference",
+      "Chapter 4"
+    ]
+  },
+  {
+    "objectID": "lectures/chapter4.html#hard",
+    "href": "lectures/chapter4.html#hard",
+    "title": "Chapter 4",
+    "section": "Hard",
+    "text": "Hard",
+    "crumbs": [
+      "Inference",
+      "Chapter 4"
     ]
   },
   {
