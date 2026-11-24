@@ -214,13 +214,13 @@ Both variables describe the same physical roll. They answer different questions.
 
 This is one reason to be cautious when comparing numerical entropy values across different measurements or descriptions of a system.
 
-::: {.practice-box}
+::: practice-box
 
 A researcher reports that their fitted model has low entropy. Does this alone tell us whether the model will predict new observations well? 
 
 Construct a situation where a low-entropy model makes poor predictions.
 
-:::
+::: 
 
 
 ## Predictive distributions and cross-entropy
@@ -632,29 +632,294 @@ $$\underbrace{-\log p(x)}_{\text{surprisal}}
 
 In applied statistics, we do not normally know $p$, so we cannot evaluate these theoretical expectations directly. Instead, we use observed data and predictive checks to estimate how models may perform on new observations. This is the conceptual foundation for information criteria and cross-validation.
 
-## Problems and investigations
+## Practice
 
-These exercises emphasize interpretation and the choice of method. Numerical answers should be accompanied by a short explanation of what the computed quantity means.
+::: practice-box
+Two analysts consider the same event. Analyst A assigns probability $0.20$. Analyst B assigns probability $0.02$. Calculate each analyst's surprisal if the event occurs, in nats. Why is it incorrect to say that the event has a unique surprisal independent of the analysts?
+:::
 
-**1. A surprise is relative to a model.** Two analysts consider the same event. Analyst A assigns probability 0.20; Analyst B assigns probability 0.02. Calculate each analyst's surprisal if the event occurs, in nats. Why is it incorrect to say that the event has a unique surprisal independent of the analysts?
+::: {.callout-note collapse="true" title="Solution"}
+The surprisals are
 
+$$
+I_A=-\log(0.20)\approx 1.609\text{ nats},\qquad
+I_B=-\log(0.02)\approx 3.912\text{ nats}.
+$$
+
+Analyst B is more surprised because B assigned the event a lower probability. Surprisal is a function of an outcome **and a probability assignment**; the event alone does not determine it. Neither calculation tells us which analyst is better calibrated without additional observations or information about the process.
+:::
+
+::: practice-box
 **2. Expected surprise.** Let $X$ take the values $a,b,c$ with probabilities $(0.5,0.3,0.2)$. Calculate $H(X)$ in nats. Identify which outcome has the greatest surprisal and explain why that does *not* imply it makes the largest contribution to entropy.
+:::
 
+
+::: {.callout-note collapse="true" title="Solution"}
+Using natural logarithms,
+
+$$
+\begin{aligned}
+H(X)&=-0.5\log(0.5)-0.3\log(0.3)-0.2\log(0.2)\\
+&\approx 1.030\text{ nats}.
+\end{aligned}
+$$
+
+Outcome $c$ has the largest *individual* surprisal, because it is the least probable:
+
+$$
+I(a)\approx0.693,\qquad I(b)\approx1.204,\qquad I(c)\approx1.609.
+$$
+
+But entropy averages surprisal over outcomes. The three contributions $-p(x)\log p(x)$ are approximately $0.347$, $0.361$, and $0.322$ nats. **Outcome $b$ contributes the most** because it is sufficiently surprising *and* occurs more frequently than $c$. The most surprising outcome need not make the largest contribution to expected surprise.
+:::
+
+::: practice-box
 **3. Coarsening an outcome.** A fair eight-sided die is rolled. First define $X$ as the exact result; then define $Y$ as whether the result is odd or even. Compute $H(X)$ and $H(Y)$ in bits. Explain why different entropies can describe the same underlying physical experiment.
+:::
 
+
+::: {.callout-note collapse="true" title="Solution"}
+For the exact result $X$, each of the eight faces has probability $1/8$, so
+
+$$
+H(X)=-8\left(\frac18\log_2\frac18\right)=3\text{ bits}.
+$$
+
+For parity $Y$, odd and even each have probability $1/2$, so
+
+$$
+H(Y)=-2\left(\frac12\log_2\frac12\right)=1\text{ bit}.
+$$
+
+The physical experiment is unchanged, but $X$ and $Y$ represent different descriptions of its outcome. Knowing the exact face answers a more detailed question than knowing parity. In this case parity is a deterministic coarsening of the exact result and necessarily discards information about which face occurred.
+:::
+
+::: practice-box
 **4. A confident but poor forecast.** A binary process has generating success probability 0.70. Compare predictions $q(1)=0.70$, $q(1)=0.50$, and $q(1)=0.99$. Compute their expected log losses and rank them. Which predictive model has the smallest *entropy*? Does this answer the same question as ranking by expected log loss?
+:::
 
+
+::: {.callout-note collapse="true" title="Solution"}
+For a generating success probability $p(1)=0.70$ and prediction $q(1)=r$, expected log loss is
+
+$$
+H(p,q)=-0.70\log r-0.30\log(1-r).
+$$
+
+| Predicted $r$ | Expected log loss (nats) | Entropy of the model (nats) |
+|---:|---:|---:|
+| 0.70 | 0.611 | 0.611 |
+| 0.50 | 0.693 | 0.693 |
+| 0.99 | 1.389 | 0.056 |
+
+Thus the expected-loss ranking, from best to worst, is $0.70$, $0.50$, $0.99$. **The $0.99$ model has the smallest entropy**, since it is most certain of its prediction, but it has the worst expected loss. Its occasional failures are extremely costly under log loss. Entropy measures uncertainty within $q$; cross-entropy measures $q$'s expected predictive performance under $p$.
+:::
+
+::: practice-box
 **5. Derive the KL identity.** Starting from the definitions of entropy and cross-entropy, show that $D_{\mathrm{KL}}(p\|q)=H(p,q)-H(p)$. Explain what remains fixed when we compare two candidate predictions $q_1$ and $q_2$ against the same $p$.
+:::
 
+
+::: {.callout-note collapse="true" title="Solution"}
+By definition,
+
+$$
+H(p)=-\sum_xp(x)\log p(x),\qquad
+H(p,q)=-\sum_xp(x)\log q(x).
+$$
+
+Subtracting,
+
+$$
+\begin{aligned}
+H(p,q)-H(p)
+&=-\sum_xp(x)\log q(x)+\sum_xp(x)\log p(x)\\
+&=\sum_xp(x)\log\frac{p(x)}{q(x)}\\
+&=D_{\mathrm{KL}}(p\|q).
+\end{aligned}
+$$
+
+When comparing $q_1$ with $q_2$, **the generating distribution $p$ and the evaluation target remain fixed**. In particular, $H(p)$ is a constant common to both comparisons. Therefore,
+
+$$
+D_{\mathrm{KL}}(p\|q_1)-D_{\mathrm{KL}}(p\|q_2)
+=H(p,q_1)-H(p,q_2).
+$$
+
+This is why differences in expected predictive log loss can rank the models even though $H(p)$ is generally unknown. The calculation assumes common outcomes and finite values where needed; if $q(x)=0$ for an outcome having $p(x)>0$, the corresponding divergence is infinite.
+:::
+
+::: practice-box
 **6. Direction matters.** Using Bernoulli distributions with $p(1)=0.8$ and $q(1)=0.5$, calculate both $D_{\mathrm{KL}}(p\|q)$ and $D_{\mathrm{KL}}(q\|p)$. Explain their differing interpretations without calling either quantity a geometric distance.
+:::
 
+
+::: {.callout-note collapse="true" title="Solution"}
+For $p(1)=0.8$, $q(1)=0.5$, and complementary probabilities $p(0)=0.2$, $q(0)=0.5$,
+
+$$
+\begin{aligned}
+D_{\mathrm{KL}}(p\|q)
+&=0.8\log\frac{0.8}{0.5}+0.2\log\frac{0.2}{0.5}\\
+&\approx0.193\text{ nats},\\[5pt]
+D_{\mathrm{KL}}(q\|p)
+&=0.5\log\frac{0.5}{0.8}+0.5\log\frac{0.5}{0.2}\\
+&\approx0.223\text{ nats}.
+\end{aligned}
+$$
+
+The first is the *extra expected loss* from using $q$ to predict observations generated by $p$. The second reverses those roles: $q$ generates observations and $p$ provides predictions. The expectations weight the two outcomes differently, so there is no reason for the values to match. Neither is an ordinary geometric distance.
+:::
+
+::: practice-box
 **7. Model comparison without knowing** $p$. You receive 100 new outcomes and predictive probabilities from two models that were fit without using those outcomes. Write Python code to compute their mean held-out log losses. Explain why the difference in observed mean log loss can be useful even though you do not know the entropy of the generating distribution.
+:::
 
+
+::: {.callout-note collapse="true" title="Solution"}
+With binary outcomes $y_i\in\{0,1\}$ and predictions $q_i=P(Y_i=1)$, compute
+
+$$
+\widehat L=-\frac{1}{100}\sum_{i=1}^{100}
+\left[y_i\log q_i+(1-y_i)\log(1-q_i)\right].
+$$
+
+Here is **executable example code**. In a real analysis, replace the simulated `outcomes` and the two example forecast arrays with the 100 held-out observations and their corresponding model predictions.
+
+```{python}
+#| label: code-solution-7
+rng_solution_7 = np.random.default_rng(107)
+outcomes = rng_solution_7.binomial(1, 0.7, size=100)
+model_1_probs = np.full(100, 0.65)
+model_2_probs = np.full(100, 0.85)
+
+def heldout_log_loss(y, prob_success):
+    y = np.asarray(y)
+    prob_success = np.asarray(prob_success)
+    assert y.shape == prob_success.shape
+    assert np.all((prob_success > 0) & (prob_success < 1))
+    return float(-np.mean(
+        y * np.log(prob_success)
+        + (1 - y) * np.log1p(-prob_success)
+    ))
+
+loss_1 = heldout_log_loss(outcomes, model_1_probs)
+loss_2 = heldout_log_loss(outcomes, model_2_probs)
+print(f"Model 1: {loss_1:.3f} nats/observation")
+print(f"Model 2: {loss_2:.3f} nats/observation")
+print(f"Model 2 minus Model 1: {loss_2 - loss_1:+.3f}")
+```
+
+A **positive** value of `loss_2 - loss_1` favors Model 1 on these observations; a negative value favors Model 2. For a fixed generating distribution, the theoretical difference is
+
+$$
+H(p,q_2)-H(p,q_1)
+=D_{\mathrm{KL}}(p\|q_2)-D_{\mathrm{KL}}(p\|q_1),
+$$
+
+because $H(p)$ cancels. The observed difference estimates this comparison without knowing $H(p)$. With only 100 observations, however, sampling variation remains; a small difference is not conclusive. Probabilities must correspond to the same held-out observations, and models must not have been fit on these observations.
+:::
+
+::: practice-box
 **8. Simulated overfitting.** Extend the grouped Bernoulli experiment in Section 5. Run at least 100 independent repetitions and report the mean training and held-out log loss for the pooled and separate-groups models. Repeat with 6, 30, and 100 training observations per group. Describe what changes and why. *(Avoid selecting only runs that support your preferred conclusion.)*
+:::
 
+
+
+::: {.callout-note collapse="true" title="Solution"}
+We repeat the same experiment using 12 groups, a common generating probability of $0.70$, and 300 independent test observations per group. Both models use the same $(k+1)/(n+2)$ smoothing rule as in Section 5. This code executes 200 independent repetitions for **each** training sample size and averages all results, not just selected runs.
+
+```{python}
+#| label: code-solution-8
+rng_solution_8 = np.random.default_rng(108)
+
+def simulation_scores(train_per_group, n_repetitions=200,
+                      n_groups=12, test_per_group=300,
+                      true_probability=0.70):
+    values = np.empty((n_repetitions, 4))
+
+    for rep in range(n_repetitions):
+        train = rng_solution_8.binomial(
+            1, true_probability, size=(n_groups, train_per_group)
+        )
+        test = rng_solution_8.binomial(
+            1, true_probability, size=(n_groups, test_per_group)
+        )
+
+        pooled = (train.sum() + 1) / (train.size + 2)
+        by_group = (train.sum(axis=1) + 1) / (train_per_group + 2)
+
+        q_pooled_train = np.full(train.shape, pooled)
+        q_pooled_test = np.full(test.shape, pooled)
+        q_group_train = np.broadcast_to(by_group[:, None], train.shape)
+        q_group_test = np.broadcast_to(by_group[:, None], test.shape)
+
+        values[rep] = [
+            mean_log_loss(train, q_pooled_train),
+            mean_log_loss(test, q_pooled_test),
+            mean_log_loss(train, q_group_train),
+            mean_log_loss(test, q_group_test),
+        ]
+    return values.mean(axis=0)
+
+print("n/group | pooled train | pooled test | group train | group test")
+for n in (6, 30, 100):
+    scores_mean = simulation_scores(n)
+    print(f"{n:7d} | " + " | ".join(f"{s:12.4f}" for s in scores_mean))
+```
+
+The separate-groups model generally achieves lower **training** loss, especially with six observations per group, because it can adapt to each group's sampling noise. Yet in this experiment the true probability is identical across groups, so that added flexibility offers no real predictive advantage. Its **held-out** loss is generally higher for small training samples.
+
+As the number of observations per group increases, the separate estimates become more stable and approach the common generating probability. The discrepancy in held-out performance narrows; any residual difference will vary across Monte Carlo repetitions. The pooled model uses more observations to estimate the same underlying probability and is generally more efficient under this particular generating assumption. This conclusion would not automatically carry over to genuinely heterogeneous groups or models with different pooling assumptions.
+
+*If preferred, use the two columns of held-out scores from each repetition to calculate standard errors or plot the distribution of paired differences; reporting only the mean does not show their variability.*
+:::
+
+
+::: practice-box
 **9. Two scientific explanations.** Construct two different plausible causal stories that produce the same probability distribution for the observations being evaluated. Explain why predictive log scores alone cannot choose between the stories.
+:::
 
+::: {.callout-note collapse="true" title="Solution"}
+Let $X$ and $Y$ be binary. Consider the following two causal stories:
+
+- **Story A:** $X$ is generated as a fair Bernoulli variable. It then causes $Y$, which agrees with $X$ with probability $0.8$.
+- **Story B:** $Y$ is generated as a fair Bernoulli variable. It then causes $X$, which agrees with $Y$ with probability $0.8$.
+
+Both stories imply exactly the same *observational joint distribution*:
+
+| | $Y=0$ | $Y=1$ |
+|---|---:|---:|
+| $X=0$ | 0.40 | 0.10 |
+| $X=1$ | 0.10 | 0.40 |
+
+Thus every observed pair $(X,Y)$ receives the same predictive probability and the same log score under either story. The causal interpretations differ, however. Under Story A, intervening to set $X=1$ would give $P(Y=1\mid\operatorname{do}(X=1))=0.8$; under Story B, intervening on $X$ does not change the marginal distribution of its presumed cause $Y$, so $P(Y=1\mid\operatorname{do}(X=1))=0.5$.
+
+The observational predictions alone cannot identify which direction of causation is correct. An intervention or some other defensible causal assumption would be needed to distinguish the stories.
+:::
+
+::: practice-box
 **10. Reflection.** Consider the claim: "This model has a lower KL divergence, so it has learned more information about the world." Identify which parts of the claim are justified, which are ambiguous, and what additional context would be required.
+:::
+
+
+
+::: {.callout-note collapse="true" title="Solution"}
+**Justified, under specified conditions:** If the intended comparison is $D_{\mathrm{KL}}(p\|q_1)<D_{\mathrm{KL}}(p\|q_2)$, both models predict the same outcome under the same generating distribution $p$, and the divergences are well defined, then $q_1$ has lower *expected predictive log loss* than $q_2$.
+
+**Ambiguous:** “More information” does not specify a particular quantity. KL divergence in this comparison measures the predictive discrepancy between distributions, not how much data the model observed, how much its posterior changed, or the practical importance of its predictions. Nor does a lower divergence prove that the model recovered the true mechanism.
+
+**Needed context:** We must specify the direction of KL divergence, the common reference/generating distribution, the outcomes and measurement scale being scored, how the models produced their predictions, and whether the claimed difference is exact or estimated from data. If estimated, we should consider sampling uncertainty and the validity of the evaluation procedure. A different question—such as how much a posterior differs from a prior—would use a different KL comparison and require a different interpretation.
+
+A more defensible conclusion is: *“For the stated predictive target and generating distribution, this model has smaller expected excess log loss.”*
+:::
+
+
+
+
+
+
+
 
 ## Quick reference
 
